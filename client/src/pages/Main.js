@@ -3,13 +3,32 @@ import LiveMonitoring from "./LiveMonitoring";
 import ValidasiDeviasi from "./ValidasiDeviasi";
 import Notification from "../components/Notification";
 import { Icon } from "@iconify/react";
-import { useState } from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 const Main = () => {
   const [currentPage, setCurrentPage] = useState("live-monitoring");
-  const [currentCctv, setCurrentCctv] = useState(1);
+  //cctv data
+  const [cctvData, setCctvData] = useState([]);
+  const [currentCctv, setCurrentCctv] = useState();
+
   const [currentObject, setCurrentObject] = useState(1);
   const [currentDeviation, setCurrentDeviation] = useState();
+
+  useEffect(() => {
+    axios
+      .get(process.env.REACT_APP_API + "cctv", {
+        headers: {
+          Authorization: "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NywidXNlcm5hbWUiOiJkZXZlbG9wZXIiLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkX2F0IjoiMjAyMi0wNi0yMyAxNDozMToyMSIsInVwZGF0ZWRfYXQiOiIyMDIyLTEwLTI3IDAwOjQxOjQ4IiwibmFtZSI6IkFkbWluIiwiY29tcGFueSI6IlBUIEJlcmF1IENvYWwifQ.84ujW7wKhnX5qIsO44tw8STP9ID4UKxzPPwnVaMuSTc",
+        },
+      })
+      .then((res) => {
+        setCctvData(res.data.data);
+        setCurrentCctv(res.data.data[0].id);
+        console.log(res.data.data)
+      })
+      .catch((err) => console.log(err))
+  }, []);
 
   return (
     <div className="main">
@@ -117,6 +136,7 @@ const Main = () => {
               <LiveMonitoring
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
+                cctvData={cctvData}
                 currentCctv={currentCctv}
                 setCurrentCctv={setCurrentCctv}
                 currentObject={currentObject}

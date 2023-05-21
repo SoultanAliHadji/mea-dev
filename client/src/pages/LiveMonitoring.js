@@ -2,32 +2,22 @@ import "../styles/live_monitoring.css";
 import { useState } from "react";
 import ReactImageMagnify from "react-magnify-image";
 
-const LiveMonitoring = ({
-  currentCctv,
-  setCurrentCctv,
-}) => {
+const LiveMonitoring = ({ cctvData, currentCctv, setCurrentCctv }) => {
   const [cctvName, setCctvName] = useState("CCTV HO - Indoor Finance");
 
-  const cctv = [
-    { id: 1, cctv: "CCTV HO - Indoor Finance" },
-    { id: 2, cctv: "CCTV GMO - VIEWPOINT 2" },
-    { id: 6, cctv: "CCTV GMO - VIEWPOINT" },
-    { id: 10, cctv: "CCTV GMO - POST DUMPLING" },
-  ];
-
-  const cctvArray = cctv.map((data) => {
+  const cctvArray = cctvData.map((cctv) => {
     return (
       <button
         className={
           "border-0 text-start rounded-2 px-3 py-2" +
-          (currentCctv === data.id ? " active" : "")
+          (currentCctv === cctv.id ? " active" : "")
         }
         onClick={() => {
-          setCurrentCctv(data.id);
-          setCctvName(data.cctv)
+          setCurrentCctv(cctv.id);
+          setCctvName(cctv.name + " - " + cctv.location);
         }}
       >
-        {data.cctv}
+        {cctv.name + " - " + cctv.location}
       </button>
     );
   });
