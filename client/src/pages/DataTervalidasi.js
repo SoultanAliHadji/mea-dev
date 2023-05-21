@@ -19,10 +19,6 @@ const DataTervalidasi = ({ cctvData, objectData }) => {
     }
   });
 
-  useEffect(() => {
-    console.log(date);
-  }, [date]);
-
   return (
     <div className="data-tervalidasi">
       <div className="title d-grid gap-3 mb-3">
@@ -128,7 +124,7 @@ const DataTervalidasi = ({ cctvData, objectData }) => {
                           <label>{dateStatus}</label>
                         </div>
                         <div className="col d-flex justify-content-end p-0">
-                          {date !== null || dateStatus === "" ? (
+                          {date !== null && dateStatus === "" ? (
                             <button
                               className="border-0 rounded-2 px-3 py-2"
                               onClick={() => {
