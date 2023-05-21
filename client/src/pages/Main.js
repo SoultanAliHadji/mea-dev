@@ -2,9 +2,9 @@ import "../styles/main.css";
 import LiveMonitoring from "./LiveMonitoring";
 import ValidasiDeviasi from "./ValidasiDeviasi";
 import Notification from "../components/Notification";
-import { Icon } from "@iconify/react";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { Icon } from "@iconify/react";
 
 const Main = () => {
   const [currentPage, setCurrentPage] = useState("live-monitoring");
@@ -20,7 +20,7 @@ const Main = () => {
   const [currentCctvName, setCurrentCctvName] = useState();
   const [currentCctvLocation, setCurrentCctvLocation] = useState();
 
-  const [currentDeviation, setCurrentDeviation] = useState();
+  const [currentDeviationId, setCurrentDeviationId] = useState();
 
   useEffect(() => {
     axios
@@ -161,7 +161,10 @@ const Main = () => {
                 currentCctvData={currentCctvData}
               />
             ) : currentPage === "validasi-deviasi" ? (
-              <ValidasiDeviasi />
+              <ValidasiDeviasi
+                getToken={getToken}
+                currentDeviationId={currentDeviationId}
+              />
             ) : (
               <h1>Data Tervalidasi</h1>
             )}
@@ -224,8 +227,8 @@ const Main = () => {
                   setCurrentPage={setCurrentPage}
                   currentCctvName={currentCctvName}
                   currentCctvLocation={currentCctvLocation}
-                  currentDeviation={currentDeviation}
-                  setCurrentDeviation={setCurrentDeviation}
+                  currentDeviationId={currentDeviationId}
+                  setCurrentDeviationId={setCurrentDeviationId}
                 />
               </div>
             </div>

@@ -1,6 +1,4 @@
 import "../styles/live_monitoring.css";
-import axios from "axios";
-import { useState, useEffect } from "react";
 import ReactImageMagnify from "react-magnify-image";
 
 const LiveMonitoring = ({

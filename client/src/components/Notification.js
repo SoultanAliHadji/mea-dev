@@ -1,7 +1,7 @@
 import "../styles/notification.css";
-import { Icon } from "@iconify/react";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { Icon } from "@iconify/react";
 
 const Notification = ({
   currentPage,
@@ -9,11 +9,18 @@ const Notification = ({
   getToken,
   currentCctvName,
   currentCctvLocation,
-  currentDeviation,
-  setCurrentDeviation,
+  currentDeviationId,
+  setCurrentDeviationId,
 }) => {
   const [deviationData, setDeviationData] = useState([]);
   const [currentObject, setCurrentObject] = useState("AllObject");
+
+  const object = [
+    { id: 1, name: "Semua", value: "AllObject" },
+    { id: 2, name: "Person", value: "Person" },
+    { id: 3, name: "LV", value: "LV" },
+    { id: 4, name: "HD", value: "HD" },
+  ];
 
   useEffect(() => {
     axios
@@ -40,13 +47,29 @@ const Notification = ({
       .catch((err) => console.log(err));
   }, [currentCctvName, currentCctvLocation, currentObject]);
 
-  const devArr = deviationData.map((deviation) => {
+  const objectArr = object.map((object) => {
+    return (
+      <button
+        className={
+          "border-0 rounded-5 px-3 py-2" +
+          (currentObject === object.value ? " active" : "")
+        }
+        onClick={() => {
+          setCurrentObject(object.value);
+        }}
+      >
+        {object.name}
+      </button>
+    );
+  });
+
+  const devArr = deviationData.slice(0, 10).map((deviation) => {
     return (
       <button
         className={
           "border-0 text-start rounded-2 px-3 py-2 d-grid gap-2" +
           (currentPage !== "live-monitoring" &&
-          currentDeviation === deviation.id
+          currentDeviationId === deviation.id
             ? " active"
             : "")
         }
@@ -54,14 +77,14 @@ const Notification = ({
           currentPage !== "validasi-deviasi"
             ? setCurrentPage("validasi-deviasi")
             : setCurrentPage(currentPage);
-          setCurrentDeviation(deviation.id);
+          setCurrentDeviationId(deviation.id);
         }}
       >
         <div className="row align-items-center">
-          <div className="col-6">
+          <div className="col-5">
             <label>{"Deviasi " + deviation.type_object}</label>
           </div>
-          <div className="col-6 d-flex justify-content-end">
+          <div className="col-7 d-flex justify-content-end">
             <label
               className={
                 "px-2 rounded-2" +
@@ -72,7 +95,9 @@ const Notification = ({
                   : " status-none")
               }
             >
-              {deviation.type_validation}
+              {deviation.type_validation === "not_yet"
+                ? "Perlu Validasi"
+                : deviation.type_validation}
             </label>
           </div>
         </div>
@@ -88,29 +113,6 @@ const Notification = ({
           </label>
           <label>{deviation.created_at}</label>
         </div>
-      </button>
-    );
-  });
-
-  const object = [
-    { id: 1, name: "Semua", value: "AllObject" },
-    { id: 2, name: "Person", value: "Person" },
-    { id: 3, name: "LV", value: "LV" },
-    { id: 4, name: "HD", value: "HD" },
-  ];
-
-  const objectArr = object.map((object) => {
-    return (
-      <button
-        className={
-          "border-0 rounded-5 px-3 py-2" +
-          (currentObject === object.value ? " active" : "")
-        }
-        onClick={() => {
-          setCurrentObject(object.value);
-        }}
-      >
-        {object.name}
       </button>
     );
   });
