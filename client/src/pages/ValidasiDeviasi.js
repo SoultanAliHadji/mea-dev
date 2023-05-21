@@ -1,6 +1,7 @@
 import "../styles/validasi_deviasi.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { Icon } from "@iconify/react";
 import ReactImageMagnify from "react-magnify-image";
 
 const ValidasiDeviasi = ({ getToken, currentDeviationId }) => {
@@ -50,12 +51,12 @@ const ValidasiDeviasi = ({ getToken, currentDeviationId }) => {
 
   const currentDeviationArray = currentDeviationData.map((deviation) => {
     return (
-      <div>
+      <div className="deviation-data">
         <div className="row align-items-center">
           <div className="col">
             <label
               className={
-                "px-2 rounded-2" +
+                "px-3 rounded-2" +
                 (deviation.type_validation === "true"
                   ? " status-true"
                   : deviation.type_validation === "false"
@@ -69,10 +70,27 @@ const ValidasiDeviasi = ({ getToken, currentDeviationId }) => {
             </label>
           </div>
           <div className="col">
-            <div className="d-flex justify-content-end">
-              <button>Valid</button>
-              <button>Tidak Valid</button>
+            <div className="d-flex justify-content-end gap-2">
+              <button className="button-true border-0 rounded-2 px-3 py-1">
+                Valid
+              </button>
+              <button className="button-false rounded-2 px-3 py-1">
+                Tidak Valid
+              </button>
             </div>
+          </div>
+        </div>
+        <div className="mt-3">
+          <h6>Terdeteksi Deviasi {deviation.type_object}</h6>
+        </div>
+        <div className="d-grid-2">
+          <div className="d-flex gap-2">
+            <Icon className="fs-5" icon="bi:camera-fill" />
+            <label>{deviation.name + " - " + deviation.location}</label>
+          </div>
+          <div className="d-flex gap-2">
+            <Icon className="fs-5" icon="akar-icons:clock" />
+            <label>{deviation.created_at}</label>
           </div>
         </div>
       </div>
@@ -88,25 +106,33 @@ const ValidasiDeviasi = ({ getToken, currentDeviationId }) => {
             <label>Validasi deviasi yang terdeteksi</label>
           </div>
           <div className="content">
-            <div className="d-flex justify-content-center">
-              <ReactImageMagnify
-                className="deviation-img rounded-2"
-                {...{
-                  smallImage: {
-                    alt: "",
-                    isFluidWidth: true,
-                    src: currentDeviationImageBlob,
-                  },
-                  largeImage: {
-                    src: currentDeviationImageBlob,
-                    width: 2000,
-                    height: 1100,
-                  },
-                  enlargedImagePosition: "over",
-                }}
-              />
-            </div>
-            <div>{currentDeviationArray}</div>
+            {currentDeviationId !== 0 ? (
+              <div>
+                <div className="d-flex justify-content-center">
+                  <ReactImageMagnify
+                    className="deviation-img rounded-2"
+                    {...{
+                      smallImage: {
+                        alt: "",
+                        isFluidWidth: true,
+                        src: currentDeviationImageBlob,
+                      },
+                      largeImage: {
+                        src: currentDeviationImageBlob,
+                        width: 2000,
+                        height: 1100,
+                      },
+                      enlargedImagePosition: "over",
+                    }}
+                  />
+                </div>
+                <div className="mt-3">{currentDeviationArray}</div>
+              </div>
+            ) : (
+              <div className="d-flex justify-content-center">
+                <label>Pilih deviasi pada List Deviasi</label>
+              </div>
+            )}
           </div>
         </div>
       </div>

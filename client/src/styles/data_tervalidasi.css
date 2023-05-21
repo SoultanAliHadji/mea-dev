@@ -1,0 +1,95 @@
+.data-tervalidasi {
+    .title {
+        background-color: white;
+        box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
+        padding: 8px 16px;
+        border-radius: 8px 8px 0 0;
+
+        & h6 {
+            margin: 0px;
+        }
+
+        & label {
+            color: #3E4958;
+        }
+
+        & .input-group {
+            width: 80%;
+
+            & .input-group-text {
+                background-color: transparent;
+            }
+        }
+
+        & button {
+            font-size: 14px;
+            font-weight: 500;
+            background-image: linear-gradient(to right, #3B9315, #297209);
+            color: white;
+
+            &:hover {
+                background-image: linear-gradient(to right, #297209, #297209);
+            }
+        }
+    }
+
+    .content {
+        background-color: white;
+        box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
+        padding: 12px 24px;
+        border-radius: 0 0 8px 8px;
+
+        & .deviation-img {
+            width: 74% !important;
+            border: 3px solid #297209;
+        }
+
+        & .deviation-data {
+            font-size: 14px;
+
+            & .status-none {
+                font-weight: 500;
+                background-color: #F0F3FF;
+                border: 2px solid #B1C5F6;
+                color: #1573FD;
+            }
+
+            & .status-true {
+                font-weight: 500;
+                background-color: #D2F1DD;
+                border: 2px solid #8EDCA9;
+                color: #1F8A58;
+            }
+
+            & .status-false {
+                font-weight: 500;
+                background-color: #F9D1CC;
+                border: 2px solid #F08C80;
+                color: #DE4452;
+            }
+
+            & .button-true {
+                background-image: linear-gradient(to right, #3B9315, #297209);
+                color: white;
+                font-weight: 500;
+
+                &:hover {
+                    background-image: linear-gradient(to right, #297209, #297209);
+                }
+            }
+
+            & .button-false {
+                background-image: linear-gradient(to right, white, white);
+                border: 2px solid #3B9315;
+                color: #297209;
+                font-weight: 500;
+
+                &:hover {
+                    background-image: linear-gradient(to right, #297209, #297209);
+                    border: 2px solid #297209;
+                    color: white;
+                }
+            }
+        }
+    }
+}

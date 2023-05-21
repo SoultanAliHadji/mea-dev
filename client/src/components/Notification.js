@@ -11,16 +11,10 @@ const Notification = ({
   currentCctvLocation,
   currentDeviationId,
   setCurrentDeviationId,
+  objectData,
 }) => {
   const [deviationData, setDeviationData] = useState([]);
   const [currentObject, setCurrentObject] = useState("AllObject");
-
-  const object = [
-    { id: 1, name: "Semua", value: "AllObject" },
-    { id: 2, name: "Person", value: "Person" },
-    { id: 3, name: "LV", value: "LV" },
-    { id: 4, name: "HD", value: "HD" },
-  ];
 
   useEffect(() => {
     axios
@@ -47,7 +41,7 @@ const Notification = ({
       .catch((err) => console.log(err));
   }, [currentCctvName, currentCctvLocation, currentObject]);
 
-  const objectArr = object.map((object) => {
+  const objectArr = objectData.map((object) => {
     return (
       <button
         className={
@@ -102,15 +96,11 @@ const Notification = ({
           </div>
         </div>
         <div className="d-flex align-items-end gap-2">
-          <label>
-            <Icon className="fs-5" icon="bi:camera-fill" />
-          </label>
+          <Icon className="fs-5" icon="bi:camera-fill" />
           <label>{deviation.name + " - " + deviation.location}</label>
         </div>
         <div className="d-flex align-items-end gap-2">
-          <label>
-            <Icon className="fs-5" icon="akar-icons:clock" />
-          </label>
+          <Icon className="fs-5" icon="akar-icons:clock" />
           <label>{deviation.created_at}</label>
         </div>
       </button>
