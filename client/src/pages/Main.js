@@ -8,9 +8,14 @@ import { useState, useEffect } from "react";
 
 const Main = () => {
   const [currentPage, setCurrentPage] = useState("live-monitoring");
+
+  //token
+  const getToken =
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NywidXNlcm5hbWUiOiJkZXZlbG9wZXIiLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkX2F0IjoiMjAyMi0wNi0yMyAxNDozMToyMSIsInVwZGF0ZWRfYXQiOiIyMDIyLTEwLTI3IDAwOjQxOjQ4IiwibmFtZSI6IkFkbWluIiwiY29tcGFueSI6IlBUIEJlcmF1IENvYWwifQ.84ujW7wKhnX5qIsO44tw8STP9ID4UKxzPPwnVaMuSTc";
+
   //cctv data
   const [cctvData, setCctvData] = useState([]);
-  const [currentCctv, setCurrentCctv] = useState();
+  const [currentCctvId, setCurrentCctvId] = useState();
 
   const [currentObject, setCurrentObject] = useState(1);
   const [currentDeviation, setCurrentDeviation] = useState();
@@ -19,15 +24,14 @@ const Main = () => {
     axios
       .get(process.env.REACT_APP_API + "cctv", {
         headers: {
-          Authorization: "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NywidXNlcm5hbWUiOiJkZXZlbG9wZXIiLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkX2F0IjoiMjAyMi0wNi0yMyAxNDozMToyMSIsInVwZGF0ZWRfYXQiOiIyMDIyLTEwLTI3IDAwOjQxOjQ4IiwibmFtZSI6IkFkbWluIiwiY29tcGFueSI6IlBUIEJlcmF1IENvYWwifQ.84ujW7wKhnX5qIsO44tw8STP9ID4UKxzPPwnVaMuSTc",
+          Authorization: "Bearer " + getToken,
         },
       })
       .then((res) => {
         setCctvData(res.data.data);
-        setCurrentCctv(res.data.data[0].id);
-        console.log(res.data.data)
+        setCurrentCctvId(res.data.data[0].id);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.log(err));
   }, []);
 
   return (
@@ -134,15 +138,10 @@ const Main = () => {
           <div className="col">
             {currentPage === "live-monitoring" ? (
               <LiveMonitoring
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
+                getToken={getToken}
                 cctvData={cctvData}
-                currentCctv={currentCctv}
-                setCurrentCctv={setCurrentCctv}
-                currentObject={currentObject}
-                setCurrentObject={setCurrentObject}
-                currentDeviation={currentDeviation}
-                setCurrentDeviation={setCurrentDeviation}
+                currentCctvId={currentCctvId}
+                setCurrentCctvId={setCurrentCctvId}
               />
             ) : currentPage === "validasi-deviasi" ? (
               <ValidasiDeviasi />
@@ -205,8 +204,8 @@ const Main = () => {
                 <Notification
                   currentPage={currentPage}
                   setCurrentPage={setCurrentPage}
-                  currentCctv={currentCctv}
-                  setCurrentCctv={setCurrentCctv}
+                  currentCctvId={currentCctvId}
+                  setCurrentCctvId={setCurrentCctvId}
                   currentObject={currentObject}
                   setCurrentObject={setCurrentObject}
                   currentDeviation={currentDeviation}

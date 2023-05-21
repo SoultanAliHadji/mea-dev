@@ -4,8 +4,8 @@ import { Icon } from "@iconify/react";
 const Notification = ({
   currentPage,
   setCurrentPage,
-  currentCctv,
-  setCurrentCctv,
+  currentCctvId,
+  setCurrentCctvId,
   currentObject,
   setCurrentObject,
   currentDeviation,

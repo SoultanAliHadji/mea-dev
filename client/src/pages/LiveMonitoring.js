@@ -1,24 +1,52 @@
 import "../styles/live_monitoring.css";
-import { useState } from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
 import ReactImageMagnify from "react-magnify-image";
 
-const LiveMonitoring = ({ cctvData, currentCctv, setCurrentCctv }) => {
-  const [cctvName, setCctvName] = useState("CCTV HO - Indoor Finance");
+const LiveMonitoring = ({
+  getToken,
+  cctvData,
+  currentCctvId,
+  setCurrentCctvId,
+}) => {
+  const [currentCctvData, setCurrentCctvData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(process.env.REACT_APP_API + "cctv/" + currentCctvId, {
+        headers: {
+          Authorization: "Bearer " + getToken,
+        },
+      })
+      .then((res) => {
+        setCurrentCctvData(res.data.data);
+        console.log(res.data.data);
+      })
+      .catch((err) => console.log(err));
+  }, [currentCctvId]);
 
   const cctvArray = cctvData.map((cctv) => {
     return (
       <button
         className={
           "border-0 text-start rounded-2 px-3 py-2" +
-          (currentCctv === cctv.id ? " active" : "")
+          (currentCctvId === cctv.id ? " active" : "")
         }
         onClick={() => {
-          setCurrentCctv(cctv.id);
-          setCctvName(cctv.name + " - " + cctv.location);
+          setCurrentCctvId(cctv.id);
         }}
       >
         {cctv.name + " - " + cctv.location}
       </button>
+    );
+  });
+
+  const cctvInfoArray = currentCctvData.map((info) => {
+    return (
+      <div className="cctv-info">
+        <h6>{info.name + " - " + info.location}</h6>
+        <label>IP {info.ip}</label>
+      </div>
     );
   });
 
@@ -54,17 +82,19 @@ const LiveMonitoring = ({ cctvData, currentCctv, setCurrentCctv }) => {
                 smallImage: {
                   alt: "",
                   isFluidWidth: true,
-                  src: process.env.REACT_APP_API + "video_feed/" + currentCctv,
+                  src:
+                    process.env.REACT_APP_API + "video_feed/" + currentCctvId,
                 },
                 largeImage: {
-                  src: process.env.REACT_APP_API + "video_feed/" + currentCctv,
+                  src:
+                    process.env.REACT_APP_API + "video_feed/" + currentCctvId,
                   width: 2000,
                   height: 1100,
                 },
                 enlargedImagePosition: "over",
               }}
             />
-            <h6>{cctvName}</h6>
+            {cctvInfoArray}
           </div>
         </div>
       </div>
