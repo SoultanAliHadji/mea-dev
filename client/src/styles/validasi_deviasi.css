@@ -1,0 +1,57 @@
+.validasi-deviasi {
+    & .col {
+        .title {
+            background-color: white;
+            box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
+            padding: 8px 16px;
+            border-radius: 8px 8px 0 0;
+    
+            & h6 {
+                margin: 0px;
+            }
+    
+            & label {
+                font-size: 12px;
+                color: #3E4958;
+            }
+        }
+    
+        .content {
+            background-color: white;
+            box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
+            padding: 12px 24px;
+            border-radius: 0 0 8px 8px;
+    
+            & .cctv-list {
+                & button {
+                    background-color: white;
+                    color: #3E4958;
+                    font-size: 12px;
+                    font-weight: 500;
+                    box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.2);
+    
+                    &:hover {
+                        background-color: #DFF4DF;
+                    }
+                }
+    
+                & .active {
+                    background-image: linear-gradient(to right, #3B9315, #297209);
+                    color: white;
+                    pointer-events: none;
+                }
+            }
+    
+            & .view-all-cctv button {
+                font-size: 12px;
+                font-weight: 500;
+                background-image: linear-gradient(to right, #3B9315, #297209);
+                color: white;
+    
+                &:hover {
+                    background-image: linear-gradient(to right, #297209, #297209);
+                }
+            }
+        }
+    }
+}

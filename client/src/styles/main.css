@@ -1,0 +1,117 @@
+.main {
+    max-width: 100vw;
+    height: 100vh;
+    background-color: #F0F0F0;
+}
+
+.navbar {
+    background-color: white;
+    box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
+
+    & a {
+        cursor: pointer;
+    }
+
+    & .navbar-brand img {
+        max-height: 30px;
+    }
+
+    & .nav-item {
+        font-weight: 500;
+
+        & .nav-link:hover {
+            color: #297209 !important;
+        }
+
+        & .active {
+            color: #297209 !important;
+            text-decoration: underline;
+            text-decoration-thickness: 3px;
+            text-underline-offset: 10px;
+            pointer-events: none;
+        }
+    }
+
+    & .dropdown a {
+        font-weight: 500;
+
+        &:hover {
+            background-color: #F9D1CC;
+            color: #DE4452;
+        }
+
+        &:focus {
+            color: #DE4452;
+        }
+
+        & label {
+            cursor: pointer;
+        }
+    }
+}
+
+.col-3 {
+    .title {
+        background-color: white;
+        box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
+        padding: 8px 16px;
+        border-radius: 8px 8px 0 0;
+
+        & h6 {
+            margin: 0px;
+        }
+
+        & label {
+            font-size: 12px;
+            color: #3E4958;
+        }
+
+        & button {
+            font-weight: 500;
+            border: 1px solid #297209;
+            color: #297209;
+
+            &:hover {
+                background-color: #DFF4DF !important;
+            }
+        }
+    }
+
+    .content {
+        background-color: white;
+        box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
+        padding: 12px 24px;
+        border-radius: 0 0 8px 8px;
+
+        & .cctv-list {
+            & button {
+                background-color: white;
+                color: #3E4958;
+                font-size: 12px;
+                font-weight: 500;
+                box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.2);
+
+                &:hover {
+                    background-color: #DFF4DF;
+                }
+            }
+
+            & .active {
+                background-image: linear-gradient(to right, #3B9315, #297209);
+                color: white;
+                pointer-events: none;
+            }
+        }
+
+        & .view-all-cctv button {
+            font-size: 12px;
+            font-weight: 500;
+            background-image: linear-gradient(to right, #3B9315, #297209);
+            color: white;
+
+            &:hover {
+                background-image: linear-gradient(to right, #297209, #297209);
+            }
+        }
+    }
+}

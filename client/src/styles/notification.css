@@ -1,0 +1,74 @@
+.notification {
+    & .notification-filter {
+        & button {
+            background-color: white;
+            color: #3E4958;
+            font-size: 12px;
+            font-weight: 500;
+            box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.2);
+
+            &:hover {
+                background-color: #DFF4DF;
+            }
+        }
+
+        & .active {
+            background-image: linear-gradient(to right, #3B9315, #297209);
+            color: white;
+            pointer-events: none;
+        }
+    }
+
+    & .deviation-list {
+        & button {
+            background-color: white;
+            color: #3E4958;
+            font-size: 12px;
+            font-weight: 500;
+            box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.2);
+
+            &:hover {
+                background-color: #DFF4DF;
+            }
+
+            & label {
+                cursor: pointer;
+            }
+
+            & .status-none {
+                background-color: #F0F3FF;
+                border: 2px solid #B1C5F6;
+                color: #1573FD;
+            }
+
+            & .status-true {
+                background-color: #D2F1DD;
+                border: 2px solid #8EDCA9;
+                color: #1F8A58;
+            }
+
+            & .status-false {
+                background-color: #F9D1CC;
+                border: 2px solid #F08C80;
+                color: #DE4452;
+            }
+        }
+
+        & .active {
+            background-image: linear-gradient(to right, #3B9315, #297209);
+            color: white;
+            pointer-events: none;
+        }
+    }
+
+    & .validation-button button {
+        font-size: 12px;
+        font-weight: 500;
+        background-image: linear-gradient(to right, #3B9315, #297209);
+        color: white;
+
+        &:hover {
+            background-image: linear-gradient(to right, #297209, #297209);
+        }
+    }
+}
