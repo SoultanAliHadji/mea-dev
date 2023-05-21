@@ -4,26 +4,11 @@ import { useState, useEffect } from "react";
 import ReactImageMagnify from "react-magnify-image";
 
 const LiveMonitoring = ({
-  getToken,
   cctvData,
   currentCctvId,
   setCurrentCctvId,
+  currentCctvData,
 }) => {
-  const [currentCctvData, setCurrentCctvData] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get(process.env.REACT_APP_API + "cctv/" + currentCctvId, {
-        headers: {
-          Authorization: "Bearer " + getToken,
-        },
-      })
-      .then((res) => {
-        setCurrentCctvData(res.data.data);
-        console.log(res.data.data);
-      })
-      .catch((err) => console.log(err));
-  }, [currentCctvId]);
 
   const cctvArray = cctvData.map((cctv) => {
     return (

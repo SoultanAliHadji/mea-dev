@@ -16,6 +16,9 @@ const Main = () => {
   //cctv data
   const [cctvData, setCctvData] = useState([]);
   const [currentCctvId, setCurrentCctvId] = useState();
+  const [currentCctvData, setCurrentCctvData] = useState([]);
+  const [currentCctvName, setCurrentCctvName] = useState();
+  const [currentCctvLocation, setCurrentCctvLocation] = useState();
 
   const [currentObject, setCurrentObject] = useState(1);
   const [currentDeviation, setCurrentDeviation] = useState();
@@ -33,6 +36,21 @@ const Main = () => {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  useEffect(() => {
+    axios
+      .get(process.env.REACT_APP_API + "cctv/" + currentCctvId, {
+        headers: {
+          Authorization: "Bearer " + getToken,
+        },
+      })
+      .then((res) => {
+        setCurrentCctvData(res.data.data);
+        setCurrentCctvName(res.data.data[0].name);
+        setCurrentCctvLocation(res.data.data[0].location);
+      })
+      .catch((err) => console.log(err));
+  }, [currentCctvId]);
 
   return (
     <div className="main">
@@ -138,10 +156,10 @@ const Main = () => {
           <div className="col">
             {currentPage === "live-monitoring" ? (
               <LiveMonitoring
-                getToken={getToken}
                 cctvData={cctvData}
                 currentCctvId={currentCctvId}
                 setCurrentCctvId={setCurrentCctvId}
+                currentCctvData={currentCctvData}
               />
             ) : currentPage === "validasi-deviasi" ? (
               <ValidasiDeviasi />
@@ -203,9 +221,10 @@ const Main = () => {
               <div className="content">
                 <Notification
                   currentPage={currentPage}
+                  getToken={getToken}
                   setCurrentPage={setCurrentPage}
-                  currentCctvId={currentCctvId}
-                  setCurrentCctvId={setCurrentCctvId}
+                  currentCctvName={currentCctvName}
+                  currentCctvLocation={currentCctvLocation}
                   currentObject={currentObject}
                   setCurrentObject={setCurrentObject}
                   currentDeviation={currentDeviation}
