@@ -9,12 +9,11 @@ const Notification = ({
   getToken,
   currentCctvName,
   currentCctvLocation,
-  currentObject,
-  setCurrentObject,
   currentDeviation,
   setCurrentDeviation,
 }) => {
   const [deviationData, setDeviationData] = useState([]);
+  const [currentObject, setCurrentObject] = useState("AllObject");
 
   useEffect(() => {
     axios
@@ -25,7 +24,7 @@ const Notification = ({
           "/" +
           currentCctvLocation +
           "/" +
-          "AllObject" +
+          currentObject +
           "/All/Allvalidation/" +
           10,
         {
@@ -39,7 +38,7 @@ const Notification = ({
         console.log(res.data.data);
       })
       .catch((err) => console.log(err));
-  }, [currentCctvName, currentCctvLocation]);
+  }, [currentCctvName, currentCctvLocation, currentObject]);
 
   const devArr = deviationData.map((deviation) => {
     return (
@@ -94,24 +93,24 @@ const Notification = ({
   });
 
   const object = [
-    { id: 1, name: "Semua" },
-    { id: 2, name: "Person" },
-    { id: 3, name: "LV" },
-    { id: 4, name: "HD" },
+    { id: 1, name: "Semua", value: "AllObject" },
+    { id: 2, name: "Person", value: "Person" },
+    { id: 3, name: "LV", value: "LV" },
+    { id: 4, name: "HD", value: "HD" },
   ];
 
-  const objectArr = object.map((data) => {
+  const objectArr = object.map((object) => {
     return (
       <button
         className={
           "border-0 rounded-5 px-3 py-2" +
-          (currentObject === data.id ? " active" : "")
+          (currentObject === object.value ? " active" : "")
         }
         onClick={() => {
-          setCurrentObject(data.id);
+          setCurrentObject(object.value);
         }}
       >
-        {data.name}
+        {object.name}
       </button>
     );
   });

@@ -20,7 +20,6 @@ const Main = () => {
   const [currentCctvName, setCurrentCctvName] = useState();
   const [currentCctvLocation, setCurrentCctvLocation] = useState();
 
-  const [currentObject, setCurrentObject] = useState(1);
   const [currentDeviation, setCurrentDeviation] = useState();
 
   useEffect(() => {
@@ -225,8 +224,6 @@ const Main = () => {
                   setCurrentPage={setCurrentPage}
                   currentCctvName={currentCctvName}
                   currentCctvLocation={currentCctvLocation}
-                  currentObject={currentObject}
-                  setCurrentObject={setCurrentObject}
                   currentDeviation={currentDeviation}
                   setCurrentDeviation={setCurrentDeviation}
                 />
