@@ -14,14 +14,43 @@
         }
 
         & .input-group {
-            width: 80%;
+            max-width: max-content;
 
             & .input-group-text {
                 background-color: transparent;
             }
+
+            & button {
+                background-image: linear-gradient(to right, white, white);
+
+                & label {
+                    cursor: pointer;
+                }
+
+                &:hover {
+                    background-image: linear-gradient(to right, white, white);
+                }
+            }
         }
 
-        & button {
+        & .modal-dialog {
+            max-width: max-content;
+
+            & .modal-footer {
+                & button {
+                    font-size: 14px;
+                    font-weight: 500;
+                    background-image: linear-gradient(to right, #3B9315, #297209);
+                    color: white;
+
+                    &:hover {
+                        background-image: linear-gradient(to right, #297209, #297209);
+                    }
+                }
+            }
+        }
+
+        & .export-button {
             font-size: 14px;
             font-weight: 500;
             background-image: linear-gradient(to right, #3B9315, #297209);

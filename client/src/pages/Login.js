@@ -29,7 +29,7 @@ const Login = () => {
                 />
               </div>
             </form>
-            <a className="d-grid" href="/">
+            <a className="d-grid" href="/live-monitoring">
               <button className="border-0 rounded-2 px-3 py-2">Masuk</button>
             </a>
           </div>

@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 
 const Main = () => {
-  const [currentPage, setCurrentPage] = useState("live-monitoring");
+  const [currentPage, setCurrentPage] = useState(window.location.pathname === "/validasi-deviasi" ? "validasi-deviasi" : window.location.pathname === "/data-tervalidasi" ? "data-tervalidasi" : "live-monitoring");
 
   //token
   const getToken =
@@ -94,6 +94,7 @@ const Main = () => {
                   }
                   onClick={() => {
                     setCurrentPage("live-monitoring");
+                    window.history.replaceState(null, null, "/live-monitoring");
                   }}
                 >
                   Live Monitoring
@@ -107,6 +108,7 @@ const Main = () => {
                   }
                   onClick={() => {
                     setCurrentPage("validasi-deviasi");
+                    window.history.replaceState(null, null, "/validasi-deviasi");
                   }}
                 >
                   Validasi Deviasi
@@ -120,6 +122,7 @@ const Main = () => {
                   }
                   onClick={() => {
                     setCurrentPage("data-tervalidasi");
+                    window.history.replaceState(null, null, "/data-tervalidasi");
                   }}
                 >
                   Data Tervalidasi

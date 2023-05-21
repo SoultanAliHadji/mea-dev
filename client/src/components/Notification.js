@@ -71,6 +71,7 @@ const Notification = ({
           currentPage !== "validasi-deviasi"
             ? setCurrentPage("validasi-deviasi")
             : setCurrentPage(currentPage);
+          window.history.replaceState(null, null, "/validasi-deviasi");
           setCurrentDeviationId(deviation.id);
         }}
       >
@@ -131,6 +132,7 @@ const Notification = ({
             className="border-0 rounded-2 px-3 py-2"
             onClick={() => {
               setCurrentPage("validasi-deviasi");
+              window.history.replaceState(null, null, "/validasi-deviasi");
             }}
           >
             Validasi
