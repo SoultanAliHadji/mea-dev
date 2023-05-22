@@ -16,7 +16,7 @@ const Main = () => {
 
   //cctv data
   const [cctvData, setCctvData] = useState([]);
-  const [currentCctvId, setCurrentCctvId] = useState();
+  const [currentCctvId, setCurrentCctvId] = useState(1);
   const [currentCctvData, setCurrentCctvData] = useState([]);
   const [currentCctvName, setCurrentCctvName] = useState();
   const [currentCctvLocation, setCurrentCctvLocation] = useState();
@@ -179,7 +179,7 @@ const Main = () => {
                 currentDeviationId={currentDeviationId}
               />
             ) : (
-              <DataTervalidasi cctvData={cctvData} objectData={objectData}/>
+              <DataTervalidasi getToken={getToken} cctvData={cctvData} objectData={objectData}/>
             )}
           </div>
           {currentPage === "live-monitoring" ||

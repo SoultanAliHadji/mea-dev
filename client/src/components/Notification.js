@@ -36,7 +36,6 @@ const Notification = ({
       )
       .then((res) => {
         setDeviationData(res.data.data);
-        console.log(res.data.data);
       })
       .catch((err) => console.log(err));
   }, [currentCctvName, currentCctvLocation, currentObject]);
@@ -44,6 +43,7 @@ const Notification = ({
   const objectArr = objectData.map((object) => {
     return (
       <button
+        key={object.id}
         className={
           "border-0 rounded-5 px-3 py-2" +
           (currentObject === object.value ? " active" : "")
@@ -60,6 +60,7 @@ const Notification = ({
   const devArr = deviationData.slice(0, 10).map((deviation) => {
     return (
       <button
+        key={deviation.id}
         className={
           "border-0 text-start rounded-2 px-3 py-2 d-grid gap-2" +
           (currentPage !== "live-monitoring" &&
@@ -92,7 +93,9 @@ const Notification = ({
             >
               {deviation.type_validation === "not_yet"
                 ? "Perlu Validasi"
-                : deviation.type_validation}
+                : deviation.type_validation === "true"
+                ? "Valid"
+                : "Tidak Valid"}
             </label>
           </div>
         </div>
@@ -118,8 +121,8 @@ const Notification = ({
         className="deviation-list d-grid gap-2 overflow-auto"
         style={
           currentPage !== "live-monitoring"
-            ? { "max-height": "65.5vh" }
-            : { "max-height": "58vh" }
+            ? { maxHeight: "65.5vh" }
+            : { maxHeight: "58vh" }
         }
       >
         {devArr}

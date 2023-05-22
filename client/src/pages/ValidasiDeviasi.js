@@ -10,48 +10,53 @@ const ValidasiDeviasi = ({ getToken, currentDeviationId }) => {
   const [currentDeviationImageBlob, setCurrentDeviationImageBlob] = useState();
 
   useEffect(() => {
-    axios
-      .get(process.env.REACT_APP_API + "view/" + currentDeviationId, {
-        headers: {
-          Authorization: "Bearer " + getToken,
-        },
-      })
-      .then((res) => {
-        setCurrentDeviationData(res.data.data);
-        setCurrentDeviationImageRaw(res.data.data[0].image);
-      })
-      .catch((err) => console.log(err));
-  }, [currentDeviationId]);
-
-  useEffect(() => {
-    axios
-      .get(
-        process.env.REACT_APP_API +
-          "assets/outputFolder/cctvOutput/" +
-          "2023-03-17 09:18:38.921260_VIEWPOINT.jpg", //viewimage
-        {
+    if (currentDeviationId != 0) {
+      axios
+        .get(process.env.REACT_APP_API + "view/" + currentDeviationId, {
           headers: {
             Authorization: "Bearer " + getToken,
           },
-          responseType: "arraybuffer",
-        }
-      )
-      .then((res) => {
-        let blob = new Blob([res.data], { type: res.headers["content-type"] });
-        var reader = new window.FileReader();
-        reader.readAsDataURL(blob);
-        reader.onload = function () {
-          var imageDataUrl = reader.result;
-          setCurrentDeviationImageBlob(imageDataUrl);
-          console.log(imageDataUrl);
-        };
-      })
-      .catch((err) => console.log(err));
+        })
+        .then((res) => {
+          setCurrentDeviationData(res.data.data);
+          setCurrentDeviationImageRaw(res.data.data[0].image);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [currentDeviationId]);
+
+  useEffect(() => {
+    if (currentDeviationId != 0) {
+      axios
+        .get(
+          process.env.REACT_APP_API +
+            "assets/outputFolder/cctvOutput/" +
+            "2023-03-17 09:18:38.921260_VIEWPOINT.jpg", //viewimage
+          {
+            headers: {
+              Authorization: "Bearer " + getToken,
+            },
+            responseType: "arraybuffer",
+          }
+        )
+        .then((res) => {
+          let blob = new Blob([res.data], {
+            type: res.headers["content-type"],
+          });
+          var reader = new window.FileReader();
+          reader.readAsDataURL(blob);
+          reader.onload = function () {
+            var imageDataUrl = reader.result;
+            setCurrentDeviationImageBlob(imageDataUrl);
+          };
+        })
+        .catch((err) => console.log(err));
+    }
   }, [currentDeviationImageRaw]);
 
   const currentDeviationArray = currentDeviationData.map((deviation) => {
     return (
-      <div className="deviation-data">
+      <div key={deviation.id} className="deviation-data">
         <div className="row align-items-center">
           <div className="col">
             <label
@@ -66,7 +71,9 @@ const ValidasiDeviasi = ({ getToken, currentDeviationId }) => {
             >
               {deviation.type_validation === "not_yet"
                 ? "Perlu Validasi"
-                : deviation.type_validation}
+                : deviation.type_validation === "true"
+                ? "Valid"
+                : "Tidak Valid"}
             </label>
           </div>
           <div className="col">

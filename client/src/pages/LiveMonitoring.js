@@ -7,10 +7,10 @@ const LiveMonitoring = ({
   setCurrentCctvId,
   currentCctvData,
 }) => {
-
   const cctvArray = cctvData.map((cctv) => {
     return (
       <button
+        key={cctv.id}
         className={
           "border-0 text-start rounded-2 px-3 py-2" +
           (currentCctvId === cctv.id ? " active" : "")
@@ -26,7 +26,7 @@ const LiveMonitoring = ({
 
   const cctvInfoArray = currentCctvData.map((info) => {
     return (
-      <div className="cctv-info">
+      <div key={info.id} className="cctv-info">
         <h6>{info.name + " - " + info.location}</h6>
         <label>IP {info.ip}</label>
       </div>
