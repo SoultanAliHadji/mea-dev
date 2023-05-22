@@ -70,37 +70,50 @@
 
         & .table {
             font-size: 14px;
-            
+
             & .table-success {
                 background-color: #3B9315;
                 color: white;
             }
 
+            & img {
+                width: 100px;
+            }
+
             & button {
                 font-size: 14px;
-                    font-weight: 500;
-                    background-image: linear-gradient(to right, #3B9315, #297209);
-                    color: white;
+                font-weight: 500;
+                background-image: linear-gradient(to right, #3B9315, #297209);
+                color: white;
 
-                    &:hover {
-                        background-image: linear-gradient(to right, #297209, #297209);
-                    }
+                &:hover {
+                    background-image: linear-gradient(to right, #297209, #297209);
+                }
+            }
+
+            & .modal-dialog {
+                & .spinner-border {
+                    color: #3B9315;
+                }
             }
         }
 
         & .status-none {
+            font-weight: 500;
             background-color: #F0F3FF;
             border: 2px solid #B1C5F6;
             color: #1573FD;
         }
 
         & .status-true {
+            font-weight: 500;
             background-color: #D2F1DD;
             border: 2px solid #8EDCA9;
             color: #1F8A58;
         }
 
         & .status-false {
+            font-weight: 500;
             background-color: #F9D1CC;
             border: 2px solid #F08C80;
             color: #DE4452;

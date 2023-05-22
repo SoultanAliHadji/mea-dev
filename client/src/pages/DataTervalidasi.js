@@ -3,12 +3,17 @@ import "../styles/calendar.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
+import ReactImageMagnify from "react-magnify-image";
 import Calendar from "react-calendar";
 
 const DataTervalidasi = ({ getToken, cctvData, objectData }) => {
   const [date, setDate] = useState([new Date(), new Date()]);
   const [dateStatus, setDateStatus] = useState("*pilih tanggal (start)");
   const [deviationData, setDeviationData] = useState([]);
+  const [currentDeviationImageRaw, setCurrentDeviationImageRaw] = useState();
+  const [currentDeviationImageBlob, setCurrentDeviationImageBlob] = useState();
+  const [reactMagnifyImageLoading, setReactMagnifyImageLoading] =
+    useState(false);
   const [currentCctv, setCurrentCctv] = useState("All/All");
   const [currentObject, setCurrentObject] = useState("All");
 
@@ -41,6 +46,37 @@ const DataTervalidasi = ({ getToken, cctvData, objectData }) => {
       })
       .catch((err) => console.log(err));
   }, [currentCctv, currentObject, date]);
+
+  useEffect(() => {
+    setReactMagnifyImageLoading(true);
+    axios
+      .get(
+        process.env.REACT_APP_API +
+          "assets/outputFolder/cctvOutput/" +
+          "2023-03-17 09:18:38.921260_VIEWPOINT.jpg", //viewimage
+        {
+          headers: {
+            Authorization: "Bearer " + getToken,
+          },
+          responseType: "arraybuffer",
+        }
+      )
+      .then((res) => {
+        let blob = new Blob([res.data], {
+          type: res.headers["content-type"],
+        });
+        var reader = new window.FileReader();
+        reader.readAsDataURL(blob);
+        reader.onload = function () {
+          var imageDataUrl = reader.result;
+          setCurrentDeviationImageBlob(imageDataUrl);
+        };
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setReactMagnifyImageLoading(false);
+      });
+  }, [currentDeviationImageRaw]);
 
   const cctvFilter = cctvData.map((cctv) => {
     return (
@@ -77,13 +113,9 @@ const DataTervalidasi = ({ getToken, cctvData, objectData }) => {
         </td>
         <td className="text-center">{deviation.created_at}</td>
         <td className="text-center">{deviation.type_object}</td>
-        {/*<td className="text-center">
-          <img
-            className="deviation-img"
-            src={require("../../assets/mining_eyes.jpg")}
-            alt=""
-          />
-        </td>*/}
+        {/* <td className="text-center">
+          <img src={currentDeviationImageBlob} alt="" />
+        </td> */}
         <td className="text-center">
           {deviation.comment == null
             ? "-"
@@ -91,10 +123,10 @@ const DataTervalidasi = ({ getToken, cctvData, objectData }) => {
             ? deviation.comment
             : deviation.comment.substr(0, 19) + "..."}
         </td>
-        <td className="d-flex justify-content-center">
-          <div
+        <td className="text-center">
+          <label
             className={
-              "rounded-2 px-2 fw-bolder" +
+              "px-2 rounded-2" +
               (deviation.type_validation == "not_yet"
                 ? " status-none"
                 : deviation.type_validation == "true"
@@ -107,7 +139,7 @@ const DataTervalidasi = ({ getToken, cctvData, objectData }) => {
               : deviation.type_validation == "true"
               ? "Valid"
               : "Tidak Valid"}
-          </div>
+          </label>
         </td>
         <td className="text-center">
           {deviation.user_name == null
@@ -120,21 +152,18 @@ const DataTervalidasi = ({ getToken, cctvData, objectData }) => {
           <div className="d-flex justify-content-center">
             <button
               type="button"
-              className="border-0 rounded-2 px-3 py-1"
-              deviation-bs-toggle="modal"
-              deviation-bs-target="#viewModal"
+              class="border-0 rounded-2 px-3 py-1"
+              data-bs-toggle="modal"
+              data-bs-target="#viewModal"
               onClick={() => {
-                // setImagename(deviation.image);
-                // setStatus(deviation.type_validation);
-                // setValidator(deviation.user_name);
-                // setComment(deviation.comment);
+                setCurrentDeviationImageRaw(deviation.image);
               }}
             >
               <Icon icon="fa-solid:eye" />
             </button>
           </div>
         </td>
-        {/* <div
+        <div
           className="modal fade"
           id="viewModal"
           tabindex="-1"
@@ -143,17 +172,17 @@ const DataTervalidasi = ({ getToken, cctvData, objectData }) => {
         >
           <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content">
-              <div className="modal-body">
-                {modalloading == false ? (
+              <div className="modal-body d-grid gap-2">
+                {reactMagnifyImageLoading === false ? (
                   <ReactImageMagnify
                     {...{
                       smallImage: {
                         alt: "",
                         isFluidWidth: true,
-                        src: modalimage,
+                        src: currentDeviationImageBlob,
                       },
                       largeImage: {
-                        src: modalimage,
+                        src: currentDeviationImageBlob,
                         width: 800,
                         height: 500,
                       },
@@ -162,44 +191,53 @@ const DataTervalidasi = ({ getToken, cctvData, objectData }) => {
                   />
                 ) : (
                   <div className="d-flex justify-content-center">
-                    <div className="absolute-fixed">
-                      <div
-                        className="spinner-border text-success"
-                        role="status"
-                      >
-                        <span className="visually-hidden">Loading...</span>
-                      </div>
+                    <div className="spinner-border">
+                      <span className="visually-hidden">Loading...</span>
                     </div>
                   </div>
                 )}
-                <div
-                  className={
-                    "rounded-2 px-2 fw-bolder mt-2" +
-                    (status == "not_yet"
-                      ? " text-primary notification-tag"
-                      : status == "true"
-                      ? " text-success notification-tag-true"
-                      : " text-danger notification-tag-false")
-                  }
-                >
-                  {status == "not_yet"
-                    ? "Perlu Validasi"
-                    : status == "true"
-                    ? "Valid"
-                    : "Tidak Valid"}
+
+                <div>
+                  <label
+                    className={
+                      "px-2 rounded-2 mt-2" +
+                      (deviation.type_validation == "not_yet"
+                        ? " status-none"
+                        : deviation.type_validation == "true"
+                        ? " status-true"
+                        : " status-false")
+                    }
+                  >
+                    {deviation.type_validation == "not_yet"
+                      ? "Perlu Validasi"
+                      : deviation.type_validation == "true"
+                      ? "Valid"
+                      : "Tidak Valid"}
+                  </label>
                 </div>
-                <div className="d-flex gap-1 mt-2 deviation-desc">
-                  <label className="fw-bolder">Pengawas:</label>
-                  {validator == null ? "-" : <label>{validator}</label>}
-                </div>
-                <div className="d-flex gap-1 deviation-desc">
-                  <label className="fw-bolder">Deskripsi:</label>
-                  {comment == null ? "-" : <label>{comment}</label>}
+
+                <div>
+                  <div className="d-flex gap-1 deviation-desc">
+                    <label className="fw-bolder">Pengawas:</label>
+                    {deviation.user_name == null ? (
+                      "-"
+                    ) : (
+                      <label>{deviation.user_name}</label>
+                    )}
+                  </div>
+                  <div className="d-flex gap-1 deviation-desc">
+                    <label className="fw-bolder">Deskripsi:</label>
+                    {deviation.comment == null ? (
+                      "-"
+                    ) : (
+                      <label>{deviation.comment}</label>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div> */}
+        </div>
       </tr>
     );
   });
@@ -362,9 +400,9 @@ const DataTervalidasi = ({ getToken, cctvData, objectData }) => {
               <th className="table-success" scope="col">
                 Objek
               </th>
-              {/*<th className="table-success" scope="col">
+              {/* <th className="table-success" scope="col">
                 Gambar Deviasi
-              </th>*/}
+              </th> */}
               <th className="table-success" scope="col">
                 Deskripsi
               </th>
