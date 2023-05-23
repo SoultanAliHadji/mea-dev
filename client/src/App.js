@@ -6,15 +6,15 @@ import { BrowserRouter as Router, Switch, Route, HashRouter } from "react-router
 function App() {
   return (
     <div className="App">
-      <Router>
+      <HashRouter>
         <Switch>
           <Route path="/login" component={Login} />
-          <Route path="/" component={Main} />
+          <Route path="/mea-dev/" component={Main} />
           <Route path="/live-monitoring" component={Main} />
           <Route path="/validasi-deviasi" component={Main} />
           <Route path="/data-tervalidasi" component={Main} />
         </Switch>
-      </Router>
+      </HashRouter>
     </div>
   );
 }
