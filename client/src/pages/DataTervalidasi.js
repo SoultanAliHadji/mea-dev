@@ -1,16 +1,17 @@
 import "../styles/data_tervalidasi.css";
 import "../styles/calendar.css";
+import DataTable from "../components/DataTable";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
-import ReactImageMagnify from "react-magnify-image";
 import Calendar from "react-calendar";
 
 const DataTervalidasi = ({ getToken, cctvData, objectData }) => {
   const [date, setDate] = useState([new Date(), new Date()]);
   const [dateStatus, setDateStatus] = useState("*pilih tanggal (start)");
   const [deviationData, setDeviationData] = useState([]);
-  const [currentDeviationImageRaw, setCurrentDeviationImageRaw] = useState();
+  const [currentDeviationId, setCurrentDeviationId] = useState();
+  const [currentDeviationData, setCurrentDeviationData] = useState([]);
   const [currentDeviationImageBlob, setCurrentDeviationImageBlob] = useState();
   const [reactMagnifyImageLoading, setReactMagnifyImageLoading] =
     useState(false);
@@ -48,6 +49,22 @@ const DataTervalidasi = ({ getToken, cctvData, objectData }) => {
   }, [currentCctv, currentObject, date]);
 
   useEffect(() => {
+    axios
+      .get(
+        process.env.REACT_APP_API + "view/" + currentDeviationId, //viewimage
+        {
+          headers: {
+            Authorization: "Bearer " + getToken,
+          },
+        }
+      )
+      .then((res) => {
+        setCurrentDeviationData(res.data.data);
+      })
+      .catch((err) => console.log(err));
+  }, [currentDeviationId]);
+
+  useEffect(() => {
     setReactMagnifyImageLoading(true);
     axios
       .get(
@@ -76,7 +93,7 @@ const DataTervalidasi = ({ getToken, cctvData, objectData }) => {
       .finally(() => {
         setReactMagnifyImageLoading(false);
       });
-  }, [currentDeviationImageRaw]);
+  }, [currentDeviationData]);
 
   const cctvFilter = cctvData.map((cctv) => {
     return (
@@ -100,146 +117,6 @@ const DataTervalidasi = ({ getToken, cctvData, objectData }) => {
         </option>
       );
     }
-  });
-
-  const deviationArray = deviationData.slice(0, 10).map((deviation) => {
-    return (
-      <tr className="align-middle" key={deviation.id}>
-        <th className="text-center" scope="row">
-          {deviation.id}
-        </th>
-        <td className="text-center">
-          {deviation.name} - {deviation.location}
-        </td>
-        <td className="text-center">{deviation.created_at}</td>
-        <td className="text-center">{deviation.type_object}</td>
-        {/* <td className="text-center">
-          <img src={currentDeviationImageBlob} alt="" />
-        </td> */}
-        <td className="text-center">
-          {deviation.comment == null
-            ? "-"
-            : deviation.comment.length < 20
-            ? deviation.comment
-            : deviation.comment.substr(0, 19) + "..."}
-        </td>
-        <td className="text-center">
-          <label
-            className={
-              "px-2 rounded-2" +
-              (deviation.type_validation == "not_yet"
-                ? " status-none"
-                : deviation.type_validation == "true"
-                ? " status-true"
-                : " status-false")
-            }
-          >
-            {deviation.type_validation == "not_yet"
-              ? "Perlu Validasi"
-              : deviation.type_validation == "true"
-              ? "Valid"
-              : "Tidak Valid"}
-          </label>
-        </td>
-        <td className="text-center">
-          {deviation.user_name == null
-            ? "-"
-            : deviation.user_name.length < 10
-            ? deviation.user_name
-            : deviation.user_name.substr(0, 9) + "..."}
-        </td>
-        <td>
-          <div className="d-flex justify-content-center">
-            <button
-              type="button"
-              class="border-0 rounded-2 px-3 py-1"
-              data-bs-toggle="modal"
-              data-bs-target="#viewModal"
-              onClick={() => {
-                setCurrentDeviationImageRaw(deviation.image);
-              }}
-            >
-              <Icon icon="fa-solid:eye" />
-            </button>
-          </div>
-        </td>
-        <div
-          className="modal fade"
-          id="viewModal"
-          tabindex="-1"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog modal-dialog-centered">
-            <div className="modal-content">
-              <div className="modal-body d-grid gap-2">
-                {reactMagnifyImageLoading === false ? (
-                  <ReactImageMagnify
-                    {...{
-                      smallImage: {
-                        alt: "",
-                        isFluidWidth: true,
-                        src: currentDeviationImageBlob,
-                      },
-                      largeImage: {
-                        src: currentDeviationImageBlob,
-                        width: 800,
-                        height: 500,
-                      },
-                      enlargedImagePosition: "over",
-                    }}
-                  />
-                ) : (
-                  <div className="d-flex justify-content-center">
-                    <div className="spinner-border">
-                      <span className="visually-hidden">Loading...</span>
-                    </div>
-                  </div>
-                )}
-
-                <div>
-                  <label
-                    className={
-                      "px-2 rounded-2 mt-2" +
-                      (deviation.type_validation == "not_yet"
-                        ? " status-none"
-                        : deviation.type_validation == "true"
-                        ? " status-true"
-                        : " status-false")
-                    }
-                  >
-                    {deviation.type_validation == "not_yet"
-                      ? "Perlu Validasi"
-                      : deviation.type_validation == "true"
-                      ? "Valid"
-                      : "Tidak Valid"}
-                  </label>
-                </div>
-
-                <div>
-                  <div className="d-flex gap-1 deviation-desc">
-                    <label className="fw-bolder">Pengawas:</label>
-                    {deviation.user_name == null ? (
-                      "-"
-                    ) : (
-                      <label>{deviation.user_name}</label>
-                    )}
-                  </div>
-                  <div className="d-flex gap-1 deviation-desc">
-                    <label className="fw-bolder">Deskripsi:</label>
-                    {deviation.comment == null ? (
-                      "-"
-                    ) : (
-                      <label>{deviation.comment}</label>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </tr>
-    );
   });
 
   return (
@@ -315,13 +192,13 @@ const DataTervalidasi = ({ getToken, cctvData, objectData }) => {
                 className="modal fade"
                 id="periodModal"
                 tabindex="-1"
-                aria-labelledby="exampleModalLabel"
+                aria-labelledby="periodModalLabel"
                 aria-hidden="true"
               >
                 <div className="modal-dialog modal-dialog-centered">
                   <div className="modal-content">
                     <div className="modal-header">
-                      <h1 className="modal-title fs-5" id="exampleModalLabel">
+                      <h1 className="modal-title fs-5" id="periodModalLabel">
                         Pilih Periode
                       </h1>
                       <button
@@ -385,44 +262,13 @@ const DataTervalidasi = ({ getToken, cctvData, objectData }) => {
         </div>
       </div>
       <div className="content">
-        <table className="table">
-          <thead>
-            <tr className="text-center">
-              <th className="table-success" scope="col">
-                ID
-              </th>
-              <th className="table-success" scope="col">
-                Lokasi CCTV
-              </th>
-              <th className="table-success" scope="col">
-                Date Time
-              </th>
-              <th className="table-success" scope="col">
-                Objek
-              </th>
-              {/* <th className="table-success" scope="col">
-                Gambar Deviasi
-              </th> */}
-              <th className="table-success" scope="col">
-                Deskripsi
-              </th>
-              <th className="table-success" scope="col">
-                Status
-              </th>
-              <th className="table-success" scope="col">
-                Pengawas
-              </th>
-              <th className="table-success" scope="col">
-                Action
-              </th>
-            </tr>
-          </thead>
-          {deviationData.length > 0 ? (
-            <tbody className="table-group-divider">{deviationArray}</tbody>
-          ) : (
-            ""
-          )}
-        </table>
+        <DataTable
+          deviationData={deviationData}
+          setCurrentDeviationId={setCurrentDeviationId}
+          currentDeviationData={currentDeviationData}
+          reactMagnifyImageLoading={reactMagnifyImageLoading}
+          currentDeviationImageBlob={currentDeviationImageBlob}
+        />
         <div>
           {deviationData.length > 0 ? (
             ""

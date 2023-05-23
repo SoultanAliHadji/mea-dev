@@ -8,7 +8,13 @@ import { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 
 const Main = () => {
-  const [currentPage, setCurrentPage] = useState(window.location.pathname === "/validasi-deviasi" ? "validasi-deviasi" : window.location.pathname === "/data-tervalidasi" ? "data-tervalidasi" : "live-monitoring");
+  const [currentPage, setCurrentPage] = useState(
+    window.location.pathname === "/validasi-deviasi"
+      ? "validasi-deviasi"
+      : window.location.pathname === "/data-tervalidasi"
+      ? "data-tervalidasi"
+      : "live-monitoring"
+  );
 
   //token
   const getToken =
@@ -25,12 +31,16 @@ const Main = () => {
   const [currentDeviationId, setCurrentDeviationId] = useState(0);
 
   //object data
+  const [currentObject, setCurrentObject] = useState("AllObject");
   const objectData = [
     { id: 1, name: "Semua", value: "AllObject" },
     { id: 2, name: "Person", value: "Person" },
     { id: 3, name: "LV", value: "LV" },
     { id: 4, name: "HD", value: "HD" },
   ];
+
+  //validation data
+  const [submitData, setSubmitData] = useState(false);
 
   useEffect(() => {
     axios
@@ -108,7 +118,11 @@ const Main = () => {
                   }
                   onClick={() => {
                     setCurrentPage("validasi-deviasi");
-                    window.history.replaceState(null, null, "/validasi-deviasi");
+                    window.history.replaceState(
+                      null,
+                      null,
+                      "/validasi-deviasi"
+                    );
                   }}
                 >
                   Validasi Deviasi
@@ -122,7 +136,11 @@ const Main = () => {
                   }
                   onClick={() => {
                     setCurrentPage("data-tervalidasi");
-                    window.history.replaceState(null, null, "/data-tervalidasi");
+                    window.history.replaceState(
+                      null,
+                      null,
+                      "/data-tervalidasi"
+                    );
                   }}
                 >
                   Data Tervalidasi
@@ -177,9 +195,15 @@ const Main = () => {
               <ValidasiDeviasi
                 getToken={getToken}
                 currentDeviationId={currentDeviationId}
+                submitData={submitData}
+                setSubmitData={setSubmitData}
               />
             ) : (
-              <DataTervalidasi getToken={getToken} cctvData={cctvData} objectData={objectData}/>
+              <DataTervalidasi
+                getToken={getToken}
+                cctvData={cctvData}
+                objectData={objectData}
+              />
             )}
           </div>
           {currentPage === "live-monitoring" ||
@@ -242,7 +266,10 @@ const Main = () => {
                   currentCctvLocation={currentCctvLocation}
                   currentDeviationId={currentDeviationId}
                   setCurrentDeviationId={setCurrentDeviationId}
+                  currentObject={currentObject}
+                  setCurrentObject={setCurrentObject}
                   objectData={objectData}
+                  submitData={submitData}
                 />
               </div>
             </div>

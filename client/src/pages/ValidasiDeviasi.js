@@ -1,10 +1,16 @@
 import "../styles/validasi_deviasi.css";
-import axios from "axios";
+import Validation from "../components/Validation";
 import { useState, useEffect } from "react";
+import axios from "axios";
 import { Icon } from "@iconify/react";
 import ReactImageMagnify from "react-magnify-image";
 
-const ValidasiDeviasi = ({ getToken, currentDeviationId }) => {
+const ValidasiDeviasi = ({
+  getToken,
+  currentDeviationId,
+  submitData,
+  setSubmitData,
+}) => {
   const [currentDeviationData, setCurrentDeviationData] = useState([]);
   const [currentDeviationImageRaw, setCurrentDeviationImageRaw] = useState([]);
   const [currentDeviationImageBlob, setCurrentDeviationImageBlob] = useState();
@@ -23,7 +29,7 @@ const ValidasiDeviasi = ({ getToken, currentDeviationId }) => {
         })
         .catch((err) => console.log(err));
     }
-  }, [currentDeviationId]);
+  }, [currentDeviationId, submitData]);
 
   useEffect(() => {
     if (currentDeviationId != 0) {
@@ -61,7 +67,7 @@ const ValidasiDeviasi = ({ getToken, currentDeviationId }) => {
           <div className="col">
             <label
               className={
-                "px-3 rounded-2" +
+                "px-3 my-1 rounded-2" +
                 (deviation.type_validation === "true"
                   ? " status-true"
                   : deviation.type_validation === "false"
@@ -77,28 +83,50 @@ const ValidasiDeviasi = ({ getToken, currentDeviationId }) => {
             </label>
           </div>
           <div className="col">
-            <div className="d-flex justify-content-end gap-2">
-              <button className="button-true border-0 rounded-2 px-3 py-1">
-                Valid
-              </button>
-              <button className="button-false rounded-2 px-3 py-1">
-                Tidak Valid
-              </button>
+            {deviation.type_validation === "not_yet" ? (
+              <Validation
+                getToken={getToken}
+                currentDeviationData={currentDeviationData}
+                currentDeviationId={currentDeviationId}
+                submitData={submitData}
+                setSubmitData={setSubmitData}
+              />
+            ) : (
+              ""
+            )}
+          </div>
+        </div>
+        <div className="my-3">
+          <h6>Terdeteksi Deviasi {deviation.type_object} {deviation.id}</h6>
+        </div>
+        <div className="row">
+          <div className="col-4 d-grid gap-2">
+            <div className="d-flex gap-2">
+              <Icon className="fs-5" icon="bi:camera-fill" />
+              <label>{deviation.name + " - " + deviation.location}</label>
+            </div>
+            <div className="d-flex gap-2">
+              <Icon className="fs-5" icon="akar-icons:clock" />
+              <label>{deviation.created_at}</label>
             </div>
           </div>
-        </div>
-        <div className="mt-3">
-          <h6>Terdeteksi Deviasi {deviation.type_object}</h6>
-        </div>
-        <div className="d-grid-2">
-          <div className="d-flex gap-2">
-            <Icon className="fs-5" icon="bi:camera-fill" />
-            <label>{deviation.name + " - " + deviation.location}</label>
-          </div>
-          <div className="d-flex gap-2">
-            <Icon className="fs-5" icon="akar-icons:clock" />
-            <label>{deviation.created_at}</label>
-          </div>
+          {deviation.type_validation !== "not_yet" ? (
+            <div className="col-4 d-grid gap-2">
+              <div className="d-flex gap-2">
+                <Icon className="fs-5" icon="fa6-solid:helmet-safety" />
+                <label>{deviation.user_name}</label>
+              </div>
+              <div className="d-flex gap-2">
+                <Icon className="fs-5" icon="codicon:note" />
+                <label>
+                  {deviation.comment.substring(0, 35) +
+                    (deviation.comment.length > 36 ? "..." : "")}
+                </label>
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     );

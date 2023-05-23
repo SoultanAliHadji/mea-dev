@@ -1,0 +1,54 @@
+.validation {
+    & .button-true {
+        background-image: linear-gradient(to right, #3B9315, #297209);
+        color: white;
+        font-weight: 500;
+
+        &:hover {
+            background-image: linear-gradient(to right, #297209, #297209);
+        }
+    }
+
+    & .button-false {
+        background-image: linear-gradient(to right, white, white);
+        border: 2px solid #3B9315;
+        color: #297209;
+        font-weight: 500;
+
+        &:hover {
+            background-image: linear-gradient(to right, #297209, #297209);
+            border: 2px solid #297209;
+            color: white;
+        }
+    }
+
+    & .modal {
+        & .cancel-button {
+            background-image: linear-gradient(to right, white, white);
+            border: 2px solid #3B9315;
+            color: #297209;
+            font-weight: 500;
+
+            &:hover {
+                background-image: linear-gradient(to right, #297209, #297209);
+                border: 2px solid #297209;
+                color: white;
+            }
+        }
+
+        & .submit-button {
+            background-image: linear-gradient(to right, #3B9315, #297209);
+            color: white;
+            font-weight: 500;
+
+            &:hover {
+                background-image: linear-gradient(to right, #297209, #297209);
+            }
+        }
+
+        & .disabled {
+            background-image: linear-gradient(to right, #7FB766, #74A460);
+            pointer-events: none;
+        }
+    }
+}

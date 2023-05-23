@@ -11,10 +11,12 @@ const Notification = ({
   currentCctvLocation,
   currentDeviationId,
   setCurrentDeviationId,
+  currentObject,
+  setCurrentObject,
   objectData,
+  submitData,
 }) => {
   const [deviationData, setDeviationData] = useState([]);
-  const [currentObject, setCurrentObject] = useState("AllObject");
 
   useEffect(() => {
     axios
@@ -38,7 +40,7 @@ const Notification = ({
         setDeviationData(res.data.data);
       })
       .catch((err) => console.log(err));
-  }, [currentCctvName, currentCctvLocation, currentObject]);
+  }, [currentCctvName, currentCctvLocation, currentObject, submitData]);
 
   const objectArr = objectData.map((object) => {
     return (
