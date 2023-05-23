@@ -17,8 +17,10 @@ const Notification = ({
   submitData,
 }) => {
   const [deviationData, setDeviationData] = useState([]);
+  const [deviationDataLoading, setDeviationDataLoading] = useState(false);
 
   useEffect(() => {
+    setDeviationDataLoading(true);
     axios
       .get(
         process.env.REACT_APP_API +
@@ -39,7 +41,10 @@ const Notification = ({
       .then((res) => {
         setDeviationData(res.data.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setDeviationDataLoading(false);
+      });
   }, [currentCctvName, currentCctvLocation, currentObject, submitData]);
 
   const objectArr = objectData.map((object) => {
@@ -59,7 +64,7 @@ const Notification = ({
     );
   });
 
-  const devArr = deviationData.slice(0, 10).map((deviation) => {
+  const deviationArray = deviationData.slice(0, 10).map((deviation) => {
     return (
       <button
         key={deviation.id}
@@ -119,16 +124,25 @@ const Notification = ({
         {objectArr}
       </div>
       <hr />
-      <div
-        className="deviation-list d-grid gap-2 overflow-auto"
-        style={
-          currentPage !== "live-monitoring"
-            ? { maxHeight: "65.5vh" }
-            : { maxHeight: "58vh" }
-        }
-      >
-        {devArr}
-      </div>
+      {deviationDataLoading === false ? (
+        <div
+          className="deviation-list d-grid gap-2 overflow-auto"
+          style={
+            currentPage !== "live-monitoring"
+              ? { maxHeight: "65.5vh" }
+              : { maxHeight: "58vh" }
+          }
+        >
+          {deviationArray}
+        </div>
+      ) : (
+        <div className="d-flex justify-content-center my-3">
+          <div className="spinner-border">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      )}
+
       {currentPage !== "live-monitoring" ? (
         ""
       ) : (

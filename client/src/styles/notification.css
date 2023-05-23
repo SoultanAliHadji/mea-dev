@@ -61,6 +61,10 @@
         }
     }
 
+    & .spinner-border {
+        color: #3B9315;
+    }
+
     & .validation-button button {
         font-size: 12px;
         font-weight: 500;

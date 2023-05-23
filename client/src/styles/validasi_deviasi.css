@@ -27,6 +27,10 @@
                 border: 3px solid #297209;
             }
 
+            & .spinner-border {
+                color: #3B9315;
+            }
+
             & .deviation-data {
                 font-size: 14px;
 

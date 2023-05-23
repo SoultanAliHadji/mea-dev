@@ -26,6 +26,8 @@ const Main = () => {
   const [currentCctvData, setCurrentCctvData] = useState([]);
   const [currentCctvName, setCurrentCctvName] = useState();
   const [currentCctvLocation, setCurrentCctvLocation] = useState();
+  const [cctvLoading, setCctvLoading] = useState(false);
+  const [cctvInfoLoading, setCctvInfoLoading] = useState(false);
 
   //deviation data
   const [currentDeviationId, setCurrentDeviationId] = useState(0);
@@ -43,6 +45,7 @@ const Main = () => {
   const [submitData, setSubmitData] = useState(false);
 
   useEffect(() => {
+    setCctvLoading(true);
     axios
       .get(process.env.REACT_APP_API + "cctv", {
         headers: {
@@ -53,10 +56,14 @@ const Main = () => {
         setCctvData(res.data.data);
         setCurrentCctvId(res.data.data[0].id);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setCctvLoading(false);
+      });
   }, []);
 
   useEffect(() => {
+    setCctvInfoLoading(true);
     axios
       .get(process.env.REACT_APP_API + "cctv/" + currentCctvId, {
         headers: {
@@ -68,7 +75,10 @@ const Main = () => {
         setCurrentCctvName(res.data.data[0].name);
         setCurrentCctvLocation(res.data.data[0].location);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setCctvInfoLoading(false);
+      });
   }, [currentCctvId]);
 
   return (
@@ -190,6 +200,8 @@ const Main = () => {
                 currentCctvId={currentCctvId}
                 setCurrentCctvId={setCurrentCctvId}
                 currentCctvData={currentCctvData}
+                cctvLoading={cctvLoading}
+                cctvInfoLoading={cctvInfoLoading}
               />
             ) : currentPage === "validasi-deviasi" ? (
               <ValidasiDeviasi

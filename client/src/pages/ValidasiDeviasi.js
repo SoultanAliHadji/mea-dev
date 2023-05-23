@@ -14,8 +14,11 @@ const ValidasiDeviasi = ({
   const [currentDeviationData, setCurrentDeviationData] = useState([]);
   const [currentDeviationImageRaw, setCurrentDeviationImageRaw] = useState([]);
   const [currentDeviationImageBlob, setCurrentDeviationImageBlob] = useState();
+  const [currentDeviationDataLoading, setCurrentDeviationDataLoading] =
+    useState(false);
 
   useEffect(() => {
+    setCurrentDeviationDataLoading(true);
     if (currentDeviationId != 0) {
       axios
         .get(process.env.REACT_APP_API + "view/" + currentDeviationId, {
@@ -27,7 +30,10 @@ const ValidasiDeviasi = ({
           setCurrentDeviationData(res.data.data);
           setCurrentDeviationImageRaw(res.data.data[0].image);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err))
+        .finally(() => {
+          setCurrentDeviationDataLoading(false);
+        });
     }
   }, [currentDeviationId, submitData]);
 
@@ -97,7 +103,9 @@ const ValidasiDeviasi = ({
           </div>
         </div>
         <div className="my-3">
-          <h6>Terdeteksi Deviasi {deviation.type_object} {deviation.id}</h6>
+          <h6>
+            Terdeteksi Deviasi {deviation.type_object} {deviation.id}
+          </h6>
         </div>
         <div className="row">
           <div className="col-4 d-grid gap-2">
@@ -161,7 +169,15 @@ const ValidasiDeviasi = ({
                     }}
                   />
                 </div>
-                <div className="mt-3">{currentDeviationArray}</div>
+                {currentDeviationDataLoading === false ? (
+                  <div className="mt-3">{currentDeviationArray}</div>
+                ) : (
+                  <div className="d-flex justify-content-center my-3">
+                    <div className="spinner-border">
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
+                  </div>
+                )}
               </div>
             ) : (
               <div className="d-flex justify-content-center">

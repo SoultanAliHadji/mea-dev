@@ -6,6 +6,8 @@ const LiveMonitoring = ({
   currentCctvId,
   setCurrentCctvId,
   currentCctvData,
+  cctvLoading,
+  cctvInfoLoading,
 }) => {
   const cctvArray = cctvData.map((cctv) => {
     return (
@@ -42,7 +44,15 @@ const LiveMonitoring = ({
             <label>Pilih CCTV untuk melihat Live Monitoring</label>
           </div>
           <div className="content">
-            <div className="cctv-list d-grid gap-2">{cctvArray}</div>
+            {cctvLoading === false ? (
+              <div className="cctv-list d-grid gap-2">{cctvArray}</div>
+            ) : (
+              <div className="d-flex justify-content-center my-3">
+                <div className="spinner-border">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              </div>
+            )}
             <div className="view-all-cctv d-grid mt-4">
               <button className="border-0 rounded-2 px-3 py-2">
                 Lihat Semua CCTV
@@ -77,7 +87,15 @@ const LiveMonitoring = ({
                 enlargedImagePosition: "over",
               }}
             />
-            {cctvInfoArray}
+            {cctvInfoLoading === false ? (
+              <div>{cctvInfoArray}</div>
+            ) : (
+              <div className="d-flex justify-content-center my-3">
+                <div className="spinner-border">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

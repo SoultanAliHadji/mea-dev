@@ -98,7 +98,7 @@ const DataTable = ({
                       }}
                     />
                   ) : (
-                    <div className="d-flex justify-content-center">
+                    <div className="d-flex justify-content-center my-3">
                       <div className="spinner-border">
                         <span className="visually-hidden">Loading...</span>
                       </div>
