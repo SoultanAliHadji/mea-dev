@@ -9,9 +9,9 @@ import { Icon } from "@iconify/react";
 
 const Main = () => {
   const [currentPage, setCurrentPage] = useState(
-    window.location.pathname === "/validasi-deviasi"
+    window.location.pathname.includes("/validasi-deviasi")
       ? "validasi-deviasi"
-      : window.location.pathname === "/data-tervalidasi"
+      : window.location.pathname.includes("/data-tervalidasi")
       ? "data-tervalidasi"
       : "live-monitoring"
   );
