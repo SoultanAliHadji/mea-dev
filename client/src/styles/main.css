@@ -75,6 +75,35 @@
                 background-color: #DFF4DF !important;
             }
         }
+
+        & .dropdown-title {
+            font-size: 14px;
+            pointer-events: none;
+        }
+
+        & .dropdown-item {
+            font-size: 12px;
+            font-weight: 500;
+
+            &:hover {
+                background-color: #DFF4DF;
+                color: #297209;
+            }
+
+            &:focus {
+                color: #297209;
+            }
+
+            & label {
+                cursor: pointer;
+            }
+        }
+
+        & .active {
+            background-image: linear-gradient(to right, #3B9315, #297209);
+            color: white;
+            pointer-events: none;
+        }
     }
 
     .content {

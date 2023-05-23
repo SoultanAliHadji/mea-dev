@@ -16,6 +16,8 @@ const ValidasiDeviasi = ({
   const [currentDeviationImageBlob, setCurrentDeviationImageBlob] = useState();
   const [currentDeviationDataLoading, setCurrentDeviationDataLoading] =
     useState(false);
+  const [currentDeviationImageLoading, setCurrentDeviationImageLoading] =
+    useState(false);
 
   useEffect(() => {
     setCurrentDeviationDataLoading(true);
@@ -39,6 +41,7 @@ const ValidasiDeviasi = ({
 
   useEffect(() => {
     if (currentDeviationId != 0) {
+      setCurrentDeviationImageLoading(true);
       axios
         .get(
           process.env.REACT_APP_API +
@@ -62,7 +65,10 @@ const ValidasiDeviasi = ({
             setCurrentDeviationImageBlob(imageDataUrl);
           };
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err))
+        .finally(() => {
+          setCurrentDeviationImageLoading(false);
+        });
     }
   }, [currentDeviationImageRaw]);
 
@@ -149,39 +155,47 @@ const ValidasiDeviasi = ({
             <label>Validasi deviasi yang terdeteksi</label>
           </div>
           <div className="content">
-            {currentDeviationId !== 0 ? (
-              <div>
-                <div className="d-flex justify-content-center">
-                  <ReactImageMagnify
-                    className="deviation-img rounded-2"
-                    {...{
-                      smallImage: {
-                        alt: "",
-                        isFluidWidth: true,
-                        src: currentDeviationImageBlob,
-                      },
-                      largeImage: {
-                        src: currentDeviationImageBlob,
-                        width: 2000,
-                        height: 1100,
-                      },
-                      enlargedImagePosition: "over",
-                    }}
-                  />
-                </div>
-                {currentDeviationDataLoading === false ? (
-                  <div className="mt-3">{currentDeviationArray}</div>
-                ) : (
-                  <div className="d-flex justify-content-center my-3">
-                    <div className="spinner-border">
-                      <span className="visually-hidden">Loading...</span>
-                    </div>
+            {currentDeviationImageLoading === false ? (
+              currentDeviationId !== 0 ? (
+                <div>
+                  <div className="d-flex justify-content-center">
+                    <ReactImageMagnify
+                      className="deviation-img rounded-2"
+                      {...{
+                        smallImage: {
+                          alt: "",
+                          isFluidWidth: true,
+                          src: currentDeviationImageBlob,
+                        },
+                        largeImage: {
+                          src: currentDeviationImageBlob,
+                          width: 2000,
+                          height: 1100,
+                        },
+                        enlargedImagePosition: "over",
+                      }}
+                    />
                   </div>
-                )}
-              </div>
+                  {currentDeviationDataLoading === false ? (
+                    <div className="mt-3">{currentDeviationArray}</div>
+                  ) : (
+                    <div className="d-flex justify-content-center my-3">
+                      <div className="spinner-border">
+                        <span className="visually-hidden">Loading...</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="d-flex justify-content-center">
+                  <label>Pilih deviasi pada List Deviasi</label>
+                </div>
+              )
             ) : (
               <div className="d-flex justify-content-center">
-                <label>Pilih deviasi pada List Deviasi</label>
+                <div className="spinner-border">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
               </div>
             )}
           </div>

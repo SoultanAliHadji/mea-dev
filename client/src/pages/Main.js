@@ -41,6 +41,13 @@ const Main = () => {
     { id: 4, name: "HD", value: "HD" },
   ];
 
+  //tipe validasi
+  const validationTypeData = [
+    { id: 1, name: "Perlu Validasi", value: "not_yet" },
+    { id: 2, name: "Valid", value: "true" },
+    { id: 3, name: "Tidak Valid", value: "false" },
+  ];
+
   //validation data
   const [submitData, setSubmitData] = useState(false);
 
@@ -80,6 +87,34 @@ const Main = () => {
         setCctvInfoLoading(false);
       });
   }, [currentCctvId]);
+
+  const cctvFilteArray = cctvData.map((cctv) => {
+    return (
+      <li>
+        <button
+          className={
+            "dropdown-item text-center border-0" +
+            (currentCctvId === cctv.id ? " active" : "")
+          }
+          onClick={() => {
+            setCurrentCctvId(cctv.id);
+          }}
+        >
+          {cctv.name + " - " + cctv.location}
+        </button>
+      </li>
+    );
+  });
+
+  const validationTypeFilterArray = validationTypeData.map((validationType) => {
+    return (
+      <li>
+        <button className="dropdown-item text-center border-0">
+          {validationType.name}
+        </button>
+      </li>
+    );
+  });
 
   return (
     <div className="main">
@@ -241,26 +276,21 @@ const Main = () => {
                           />
                         </button>
                         <ul className="dropdown-menu dropdown-menu-end mt-3">
-                          <li>
-                            <label
-                              className="dropdown-item disabled text-center"
-                              href="#"
-                            >
-                              Admin
-                            </label>
+                          <li className="my-1">
+                            <h6 className="dropdown-title text-center">
+                              Filter CCTV
+                            </h6>
                           </li>
+                          {cctvFilteArray}
                           <li>
-                            <hr className="dropdown-divider" />
+                            <hr className="dropdown-title dropdown-divider" />
                           </li>
-                          <li>
-                            <a
-                              className="dropdown-item d-flex align-items-center gap-2"
-                              href="/login"
-                            >
-                              <Icon className="fs-5" icon="ci:log-out" />
-                              <label>Log Out</label>
-                            </a>
+                          <li className="my-1">
+                            <h6 className="dropdown-title text-center">
+                              Filter Tipe Validasi
+                            </h6>
                           </li>
+                          {validationTypeFilterArray}
                         </ul>
                       </div>
                     ) : (
