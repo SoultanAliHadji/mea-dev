@@ -16,14 +16,14 @@ const Validation = ({
   const handleSubmit = () => {
     axios({
       method: "put",
-      url: process.env.REACT_APP_API + "deviation/" + currentDeviationId,
+      url: "http://10.10.10.66:5002/api/" + "deviation/" + currentDeviationId,
       data: {
         type_validation: validationStatus,
         comment:
           validationCommentData.join(", ") +
           (validationCommentData.length > 0 ? ", " : "") +
           (textareaValue.length > 0 ? textareaValue : ""),
-        user_id: 7,
+        user_id: localStorage.getItem("id"),
       },
       headers: {
         "Content-Type": "multipart/form-data",

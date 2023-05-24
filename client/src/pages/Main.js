@@ -3,15 +3,16 @@ import LiveMonitoring from "./LiveMonitoring";
 import ValidasiDeviasi from "./ValidasiDeviasi";
 import Notification from "../components/Notification";
 import DataTervalidasi from "./DataTervalidasi";
-import axios from "axios";
 import { useState, useEffect } from "react";
+import axios from "axios";
 import { Icon } from "@iconify/react";
 
 const Main = () => {
   const [currentPage, setCurrentPage] = useState(
-    window.location.pathname.includes("/validasi-deviasi")
+    window.location.hash.includes("#/validasi-deviasi")
       ? "validasi-deviasi"
-      : window.location.pathname.includes("/data-tervalidasi")
+      : window.location.hash.includes("#/data-tervalidasi") &&
+        localStorage.getItem("role") === "admin"
       ? "data-tervalidasi"
       : "live-monitoring"
   );
@@ -54,7 +55,7 @@ const Main = () => {
   useEffect(() => {
     setCctvLoading(true);
     axios
-      .get(process.env.REACT_APP_API + "cctv", {
+      .get("http://10.10.10.66:5002/api/" + "cctv", {
         headers: {
           Authorization: "Bearer " + getToken,
         },
@@ -72,7 +73,7 @@ const Main = () => {
   useEffect(() => {
     setCctvInfoLoading(true);
     axios
-      .get(process.env.REACT_APP_API + "cctv/" + currentCctvId, {
+      .get("http://10.10.10.66:5002/api/" + "cctv/" + currentCctvId, {
         headers: {
           Authorization: "Bearer " + getToken,
         },
@@ -90,7 +91,7 @@ const Main = () => {
 
   const cctvFilteArray = cctvData.map((cctv) => {
     return (
-      <li>
+      <li key={cctv.id}>
         <button
           className={
             "dropdown-item text-center border-0" +
@@ -108,7 +109,7 @@ const Main = () => {
 
   const validationTypeFilterArray = validationTypeData.map((validationType) => {
     return (
-      <li>
+      <li key={validationType.id}>
         <button className="dropdown-item text-center border-0">
           {validationType.name}
         </button>
@@ -149,7 +150,11 @@ const Main = () => {
                   }
                   onClick={() => {
                     setCurrentPage("live-monitoring");
-                    window.history.replaceState(null, null, "/live-monitoring");
+                    window.history.replaceState(
+                      null,
+                      null,
+                      "/mea-dev/#/live-monitoring"
+                    );
                   }}
                 >
                   Live Monitoring
@@ -166,14 +171,20 @@ const Main = () => {
                     window.history.replaceState(
                       null,
                       null,
-                      "/validasi-deviasi"
+                      "/mea-dev/#/validasi-deviasi"
                     );
                   }}
                 >
                   Validasi Deviasi
                 </a>
               </li>
-              <li className="nav-item d-flex align-items-center">
+              <li
+                className={
+                  localStorage.getItem("role") === "admin"
+                    ? "nav-item d-flex align-items-center"
+                    : "d-none"
+                }
+              >
                 <a
                   className={
                     "nav-link" +
@@ -184,7 +195,7 @@ const Main = () => {
                     window.history.replaceState(
                       null,
                       null,
-                      "/data-tervalidasi"
+                      "/mea-dev/#/data-tervalidasi"
                     );
                   }}
                 >
@@ -205,7 +216,7 @@ const Main = () => {
                       className="dropdown-item disabled text-center"
                       href="#"
                     >
-                      Admin
+                      {localStorage.getItem("name")}
                     </label>
                   </li>
                   <li>
@@ -214,7 +225,11 @@ const Main = () => {
                   <li>
                     <a
                       className="dropdown-item d-flex align-items-center gap-2"
-                      href="/login"
+                      href="/mea-dev/#/login"
+                      onClick={() => {
+                        localStorage.clear();
+                        window.location.reload();
+                      }}
                     >
                       <Icon className="fs-5" icon="ci:log-out" />
                       <label>Log Out</label>

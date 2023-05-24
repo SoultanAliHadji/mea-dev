@@ -1,6 +1,6 @@
 import "../styles/notification.css";
-import axios from "axios";
 import { useState, useEffect } from "react";
+import axios from "axios";
 import { Icon } from "@iconify/react";
 
 const Notification = ({
@@ -23,7 +23,7 @@ const Notification = ({
     setDeviationDataLoading(true);
     axios
       .get(
-        process.env.REACT_APP_API +
+        "http://10.10.10.66:5002/api/" +
           "viewtable/" +
           currentCctvName +
           "/" +
@@ -79,7 +79,7 @@ const Notification = ({
           currentPage !== "validasi-deviasi"
             ? setCurrentPage("validasi-deviasi")
             : setCurrentPage(currentPage);
-          window.history.replaceState(null, null, "/validasi-deviasi");
+          window.history.replaceState(null, null, "/mea-dev/#/validasi-deviasi");
           setCurrentDeviationId(deviation.id);
         }}
       >
@@ -151,7 +151,7 @@ const Notification = ({
             className="border-0 rounded-2 px-3 py-2"
             onClick={() => {
               setCurrentPage("validasi-deviasi");
-              window.history.replaceState(null, null, "/validasi-deviasi");
+              window.history.replaceState(null, null, "/mea-dev/#/validasi-deviasi");
             }}
           >
             Validasi

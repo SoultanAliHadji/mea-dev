@@ -1,5 +1,7 @@
 .data-table {
-    & .table {
+    max-height: 55.3vh !important;
+
+    & table {
         font-size: 14px;
 
         & .table-success {

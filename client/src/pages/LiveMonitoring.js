@@ -76,11 +76,11 @@ const LiveMonitoring = ({
                   alt: "",
                   isFluidWidth: true,
                   src:
-                    process.env.REACT_APP_API + "video_feed/" + currentCctvId,
+                    "http://10.10.10.66:5002/api/" + "video_feed/" + currentCctvId,
                 },
                 largeImage: {
                   src:
-                    process.env.REACT_APP_API + "video_feed/" + currentCctvId,
+                    "http://10.10.10.66:5002/api/" + "video_feed/" + currentCctvId,
                   width: 2000,
                   height: 1100,
                 },

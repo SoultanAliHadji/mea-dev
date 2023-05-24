@@ -1,6 +1,54 @@
 import "../styles/login.css";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { Icon } from "@iconify/react";
 
 const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginStatus, setLoginStatus] = useState("");
+  const [loginMessage, setLoginMessage] = useState("");
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
+
+  const handleHandle = () => {};
+
+  const handleLogin = () => {
+    if (username === "" || password === "") {
+      setLoginMessage("username atau password tidak boleh kosong");
+    } else {
+      axios
+        .post("http://10.10.10.66:5002/api/" + "login", {
+          username: username,
+          password: password,
+        })
+        .then((res) => {
+          setLoginStatus(res.data.meta.status);
+          console.log(res.data.data);
+          localStorage.setItem("token", res.data.data.token);
+          localStorage.setItem("role", res.data.data.role);
+          localStorage.setItem("name", res.data.data.name);
+          localStorage.setItem("id", res.data.data.id);
+        })
+        .catch((err) => {
+          setLoginStatus(err.response.data.data.errors);
+        });
+    }
+  };
+
+  useEffect(() => {
+    if (loginStatus === "success") {
+      window.location.href = "/mea-dev/#/live-monitoring";
+      window.location.reload();
+    } else {
+      window.location.href = "/mea-dev/#/login/#";
+      if (loginStatus.toLocaleLowerCase() === "username salah") {
+        setLoginMessage("username salah");
+      } else if (loginStatus.toLocaleLowerCase() === "password salah") {
+        setLoginMessage("password salah");
+      }
+    }
+  }, [loginStatus]);
+
   return (
     <div className="login d-flex justify-content-center align-items-center">
       <div className="form-container rounded-4">
@@ -18,33 +66,62 @@ const Login = () => {
                   type="text"
                   className="form-control"
                   placeholder="Masukkan Username atau SID"
+                  onChange={(e) => setUsername(e.target.value)}
+                  onKeyDown={(e) => {
+                    e.key === "Enter" ? handleLogin() : handleHandle();
+                  }}
                 />
               </div>
               <div className="d-grid gap-1">
                 <label>Password</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  placeholder="Masukkan Password"
-                />
+                <div className="d-flex align-items-center">
+                  <input
+                    type={passwordVisibility === false ? "password" : "text"}
+                    className="form-control"
+                    placeholder="Masukkan Password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    onKeyDown={(e) => {
+                      e.key === "Enter" ? handleLogin() : handleHandle();
+                    }}
+                  />
+                  <Icon
+                    className="password-visibility fs-5"
+                    icon={
+                      passwordVisibility === false
+                        ? "clarity:eye-line"
+                        : "clarity:eye-hide-line"
+                    }
+                    onClick={() => {
+                      setPasswordVisibility(!passwordVisibility);
+                    }}
+                  />
+                </div>
               </div>
             </form>
-            <a className="d-grid" href="/live-monitoring">
-              <button className="border-0 rounded-2 px-3 py-2">Masuk</button>
-            </a>
+            <div className="d-grid">
+              <button
+                className="border-0 rounded-2 px-3 py-2"
+                onClick={handleLogin}
+              >
+                Masuk
+              </button>
+            </div>
+            <label className="login-message mt-2">
+              {loginMessage !== "" ? "*" + loginMessage : ""}
+            </label>
           </div>
           <div className="col-6 d-flex justify-content-center align-items-center">
             <div
               id="carouselExampleDark"
-              class="carousel slide"
+              className="carousel slide"
               data-bs-ride="carousel"
             >
-              <div class="carousel-indicators">
+              <div className="carousel-indicators">
                 <button
                   type="button"
                   data-bs-target="#carouselExampleDark"
                   data-bs-slide-to="0"
-                  class="active"
+                  className="active"
                   aria-current="true"
                   aria-label="Slide 1"
                 ></button>
@@ -61,52 +138,52 @@ const Login = () => {
                   aria-label="Slide 3"
                 ></button>
               </div>
-              <div class="carousel-inner">
-                <div class="carousel-item active" data-bs-interval="3000">
+              <div className="carousel-inner">
+                <div className="carousel-item active" data-bs-interval="3000">
                   <img
                     src={require("../assets/login-slider-png/slider_live_monitoring.png")}
-                    class="d-block w-100"
+                    className="d-block w-100"
                     alt="..."
                   />
                 </div>
-                <div class="carousel-item" data-bs-interval="3000">
+                <div className="carousel-item" data-bs-interval="3000">
                   <img
                     src={require("../assets/login-slider-png/slider_validasi_deviasi.png")}
-                    class="d-block w-100"
+                    className="d-block w-100"
                     alt="..."
                   />
                 </div>
-                <div class="carousel-item" data-bs-interval="3000">
+                <div className="carousel-item" data-bs-interval="3000">
                   <img
                     src={require("../assets/login-slider-png/slider_data_tervalidasi.png")}
-                    class="d-block w-100"
+                    className="d-block w-100"
                     alt="..."
                   />
                 </div>
               </div>
               <button
-                class="carousel-control-prev"
+                className="carousel-control-prev"
                 type="button"
                 data-bs-target="#carouselExampleDark"
                 data-bs-slide="prev"
               >
                 <span
-                  class="carousel-control-prev-icon"
+                  className="carousel-control-prev-icon"
                   aria-hidden="true"
                 ></span>
-                <span class="visually-hidden">Previous</span>
+                <span className="visually-hidden">Previous</span>
               </button>
               <button
-                class="carousel-control-next"
+                className="carousel-control-next"
                 type="button"
                 data-bs-target="#carouselExampleDark"
                 data-bs-slide="next"
               >
                 <span
-                  class="carousel-control-next-icon"
+                  className="carousel-control-next-icon"
                   aria-hidden="true"
                 ></span>
-                <span class="visually-hidden">Next</span>
+                <span className="visually-hidden">Next</span>
               </button>
             </div>
           </div>

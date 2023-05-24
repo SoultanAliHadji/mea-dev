@@ -19,22 +19,27 @@
                 font-weight: 500;
             }
 
-            & a {
-                text-decoration: none;
+            & .password-visibility {
+                cursor: pointer;
+                margin-left: -30px;
+                color: #297209;
+            }
 
-                & button {
-                    background-image: linear-gradient(to right, #3B9315, #297209);
-                    color: white;
-                    font-weight: 500;
-                    box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.2);
+            & button {
+                background-image: linear-gradient(to right, #3B9315, #297209);
+                color: white;
+                font-weight: 500;
+                box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.2);
 
-                    &:hover {
-                        background-image: linear-gradient(to right, #297209, #297209);
-                    }
+                &:hover {
+                    background-image: linear-gradient(to right, #297209, #297209);
                 }
             }
 
-
+            & .login-message {
+                color: #DE4452;
+                font-size: 14px;
+            }
         }
     }
 }

@@ -1,14 +1,16 @@
 import "../styles/data_tervalidasi.css";
 import "../styles/calendar.css";
 import DataTable from "../components/DataTable";
-import axios from "axios";
 import { useState, useEffect } from "react";
+import axios from "axios";
 import { Icon } from "@iconify/react";
 import Calendar from "react-calendar";
 
 const DataTervalidasi = ({ getToken, cctvData, objectData }) => {
   const [date, setDate] = useState([new Date(), new Date()]);
   const [dateStatus, setDateStatus] = useState("*pilih tanggal (start)");
+  const [dataLimit, setDataLimit] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
   const [deviationData, setDeviationData] = useState([]);
   const [currentDeviationId, setCurrentDeviationId] = useState();
   const [currentDeviationData, setCurrentDeviationData] = useState([]);
@@ -21,7 +23,7 @@ const DataTervalidasi = ({ getToken, cctvData, objectData }) => {
   useEffect(() => {
     axios
       .get(
-        process.env.REACT_APP_API +
+        "http://10.10.10.66:5002/api/" +
           "viewtable/" +
           currentCctv +
           "/" +
@@ -35,7 +37,7 @@ const DataTervalidasi = ({ getToken, cctvData, objectData }) => {
             (date[0].getDate() < 10 ? "0" : "") +
             date[0].getDate()) +
           "/Allvalidation/" +
-          10,
+          dataLimit,
         {
           headers: {
             Authorization: "Bearer " + getToken,
@@ -46,12 +48,12 @@ const DataTervalidasi = ({ getToken, cctvData, objectData }) => {
         setDeviationData(res.data.data);
       })
       .catch((err) => console.log(err));
-  }, [currentCctv, currentObject, date]);
+  }, [currentCctv, currentObject, date, dataLimit]);
 
   useEffect(() => {
     axios
       .get(
-        process.env.REACT_APP_API + "view/" + currentDeviationId, //viewimage
+        "http://10.10.10.66:5002/api/" + "view/" + currentDeviationId, //viewimage
         {
           headers: {
             Authorization: "Bearer " + getToken,
@@ -68,7 +70,7 @@ const DataTervalidasi = ({ getToken, cctvData, objectData }) => {
     setReactMagnifyImageLoading(true);
     axios
       .get(
-        process.env.REACT_APP_API +
+        "http://10.10.10.66:5002/api/" +
           "assets/outputFolder/cctvOutput/" +
           "2023-03-17 09:18:38.921260_VIEWPOINT.jpg", //viewimage
         {
@@ -263,6 +265,7 @@ const DataTervalidasi = ({ getToken, cctvData, objectData }) => {
       </div>
       <div className="content">
         <DataTable
+          dataLimit={dataLimit}
           deviationData={deviationData}
           setCurrentDeviationId={setCurrentDeviationId}
           currentDeviationData={currentDeviationData}
@@ -271,7 +274,33 @@ const DataTervalidasi = ({ getToken, cctvData, objectData }) => {
         />
         <div>
           {deviationData.length > 0 ? (
-            ""
+            <div className="pagination-nav d-flex justify-content-center align-items-center gap-3 mt-5">
+              <button
+                className={
+                  "border-0 rounded-start py-2" +
+                  (currentPage === 1 ? " disabled" : "")
+                }
+                onClick={() => {
+                  setCurrentPage(currentPage - 1);
+                  setDataLimit(dataLimit - 10);
+                }}
+              >
+                Previous
+              </button>
+              <label>{currentPage}</label>
+              <button
+                className={
+                  "border-0 rounded-end py-2" +
+                  (dataLimit > deviationData.length ? " disabled" : "")
+                }
+                onClick={() => {
+                  setCurrentPage(currentPage + 1);
+                  setDataLimit(dataLimit + 10);
+                }}
+              >
+                Next
+              </button>
+            </div>
           ) : (
             <label className="w-100 text-center my-2">
               Tidak terdapat data yang sesuai dengan filter CCTV, Objek, maupun

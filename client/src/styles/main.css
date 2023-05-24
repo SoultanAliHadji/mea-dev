@@ -84,6 +84,7 @@
         & .dropdown-item {
             font-size: 12px;
             font-weight: 500;
+            color: #3E4958;
 
             &:hover {
                 background-color: #DFF4DF;

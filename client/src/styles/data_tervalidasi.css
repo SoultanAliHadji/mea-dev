@@ -67,5 +67,27 @@
         box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
         padding: 12px 24px;
         border-radius: 0 0 8px 8px;
+
+        & .pagination-nav {
+            height: 40px;
+            & button {
+                min-width: 90px;
+                font-size: 14px;
+                font-weight: 500;
+                background-image: linear-gradient(to right, #3B9315, #297209);
+                color: white;
+
+                &:hover {
+                    background-image: linear-gradient(to right, #297209, #297209);
+                }
+            }
+
+            & .disabled {
+                background-image: linear-gradient(to right, white, white);
+                border: 1px solid #3E4958 !important;
+                color: #3E4958;
+                pointer-events: none;
+            }
+        }
     }
 }

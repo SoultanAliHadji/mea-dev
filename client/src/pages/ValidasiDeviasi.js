@@ -23,7 +23,7 @@ const ValidasiDeviasi = ({
     setCurrentDeviationDataLoading(true);
     if (currentDeviationId != 0) {
       axios
-        .get(process.env.REACT_APP_API + "view/" + currentDeviationId, {
+        .get("http://10.10.10.66:5002/api/" + "view/" + currentDeviationId, {
           headers: {
             Authorization: "Bearer " + getToken,
           },
@@ -44,7 +44,7 @@ const ValidasiDeviasi = ({
       setCurrentDeviationImageLoading(true);
       axios
         .get(
-          process.env.REACT_APP_API +
+          "http://10.10.10.66:5002/api/" +
             "assets/outputFolder/cctvOutput/" +
             "2023-03-17 09:18:38.921260_VIEWPOINT.jpg", //viewimage
           {
@@ -110,7 +110,7 @@ const ValidasiDeviasi = ({
         </div>
         <div className="my-3">
           <h6>
-            Terdeteksi Deviasi {deviation.type_object} {deviation.id}
+            Terdeteksi Deviasi {deviation.type_object}
           </h6>
         </div>
         <div className="row">
