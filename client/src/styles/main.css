@@ -67,6 +67,15 @@
             color: #737373;
         }
 
+        & .notif-sound {
+            color: #3B9315;
+
+            &:hover {
+                color: #297209;
+                cursor: pointer;
+            }
+        }
+
         & button {
             font-weight: 500;
             border: 1px solid #297209;

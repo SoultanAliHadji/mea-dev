@@ -33,6 +33,10 @@ const Main = () => {
   //deviation data
   const [currentDeviationId, setCurrentDeviationId] = useState(0);
 
+  //notification sound
+  const [notificationSound, setNotificationSound] = useState(true);
+  const audio = new Audio(require("../assets/notification.mp3"));
+
   //object data
   const objectData = [
     { id: 1, name: "Semua", value: "AllObject" },
@@ -284,11 +288,25 @@ const Main = () => {
             <div className="col-3">
               <div className="title mb-3">
                 <div className="row align-items-center">
-                  <div className="col-9">
+                  <div className="col-8">
                     <h6>List Deviasi</h6>
                     <label>List deviasi yang terdeteksi</label>
                   </div>
-                  <div className="col d-flex justify-content-end">
+                  <div className="col d-flex justify-content-end gap-3">
+                    <div>
+                      <Icon
+                        className="notif-sound fs-5"
+                        icon={
+                          notificationSound === true
+                            ? "teenyicons:sound-on-solid"
+                            : "teenyicons:sound-off-solid"
+                        }
+                        muted={notificationSound}
+                        onClick={() => {
+                          setNotificationSound(!notificationSound);
+                        }}
+                      />
+                    </div>
                     {currentPage === "validasi-deviasi" ? (
                       <div className="dropdown">
                         <button
@@ -338,6 +356,8 @@ const Main = () => {
                   setCurrentObject={setCurrentObject}
                   objectData={objectData}
                   submitData={submitData}
+                  notificationSound={notificationSound}
+                  audio={audio}
                 />
               </div>
             </div>

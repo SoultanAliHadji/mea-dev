@@ -15,6 +15,8 @@ const Notification = ({
   setCurrentObject,
   objectData,
   submitData,
+  notificationSound,
+  audio,
 }) => {
   const [deviationData, setDeviationData] = useState([]);
   const [deviationDataLoading, setDeviationDataLoading] = useState(false);
@@ -44,6 +46,9 @@ const Notification = ({
       .catch((err) => console.log(err))
       .finally(() => {
         setDeviationDataLoading(false);
+        if (notificationSound === true) {
+          audio.play();
+        }
       });
   }, [currentCctvName, currentCctvLocation, currentObject, submitData]);
 
@@ -79,7 +84,11 @@ const Notification = ({
           currentPage !== "validasi-deviasi"
             ? setCurrentPage("validasi-deviasi")
             : setCurrentPage(currentPage);
-          window.history.replaceState(null, null, "/mea-dev/#/validasi-deviasi");
+          window.history.replaceState(
+            null,
+            null,
+            "/mea-dev/#/validasi-deviasi"
+          );
           setCurrentDeviationId(deviation.id);
         }}
       >
@@ -120,7 +129,7 @@ const Notification = ({
 
   return (
     <div className="notification">
-      <div className="notification-filter d-flex justify-content-center gap-1">
+      <div className="notification-filter d-flex justify-content-center align-items-center gap-1">
         {objectArr}
       </div>
       <hr />
@@ -151,7 +160,11 @@ const Notification = ({
             className="border-0 rounded-2 px-3 py-2"
             onClick={() => {
               setCurrentPage("validasi-deviasi");
-              window.history.replaceState(null, null, "/mea-dev/#/validasi-deviasi");
+              window.history.replaceState(
+                null,
+                null,
+                "/mea-dev/#/validasi-deviasi"
+              );
             }}
           >
             Validasi
