@@ -37,7 +37,9 @@ const Login = () => {
 
   useEffect(() => {
     if (loginStatus === "success") {
-      window.location.href = "/mea-dev/#/live-monitoring";
+      if (window.location.hash.includes("login")) {
+        window.location.href = "/mea-dev/#/live-monitoring";
+      }
       window.location.reload();
     } else {
       window.location.href = "/mea-dev/#/login/#";

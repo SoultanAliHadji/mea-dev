@@ -17,10 +17,6 @@ const Main = () => {
       : "live-monitoring"
   );
 
-  //token
-  const getToken =
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NywidXNlcm5hbWUiOiJkZXZlbG9wZXIiLCJyb2xlIjoiYWRtaW4iLCJjcmVhdGVkX2F0IjoiMjAyMi0wNi0yMyAxNDozMToyMSIsInVwZGF0ZWRfYXQiOiIyMDIyLTEwLTI3IDAwOjQxOjQ4IiwibmFtZSI6IkFkbWluIiwiY29tcGFueSI6IlBUIEJlcmF1IENvYWwifQ.84ujW7wKhnX5qIsO44tw8STP9ID4UKxzPPwnVaMuSTc";
-
   //cctv data
   const [cctvData, setCctvData] = useState([]);
   const [currentCctvId, setCurrentCctvId] = useState(1);
@@ -64,7 +60,7 @@ const Main = () => {
     axios
       .get("http://10.10.10.66:5002/api/" + "cctv", {
         headers: {
-          Authorization: "Bearer " + getToken,
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
       })
       .then((res) => {
@@ -82,7 +78,7 @@ const Main = () => {
     axios
       .get("http://10.10.10.66:5002/api/" + "cctv/" + currentCctvId, {
         headers: {
-          Authorization: "Bearer " + getToken,
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
       })
       .then((res) => {
@@ -270,17 +266,12 @@ const Main = () => {
               />
             ) : currentPage === "validasi-deviasi" ? (
               <ValidasiDeviasi
-                getToken={getToken}
                 currentDeviationId={currentDeviationId}
                 submitData={submitData}
                 setSubmitData={setSubmitData}
               />
             ) : (
-              <DataTervalidasi
-                getToken={getToken}
-                cctvData={cctvData}
-                objectData={objectData}
-              />
+              <DataTervalidasi cctvData={cctvData} objectData={objectData} />
             )}
           </div>
           {currentPage === "live-monitoring" ||
@@ -346,7 +337,6 @@ const Main = () => {
               <div className="content">
                 <Notification
                   currentPage={currentPage}
-                  getToken={getToken}
                   setCurrentPage={setCurrentPage}
                   currentCctvName={currentCctvName}
                   currentCctvLocation={currentCctvLocation}

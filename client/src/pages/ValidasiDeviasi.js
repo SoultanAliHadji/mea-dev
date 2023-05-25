@@ -5,12 +5,7 @@ import axios from "axios";
 import { Icon } from "@iconify/react";
 import ReactImageMagnify from "react-magnify-image";
 
-const ValidasiDeviasi = ({
-  getToken,
-  currentDeviationId,
-  submitData,
-  setSubmitData,
-}) => {
+const ValidasiDeviasi = ({ currentDeviationId, submitData, setSubmitData }) => {
   const [currentDeviationData, setCurrentDeviationData] = useState([]);
   const [currentDeviationImageRaw, setCurrentDeviationImageRaw] = useState([]);
   const [currentDeviationImageBlob, setCurrentDeviationImageBlob] = useState();
@@ -25,7 +20,7 @@ const ValidasiDeviasi = ({
       axios
         .get("http://10.10.10.66:5002/api/" + "view/" + currentDeviationId, {
           headers: {
-            Authorization: "Bearer " + getToken,
+            Authorization: "Bearer " + localStorage.getItem("token"),
           },
         })
         .then((res) => {
@@ -49,7 +44,7 @@ const ValidasiDeviasi = ({
             "2023-03-17 09:18:38.921260_VIEWPOINT.jpg", //viewimage
           {
             headers: {
-              Authorization: "Bearer " + getToken,
+              Authorization: "Bearer " + localStorage.getItem("token"),
             },
             responseType: "arraybuffer",
           }
@@ -97,7 +92,6 @@ const ValidasiDeviasi = ({
           <div className="col">
             {deviation.type_validation === "not_yet" ? (
               <Validation
-                getToken={getToken}
                 currentDeviationData={currentDeviationData}
                 currentDeviationId={currentDeviationId}
                 submitData={submitData}
@@ -109,9 +103,7 @@ const ValidasiDeviasi = ({
           </div>
         </div>
         <div className="my-3">
-          <h6>
-            Terdeteksi Deviasi {deviation.type_object}
-          </h6>
+          <h6>Terdeteksi Deviasi {deviation.type_object}</h6>
         </div>
         <div className="row">
           <div className="col-4 d-grid gap-2">

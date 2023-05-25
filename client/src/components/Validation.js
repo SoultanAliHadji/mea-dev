@@ -2,12 +2,7 @@ import "../styles/validation.css";
 import { useState } from "react";
 import axios from "axios";
 
-const Validation = ({
-  getToken,
-  currentDeviationId,
-  submitData,
-  setSubmitData,
-}) => {
+const Validation = ({ currentDeviationId, submitData, setSubmitData }) => {
   const [validationStatus, setValidationStatus] = useState();
   const [validationCommentData, setValidationCommentData] = useState([]);
   const [textareaStatus, setTextareaStatus] = useState(true);
@@ -27,7 +22,7 @@ const Validation = ({
       },
       headers: {
         "Content-Type": "multipart/form-data",
-        Authorization: "Bearer " + getToken,
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
     })
       .then((data) => {

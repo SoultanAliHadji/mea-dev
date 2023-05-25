@@ -6,15 +6,14 @@ import axios from "axios";
 import { Icon } from "@iconify/react";
 import Calendar from "react-calendar";
 
-const DataTervalidasi = ({ getToken, cctvData, objectData }) => {
+const DataTervalidasi = ({ cctvData, objectData }) => {
   const [date, setDate] = useState([new Date(), new Date()]);
   const [dateStatus, setDateStatus] = useState("*pilih tanggal (start)");
   const [dataLimit, setDataLimit] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [deviationData, setDeviationData] = useState([]);
   const [deviationDataLoading, setDeviationDataLoading] = useState(false);
-  const [currentDeviationId, setCurrentDeviationId] = useState();
-  const [currentDeviationData, setCurrentDeviationData] = useState([]);
+  const [currentDeviationImageRaw, setCurrentDeviationImageRaw] = useState();
   const [currentDeviationImageBlob, setCurrentDeviationImageBlob] = useState();
   const [reactMagnifyImageLoading, setReactMagnifyImageLoading] =
     useState(false);
@@ -42,7 +41,7 @@ const DataTervalidasi = ({ getToken, cctvData, objectData }) => {
           dataLimit,
         {
           headers: {
-            Authorization: "Bearer " + getToken,
+            Authorization: "Bearer " + localStorage.getItem("token"),
           },
         }
       )
@@ -56,28 +55,15 @@ const DataTervalidasi = ({ getToken, cctvData, objectData }) => {
   }, [currentCctv, currentObject, date, dataLimit]);
 
   useEffect(() => {
-    axios
-      .get("http://10.10.10.66:5002/api/" + "view/" + currentDeviationId, {
-        headers: {
-          Authorization: "Bearer " + getToken,
-        },
-      })
-      .then((res) => {
-        setCurrentDeviationData(res.data.data);
-      })
-      .catch((err) => console.log(err));
-  }, [currentDeviationId]);
-
-  useEffect(() => {
     setReactMagnifyImageLoading(true);
     axios
       .get(
         "http://10.10.10.66:5002/api/" +
           "assets/outputFolder/cctvOutput/" +
-          "2023-03-17 09:18:38.921260_VIEWPOINT.jpg", //viewimage
+          "2023-03-17 09:18:38.921260_VIEWPOINT.jpg", //currentDeviationImageRaw,
         {
           headers: {
-            Authorization: "Bearer " + getToken,
+            Authorization: "Bearer " + localStorage.getItem("token"),
           },
           responseType: "arraybuffer",
         }
@@ -97,7 +83,7 @@ const DataTervalidasi = ({ getToken, cctvData, objectData }) => {
       .finally(() => {
         setReactMagnifyImageLoading(false);
       });
-  }, [currentDeviationData]);
+  }, [currentDeviationImageRaw]);
 
   const cctvFilter = cctvData.map((cctv) => {
     return (
@@ -270,10 +256,9 @@ const DataTervalidasi = ({ getToken, cctvData, objectData }) => {
           dataLimit={dataLimit}
           deviationData={deviationData}
           deviationDataLoading={deviationDataLoading}
-          setCurrentDeviationId={setCurrentDeviationId}
-          currentDeviationData={currentDeviationData}
-          reactMagnifyImageLoading={reactMagnifyImageLoading}
+          setCurrentDeviationImageRaw={setCurrentDeviationImageRaw}
           currentDeviationImageBlob={currentDeviationImageBlob}
+          reactMagnifyImageLoading={reactMagnifyImageLoading}
         />
         <div>
           {deviationDataLoading === false ? (

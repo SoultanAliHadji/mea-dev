@@ -6,10 +6,9 @@ const DataTable = ({
   dataLimit,
   deviationData,
   deviationDataLoading,
-  setCurrentDeviationId,
-  currentDeviationData,
-  reactMagnifyImageLoading,
+  setCurrentDeviationImageRaw,
   currentDeviationImageBlob,
+  reactMagnifyImageLoading,
 }) => {
   const deviationArray = deviationData
     .slice(dataLimit - 10, dataLimit)
@@ -65,9 +64,9 @@ const DataTable = ({
                 type="button"
                 className="detail-button border-0 rounded-2 px-3 py-1"
                 data-bs-toggle="modal"
-                data-bs-target="#deviationModal"
+                data-bs-target={"#deviationModal" + deviation.id}
                 onClick={() => {
-                  setCurrentDeviationId(deviation.id);
+                  setCurrentDeviationImageRaw(deviation.image);
                 }}
               >
                 <Icon icon="fa-solid:eye" />
@@ -76,7 +75,7 @@ const DataTable = ({
           </td>
           <div
             className="modal fade"
-            id="deviationModal"
+            id={"deviationModal" + deviation.id}
             tabindex="-1"
             aria-labelledby="deviationModalLabel"
             aria-hidden="true"
@@ -94,71 +93,68 @@ const DataTable = ({
                     aria-label="Close"
                   ></button>
                 </div>
-                {currentDeviationData.length > 0 ? (
-                  <div className="modal-body d-grid gap-2">
-                    {reactMagnifyImageLoading === false ? (
-                      <ReactImageMagnify
-                        {...{
-                          smallImage: {
-                            alt: "",
-                            isFluidWidth: true,
-                            src: currentDeviationImageBlob,
-                          },
-                          largeImage: {
-                            src: currentDeviationImageBlob,
-                            width: 800,
-                            height: 500,
-                          },
-                          enlargedImagePosition: "over",
-                        }}
-                      />
-                    ) : (
-                      <div className="d-flex justify-content-center my-3">
-                        <div className="spinner-border">
-                          <span className="visually-hidden">Loading...</span>
-                        </div>
+
+                <div className="modal-body d-grid gap-2">
+                  {reactMagnifyImageLoading === false ? (
+                    <ReactImageMagnify
+                      {...{
+                        smallImage: {
+                          alt: "",
+                          isFluidWidth: true,
+                          src: currentDeviationImageBlob,
+                        },
+                        largeImage: {
+                          src: currentDeviationImageBlob,
+                          width: 800,
+                          height: 500,
+                        },
+                        enlargedImagePosition: "over",
+                      }}
+                    />
+                  ) : (
+                    <div className="d-flex justify-content-center my-3">
+                      <div className="spinner-border">
+                        <span className="visually-hidden">Loading...</span>
                       </div>
-                    )}
-                    <div>
-                      <label
-                        className={
-                          "px-2 rounded-2 mt-2" +
-                          (currentDeviationData[0].type_validation === "not_yet"
-                            ? " status-none"
-                            : currentDeviationData[0].type_validation === "true"
-                            ? " status-true"
-                            : " status-false")
-                        }
-                      >
-                        {currentDeviationData[0].type_validation === "not_yet"
-                          ? "Perlu Validasi"
-                          : currentDeviationData[0].type_validation === "true"
-                          ? "Valid"
-                          : "Tidak Valid"}
-                      </label>
                     </div>
-                    <div>
-                      <div className="d-flex gap-1">
-                        <label className="fw-bolder">Pengawas:</label>
-                        {currentDeviationData[0].user_name === null ? (
-                          "-"
-                        ) : (
-                          <label>{currentDeviationData[0].user_name}</label>
-                        )}
-                      </div>
-                      <div className="d-flex gap-1">
-                        <label className="fw-bolder">Deskripsi:</label>
-                        {currentDeviationData[0].comment === null ? (
-                          "-"
-                        ) : (
-                          <label>{currentDeviationData[0].comment}</label>
-                        )}
-                      </div>
+                  )}
+                  <div>
+                    <label
+                      className={
+                        "px-2 rounded-2 mt-2" +
+                        (deviation.type_validation === "not_yet"
+                          ? " status-none"
+                          : deviation.type_validation === "true"
+                          ? " status-true"
+                          : " status-false")
+                      }
+                    >
+                      {deviation.type_validation === "not_yet"
+                        ? "Perlu Validasi"
+                        : deviation.type_validation === "true"
+                        ? "Valid"
+                        : "Tidak Valid"}
+                    </label>
+                  </div>
+                  <div>
+                    <div className="d-flex gap-1">
+                      <label className="fw-bolder">Pengawas:</label>
+                      {deviation.user_name === null ? (
+                        "-"
+                      ) : (
+                        <label>{deviation.user_name}</label>
+                      )}
+                    </div>
+                    <div className="d-flex gap-1">
+                      <label className="fw-bolder">Deskripsi:</label>
+                      {deviation.comment === null ? (
+                        "-"
+                      ) : (
+                        <label>{deviation.comment}</label>
+                      )}
                     </div>
                   </div>
-                ) : (
-                  ""
-                )}
+                </div>
               </div>
             </div>
           </div>

@@ -76,11 +76,15 @@ const LiveMonitoring = ({
                   alt: "",
                   isFluidWidth: true,
                   src:
-                    "http://10.10.10.66:5002/api/" + "video_feed/" + currentCctvId,
+                    "http://10.10.10.66:5002/api/" +
+                    "video_feed/" +
+                    currentCctvId,
                 },
                 largeImage: {
                   src:
-                    "http://10.10.10.66:5002/api/" + "video_feed/" + currentCctvId,
+                    "http://10.10.10.66:5002/api/" +
+                    "video_feed/" +
+                    currentCctvId,
                   width: 2000,
                   height: 1100,
                 },

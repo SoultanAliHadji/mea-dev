@@ -6,7 +6,6 @@ import { Icon } from "@iconify/react";
 const Notification = ({
   currentPage,
   setCurrentPage,
-  getToken,
   currentCctvName,
   currentCctvLocation,
   currentDeviationId,
@@ -36,7 +35,7 @@ const Notification = ({
           10,
         {
           headers: {
-            Authorization: "Bearer " + getToken,
+            Authorization: "Bearer " + localStorage.getItem("token"),
           },
         }
       )
