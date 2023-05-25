@@ -5,37 +5,48 @@ import axios from "axios";
 import { Icon } from "@iconify/react";
 import ReactImageMagnify from "react-magnify-image";
 
-const ValidasiDeviasi = ({ currentDeviationId, submitData, setSubmitData }) => {
-  const [currentDeviationData, setCurrentDeviationData] = useState([]);
+const ValidasiDeviasi = ({
+  currentDeviationData,
+  submitData,
+  setSubmitData,
+}) => {
+  const [currentDeviationDataUpdate, setCurrentDeviationDataUpdate] = useState(
+    []
+  );
+  const [
+    currentDeviationDataUpdateLoading,
+    setCurrentDeviationDataUpdateLoading,
+  ] = useState(false);
   const [currentDeviationImageRaw, setCurrentDeviationImageRaw] = useState([]);
   const [currentDeviationImageBlob, setCurrentDeviationImageBlob] = useState();
-  const [currentDeviationDataLoading, setCurrentDeviationDataLoading] =
-    useState(false);
   const [currentDeviationImageLoading, setCurrentDeviationImageLoading] =
     useState(false);
 
   useEffect(() => {
-    setCurrentDeviationDataLoading(true);
-    if (currentDeviationId != 0) {
+    if (currentDeviationData.length !== 0) {
+      setCurrentDeviationDataUpdateLoading(true);
       axios
-        .get("http://10.10.10.66:5002/api/" + "view/" + currentDeviationId, {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        })
+        .get(
+          "http://10.10.10.66:5002/api/" + "view/" + currentDeviationData[0].id,
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
+        )
         .then((res) => {
-          setCurrentDeviationData(res.data.data);
+          setCurrentDeviationDataUpdate(res.data.data);
           setCurrentDeviationImageRaw(res.data.data[0].image);
         })
         .catch((err) => console.log(err))
         .finally(() => {
-          setCurrentDeviationDataLoading(false);
+          setCurrentDeviationDataUpdateLoading(false);
         });
     }
-  }, [currentDeviationId, submitData]);
+  }, [currentDeviationData, submitData]);
 
   useEffect(() => {
-    if (currentDeviationId != 0) {
+    if (currentDeviationData.length !== 0) {
       setCurrentDeviationImageLoading(true);
       axios
         .get(
@@ -67,7 +78,7 @@ const ValidasiDeviasi = ({ currentDeviationId, submitData, setSubmitData }) => {
     }
   }, [currentDeviationImageRaw]);
 
-  const currentDeviationArray = currentDeviationData.map((deviation) => {
+  const currentDeviationArray = currentDeviationDataUpdate.map((deviation) => {
     return (
       <div key={deviation.id} className="deviation-data">
         <div className="row align-items-center">
@@ -93,7 +104,6 @@ const ValidasiDeviasi = ({ currentDeviationId, submitData, setSubmitData }) => {
             {deviation.type_validation === "not_yet" ? (
               <Validation
                 currentDeviationData={currentDeviationData}
-                currentDeviationId={currentDeviationId}
                 submitData={submitData}
                 setSubmitData={setSubmitData}
               />
@@ -147,31 +157,30 @@ const ValidasiDeviasi = ({ currentDeviationId, submitData, setSubmitData }) => {
             <label>Validasi deviasi yang terdeteksi</label>
           </div>
           <div className="content">
-            {currentDeviationImageLoading === false ? (
-              currentDeviationId !== 0 ? (
+            <div>
+              {currentDeviationData.length !== 0 ? (
                 <div>
-                  <div className="d-flex justify-content-center">
-                    <ReactImageMagnify
-                      className="deviation-img rounded-2"
-                      {...{
-                        smallImage: {
-                          alt: "",
-                          isFluidWidth: true,
-                          src: currentDeviationImageBlob,
-                        },
-                        largeImage: {
-                          src: currentDeviationImageBlob,
-                          width: 2000,
-                          height: 1100,
-                        },
-                        enlargedImagePosition: "over",
-                      }}
-                    />
-                  </div>
-                  {currentDeviationDataLoading === false ? (
-                    <div className="mt-3">{currentDeviationArray}</div>
+                  {currentDeviationImageLoading === false ? (
+                    <div className="d-flex justify-content-center">
+                      <ReactImageMagnify
+                        className="deviation-img rounded-2"
+                        {...{
+                          smallImage: {
+                            alt: "",
+                            isFluidWidth: true,
+                            src: currentDeviationImageBlob,
+                          },
+                          largeImage: {
+                            src: currentDeviationImageBlob,
+                            width: 2000,
+                            height: 1100,
+                          },
+                          enlargedImagePosition: "over",
+                        }}
+                      />
+                    </div>
                   ) : (
-                    <div className="d-flex justify-content-center my-3">
+                    <div className="d-flex justify-content-center">
                       <div className="spinner-border">
                         <span className="visually-hidden">Loading...</span>
                       </div>
@@ -182,14 +191,17 @@ const ValidasiDeviasi = ({ currentDeviationId, submitData, setSubmitData }) => {
                 <div className="d-flex justify-content-center">
                   <label>Pilih deviasi pada List Deviasi</label>
                 </div>
-              )
-            ) : (
-              <div className="d-flex justify-content-center">
-                <div className="spinner-border">
-                  <span className="visually-hidden">Loading...</span>
+              )}
+              {currentDeviationDataUpdateLoading === false ? (
+                <div className="mt-3">{currentDeviationArray}</div>
+              ) : (
+                <div className="d-flex justify-content-center mt-3">
+                  <div className="spinner-border">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </div>

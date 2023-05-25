@@ -1,56 +1,17 @@
 import "../styles/notification.css";
-import { useState, useEffect } from "react";
-import axios from "axios";
 import { Icon } from "@iconify/react";
 
 const Notification = ({
   currentPage,
   setCurrentPage,
-  currentCctvName,
-  currentCctvLocation,
-  currentDeviationId,
-  setCurrentDeviationId,
+  deviationData,
+  deviationDataLoading,
+  currentDeviationData,
+  setCurrentDeviationData,
   currentObject,
   setCurrentObject,
   objectData,
-  submitData,
-  notificationSound,
-  audio,
 }) => {
-  const [deviationData, setDeviationData] = useState([]);
-  const [deviationDataLoading, setDeviationDataLoading] = useState(false);
-
-  useEffect(() => {
-    setDeviationDataLoading(true);
-    axios
-      .get(
-        "http://10.10.10.66:5002/api/" +
-          "viewtable/" +
-          currentCctvName +
-          "/" +
-          currentCctvLocation +
-          "/" +
-          currentObject +
-          "/All/Allvalidation/" +
-          10,
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        }
-      )
-      .then((res) => {
-        setDeviationData(res.data.data);
-      })
-      .catch((err) => console.log(err))
-      .finally(() => {
-        setDeviationDataLoading(false);
-        if (notificationSound === true) {
-          audio.play();
-        }
-      });
-  }, [currentCctvName, currentCctvLocation, currentObject, submitData]);
-
   const objectArr = objectData.map((object) => {
     return (
       <button
@@ -68,14 +29,15 @@ const Notification = ({
     );
   });
 
-  const deviationArray = deviationData.slice(0, 10).map((deviation) => {
+  const deviationArray = deviationData.slice(0, 10).map((deviation, index) => {
     return (
       <button
         key={deviation.id}
         className={
           "border-0 text-start rounded-2 px-3 py-2 d-grid gap-2" +
           (currentPage !== "live-monitoring" &&
-          currentDeviationId === deviation.id
+          currentDeviationData.length !== 0 &&
+          currentDeviationData[0].id === deviation.id
             ? " active"
             : "")
         }
@@ -88,7 +50,7 @@ const Notification = ({
             null,
             "/mea-dev/#/validasi-deviasi"
           );
-          setCurrentDeviationId(deviation.id);
+          setCurrentDeviationData([deviationData[index]]);
         }}
       >
         <div className="row align-items-center">

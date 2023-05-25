@@ -27,7 +27,9 @@ const Main = () => {
   const [cctvInfoLoading, setCctvInfoLoading] = useState(false);
 
   //deviation data
-  const [currentDeviationId, setCurrentDeviationId] = useState(0);
+  const [deviationData, setDeviationData] = useState([]);
+  const [deviationDataLoading, setDeviationDataLoading] = useState(false);
+  const [currentDeviationData, setCurrentDeviationData] = useState([]);
 
   //notification sound
   const [notificationSound, setNotificationSound] = useState(true);
@@ -91,6 +93,39 @@ const Main = () => {
         setCctvInfoLoading(false);
       });
   }, [currentCctvId]);
+
+  useEffect(() => {
+    if (currentPage !== "data-tervalidasi") {
+      setDeviationDataLoading(true);
+      axios
+        .get(
+          "http://10.10.10.66:5002/api/" +
+            "viewtable/" +
+            currentCctvName +
+            "/" +
+            currentCctvLocation +
+            "/" +
+            currentObject +
+            "/All/Allvalidation/" +
+            10,
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
+        )
+        .then((res) => {
+          setDeviationData(res.data.data);
+        })
+        .catch((err) => console.log(err))
+        .finally(() => {
+          setDeviationDataLoading(false);
+          if (notificationSound === true) {
+            audio.play();
+          }
+        });
+    }
+  }, [currentPage, currentCctvName, currentCctvLocation, currentObject, submitData]);
 
   const cctvFilteArray = cctvData.map((cctv) => {
     return (
@@ -266,7 +301,7 @@ const Main = () => {
               />
             ) : currentPage === "validasi-deviasi" ? (
               <ValidasiDeviasi
-                currentDeviationId={currentDeviationId}
+                currentDeviationData={currentDeviationData}
                 submitData={submitData}
                 setSubmitData={setSubmitData}
               />
@@ -338,16 +373,13 @@ const Main = () => {
                 <Notification
                   currentPage={currentPage}
                   setCurrentPage={setCurrentPage}
-                  currentCctvName={currentCctvName}
-                  currentCctvLocation={currentCctvLocation}
-                  currentDeviationId={currentDeviationId}
-                  setCurrentDeviationId={setCurrentDeviationId}
+                  deviationData={deviationData}
+                  deviationDataLoading={deviationDataLoading}
+                  currentDeviationData={currentDeviationData}
+                  setCurrentDeviationData={setCurrentDeviationData}
                   currentObject={currentObject}
                   setCurrentObject={setCurrentObject}
                   objectData={objectData}
-                  submitData={submitData}
-                  notificationSound={notificationSound}
-                  audio={audio}
                 />
               </div>
             </div>

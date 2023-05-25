@@ -2,7 +2,7 @@ import "../styles/validation.css";
 import { useState } from "react";
 import axios from "axios";
 
-const Validation = ({ currentDeviationId, submitData, setSubmitData }) => {
+const Validation = ({ currentDeviationData, submitData, setSubmitData }) => {
   const [validationStatus, setValidationStatus] = useState();
   const [validationCommentData, setValidationCommentData] = useState([]);
   const [textareaStatus, setTextareaStatus] = useState(true);
@@ -11,7 +11,10 @@ const Validation = ({ currentDeviationId, submitData, setSubmitData }) => {
   const handleSubmit = () => {
     axios({
       method: "put",
-      url: "http://10.10.10.66:5002/api/" + "deviation/" + currentDeviationId,
+      url:
+        "http://10.10.10.66:5002/api/" +
+        "deviation/" +
+        currentDeviationData[0].id,
       data: {
         type_validation: validationStatus,
         comment:
