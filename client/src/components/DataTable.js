@@ -5,6 +5,7 @@ import { Icon } from "@iconify/react";
 const DataTable = ({
   dataLimit,
   deviationData,
+  deviationDataLoading,
   setCurrentDeviationId,
   currentDeviationData,
   reactMagnifyImageLoading,
@@ -199,7 +200,7 @@ const DataTable = ({
             </th>
           </tr>
         </thead>
-        {deviationData.length > 0 ? (
+        {deviationData.length > 0 && deviationDataLoading === false ? (
           <tbody className="table-group-divider">{deviationArray}</tbody>
         ) : (
           ""

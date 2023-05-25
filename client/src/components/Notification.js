@@ -138,8 +138,8 @@ const Notification = ({
           className="deviation-list d-grid gap-2 overflow-auto"
           style={
             currentPage !== "live-monitoring"
-              ? { maxHeight: "65.5vh" }
-              : { maxHeight: "58vh" }
+              ? { maxHeight: "60.3vh" }
+              : { maxHeight: "52.8vh" }
           }
         >
           {deviationArray}

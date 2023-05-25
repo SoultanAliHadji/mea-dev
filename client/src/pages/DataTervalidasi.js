@@ -12,6 +12,7 @@ const DataTervalidasi = ({ getToken, cctvData, objectData }) => {
   const [dataLimit, setDataLimit] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [deviationData, setDeviationData] = useState([]);
+  const [deviationDataLoading, setDeviationDataLoading] = useState(false);
   const [currentDeviationId, setCurrentDeviationId] = useState();
   const [currentDeviationData, setCurrentDeviationData] = useState([]);
   const [currentDeviationImageBlob, setCurrentDeviationImageBlob] = useState();
@@ -21,6 +22,7 @@ const DataTervalidasi = ({ getToken, cctvData, objectData }) => {
   const [currentObject, setCurrentObject] = useState("All");
 
   useEffect(() => {
+    setDeviationDataLoading(true);
     axios
       .get(
         "http://10.10.10.66:5002/api/" +
@@ -47,19 +49,19 @@ const DataTervalidasi = ({ getToken, cctvData, objectData }) => {
       .then((res) => {
         setDeviationData(res.data.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setDeviationDataLoading(false);
+      });
   }, [currentCctv, currentObject, date, dataLimit]);
 
   useEffect(() => {
     axios
-      .get(
-        "http://10.10.10.66:5002/api/" + "view/" + currentDeviationId, //viewimage
-        {
-          headers: {
-            Authorization: "Bearer " + getToken,
-          },
-        }
-      )
+      .get("http://10.10.10.66:5002/api/" + "view/" + currentDeviationId, {
+        headers: {
+          Authorization: "Bearer " + getToken,
+        },
+      })
       .then((res) => {
         setCurrentDeviationData(res.data.data);
       })
@@ -267,45 +269,54 @@ const DataTervalidasi = ({ getToken, cctvData, objectData }) => {
         <DataTable
           dataLimit={dataLimit}
           deviationData={deviationData}
+          deviationDataLoading={deviationDataLoading}
           setCurrentDeviationId={setCurrentDeviationId}
           currentDeviationData={currentDeviationData}
           reactMagnifyImageLoading={reactMagnifyImageLoading}
           currentDeviationImageBlob={currentDeviationImageBlob}
         />
         <div>
-          {deviationData.length > 0 ? (
-            <div className="pagination-nav d-flex justify-content-center align-items-center gap-3 mt-5">
-              <button
-                className={
-                  "border-0 rounded-start py-2" +
-                  (currentPage === 1 ? " disabled" : "")
-                }
-                onClick={() => {
-                  setCurrentPage(currentPage - 1);
-                  setDataLimit(dataLimit - 10);
-                }}
-              >
-                Previous
-              </button>
-              <label>{currentPage}</label>
-              <button
-                className={
-                  "border-0 rounded-end py-2" +
-                  (dataLimit > deviationData.length ? " disabled" : "")
-                }
-                onClick={() => {
-                  setCurrentPage(currentPage + 1);
-                  setDataLimit(dataLimit + 10);
-                }}
-              >
-                Next
-              </button>
-            </div>
+          {deviationDataLoading === false ? (
+            deviationData.length > 0 ? (
+              <div className="pagination-nav d-flex justify-content-center align-items-center gap-3 mt-5">
+                <button
+                  className={
+                    "border-0 rounded-start py-2" +
+                    (currentPage === 1 ? " disabled" : "")
+                  }
+                  onClick={() => {
+                    setCurrentPage(currentPage - 1);
+                    setDataLimit(dataLimit - 10);
+                  }}
+                >
+                  Previous
+                </button>
+                <label>{currentPage}</label>
+                <button
+                  className={
+                    "border-0 rounded-end py-2" +
+                    (dataLimit <= deviationData.length ? " disabled" : "")
+                  }
+                  onClick={() => {
+                    setCurrentPage(currentPage + 1);
+                    setDataLimit(dataLimit + 10);
+                  }}
+                >
+                  Next
+                </button>
+              </div>
+            ) : (
+              <label className="w-100 text-center my-2">
+                Tidak terdapat data yang sesuai dengan filter CCTV, Objek,
+                maupun Periode
+              </label>
+            )
           ) : (
-            <label className="w-100 text-center my-2">
-              Tidak terdapat data yang sesuai dengan filter CCTV, Objek, maupun
-              Periode
-            </label>
+            <div className="d-flex justify-content-center my-3">
+              <div className="spinner-border">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
           )}
         </div>
       </div>
