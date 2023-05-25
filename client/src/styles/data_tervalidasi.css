@@ -10,7 +10,13 @@
         }
 
         & label {
-            color: #3E4958;
+            color: #737373;
+        }
+
+        & .form-select {
+            & label {
+                color: black;
+            }
         }
 
         & .input-group {
@@ -70,6 +76,7 @@
 
         & .pagination-nav {
             height: 40px;
+
             & button {
                 min-width: 90px;
                 font-size: 14px;
@@ -84,8 +91,8 @@
 
             & .disabled {
                 background-image: linear-gradient(to right, white, white);
-                border: 1px solid #3E4958 !important;
-                color: #3E4958;
+                border: 1px solid #737373 !important;
+                color: #737373;
                 pointer-events: none;
             }
         }

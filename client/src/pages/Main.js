@@ -34,20 +34,23 @@ const Main = () => {
   const [currentDeviationId, setCurrentDeviationId] = useState(0);
 
   //object data
-  const [currentObject, setCurrentObject] = useState("AllObject");
   const objectData = [
     { id: 1, name: "Semua", value: "AllObject" },
     { id: 2, name: "Person", value: "Person" },
     { id: 3, name: "LV", value: "LV" },
     { id: 4, name: "HD", value: "HD" },
   ];
+  const [currentObject, setCurrentObject] = useState("AllObject");
 
   //tipe validasi
   const validationTypeData = [
-    { id: 1, name: "Perlu Validasi", value: "not_yet" },
-    { id: 2, name: "Valid", value: "true" },
-    { id: 3, name: "Tidak Valid", value: "false" },
+    { id: 1, name: "Semua", value: "Allvalidation" },
+    { id: 2, name: "Perlu Validasi", value: "not_yet" },
+    { id: 3, name: "Valid", value: "true" },
+    { id: 4, name: "Tidak Valid", value: "false" },
   ];
+  const [currentValidationType, setCurrentValidationType] =
+    useState("Allvalidation");
 
   //validation data
   const [submitData, setSubmitData] = useState(false);
@@ -110,7 +113,15 @@ const Main = () => {
   const validationTypeFilterArray = validationTypeData.map((validationType) => {
     return (
       <li key={validationType.id}>
-        <button className="dropdown-item text-center border-0">
+        <button
+          className={
+            "dropdown-item text-center border-0" +
+            (currentValidationType === validationType.value ? " active" : "")
+          }
+          onClick={() => {
+            setCurrentValidationType(validationType.value);
+          }}
+        >
           {validationType.name}
         </button>
       </li>

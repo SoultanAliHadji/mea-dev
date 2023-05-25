@@ -12,7 +12,7 @@
     
             & label {
                 font-size: 12px;
-                color: #3E4958;
+                color: #737373;
             }
         }
     
@@ -25,13 +25,14 @@
             & .cctv-list {
                 & button {
                     background-color: white;
-                    color: #3E4958;
+                    color: #737373;
                     font-size: 12px;
                     font-weight: 500;
                     box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.2);
     
                     &:hover {
                         background-color: #DFF4DF;
+                        color: #297209;
                     }
                 }
     

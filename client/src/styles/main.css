@@ -34,6 +34,7 @@
 
     & .dropdown a {
         font-weight: 500;
+        color: #737373;
 
         &:hover {
             background-color: #F9D1CC;
@@ -63,7 +64,7 @@
 
         & label {
             font-size: 12px;
-            color: #3E4958;
+            color: #737373;
         }
 
         & button {
@@ -84,7 +85,7 @@
         & .dropdown-item {
             font-size: 12px;
             font-weight: 500;
-            color: #3E4958;
+            color: #737373;
 
             &:hover {
                 background-color: #DFF4DF;
@@ -112,36 +113,5 @@
         box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
         padding: 12px 24px;
         border-radius: 0 0 8px 8px;
-
-        & .cctv-list {
-            & button {
-                background-color: white;
-                color: #3E4958;
-                font-size: 12px;
-                font-weight: 500;
-                box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.2);
-
-                &:hover {
-                    background-color: #DFF4DF;
-                }
-            }
-
-            & .active {
-                background-image: linear-gradient(to right, #3B9315, #297209);
-                color: white;
-                pointer-events: none;
-            }
-        }
-
-        & .view-all-cctv button {
-            font-size: 12px;
-            font-weight: 500;
-            background-image: linear-gradient(to right, #3B9315, #297209);
-            color: white;
-
-            &:hover {
-                background-image: linear-gradient(to right, #297209, #297209);
-            }
-        }
     }
 }
