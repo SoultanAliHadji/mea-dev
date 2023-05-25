@@ -116,6 +116,7 @@ const Main = () => {
         )
         .then((res) => {
           setDeviationData(res.data.data);
+          console.log("ayam")
         })
         .catch((err) => console.log(err))
         .finally(() => {
@@ -125,7 +126,13 @@ const Main = () => {
           }
         });
     }
-  }, [currentPage, currentCctvName, currentCctvLocation, currentObject, submitData]);
+  }, [
+    currentPage === "data-tervalidasi" ? currentPage : currentCctvName,
+    currentCctvName,
+    currentCctvLocation,
+    currentObject,
+    submitData,
+  ]);
 
   const cctvFilteArray = cctvData.map((cctv) => {
     return (
