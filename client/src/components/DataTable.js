@@ -62,7 +62,7 @@ const DataTable = ({
             <div className="d-flex justify-content-center">
               <button
                 type="button"
-                className="border-0 rounded-2 px-3 py-1"
+                className="detail-button border-0 rounded-2 px-3 py-1"
                 data-bs-toggle="modal"
                 data-bs-target="#deviationModal"
                 onClick={() => {
@@ -82,6 +82,17 @@ const DataTable = ({
           >
             <div className="modal-dialog modal-dialog-centered">
               <div className="modal-content">
+                <div className="modal-header">
+                  <h1 className="modal-title fs-5" id="periodModalLabel">
+                    {"ID: " + deviation.id}
+                  </h1>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
                 {currentDeviationData.length > 0 ? (
                   <div className="modal-body d-grid gap-2">
                     {reactMagnifyImageLoading === false ? (
@@ -159,31 +170,31 @@ const DataTable = ({
       <table className="table">
         <thead>
           <tr className="text-center">
-            <th className="table-success" scope="col">
+            <th className="table-header" scope="col">
               ID
             </th>
-            <th className="table-success" scope="col">
+            <th className="table-header" scope="col">
               Lokasi CCTV
             </th>
-            <th className="table-success" scope="col">
+            <th className="table-header" scope="col">
               Date Time
             </th>
-            <th className="table-success" scope="col">
+            <th className="table-header" scope="col">
               Objek
             </th>
-            {/* <th className="table-success" scope="col">
+            {/* <th className="table-header" scope="col">
                 Gambar Deviasi
               </th> */}
-            <th className="table-success" scope="col">
+            <th className="table-header" scope="col">
               Deskripsi
             </th>
-            <th className="table-success" scope="col">
+            <th className="table-header" scope="col">
               Status
             </th>
-            <th className="table-success" scope="col">
+            <th className="table-header" scope="col">
               Pengawas
             </th>
-            <th className="table-success" scope="col">
+            <th className="table-header" scope="col">
               Action
             </th>
           </tr>

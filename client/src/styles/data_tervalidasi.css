@@ -14,8 +14,17 @@
         }
 
         & .form-select {
+            cursor: pointer;
+            &:hover {
+                color: #297209;
+            }
+
             & label {
                 color: black;
+
+                &:hover {
+                    color: #297209;
+                }
             }
         }
 

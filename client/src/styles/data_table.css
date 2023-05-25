@@ -4,7 +4,7 @@
     & table {
         font-size: 14px;
 
-        & .table-success {
+        & .table-header {
             background-color: #3B9315;
             color: white;
         }
@@ -13,7 +13,7 @@
             width: 100px;
         }
 
-        & button {
+        & .detail-button {
             font-size: 14px;
             font-weight: 500;
             background-image: linear-gradient(to right, #3B9315, #297209);
@@ -21,12 +21,6 @@
 
             &:hover {
                 background-image: linear-gradient(to right, #297209, #297209);
-            }
-        }
-
-        & .modal-dialog {
-            & .spinner-border {
-                color: #3B9315;
             }
         }
 
@@ -49,6 +43,12 @@
             background-color: #F9D1CC;
             border: 2px solid #F08C80;
             color: #DE4452;
+        }
+
+        & .modal-dialog {
+            & .spinner-border {
+                color: #3B9315;
+            }
         }
     }
 }
