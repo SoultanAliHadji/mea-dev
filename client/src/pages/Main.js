@@ -6,6 +6,7 @@ import DataTervalidasi from "./DataTervalidasi";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Icon } from "@iconify/react";
+import socketIOClient from "socket.io-client";
 
 const Main = () => {
   const [currentPage, setCurrentPage] = useState(
@@ -30,6 +31,7 @@ const Main = () => {
   const [deviationData, setDeviationData] = useState([]);
   const [deviationDataLoading, setDeviationDataLoading] = useState(false);
   const [currentDeviationData, setCurrentDeviationData] = useState([]);
+  const [deviationDataLimit, setDeviationDataLimit] = useState(10);
 
   //notification sound
   const [notificationSound, setNotificationSound] = useState(false);
@@ -107,7 +109,7 @@ const Main = () => {
             "/" +
             currentObject +
             "/All/Allvalidation/" +
-            10,
+            deviationDataLimit,
           {
             headers: {
               Authorization: "Bearer " + localStorage.getItem("token"),
@@ -116,7 +118,6 @@ const Main = () => {
         )
         .then((res) => {
           setDeviationData(res.data.data);
-          console.log("ayam");
         })
         .catch((err) => console.log(err))
         .finally(() => {
@@ -131,8 +132,37 @@ const Main = () => {
     currentCctvName,
     currentCctvLocation,
     currentObject,
+    deviationDataLimit,
     submitData,
   ]);
+
+  //socket.io
+  const socket = socketIOClient("http://10.10.10.66:5002", {
+    transports: ["polling"],
+    cors: {
+      origin: "*",
+    },
+  });
+
+  useEffect(() => {
+    socket.on("message_from_server", (data) => handleNewNotif(data));
+    console.log(socket);
+
+    return () => {
+      socket.off("message_from_server");
+    };
+  }, []);
+
+  const handleNewNotif = (datas) => {
+    // looping data's'
+    datas.map((data, index) => {
+      if (currentCctvName == data.name && currentCctvLocation == data.location) {
+        let newData = data;
+        console.log("newData", newData);
+        setDeviationData((data) => [newData, ...data]);
+      }
+    });
+  };
 
   const cctvFilteArray = cctvData.map((cctv) => {
     return (
@@ -144,6 +174,7 @@ const Main = () => {
           }
           onClick={() => {
             setCurrentCctvId(cctv.id);
+            setDeviationDataLimit(10);
           }}
         >
           {cctv.name + " - " + cctv.location}
@@ -162,6 +193,7 @@ const Main = () => {
           }
           onClick={() => {
             setCurrentValidationType(validationType.value);
+            setDeviationDataLimit(10);
           }}
         >
           {validationType.name}
@@ -296,7 +328,7 @@ const Main = () => {
       </nav>
       <div className="container mt-3">
         <div className="row">
-          <div className="col">
+          <div className="col-xl mb-sm-5">
             {currentPage === "live-monitoring" ? (
               <LiveMonitoring
                 cctvData={cctvData}
@@ -305,6 +337,7 @@ const Main = () => {
                 currentCctvData={currentCctvData}
                 cctvLoading={cctvLoading}
                 cctvInfoLoading={cctvInfoLoading}
+                setDeviationDataLimit={setDeviationDataLimit}
               />
             ) : currentPage === "validasi-deviasi" ? (
               <ValidasiDeviasi
@@ -318,7 +351,7 @@ const Main = () => {
           </div>
           {currentPage === "live-monitoring" ||
           currentPage === "validasi-deviasi" ? (
-            <div className="col-3">
+            <div className="col-xl-3">
               <div className="title mb-3">
                 <div className="row align-items-center">
                   <div className="col-8">
@@ -382,6 +415,8 @@ const Main = () => {
                   setCurrentPage={setCurrentPage}
                   deviationData={deviationData}
                   deviationDataLoading={deviationDataLoading}
+                  deviationDataLimit={deviationDataLimit}
+                  setDeviationDataLimit={setDeviationDataLimit}
                   currentDeviationData={currentDeviationData}
                   setCurrentDeviationData={setCurrentDeviationData}
                   currentObject={currentObject}

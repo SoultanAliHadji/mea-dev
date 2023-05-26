@@ -8,6 +8,7 @@ const LiveMonitoring = ({
   currentCctvData,
   cctvLoading,
   cctvInfoLoading,
+  setDeviationDataLimit,
 }) => {
   const cctvArray = cctvData.map((cctv) => {
     return (
@@ -19,6 +20,7 @@ const LiveMonitoring = ({
         }
         onClick={() => {
           setCurrentCctvId(cctv.id);
+          setDeviationDataLimit(10);
         }}
       >
         {cctv.name + " - " + cctv.location}
@@ -30,7 +32,7 @@ const LiveMonitoring = ({
     return (
       <div key={info.id} className="cctv-info">
         <h6>{info.name + " - " + info.location}</h6>
-        <label>IP {info.ip}</label>
+        <label>{"IP" + info.ip}</label>
       </div>
     );
   });
@@ -38,7 +40,7 @@ const LiveMonitoring = ({
   return (
     <div className="live-monitoring">
       <div className="row">
-        <div className="col-4">
+        <div className="col-xl-4 mb-sm-5">
           <div className="title mb-3">
             <h6>List CCTV</h6>
             <label>Pilih CCTV untuk melihat Live Monitoring</label>
@@ -60,7 +62,7 @@ const LiveMonitoring = ({
             </div>
           </div>
         </div>
-        <div className="col">
+        <div className="col-xl">
           <div className="title mb-3">
             <h6>Real-Time Monitoring</h6>
             <label>

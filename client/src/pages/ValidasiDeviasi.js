@@ -150,59 +150,55 @@ const ValidasiDeviasi = ({
 
   return (
     <div className="validasi-deviasi">
-      <div className="row">
-        <div className="col">
-          <div className="title mb-3">
-            <h6>Validasi Deviasi</h6>
-            <label>Validasi deviasi yang terdeteksi</label>
-          </div>
-          <div className="content">
+      <div className="title mb-3">
+        <h6>Validasi Deviasi</h6>
+        <label>Validasi deviasi yang terdeteksi</label>
+      </div>
+      <div className="content">
+        <div>
+          {currentDeviationData.length !== 0 ? (
             <div>
-              {currentDeviationData.length !== 0 ? (
-                <div>
-                  {currentDeviationImageLoading === false ? (
-                    <div className="d-flex justify-content-center">
-                      <ReactImageMagnify
-                        className="deviation-img rounded-2"
-                        {...{
-                          smallImage: {
-                            alt: "",
-                            isFluidWidth: true,
-                            src: currentDeviationImageBlob,
-                          },
-                          largeImage: {
-                            src: currentDeviationImageBlob,
-                            width: 2000,
-                            height: 1100,
-                          },
-                          enlargedImagePosition: "over",
-                        }}
-                      />
-                    </div>
-                  ) : (
-                    <div className="d-flex justify-content-center">
-                      <div className="spinner-border">
-                        <span className="visually-hidden">Loading...</span>
-                      </div>
-                    </div>
-                  )}
+              {currentDeviationImageLoading === false ? (
+                <div className="d-flex justify-content-center">
+                  <ReactImageMagnify
+                    className="deviation-img rounded-2"
+                    {...{
+                      smallImage: {
+                        alt: "",
+                        isFluidWidth: true,
+                        src: currentDeviationImageBlob,
+                      },
+                      largeImage: {
+                        src: currentDeviationImageBlob,
+                        width: 2000,
+                        height: 1100,
+                      },
+                      enlargedImagePosition: "over",
+                    }}
+                  />
                 </div>
               ) : (
                 <div className="d-flex justify-content-center">
-                  <label>Pilih deviasi pada List Deviasi</label>
-                </div>
-              )}
-              {currentDeviationDataUpdateLoading === false ? (
-                <div className="mt-3">{currentDeviationArray}</div>
-              ) : (
-                <div className="d-flex justify-content-center mt-3">
                   <div className="spinner-border">
                     <span className="visually-hidden">Loading...</span>
                   </div>
                 </div>
               )}
             </div>
-          </div>
+          ) : (
+            <div className="d-flex justify-content-center">
+              <label>Pilih deviasi pada List Deviasi</label>
+            </div>
+          )}
+          {currentDeviationDataUpdateLoading === false ? (
+            <div className="mt-3">{currentDeviationArray}</div>
+          ) : (
+            <div className="d-flex justify-content-center mt-3">
+              <div className="spinner-border">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

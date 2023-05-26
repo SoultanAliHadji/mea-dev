@@ -61,6 +61,17 @@
             color: white;
             pointer-events: none;
         }
+
+        & .load-more-button {
+            color: #3B9315;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 500;
+
+            &:hover {
+                color: #297209;
+            }
+        }
     }
 
     & .spinner-border {
