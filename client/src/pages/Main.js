@@ -32,7 +32,7 @@ const Main = () => {
   const [currentDeviationData, setCurrentDeviationData] = useState([]);
 
   //notification sound
-  const [notificationSound, setNotificationSound] = useState(true);
+  const [notificationSound, setNotificationSound] = useState(false);
   const audio = new Audio(require("../assets/notification.mp3"));
 
   //object data
@@ -116,7 +116,7 @@ const Main = () => {
         )
         .then((res) => {
           setDeviationData(res.data.data);
-          console.log("ayam")
+          console.log("ayam");
         })
         .catch((err) => console.log(err))
         .finally(() => {

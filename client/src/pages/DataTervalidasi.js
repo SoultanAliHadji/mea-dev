@@ -38,7 +38,7 @@ const DataTervalidasi = ({ cctvData, objectData }) => {
             (date[0].getDate() < 10 ? "0" : "") +
             date[0].getDate()) +
           "/Allvalidation/" +
-          dataLimit,
+          dataLimit + 1,
         {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
@@ -280,7 +280,7 @@ const DataTervalidasi = ({ cctvData, objectData }) => {
                 <button
                   className={
                     "border-0 rounded-end py-2" +
-                    (dataLimit <= deviationData.length ? " disabled" : "")
+                    (dataLimit > deviationData.length ? " disabled" : "")
                   }
                   onClick={() => {
                     setCurrentPage(currentPage + 1);
