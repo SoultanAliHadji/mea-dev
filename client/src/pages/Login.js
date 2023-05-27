@@ -10,7 +10,7 @@ const Login = () => {
   const [loginMessage, setLoginMessage] = useState("");
   const [passwordVisibility, setPasswordVisibility] = useState(false);
 
-  const handleHandle = () => {};
+  const enterKeyHandle = () => {};
 
   const handleLogin = () => {
     if (username === "" || password === "") {
@@ -42,7 +42,7 @@ const Login = () => {
         window.location.href = "/mea-dev/#/live-monitoring";
       }
       window.location.reload();
-    } else {
+    } else if (loginStatus === "failed") {
       window.location.href = "/mea-dev/#/login/#";
       if (loginStatus.toLocaleLowerCase() === "username salah") {
         setLoginMessage("username salah");
@@ -71,7 +71,7 @@ const Login = () => {
                   placeholder="Masukkan Username atau SID"
                   onChange={(e) => setUsername(e.target.value)}
                   onKeyDown={(e) => {
-                    e.key === "Enter" ? handleLogin() : handleHandle();
+                    e.key === "Enter" ? handleLogin() : enterKeyHandle();
                   }}
                 />
               </div>
@@ -84,7 +84,7 @@ const Login = () => {
                     placeholder="Masukkan Password"
                     onChange={(e) => setPassword(e.target.value)}
                     onKeyDown={(e) => {
-                      e.key === "Enter" ? handleLogin() : handleHandle();
+                      e.key === "Enter" ? handleLogin() : enterKeyHandle();
                     }}
                   />
                   <Icon

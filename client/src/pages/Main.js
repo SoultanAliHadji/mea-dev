@@ -156,7 +156,10 @@ const Main = () => {
   const handleNewNotif = (datas) => {
     // looping data's'
     datas.map((data, index) => {
-      if (currentCctvName == data.name && currentCctvLocation == data.location) {
+      if (
+        currentCctvName == data.name &&
+        currentCctvLocation == data.location
+      ) {
         let newData = data;
         console.log("newData", newData);
         setDeviationData((data) => [newData, ...data]);
@@ -308,17 +311,17 @@ const Main = () => {
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <a
+                    <button
                       className="dropdown-item d-flex align-items-center gap-2"
-                      href="/mea-dev/#/login"
                       onClick={() => {
                         localStorage.clear();
+                        window.location.href = "/mea-dev/#/login";
                         window.location.reload();
                       }}
                     >
                       <Icon className="fs-5" icon="ci:log-out" />
                       <label>Log Out</label>
-                    </a>
+                    </button>
                   </li>
                 </ul>
               </li>

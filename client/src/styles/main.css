@@ -32,7 +32,7 @@
         }
     }
 
-    & .dropdown a {
+    & .dropdown .dropdown-menu button {
         font-weight: 500;
         color: #737373;
 
