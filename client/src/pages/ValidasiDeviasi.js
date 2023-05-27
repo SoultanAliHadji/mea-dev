@@ -7,43 +7,13 @@ import ReactImageMagnify from "react-magnify-image";
 
 const ValidasiDeviasi = ({
   currentDeviationData,
+  setCurrentDeviationData,
   submitData,
   setSubmitData,
 }) => {
-  const [currentDeviationDataUpdate, setCurrentDeviationDataUpdate] = useState(
-    []
-  );
-  const [
-    currentDeviationDataUpdateLoading,
-    setCurrentDeviationDataUpdateLoading,
-  ] = useState(false);
-  const [currentDeviationImageRaw, setCurrentDeviationImageRaw] = useState([]);
   const [currentDeviationImageBlob, setCurrentDeviationImageBlob] = useState();
   const [currentDeviationImageLoading, setCurrentDeviationImageLoading] =
     useState(false);
-
-  useEffect(() => {
-    if (currentDeviationData.length !== 0) {
-      setCurrentDeviationDataUpdateLoading(true);
-      axios
-        .get(
-          "http://10.10.10.66:5002/api/" + "view/" + currentDeviationData[0].id,
-          {
-            headers: {
-              Authorization: "Bearer " + localStorage.getItem("token"),
-            },
-          }
-        )
-        .then((res) => {
-          setCurrentDeviationDataUpdate(res.data.data);
-          setCurrentDeviationImageRaw(res.data.data[0].image);
-        })
-        .catch((err) => console.log(err))
-        .finally(() => {
-          setCurrentDeviationDataUpdateLoading(false);
-        });
-    }
-  }, [currentDeviationData, submitData]);
 
   useEffect(() => {
     if (currentDeviationData.length !== 0) {
@@ -52,7 +22,7 @@ const ValidasiDeviasi = ({
         .get(
           "http://10.10.10.66:5002/api/" +
             "assets/outputFolder/cctvOutput/" +
-            "2023-03-17 09:18:38.921260_VIEWPOINT.jpg", //viewimage
+            "2023-03-17 09:18:38.921260_VIEWPOINT.jpg", //currentDeviationData[0].image,
           {
             headers: {
               Authorization: "Bearer " + localStorage.getItem("token"),
@@ -76,9 +46,9 @@ const ValidasiDeviasi = ({
           setCurrentDeviationImageLoading(false);
         });
     }
-  }, [currentDeviationImageRaw]);
+  }, [currentDeviationData]);
 
-  const currentDeviationArray = currentDeviationDataUpdate.map((deviation) => {
+  const currentDeviationArray = currentDeviationData.map((deviation) => {
     return (
       <div key={deviation.id} className="deviation-data">
         <div className="row align-items-center">
@@ -104,6 +74,7 @@ const ValidasiDeviasi = ({
             {deviation.type_validation === "not_yet" ? (
               <Validation
                 currentDeviationData={currentDeviationData}
+                setCurrentDeviationData={setCurrentDeviationData}
                 submitData={submitData}
                 setSubmitData={setSubmitData}
               />
@@ -190,15 +161,7 @@ const ValidasiDeviasi = ({
               <label>Pilih deviasi pada List Deviasi</label>
             </div>
           )}
-          {currentDeviationDataUpdateLoading === false ? (
-            <div className="mt-3">{currentDeviationArray}</div>
-          ) : (
-            <div className="d-flex justify-content-center mt-3">
-              <div className="spinner-border">
-                <span className="visually-hidden">Loading...</span>
-              </div>
-            </div>
-          )}
+          <div className="mt-3">{currentDeviationArray}</div>
         </div>
       </div>
     </div>

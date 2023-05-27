@@ -2,7 +2,12 @@ import "../styles/validation.css";
 import { useState } from "react";
 import axios from "axios";
 
-const Validation = ({ currentDeviationData, submitData, setSubmitData }) => {
+const Validation = ({
+  currentDeviationData,
+  setCurrentDeviationData,
+  submitData,
+  setSubmitData,
+}) => {
   const [validationStatus, setValidationStatus] = useState();
   const [validationCommentData, setValidationCommentData] = useState([]);
   const [textareaStatus, setTextareaStatus] = useState(true);
@@ -223,6 +228,31 @@ const Validation = ({ currentDeviationData, submitData, setSubmitData }) => {
                         setTextareaValue("");
                         setSubmitData(submitData === false ? true : false);
                       }, 2000);
+                      setCurrentDeviationData([
+                        {
+                          cctv_id: currentDeviationData[0].cctv_id,
+                          comment:
+                            validationCommentData.join(", ") +
+                            (validationCommentData.length > 0 ? ", " : "") +
+                            (textareaValue.length > 0 ? textareaValue : ""),
+                          created_at: currentDeviationData[0].created_at,
+                          id: currentDeviationData[0].id,
+                          image: currentDeviationData[0].image,
+                          ip: currentDeviationData[0].ip,
+                          location: currentDeviationData[0].location,
+                          name: currentDeviationData[0].name,
+                          path: currentDeviationData[0].path,
+                          realtime_images_id:
+                            currentDeviationData[0].realtime_images_id,
+                          type_object: currentDeviationData[0].type_object,
+                          type_validation: validationStatus.toString(),
+                          updated_at: new Date(),
+                          user_id: localStorage.getItem("id"),
+                          user_name: localStorage.getItem("name"),
+                          username: localStorage.getItem("username"),
+                          violate_count: currentDeviationData[0].violate_count,
+                        },
+                      ]);
                     }}
                   >
                     Save changes
