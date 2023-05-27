@@ -26,8 +26,9 @@ const Login = () => {
           console.log(res.data.data);
           localStorage.setItem("token", res.data.data.token);
           localStorage.setItem("role", res.data.data.role);
-          localStorage.setItem("name", res.data.data.name);
           localStorage.setItem("id", res.data.data.id);
+          localStorage.setItem("name", res.data.data.name);
+          localStorage.setItem("username", res.data.data.username);
         })
         .catch((err) => {
           setLoginStatus(err.response.data.data.errors);
