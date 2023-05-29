@@ -11,6 +11,11 @@
                 background-color: #DFF4DF;
                 color: #297209;
             }
+
+            &:focus {
+                background-image: linear-gradient(to right, #3B9315, #297209);
+                color: white;
+            }
         }
 
         & .active {
@@ -31,6 +36,11 @@
             &:hover {
                 background-color: #DFF4DF;
                 color: #297209;
+            }
+
+            &:focus {
+                background-image: linear-gradient(to right, #3B9315, #297209);
+                color: white;
             }
 
             & label {

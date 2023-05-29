@@ -40,7 +40,7 @@ const LiveMonitoring = ({
   return (
     <div className="live-monitoring">
       <div className="row">
-        <div className="col-xl-4 mb-sm-5">
+        <div className="col-xl-4 mb-xl-0 mb-5">
           <div className="title mb-3">
             <h6>List CCTV</h6>
             <label>Pilih CCTV untuk melihat Live Monitoring</label>

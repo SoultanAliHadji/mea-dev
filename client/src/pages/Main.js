@@ -331,7 +331,7 @@ const Main = () => {
       </nav>
       <div className="container mt-3">
         <div className="row">
-          <div className="col-xl mb-sm-5">
+          <div className="col-xl mb-xl-0 mb-5">
             {currentPage === "live-monitoring" ? (
               <LiveMonitoring
                 cctvData={cctvData}
