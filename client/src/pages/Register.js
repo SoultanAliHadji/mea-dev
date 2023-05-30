@@ -40,11 +40,11 @@ const Register = () => {
   useEffect(() => {
     if (loginStatus === "success") {
       if (window.location.hash.includes("login")) {
-        window.location.href = "/mea-dev/#/live-monitoring";
+        window.location.href = "/mea-dev/#/login";
       }
       window.location.reload();
     } else if (loginStatus === "failed") {
-      window.location.href = "/mea-dev/#/login/#";
+      window.location.href = "/mea-dev/#/register/#";
       if (loginStatus.toLocaleLowerCase() === "username salah") {
         setLoginMessage("username salah");
       } else if (loginStatus.toLocaleLowerCase() === "password salah") {
