@@ -82,7 +82,7 @@ const Notification = ({
             </div>
           </div>
           <div className="d-flex align-items-end gap-2">
-            <Icon className="fs-5" icon="bi:camera-fill" />
+            <Icon className="fs-5" icon="mdi:cctv" />
             <label>{deviation.name + " - " + deviation.location}</label>
           </div>
           <div className="d-flex align-items-end gap-2">

@@ -119,7 +119,7 @@ const DataTervalidasi = ({ cctvData, objectData }) => {
             <label>CCTV</label>
             <div className="input-group">
               <label className="input-group-text" for="inputGroupSelect01">
-                <Icon className="" icon="bi:camera-fill" />
+                <Icon className="" icon="mdi:cctv" />
               </label>
               <select
                 className="form-select"

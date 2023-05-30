@@ -89,7 +89,7 @@ const ValidasiDeviasi = ({
         <div className="row">
           <div className="col-4 d-grid gap-2">
             <div className="d-flex gap-2">
-              <Icon className="fs-5" icon="bi:camera-fill" />
+              <Icon className="fs-5" icon="mdi:cctv" />
               <label>{deviation.name + " - " + deviation.location}</label>
             </div>
             <div className="d-flex gap-2">
