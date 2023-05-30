@@ -14,7 +14,7 @@ const Login = () => {
 
   const handleLogin = () => {
     if (username === "" || password === "") {
-      setLoginMessage("username atau password tidak boleh kosong");
+      setLoginMessage("username dan password tidak boleh kosong");
     } else {
       axios
         .post("http://10.10.10.66:5002/api/" + "login", {

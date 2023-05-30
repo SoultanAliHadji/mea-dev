@@ -1,0 +1,44 @@
+.register {
+    background-image: url("../assets/background/bg_login.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+
+    & .form-container {
+        background-color: white;
+        max-width: 30vw;
+        min-height: 65.5vh;
+
+        & img {
+            width: 60%;
+        }
+
+        & label {
+            font-weight: 500;
+        }
+
+        & .password-visibility {
+            cursor: pointer;
+            margin-left: -30px;
+            color: #297209;
+        }
+
+        & button {
+            background-image: linear-gradient(to right, #3B9315, #297209);
+            color: white;
+            font-weight: 500;
+            box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.2);
+
+            &:hover {
+                background-image: linear-gradient(to right, #297209, #297209);
+            }
+        }
+
+        & .login-message {
+            color: #DE4452;
+            font-size: 14px;
+        }
+
+    }
+}

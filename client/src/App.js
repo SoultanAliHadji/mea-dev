@@ -1,6 +1,7 @@
 import "./App.css";
 import Main from "./pages/Main";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,6 +15,7 @@ function App() {
       <HashRouter>
         <Switch>
           <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
           <Route
             path="/live-monitoring"
             component={localStorage.getItem("token") !== null ? Main : Login}
