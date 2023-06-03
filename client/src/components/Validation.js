@@ -8,8 +8,8 @@ const Validation = ({
   submitData,
   setSubmitData,
 }) => {
-  const [operatorName, setOperatorName] = useState("");
   const [validationStatus, setValidationStatus] = useState();
+  const [operatorName, setOperatorName] = useState("");
   const [validationCommentData, setValidationCommentData] = useState([]);
   const [textareaStatus, setTextareaStatus] = useState(true);
   const [textareaValue, setTextareaValue] = useState("");
@@ -145,6 +145,7 @@ const Validation = ({
                 aria-label="Close"
                 onClick={() => {
                   setValidationStatus();
+                  setOperatorName("");
                   setValidationCommentData([]);
                   setTextareaStatus(true);
                   setTextareaValue("");
@@ -155,8 +156,11 @@ const Validation = ({
               <input
                 className="form-control mb-4"
                 type="text"
+                value={operatorName}
                 placeholder="Tulis nama operator yang terdeteksi"
-                onChange={(e) => {setOperatorName(e.target.value)}}
+                onChange={(e) => {
+                  setOperatorName(e.target.value);
+                }}
               />
               {validationStatus === true
                 ? trueCommentArray
@@ -196,8 +200,10 @@ const Validation = ({
               <div className="row w-100 align-items-center">
                 <div className="col px-0">
                   <label>
-                    {operatorName === "" ? "*tulis nama operator satu/lebih" : validationCommentData.length < 1 &&
-                    textareaValue.length < 1
+                    {operatorName === ""
+                      ? "*tulis nama operator satu/lebih"
+                      : validationCommentData.length < 1 &&
+                        textareaValue.length < 1
                       ? "*pilih dan/atau deskripsikan manual"
                       : ""}
                   </label>
@@ -209,6 +215,7 @@ const Validation = ({
                     data-bs-dismiss="modal"
                     onClick={() => {
                       setValidationStatus();
+                      setOperatorName("");
                       setValidationCommentData([]);
                       setTextareaStatus(true);
                       setTextareaValue("");
@@ -220,8 +227,9 @@ const Validation = ({
                     type="button"
                     className={
                       "submit-button border-0 rounded-2 px-3 py-1" +
-                      (operatorName === "" || (validationCommentData.length < 1 &&
-                      textareaValue.length < 1)
+                      (operatorName === "" ||
+                      (validationCommentData.length < 1 &&
+                        textareaValue.length < 1)
                         ? " disabled"
                         : "")
                     }
