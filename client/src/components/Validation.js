@@ -8,6 +8,7 @@ const Validation = ({
   submitData,
   setSubmitData,
 }) => {
+  const [operatorName, setOperatorName] = useState("");
   const [validationStatus, setValidationStatus] = useState();
   const [validationCommentData, setValidationCommentData] = useState([]);
   const [textareaStatus, setTextareaStatus] = useState(true);
@@ -151,6 +152,12 @@ const Validation = ({
               ></button>
             </div>
             <div className="modal-body d-grid gap-2">
+              <input
+                className="form-control mb-4"
+                type="text"
+                placeholder="Tulis nama operator yang terdeteksi"
+                onChange={(e) => {setOperatorName(e.target.value)}}
+              />
               {validationStatus === true
                 ? trueCommentArray
                 : validationStatus === false
@@ -170,13 +177,13 @@ const Validation = ({
                   checked={!textareaStatus}
                 />
                 <textarea
-                  className="w-100"
+                  className="form-control w-100"
                   rows={4}
                   value={textareaValue}
                   placeholder={
                     textareaStatus === true && textareaValue.length < 1
-                      ? "Centang checkbox di samping untuk mengaktifkan (opsional))"
-                      : "Tulis detail komentar"
+                      ? "Centang untuk mengaktifkan deskripsi manual"
+                      : "Tulis deskripsi"
                   }
                   disabled={textareaStatus}
                   onChange={(e) => {
@@ -189,9 +196,9 @@ const Validation = ({
               <div className="row w-100 align-items-center">
                 <div className="col px-0">
                   <label>
-                    {validationCommentData.length < 1 &&
+                    {operatorName === "" ? "*tulis nama operator satu/lebih" : validationCommentData.length < 1 &&
                     textareaValue.length < 1
-                      ? "*pilih salah satu opsi atau isi manual"
+                      ? "*pilih dan/atau deskripsikan manual"
                       : ""}
                   </label>
                 </div>
@@ -213,8 +220,8 @@ const Validation = ({
                     type="button"
                     className={
                       "submit-button border-0 rounded-2 px-3 py-1" +
-                      (validationCommentData.length < 1 &&
-                      textareaValue.length < 1
+                      (operatorName === "" || (validationCommentData.length < 1 &&
+                      textareaValue.length < 1)
                         ? " disabled"
                         : "")
                     }
