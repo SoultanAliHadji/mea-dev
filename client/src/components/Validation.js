@@ -24,6 +24,9 @@ const Validation = ({
       data: {
         type_validation: validationStatus,
         comment:
+          "Operator terdeteksi: " +
+          operatorName +
+          ", " +
           validationCommentData.join(", ") +
           (validationCommentData.length > 0 ? ", " : "") +
           (textareaValue.length > 0 ? textareaValue : ""),
@@ -247,6 +250,9 @@ const Validation = ({
                         {
                           cctv_id: currentDeviationData[0].cctv_id,
                           comment:
+                            "Operator terdeteksi: " +
+                            operatorName +
+                            ", " +
                             validationCommentData.join(", ") +
                             (validationCommentData.length > 0 ? ", " : "") +
                             (textareaValue.length > 0 ? textareaValue : ""),
