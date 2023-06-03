@@ -86,6 +86,11 @@ const DataTervalidasi = ({ cctvData, objectData }) => {
       });
   }, [currentDeviationImageRaw]);
 
+  useEffect(() => {
+    setDataLimit(10);
+    setCurrentPage(1);
+  }, [currentCctv, currentObject, date]);
+
   const cctvFilter = cctvData.map((cctv) => {
     return (
       <option key={cctv.id} value={cctv.name + "/" + cctv.location}>
@@ -271,7 +276,7 @@ const DataTervalidasi = ({ cctvData, objectData }) => {
                 <button
                   className={
                     "border-0 rounded-end py-2" +
-                    (dataLimit > deviationData.length ? " disabled" : "")
+                    (dataLimit >= deviationData.length ? " disabled" : "")
                   }
                   onClick={() => {
                     setCurrentPage(currentPage + 1);
