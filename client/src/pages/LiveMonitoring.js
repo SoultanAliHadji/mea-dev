@@ -32,7 +32,7 @@ const LiveMonitoring = ({
     return (
       <div key={info.id} className="cctv-info">
         <h6>{info.name + " - " + info.location}</h6>
-        <label>{"IP" + info.ip}</label>
+        <label>{"IP " + info.ip}</label>
       </div>
     );
   });
