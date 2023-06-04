@@ -8,7 +8,10 @@ const NotFound = () => {
           <div className="d-flex justify-content-center">
             <img src={require("../assets/error.png")} alt="" />
           </div>
-          <h1>Halaman tidak tersedia!</h1>
+          <div className="text-center">
+            <h3>Halaman tidak ditemukan</h3>
+            <label>Sepertinya anda mengakses halaman yang salah. Coba untuk kembali ke halaman sebelumnya atau laporkan error pada tim developer!</label>
+          </div>
         </div>
       </div>
     </div>

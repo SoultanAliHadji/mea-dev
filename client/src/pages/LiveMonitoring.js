@@ -1,5 +1,6 @@
 import "../styles/live_monitoring.css";
 import ReactImageMagnify from "react-magnify-image";
+import { useEffect, useState } from "react";
 
 const LiveMonitoring = ({
   cctvData,
@@ -10,6 +11,27 @@ const LiveMonitoring = ({
   cctvInfoLoading,
   setDeviationDataLimit,
 }) => {
+  const [realTimeCctvLoading, setRealTimeCctvLoading] = useState(false);
+  const [realTimeCctv, setRealTimeCctv] = useState();
+  const [realTimeCctvError, setRealTimeCctvError] = useState(false);
+
+  useEffect(() => {
+    setRealTimeCctvLoading(true);
+    var image = new Image();
+    image.src = "http://10.10.10.66:5002/api/" + "video_feed/" + currentCctvId;
+    image.onload = () => {
+      setRealTimeCctvLoading(false);
+      setRealTimeCctvError(false);
+      setRealTimeCctv(
+        "http://10.10.10.66:5002/api/" + "video_feed/" + currentCctvId
+      );
+    };
+    image.onerror = () => {
+      setRealTimeCctvLoading(false);
+      setRealTimeCctvError(true);
+    };
+  }, [currentCctvId]);
+
   const cctvArray = cctvData.map((cctv) => {
     return (
       <button
@@ -71,28 +93,34 @@ const LiveMonitoring = ({
             </label>
           </div>
           <div className="content d-grid gap-3">
-            <ReactImageMagnify
-              className="live-cctv mw-100 rounded-2"
-              {...{
-                smallImage: {
-                  alt: "",
-                  isFluidWidth: true,
-                  src:
-                    "http://10.10.10.66:5002/api/" +
-                    "video_feed/" +
-                    currentCctvId,
-                },
-                largeImage: {
-                  src:
-                    "http://10.10.10.66:5002/api/" +
-                    "video_feed/" +
-                    currentCctvId,
-                  width: 2000,
-                  height: 1100,
-                },
-                enlargedImagePosition: "over",
-              }}
-            />
+            <div className="live-cctv d-flex justify-content-center align-items-center rounded-2">
+              {realTimeCctvLoading === true ? (
+                <div className="d-flex justify-content-center my-3">
+                  <div className="spinner-border">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              ) : realTimeCctvError === false ? (
+                <ReactImageMagnify
+                  className="mw-100"
+                  {...{
+                    smallImage: {
+                      alt: "live_monitoring",
+                      isFluidWidth: true,
+                      src: realTimeCctv,
+                    },
+                    largeImage: {
+                      src: realTimeCctv,
+                      width: 2000,
+                      height: 1100,
+                    },
+                    enlargedImagePosition: "over",
+                  }}
+                />
+              ) : (
+                <img src={require("../assets/error.png")} alt="" />
+              )}
+            </div>
             {cctvInfoLoading === false ? (
               <div>{cctvInfoArray}</div>
             ) : (
