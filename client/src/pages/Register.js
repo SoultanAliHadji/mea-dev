@@ -18,7 +18,7 @@ const Register = () => {
       setLoginMessage("nama, username, dan password tidak boleh kosong");
     } else {
       axios
-        .post("http://10.10.10.66:5002/api/" + "login", {
+        .post(process.env.REACT_APP_API + "login", {
           username: username,
           password: password,
         })
@@ -39,12 +39,12 @@ const Register = () => {
 
   useEffect(() => {
     if (loginStatus === "success") {
-      if (window.location.hash.includes("login")) {
-        window.location.href = "/mea-dev/#/login";
+      if (window.location.href.includes("login")) {
+        window.location.href = "/login";
       }
       window.location.reload();
     } else if (loginStatus === "failed") {
-      window.location.href = "/mea-dev/#/register/#";
+      window.location.href = "/register/#";
       if (loginStatus.toLocaleLowerCase() === "username salah") {
         setLoginMessage("username salah");
       } else if (loginStatus.toLocaleLowerCase() === "password salah") {
@@ -60,7 +60,8 @@ const Register = () => {
           <img className="mb-5" src={require("../assets/logo.png")} alt="" />
           <h3>Register</h3>
           <p>
-            Silahkan isi beberapa detail di bawah ini untuk registrasi akun baru.
+            Silahkan isi beberapa detail di bawah ini untuk registrasi akun
+            baru.
           </p>
           <form className="my-4 d-grid gap-2">
             <div className="d-grid gap-1">

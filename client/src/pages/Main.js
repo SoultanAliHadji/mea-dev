@@ -10,9 +10,9 @@ import socketIOClient from "socket.io-client";
 
 const Main = () => {
   const [currentPage, setCurrentPage] = useState(
-    window.location.hash.includes("#/validasi-deviasi")
+    window.location.href.includes("validasi-deviasi")
       ? "validasi-deviasi"
-      : window.location.hash.includes("#/data-tervalidasi") &&
+      : window.location.href.includes("data-tervalidasi") &&
         localStorage.getItem("role") === "admin"
       ? "data-tervalidasi"
       : "live-monitoring"
@@ -62,7 +62,7 @@ const Main = () => {
   useEffect(() => {
     setCctvLoading(true);
     axios
-      .get("http://10.10.10.66:5002/api/" + "cctv", {
+      .get(process.env.REACT_APP_API + "cctv", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -80,7 +80,7 @@ const Main = () => {
   useEffect(() => {
     setCctvInfoLoading(true);
     axios
-      .get("http://10.10.10.66:5002/api/" + "cctv/" + currentCctvId, {
+      .get(process.env.REACT_APP_API + "cctv/" + currentCctvId, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -101,7 +101,7 @@ const Main = () => {
       setDeviationDataLoading(true);
       axios
         .get(
-          "http://10.10.10.66:5002/api/" +
+          process.env.REACT_APP_API +
             "viewtable/" +
             currentCctvName +
             "/" +
@@ -238,11 +238,7 @@ const Main = () => {
                   }
                   onClick={() => {
                     setCurrentPage("live-monitoring");
-                    window.history.replaceState(
-                      null,
-                      null,
-                      "/mea-dev/#/live-monitoring"
-                    );
+                    window.history.replaceState(null, null, "/live-monitoring");
                   }}
                 >
                   Live Monitoring
@@ -259,7 +255,7 @@ const Main = () => {
                     window.history.replaceState(
                       null,
                       null,
-                      "/mea-dev/#/validasi-deviasi"
+                      "/validasi-deviasi"
                     );
                   }}
                 >
@@ -283,7 +279,7 @@ const Main = () => {
                     window.history.replaceState(
                       null,
                       null,
-                      "/mea-dev/#/data-tervalidasi"
+                      "/data-tervalidasi"
                     );
                   }}
                 >
@@ -315,7 +311,7 @@ const Main = () => {
                       className="dropdown-item d-flex align-items-center gap-2"
                       onClick={() => {
                         localStorage.clear();
-                        window.location.href = "/mea-dev/#/login";
+                        window.location.href = "/login";
                         window.location.reload();
                       }}
                     >

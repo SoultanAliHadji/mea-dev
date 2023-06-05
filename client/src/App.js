@@ -7,14 +7,13 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  HashRouter,
   Redirect,
 } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <HashRouter>
+      <Router>
         <Switch>
           <Route
             exact
@@ -38,7 +37,7 @@ function App() {
           <Route path="/404" component={NotFound} />
           <Redirect from="*" to="/404" />
         </Switch>
-      </HashRouter>
+      </Router>
     </div>
   );
 }

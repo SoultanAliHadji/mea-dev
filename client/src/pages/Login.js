@@ -17,7 +17,7 @@ const Login = () => {
       setLoginMessage("username dan password tidak boleh kosong");
     } else {
       axios
-        .post("http://10.10.10.66:5002/api/" + "login", {
+        .post(process.env.REACT_APP_API + "login", {
           username: username,
           password: password,
         })
@@ -38,12 +38,12 @@ const Login = () => {
 
   useEffect(() => {
     if (loginStatus === "success") {
-      if (window.location.hash.includes("login")) {
-        window.location.href = "/mea-dev/#/live-monitoring";
+      if (window.location.href.includes("login")) {
+        window.location.href = "/live-monitoring";
       }
       window.location.reload();
     } else if (loginStatus === "failed") {
-      window.location.href = "/mea-dev/#/login/#";
+      window.location.href = "/login/#";
       if (loginStatus.toLocaleLowerCase() === "username salah") {
         setLoginMessage("username salah");
       } else if (loginStatus.toLocaleLowerCase() === "password salah") {

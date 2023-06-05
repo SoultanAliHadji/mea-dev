@@ -24,7 +24,7 @@ const DataTervalidasi = ({ cctvData, objectData }) => {
     setDeviationDataLoading(true);
     axios
       .get(
-        "http://10.10.10.66:5002/api/" +
+        process.env.REACT_APP_API +
           "viewtable/" +
           currentCctv +
           "/" +
@@ -59,7 +59,7 @@ const DataTervalidasi = ({ cctvData, objectData }) => {
     setReactMagnifyImageLoading(true);
     axios
       .get(
-        "http://10.10.10.66:5002/api/" +
+        process.env.REACT_APP_API +
           "assets/outputFolder/cctvOutput/" +
           "2023-03-17 09:18:38.921260_VIEWPOINT.jpg", //currentDeviationImageRaw,
         {

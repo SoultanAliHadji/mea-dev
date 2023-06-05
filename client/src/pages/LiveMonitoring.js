@@ -18,12 +18,12 @@ const LiveMonitoring = ({
   useEffect(() => {
     setRealTimeCctvLoading(true);
     var image = new Image();
-    image.src = "http://10.10.10.66:5002/api/" + "video_feed/" + currentCctvId;
+    image.src = process.env.REACT_APP_API + "video_feed/" + currentCctvId;
     image.onload = () => {
       setRealTimeCctvLoading(false);
       setRealTimeCctvError(false);
       setRealTimeCctv(
-        "http://10.10.10.66:5002/api/" + "video_feed/" + currentCctvId
+        process.env.REACT_APP_API + "video_feed/" + currentCctvId
       );
     };
     image.onerror = () => {

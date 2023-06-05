@@ -18,9 +18,7 @@ const Validation = ({
     axios({
       method: "put",
       url:
-        "http://10.10.10.66:5002/api/" +
-        "deviation/" +
-        currentDeviationData[0].id,
+        process.env.REACT_APP_API + "deviation/" + currentDeviationData[0].id,
       data: {
         type_validation: validationStatus,
         comment:
