@@ -3,41 +3,44 @@ import Main from "./pages/Main";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Switch>
+      <BrowserRouter>
+        <Routes>
           <Route
             exact
             path="/"
-            component={localStorage.getItem("token") !== null ? Main : Login}
+            element={
+              localStorage.getItem("token") !== null ? <Main /> : <Login />
+            }
           />
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route
             path="/live-monitoring"
-            component={localStorage.getItem("token") !== null ? Main : Login}
+            element={
+              localStorage.getItem("token") !== null ? <Main /> : <Login />
+            }
           />
           <Route
             path="/validasi-deviasi"
-            component={localStorage.getItem("token") !== null ? Main : Login}
+            element={
+              localStorage.getItem("token") !== null ? <Main /> : <Login />
+            }
           />
           <Route
             path="/data-tervalidasi"
-            component={localStorage.getItem("token") !== null ? Main : Login}
+            element={
+              localStorage.getItem("token") !== null ? <Main /> : <Login />
+            }
           />
-          <Route path="/404" component={NotFound} />
-          <Redirect from="*" to="/404" />
-        </Switch>
-      </Router>
+          <Route path="/404" element={<NotFound />} />
+          <Route path="*" element={<Navigate to="/404" />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
