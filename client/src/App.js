@@ -37,8 +37,7 @@ function App() {
               localStorage.getItem("token") !== null ? <Main /> : <Login />
             }
           />
-          <Route path="/404" element={<NotFound />} />
-          <Route path="*" element={<Navigate to="/404" />} />
+          <Route path="/" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </div>
