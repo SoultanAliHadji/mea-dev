@@ -156,9 +156,9 @@ const LiveMonitoring = ({
                     className=""
                     src={require("../assets/error.png")}
                     alt=""
-                    onClick={annotationDot}
+                    // onClick={annotationDot}
                   />
-                  {annotationDotArray}
+                  {/* {annotationDotArray} */}
                 </div>
               )}
             </div>
@@ -171,7 +171,7 @@ const LiveMonitoring = ({
                 </div>
               </div>
             )}
-            {annotationArray}
+            {/* {annotationArray}
             <a
               href="#"
               onClick={() => {
@@ -179,7 +179,7 @@ const LiveMonitoring = ({
               }}
             >
               Reset
-            </a>
+            </a> */}
           </div>
         </div>
       </div>
