@@ -1,6 +1,7 @@
 import "../styles/live_monitoring.css";
-import ReactImageMagnify from "react-magnify-image";
 import { useEffect, useState } from "react";
+import ReactImageMagnify from "react-magnify-image";
+
 
 const LiveMonitoring = ({
   cctvData,
