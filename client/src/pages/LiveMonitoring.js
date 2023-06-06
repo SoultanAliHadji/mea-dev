@@ -2,7 +2,6 @@ import "../styles/live_monitoring.css";
 import { useEffect, useState } from "react";
 import ReactImageMagnify from "react-magnify-image";
 
-
 const LiveMonitoring = ({
   cctvData,
   currentCctvId,
@@ -15,6 +14,35 @@ const LiveMonitoring = ({
   const [realTimeCctvLoading, setRealTimeCctvLoading] = useState(false);
   const [realTimeCctv, setRealTimeCctv] = useState();
   const [realTimeCctvError, setRealTimeCctvError] = useState(false);
+  const [annotation, setAnnotation] = useState([]);
+
+  const annotationDot = (e) => {
+    if (annotation.length < 4) {
+      setAnnotation((arr) => [
+        ...arr,
+        { x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY },
+      ]);
+    }
+  };
+
+  const annotationArray = annotation.map((annotation) => {
+    return <div>{annotation.x + ", " + annotation.y}</div>;
+  });
+
+  const annotationDotArray = annotation.map((annotation) => {
+    return (
+      <div
+        className={"position-absolute rounded-5"}
+        style={{
+          width: "8px",
+          height: "8px",
+          backgroundColor: "#DE4452",
+          left: annotation.x - 4 + "px",
+          top: annotation.y - 4 + "px",
+        }}
+      ></div>
+    );
+  });
 
   useEffect(() => {
     setRealTimeCctvLoading(true);
@@ -119,7 +147,15 @@ const LiveMonitoring = ({
                   }}
                 />
               ) : (
-                <img src={require("../assets/error.png")} alt="" />
+                <div className="position-relative">
+                  <img
+                    className=""
+                    src={require("../assets/error.png")}
+                    alt=""
+                    // onClick={annotationDot}
+                  />
+                  {/* {annotationDotArray} */}
+                </div>
               )}
             </div>
             {cctvInfoLoading === false ? (
@@ -131,6 +167,15 @@ const LiveMonitoring = ({
                 </div>
               </div>
             )}
+            {annotationArray}
+            {/* <a
+              href="#"
+              onClick={() => {
+                setAnnotation([]);
+              }}
+            >
+              Reset
+            </a> */}
           </div>
         </div>
       </div>
