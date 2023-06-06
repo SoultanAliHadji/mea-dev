@@ -29,18 +29,22 @@ const LiveMonitoring = ({
     return <div>{annotation.x + ", " + annotation.y}</div>;
   });
 
-  const annotationDotArray = annotation.map((annotation) => {
+  const annotationDotArray = annotation.map((annotation, index) => {
     return (
       <div
-        className={"position-absolute rounded-5"}
+        className="annotation-dot position-absolute rounded-5 d-flex justify-content-center align-items-center"
         style={{
-          width: "8px",
-          height: "8px",
-          backgroundColor: "#DE4452",
-          left: annotation.x - 4 + "px",
-          top: annotation.y - 4 + "px",
+          width: "16px",
+          height: "16px",
+          fontSize: "12px",
+          color: "white",
+          backgroundColor: "red",
+          left: annotation.x - 8 + "px",
+          top: annotation.y - 8 + "px",
         }}
-      ></div>
+      >
+        <label>{index + 1}</label>
+      </div>
     );
   });
 
@@ -152,9 +156,9 @@ const LiveMonitoring = ({
                     className=""
                     src={require("../assets/error.png")}
                     alt=""
-                    // onClick={annotationDot}
+                    onClick={annotationDot}
                   />
-                  {/* {annotationDotArray} */}
+                  {annotationDotArray}
                 </div>
               )}
             </div>
@@ -168,14 +172,14 @@ const LiveMonitoring = ({
               </div>
             )}
             {annotationArray}
-            {/* <a
+            <a
               href="#"
               onClick={() => {
                 setAnnotation([]);
               }}
             >
               Reset
-            </a> */}
+            </a>
           </div>
         </div>
       </div>
