@@ -135,7 +135,7 @@ const Notification = ({
               window.history.replaceState(null, null, "/validasi-deviasi");
             }}
           >
-            Lihat Semua
+            Validasi
           </button>
         </div>
       )}
