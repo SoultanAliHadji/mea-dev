@@ -183,10 +183,7 @@ const LiveMonitoring = ({
             </label>
           </div>
           <div className="content d-grid">
-            <div
-              className="live-cctv d-flex justify-content-center align-items-center rounded-top"
-              id="realtime-cctv"
-            >
+            <div className="live-cctv d-flex justify-content-center align-items-center rounded-top">
               {realTimeCctvLoading === true ? (
                 <div className="d-flex justify-content-center my-3">
                   <div className="spinner-border">
@@ -277,6 +274,11 @@ const LiveMonitoring = ({
               Reset
             </a> */}
           </div>
+        </div>
+      </div>
+      <div className="visually-hidden">
+        <div id="realtime-cctv">
+          <img className="w-100" src={realTimeCctv} alt="" />
         </div>
       </div>
       <div className="visually-hidden">
