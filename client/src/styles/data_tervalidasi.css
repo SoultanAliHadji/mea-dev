@@ -15,6 +15,7 @@
 
         & .form-select {
             cursor: pointer;
+
             &:hover {
                 color: #297209;
             }
@@ -62,17 +63,6 @@
                         background-image: linear-gradient(to right, #297209, #297209);
                     }
                 }
-            }
-        }
-
-        & .export-button {
-            font-size: 14px;
-            font-weight: 500;
-            background-image: linear-gradient(to right, #3B9315, #297209);
-            color: white;
-
-            &:hover {
-                background-image: linear-gradient(to right, #297209, #297209);
             }
         }
     }

@@ -1,5 +1,7 @@
 import "../styles/live_monitoring.css";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import { Icon } from "@iconify/react";
 import ReactImageMagnify from "react-magnify-image";
 
 const LiveMonitoring = ({
@@ -65,6 +67,29 @@ const LiveMonitoring = ({
     };
   }, [currentCctvId]);
 
+  const controlHandler = (act) => {
+    axios({
+      method: "post",
+      url: process.env.REACT_APP_API + "control-cctv/" + currentCctvId,
+      data: {
+        control: act,
+      },
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    })
+      .then((data) => {
+        console.log(data.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const fullscreenHandler = () => {
+    document.getElementById("realtime-cctv")?.requestFullscreen();
+  };
+
   const cctvArray = cctvData.map((cctv) => {
     return (
       <button
@@ -125,8 +150,8 @@ const LiveMonitoring = ({
               Mining Eyes
             </label>
           </div>
-          <div className="content d-grid gap-3">
-            <div className="live-cctv d-flex justify-content-center align-items-center rounded-2">
+          <div className="content d-grid">
+            <div className="live-cctv d-flex justify-content-center align-items-center rounded-top" id="realtime-cctv">
               {realTimeCctvLoading === true ? (
                 <div className="d-flex justify-content-center my-3">
                   <div className="spinner-border">
@@ -161,6 +186,37 @@ const LiveMonitoring = ({
                   {/* {annotationDotArray} */}
                 </div>
               )}
+            </div>
+            <div className="cam-navigation d-flex justify-content-end gap-1 mb-3">
+              <button
+                className="border-0"
+                onClick={() => {
+                  controlHandler("reload");
+                }}
+              >
+                <Icon icon="charm:refresh" />
+              </button>
+              <button className="border-0">
+                <Icon icon="akar-icons:chevron-left" />
+              </button>
+              <button className="border-0">
+                <Icon icon="akar-icons:chevron-right" />
+              </button>
+              <button className="border-0">
+                <Icon icon="akar-icons:chevron-up" />
+              </button>
+              <button className="border-0">
+                <Icon icon="akar-icons:chevron-down" />
+              </button>
+              <button className="border-0">
+                <Icon icon="bx:zoom-in" />
+              </button>
+              <button className="border-0">
+                <Icon icon="bx:zoom-out" />
+              </button>
+              <button className="border-0" onClick={fullscreenHandler}>
+                <Icon icon="ic:outline-zoom-out-map" />
+              </button>
             </div>
             {cctvInfoLoading === false ? (
               <div>{cctvInfoArray}</div>

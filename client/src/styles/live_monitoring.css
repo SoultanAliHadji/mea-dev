@@ -5,23 +5,23 @@
             box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
             padding: 8px 16px;
             border-radius: 8px 8px 0 0;
-    
+
             & h6 {
                 margin: 0px;
             }
-    
+
             & label {
                 font-size: 12px;
                 color: #737373;
             }
         }
-    
+
         .content {
             background-color: white;
             box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
             padding: 12px 24px;
             border-radius: 0 0 8px 8px;
-    
+
             & .cctv-list {
                 & button {
                     background-color: white;
@@ -29,7 +29,7 @@
                     font-size: 12px;
                     font-weight: 500;
                     box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.2);
-    
+
                     &:hover {
                         background-color: #DFF4DF;
                         color: #297209;
@@ -40,20 +40,20 @@
                         color: white;
                     }
                 }
-    
+
                 & .active {
                     background-image: linear-gradient(to right, #3B9315, #297209);
                     color: white;
                     pointer-events: none;
                 }
             }
-    
+
             & .view-all-cctv button {
                 font-size: 12px;
                 font-weight: 500;
                 background-image: linear-gradient(to right, #3B9315, #297209);
                 color: white;
-    
+
                 &:hover {
                     background-image: linear-gradient(to right, #297209, #297209);
                 }
@@ -62,6 +62,21 @@
             & .live-cctv {
                 min-height: 300px;
                 border: 3px solid #297209;
+            }
+
+            & .cam-navigation {
+                background-color: white;
+                box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
+                padding: 4px 8px;
+
+                & button {
+                    background-color: white;
+                    color: #737373;
+
+                    &:hover {
+                        color: #297209;
+                    }
+                }
             }
 
             & .spinner-border {

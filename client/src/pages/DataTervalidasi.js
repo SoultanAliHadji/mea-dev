@@ -1,6 +1,7 @@
 import "../styles/data_tervalidasi.css";
 import "../styles/calendar.css";
 import DataTable from "../components/DataTable";
+import DataExport from "../components/DataExport";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Icon } from "@iconify/react";
@@ -171,7 +172,21 @@ const DataTervalidasi = ({ cctvData, objectData }) => {
                 data-bs-target="#periodModal"
               >
                 <label>
-                  {date[0].toDateString() + " - " + date[1].toDateString()}
+                  {(date[0].getDate() < 10 ? "0" : "") +
+                    date[0].getDate() +
+                    "/" +
+                    (date[0].getMonth() + 1 < 10 ? "0" : "") +
+                    (date[0].getMonth() + 1) +
+                    "/" +
+                    date[0].getFullYear() +
+                    " - " +
+                    (date[1].getDate() < 10 ? "0" : "") +
+                    date[1].getDate() +
+                    "/" +
+                    (date[1].getMonth() + 1 < 10 ? "0" : "") +
+                    (date[1].getMonth() + 1) +
+                    "/" +
+                    date[1].getFullYear()}
                 </label>
               </button>
             </div>
@@ -240,10 +255,7 @@ const DataTervalidasi = ({ cctvData, objectData }) => {
             </div>
           </div>
           <div className="col-xl d-xl-flex justify-content-end align-items-end">
-            <button className="export-button border-0 rounded-2 px-3 py-2 d-flex align-items-center gap-1">
-              <Icon className="fs-5" icon="entypo:export" /> <label></label>
-              Export
-            </button>
+            <DataExport date={date} deviationData={deviationData} />
           </div>
         </div>
       </div>
