@@ -86,8 +86,12 @@ const LiveMonitoring = ({
       });
   };
 
-  const fullscreenHandler = () => {
-    document.getElementById("realtime-cctv")?.requestFullscreen();
+  const fullscreenHandler = (event) => {
+    if (event === "realtime-cctv") {
+      document.getElementById(event)?.requestFullscreen();
+    } else {
+      document.getElementById(event)?.requestFullscreen();
+    }
   };
 
   const cctvArray = cctvData.map((cctv) => {
@@ -117,6 +121,29 @@ const LiveMonitoring = ({
     );
   });
 
+  const allCctvArray = cctvData.map((cctv) => {
+    return (
+      <div className="col-6 m-0 p-0">
+        <ReactImageMagnify
+          className="w-100"
+          {...{
+            smallImage: {
+              alt: "live_monitoring",
+              isFluidWidth: true,
+              src: process.env.REACT_APP_API + "video_feed/" + cctv.id,
+            },
+            largeImage: {
+              src: process.env.REACT_APP_API + "video_feed/" + cctv.id,
+              width: 2000,
+              height: 1100,
+            },
+            enlargedImagePosition: "over",
+          }}
+        />
+      </div>
+    );
+  });
+
   return (
     <div className="live-monitoring">
       <div className="row">
@@ -136,7 +163,12 @@ const LiveMonitoring = ({
               </div>
             )}
             <div className="view-all-cctv d-grid mt-4">
-              <button className="border-0 rounded-2 px-3 py-2">
+              <button
+                className="border-0 rounded-2 px-3 py-2"
+                onClick={() => {
+                  fullscreenHandler("all-cctv");
+                }}
+              >
                 Lihat Semua CCTV
               </button>
             </div>
@@ -151,7 +183,10 @@ const LiveMonitoring = ({
             </label>
           </div>
           <div className="content d-grid">
-            <div className="live-cctv d-flex justify-content-center align-items-center rounded-top" id="realtime-cctv">
+            <div
+              className="live-cctv d-flex justify-content-center align-items-center rounded-top"
+              id="realtime-cctv"
+            >
               {realTimeCctvLoading === true ? (
                 <div className="d-flex justify-content-center my-3">
                   <div className="spinner-border">
@@ -214,7 +249,12 @@ const LiveMonitoring = ({
               <button className="border-0">
                 <Icon icon="bx:zoom-out" />
               </button>
-              <button className="border-0" onClick={fullscreenHandler}>
+              <button
+                className="border-0"
+                onClick={() => {
+                  fullscreenHandler("realtime-cctv");
+                }}
+              >
                 <Icon icon="ic:outline-zoom-out-map" />
               </button>
             </div>
@@ -237,6 +277,11 @@ const LiveMonitoring = ({
               Reset
             </a> */}
           </div>
+        </div>
+      </div>
+      <div className="visually-hidden">
+        <div className="row overflow-auto" id="all-cctv">
+          {allCctvArray}
         </div>
       </div>
     </div>
