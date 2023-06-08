@@ -10,3 +10,15 @@
         width: 40vw;
     }
 }
+
+@media only screen and (max-width: 1230px) {
+    .not-found {
+        & h3 {
+            font-size: 22px;
+        }
+    
+        & label {
+            font-size: 13px;
+        }
+    }
+}

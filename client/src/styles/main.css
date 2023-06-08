@@ -19,8 +19,14 @@
     & .nav-item {
         font-weight: 500;
 
-        & .nav-link:hover {
-            color: #297209 !important;
+        & .nav-link {
+            & .icon {
+                font-size: 24px;
+            }
+
+            &:hover {
+                color: #297209 !important;
+            }
         }
 
         & .active {
@@ -68,6 +74,7 @@
         }
 
         & .notif-sound {
+            font-size: 20px;
             color: #3B9315;
 
             &:hover {
@@ -76,44 +83,46 @@
             }
         }
 
-        & button {
-            font-weight: 500;
-            border: 1px solid #297209;
-            color: #297209;
-
-            &:hover {
-                background-color: #DFF4DF !important;
-            }
-        }
-
-        & .dropdown-title {
-            font-size: 14px;
-            pointer-events: none;
-        }
-
-        & .dropdown-item {
-            font-size: 12px;
-            font-weight: 500;
-            color: #737373;
-
-            &:hover {
-                background-color: #DFF4DF;
+        & .dropdown {
+            & button {
+                font-weight: 500;
+                border: 1px solid #297209;
                 color: #297209;
+
+                &:hover {
+                    background-color: #DFF4DF !important;
+                }
             }
 
-            &:focus {
-                color: #297209;
+            & .dropdown-title {
+                font-size: 14px;
+                pointer-events: none;
             }
 
-            & label {
-                cursor: pointer;
-            }
-        }
+            & .dropdown-item {
+                font-size: 12px;
+                font-weight: 500;
+                color: #737373;
 
-        & .active {
-            background-image: linear-gradient(to right, #3B9315, #297209);
-            color: white;
-            pointer-events: none;
+                &:hover {
+                    background-color: #DFF4DF;
+                    color: #297209;
+                }
+
+                &:focus {
+                    color: #297209;
+                }
+
+                & label {
+                    cursor: pointer;
+                }
+            }
+
+            & .active {
+                background-image: linear-gradient(to right, #3B9315, #297209);
+                color: white;
+                pointer-events: none;
+            }
         }
     }
 
@@ -122,5 +131,63 @@
         box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
         padding: 12px 24px;
         border-radius: 0 0 8px 8px;
+    }
+}
+
+@media only screen and (max-width: 1230px) {
+    .navbar {
+        & .navbar-brand img {
+            max-height: 24px;
+        }
+
+        & .nav-item {
+
+            & .nav-link {
+                font-size: 13px;
+
+                & .icon {
+                    font-size: 20px;
+                }
+            }
+
+            & .active {
+                text-decoration-thickness: 2.5px;
+                text-underline-offset: 8px;
+            }
+        }
+
+        & .dropdown .dropdown-menu {
+            font-size: 13px;
+        }
+    }
+
+    .col-xl-3 {
+        .title {
+            & h6 {
+                font-size: 13px;
+            }
+
+            & label {
+                font-size: 10px;
+            }
+
+            & .notif-sound {
+                font-size: 16px;
+            }
+
+            & .dropdown {
+                & button {
+                    font-size: 12px;
+                }
+
+                & .dropdown-title {
+                    font-size: 12px;
+                }
+
+                & .dropdown-item {
+                    font-size: 11px;
+                }
+            }
+        }
     }
 }

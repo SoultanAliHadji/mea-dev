@@ -46,8 +46,51 @@
         }
 
         & .modal-dialog {
-            & .spinner-border {
-                color: #3B9315;
+            & .modal-header {
+                & h1 {
+                    font-size: 20px;
+                }
+            }
+
+            & .modal-body {
+                & .spinner-border {
+                    color: #3B9315;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1230px) {
+    .data-table {
+        max-height: 47.3vh !important;
+
+        & table {
+            font-size: 11px;
+
+            & .table-header {
+                background-color: #3B9315;
+                color: white;
+            }
+
+            & img {
+                width: 100px;
+            }
+
+            & .detail-button {
+                font-size: 11px;
+            }
+
+            & .status-none, .status-true, .status-false {
+                font-size: 11px;
+            }
+
+            & .modal-dialog {
+                & .modal-header {
+                    & h1 {
+                        font-size: 16px;
+                    }
+                }
             }
         }
     }

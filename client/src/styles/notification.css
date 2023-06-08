@@ -25,7 +25,15 @@
         }
     }
 
-    & .deviation-list {
+    & .live-monitoring-notification-list {
+        max-height: 52.8vh
+    }
+
+    & .validasi-deviasi-notification-list {
+        max-height: 60.3vh
+    }
+
+    & .live-monitoring-notification-list, .validasi-deviasi-notification-list {
         & button {
             background-color: white;
             color: #737373;
@@ -45,6 +53,10 @@
 
             & label {
                 cursor: pointer;
+            }
+
+            & .icon {
+                font-size: 20px;
             }
 
             & .status-none {
@@ -97,5 +109,39 @@
         &:hover {
             background-image: linear-gradient(to right, #297209, #297209);
         }
+    }
+}
+
+@media only screen and (max-width: 1230px) {
+    & .notification-filter {
+        & button {
+            font-size: 10px !important;
+        }
+    }
+
+    & .live-monitoring-notification-list {
+        max-height: 50.2vh !important;
+    }
+
+    & .validasi-deviasi-notification-list {
+        max-height: 59.1vh !important;
+    }
+
+    & .live-monitoring-notification-list, .validasi-deviasi-notification-list {
+        & button {
+            font-size: 8px !important;
+
+            & .icon {
+                font-size: 16px !important;
+            }
+        }
+
+        & .load-more-button {
+            font-size: 13px;
+        }
+    }
+
+    & .validation-button button {
+        font-size: 10px !important;
     }
 }

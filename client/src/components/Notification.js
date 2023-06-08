@@ -78,11 +78,11 @@ const Notification = ({
             </div>
           </div>
           <div className="d-flex align-items-end gap-2">
-            <Icon className="fs-5" icon="mdi:cctv" />
+            <Icon className="icon" icon="mdi:cctv" />
             <label>{deviation.name + " - " + deviation.location}</label>
           </div>
           <div className="d-flex align-items-end gap-2">
-            <Icon className="fs-5" icon="akar-icons:clock" />
+            <Icon className="icon" icon="akar-icons:clock" />
             <label>{deviation.created_at}</label>
           </div>
         </button>
@@ -97,11 +97,8 @@ const Notification = ({
       <hr />
       {deviationDataLoading === false ? (
         <div
-          className="deviation-list d-grid gap-2 overflow-auto"
-          style={
-            currentPage !== "live-monitoring"
-              ? { maxHeight: "60.3vh" }
-              : { maxHeight: "52.8vh" }
+          className={
+            "d-grid gap-2 overflow-auto" + (currentPage === "live-monitoring" ? " live-monitoring-notification-list" : " validasi-deviasi-notification-list")
           }
         >
           {deviationArray}

@@ -55,5 +55,66 @@
             }
         }
     }
+}
 
+@media only screen and (max-width: 1230px) {
+    .validasi-deviasi {
+        .title {
+            & h6 {
+                font-size: 13px;
+            }
+
+            & label {
+                font-size: 10px;
+            }
+        }
+
+        .content {
+            & .not-yet-deviation {
+                font-size: 13px;
+            }
+
+            & .deviation-img {
+                width: 65% !important;
+                border: 2.5px solid #297209;
+            }
+
+            & .spinner-border {
+                color: #3B9315;
+            }
+
+            & .deviation-data {
+                font-size: 13px;
+
+                & h6 {
+                    font-size: 13px;
+                }
+
+                & .icon {
+                    font-size: 16px;
+                }
+
+                & .status-none {
+                    font-weight: 500;
+                    background-color: #F0F3FF;
+                    border: 2px solid #B1C5F6;
+                    color: #1573FD;
+                }
+
+                & .status-true {
+                    font-weight: 500;
+                    background-color: #D2F1DD;
+                    border: 2px solid #8EDCA9;
+                    color: #1F8A58;
+                }
+
+                & .status-false {
+                    font-weight: 500;
+                    background-color: #F9D1CC;
+                    border: 2px solid #F08C80;
+                    color: #DE4452;
+                }
+            }
+        }
+    }
 }

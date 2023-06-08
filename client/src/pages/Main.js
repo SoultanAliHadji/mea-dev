@@ -292,7 +292,7 @@ const Main = () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  <Icon className="fs-4" icon="bi:person-circle" />
+                  <Icon className="icon" icon="bi:person-circle" />
                 </button>
                 <ul className="dropdown-menu dropdown-menu-end mt-2">
                   <li>
@@ -361,7 +361,7 @@ const Main = () => {
                   <div className="col d-flex justify-content-end gap-3">
                     <div>
                       <Icon
-                        className="notif-sound fs-5"
+                        className="notif-sound"
                         icon={
                           notificationSound === true
                             ? "teenyicons:sound-on-solid"
@@ -381,7 +381,6 @@ const Main = () => {
                           aria-expanded="false"
                         >
                           <Icon
-                            className="fs-5"
                             icon="material-symbols:filter-list"
                           />
                         </button>

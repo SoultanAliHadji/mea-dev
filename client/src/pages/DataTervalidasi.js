@@ -200,7 +200,7 @@ const DataTervalidasi = ({ cctvData, objectData }) => {
               <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
                   <div className="modal-header">
-                    <h1 className="modal-title fs-5" id="periodModalLabel">
+                    <h1 className="modal-title" id="periodModalLabel">
                       Pilih Periode
                     </h1>
                     <button

@@ -84,3 +84,52 @@
         }
     }
 }
+
+@media only screen and (max-width: 1230px) {
+    .live-monitoring {
+        & .col-xl, .col-xl-4 {
+            .title {
+                & h6 {
+                    font-size: 13px;
+                }
+
+                & label {
+                    font-size: 10px;
+                }
+            }
+
+            .content {
+                & .cctv-list {
+                    & button {
+                        font-size: 10px;
+                    }
+                }
+
+                & .view-all-cctv button {
+                    font-size: 10px;
+                }
+
+                & .cam-navigation {
+                    & button {
+                        background-color: white;
+                        color: #737373;
+
+                        &:hover {
+                            color: #297209;
+                        }
+                    }
+                }
+
+                & .cctv-info {
+                    & h6, label {
+                        font-size: 13px;
+                    }
+                }
+
+                & .spinner-border {
+                    color: #3B9315;
+                }
+            }
+        }
+    }
+}

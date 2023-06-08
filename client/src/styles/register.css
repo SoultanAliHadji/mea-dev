@@ -42,3 +42,41 @@
 
     }
 }
+
+@media only screen and (max-width: 1230px) {
+    .register {
+        & .form-container {
+            max-width: 34vw;
+            min-height: 65.5vh;
+
+            & img {
+                width: 60%;
+            }
+
+            & h3 {
+                font-size: 22px;
+            }
+
+            & p {
+                font-size: 13px;
+            }
+
+            & label {
+                font-size: 13px;
+            }
+
+            & input {
+                font-size: 13px;
+            }
+
+            & .password-visibility {
+                font-size: 16px;
+            }
+
+            & button {
+                font-size: 13px;
+            }
+
+        }
+    }
+}

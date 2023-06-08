@@ -52,7 +52,7 @@ const DataExport = ({ date, deviationData }) => {
       className="export-button border-0 rounded-2 px-3 py-2 d-flex align-items-center gap-1"
       onClick={exportHandler}
     >
-      <Icon className="fs-5" icon="entypo:export" /> <label></label>
+      <Icon className="icon" icon="entypo:export" /> <label></label>
       Export
     </button>
   );

@@ -89,22 +89,22 @@ const ValidasiDeviasi = ({
         <div className="row">
           <div className="col-4 d-grid gap-2">
             <div className="d-flex gap-2">
-              <Icon className="fs-5" icon="mdi:cctv" />
+              <Icon className="icon" icon="mdi:cctv" />
               <label>{deviation.name + " - " + deviation.location}</label>
             </div>
             <div className="d-flex gap-2">
-              <Icon className="fs-5" icon="akar-icons:clock" />
+              <Icon className="icon" icon="akar-icons:clock" />
               <label>{deviation.created_at}</label>
             </div>
           </div>
           {deviation.type_validation !== "not_yet" ? (
             <div className="col-4 d-grid gap-2">
               <div className="d-flex gap-2">
-                <Icon className="fs-5" icon="fa6-solid:helmet-safety" />
+                <Icon className="icon" icon="fa6-solid:helmet-safety" />
                 <label>{deviation.user_name}</label>
               </div>
               <div className="d-flex gap-2">
-                <Icon className="fs-5" icon="codicon:note" />
+                <Icon className="icon" icon="codicon:note" />
                 <label>
                   {deviation.comment.substring(0, 35) +
                     (deviation.comment.length > 36 ? "..." : "")}
@@ -155,13 +155,15 @@ const ValidasiDeviasi = ({
                   </div>
                 </div>
               )}
+              <div className="mt-3">{currentDeviationArray}</div>
             </div>
           ) : (
             <div className="d-flex justify-content-center">
-              <label>Pilih deviasi pada List Deviasi</label>
+              <label className="not-yet-deviation">
+                Pilih deviasi pada List Deviasi
+              </label>
             </div>
           )}
-          <div className="mt-3">{currentDeviationArray}</div>
         </div>
       </div>
     </div>

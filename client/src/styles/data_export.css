@@ -7,4 +7,18 @@
     &:hover {
         background-image: linear-gradient(to right, #297209, #297209);
     }
+
+    & .icon {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width: 1230px) {
+    .export-button {
+        font-size: 11px;
+
+        & .icon {
+            font-size: 16px;
+        }
+    }
 }

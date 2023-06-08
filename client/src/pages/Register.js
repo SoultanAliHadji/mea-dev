@@ -101,7 +101,7 @@ const Register = () => {
                   }}
                 />
                 <Icon
-                  className="password-visibility fs-5"
+                  className="password-visibility"
                   icon={
                     passwordVisibility === false
                       ? "clarity:eye-line"
