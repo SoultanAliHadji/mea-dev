@@ -208,27 +208,87 @@ const LiveMonitoring = ({
                   }}
                 />
               ) : (
-                <div className="position-relative">
-                  <img
-                    className=""
-                    src={require("../assets/error.png")}
-                    alt=""
-                    // onClick={annotationDot}
-                  />
-                  {/* {annotationDotArray} */}
-                </div>
+                <img className="" src={require("../assets/error.png")} alt="" />
               )}
             </div>
-            <div className="cam-navigation d-flex justify-content-end gap-1 mb-3">
-              <button
-                className="border-0"
-                onClick={() => {
-                  controlHandler("reload");
-                }}
-              >
-                <Icon icon="charm:refresh" />
-              </button>
-              <button className="border-0">
+            <div className="cam-navigation row mb-3 m-0 p-0 align-items-center">
+              <div className="col">
+                <button
+                  className="border-0 d-flex align-items-center gap-1"
+                  type="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#perimeterModal"
+                >
+                  <Icon icon="uil:setting" />
+                  <label>Perimeter</label>
+                </button>
+                <div
+                  class="modal fade"
+                  id="perimeterModal"
+                  tabindex="-1"
+                  aria-labelledby="exampleModalLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">
+                          Atur Perimeter Area
+                        </h1>
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <div class="modal-body">
+                        <div className="position-relative">
+                          <img
+                            src={realTimeCctv}
+                            alt=""
+                            onClick={annotationDot}
+                          />
+                          {annotationDotArray}
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <div className="row w-100 d-flex align-items-center">
+                          <div className="col p-0">
+                            <button
+                              className="border-0"
+                              onClick={() => {
+                                setAnnotation([]);
+                              }}
+                            >
+                              Reset anotasi
+                            </button>
+                          </div>
+                          <div className="col d-flex justify-content-end p-0">
+                            <button
+                              type="button"
+                              className="submit-button border-0 rounded-2 px-3 py-1"
+                              data-bs-dismiss="modal"
+                            >
+                              Simpan
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col d-flex justify-content-end gap-1">
+                <button
+                  className="border-0"
+                  onClick={() => {
+                    controlHandler("reload");
+                  }}
+                >
+                  <Icon icon="charm:refresh" />
+                </button>
+                {/* <button className="border-0">
                 <Icon icon="akar-icons:chevron-left" />
               </button>
               <button className="border-0">
@@ -245,15 +305,16 @@ const LiveMonitoring = ({
               </button>
               <button className="border-0">
                 <Icon icon="bx:zoom-out" />
-              </button>
-              <button
-                className="border-0"
-                onClick={() => {
-                  fullscreenHandler("realtime-cctv");
-                }}
-              >
-                <Icon icon="ic:outline-zoom-out-map" />
-              </button>
+              </button> */}
+                <button
+                  className="border-0"
+                  onClick={() => {
+                    fullscreenHandler("realtime-cctv");
+                  }}
+                >
+                  <Icon icon="ic:outline-zoom-out-map" />
+                </button>
+              </div>
             </div>
             {cctvInfoLoading === false ? (
               <div>{cctvInfoArray}</div>
@@ -264,15 +325,6 @@ const LiveMonitoring = ({
                 </div>
               </div>
             )}
-            {/* {annotationArray}
-            <a
-              href="#"
-              onClick={() => {
-                setAnnotation([]);
-              }}
-            >
-              Reset
-            </a> */}
           </div>
         </div>
       </div>
