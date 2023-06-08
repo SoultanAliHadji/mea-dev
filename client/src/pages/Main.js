@@ -213,6 +213,7 @@ const Main = () => {
             className="navbar-brand d-flex align-items-center"
             onClick={() => {
               setCurrentPage("live-monitoring");
+              window.history.replaceState(null, null, "/live-monitoring");
             }}
           >
             <img src={require("../assets/logo.png")} alt="logo" />
