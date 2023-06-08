@@ -274,7 +274,7 @@ const Validation = ({
                       ]);
                     }}
                   >
-                    Kirim
+                    Validasi
                   </button>
                 </div>
               </div>

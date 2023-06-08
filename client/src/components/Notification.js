@@ -112,7 +112,7 @@ const Notification = ({
                 setDeviationDataLimit(deviationDataLimit + 10);
               }}
             >
-              Load More
+              Tampilkan Lebih
             </a>
           </div>
         </div>
@@ -135,7 +135,7 @@ const Notification = ({
               window.history.replaceState(null, null, "/validasi-deviasi");
             }}
           >
-            Detail Notifikasi
+            Detail Deviasi
           </button>
         </div>
       )}
