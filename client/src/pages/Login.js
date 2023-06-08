@@ -40,8 +40,9 @@ const Login = () => {
     if (loginStatus === "success") {
       if (window.location.href.includes("login")) {
         window.location.href = "/live-monitoring";
+      } else {
+        window.location.reload();
       }
-      window.location.reload();
     } else if (loginStatus === "failed") {
       window.location.href = "/login/#";
       if (loginStatus.toLocaleLowerCase() === "username salah") {
@@ -113,7 +114,7 @@ const Login = () => {
               {loginMessage !== "" ? "*" + loginMessage : ""}
             </label>
           </div>
-          <div className="col-6 d-flex justify-content-center align-items-center">
+          <div className="col-6 d-flex justify-content-center align-items-center d-none d-xl-inline">
             <div
               id="carouselExampleDark"
               className="carousel slide"
