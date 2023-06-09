@@ -224,7 +224,7 @@ const LiveMonitoring = ({
                   data-bs-target="#perimeterModal"
                 >
                   <Icon icon="uil:setting" />
-                  <label>Perimeter</label>
+                  <label>Perimeter Area</label>
                 </button>
                 <div
                   class="modal fade"
