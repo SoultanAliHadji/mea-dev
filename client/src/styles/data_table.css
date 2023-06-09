@@ -45,6 +45,22 @@
             color: #DE4452;
         }
 
+        & .deviation-navigation {
+            & button {
+                background-color: white;
+                color: #737373;
+                font-size: 24px;
+
+                &:hover {
+                    color: #297209;
+                }
+            }
+
+            & .disabled {
+                visibility: hidden;
+            }
+        }
+
         & .modal-dialog {
             & .modal-header {
                 & h1 {
@@ -83,6 +99,12 @@
 
             & .status-none, .status-true, .status-false {
                 font-size: 11px;
+            }
+
+            & .deviation-navigation {
+                & button {
+                    font-size: 20px;
+                }
             }
 
             & .modal-dialog {

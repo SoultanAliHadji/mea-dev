@@ -1,4 +1,5 @@
 import "../styles/data_table.css";
+import { useState } from "react";
 import ReactImageMagnify from "react-magnify-image";
 import { Icon } from "@iconify/react";
 
@@ -10,9 +11,12 @@ const DataTable = ({
   currentDeviationImageBlob,
   reactMagnifyImageLoading,
 }) => {
+  const [currentindex, setCurrentIndex] = useState(0);
+  const [currentDeviationDetail, setCurrentDeviationDetail] = useState({});
+
   const deviationArray = deviationData
     .slice(dataLimit - 10, dataLimit)
-    .map((deviation) => {
+    .map((deviation, index) => {
       return (
         <tr className="align-middle" key={deviation.id}>
           <th className="text-center" scope="row">
@@ -66,6 +70,8 @@ const DataTable = ({
                 data-bs-toggle="modal"
                 data-bs-target={"#deviationModal" + deviation.id}
                 onClick={() => {
+                  setCurrentIndex(index);
+                  setCurrentDeviationDetail(deviation);
                   setCurrentDeviationImageRaw(deviation.image);
                 }}
               >
@@ -83,7 +89,7 @@ const DataTable = ({
                 <div className="modal-content">
                   <div className="modal-header">
                     <h1 className="modal-title" id="periodModalLabel">
-                      {"ID: " + deviation.id}
+                      {"ID: " + currentDeviationDetail.id}
                     </h1>
                     <button
                       type="button"
@@ -116,39 +122,89 @@ const DataTable = ({
                         </div>
                       </div>
                     )}
-                    <div>
-                      <label
-                        className={
-                          "px-2 rounded-2 mt-2" +
-                          (deviation.type_validation === "not_yet"
-                            ? " status-none"
-                            : deviation.type_validation === "true"
-                            ? " status-true"
-                            : " status-false")
-                        }
-                      >
-                        {deviation.type_validation === "not_yet"
-                          ? "Perlu Validasi"
-                          : deviation.type_validation === "true"
-                          ? "Valid"
-                          : "Tidak Valid"}
-                      </label>
+                    <div className="row">
+                      <div className="col">
+                        <label
+                          className={
+                            "px-2 rounded-2 mt-2" +
+                            (currentDeviationDetail.type_validation ===
+                            "not_yet"
+                              ? " status-none"
+                              : currentDeviationDetail.type_validation ===
+                                "true"
+                              ? " status-true"
+                              : " status-false")
+                          }
+                        >
+                          {currentDeviationDetail.type_validation === "not_yet"
+                            ? "Perlu Validasi"
+                            : currentDeviationDetail.type_validation === "true"
+                            ? "Valid"
+                            : "Tidak Valid"}
+                        </label>
+                      </div>
+                      <div className="col p-0">
+                        <div className="deviation-navigation d-flex justify-content-end gap-2">
+                          <button
+                            className={
+                              "border-0" +
+                              (currentindex === 0 ? " disabled" : "")
+                            }
+                            onClick={() => {
+                              setCurrentIndex(currentindex - 1);
+                              setCurrentDeviationDetail(
+                                deviationData[currentindex - 1]
+                              );
+                              setCurrentDeviationImageRaw(
+                                deviationData[currentindex - 1].image
+                              );
+                            }}
+                          >
+                            <Icon
+                              className="icon"
+                              icon="akar-icons:chevron-left"
+                            />
+                          </button>
+                          <button
+                            className={
+                              "border-0" +
+                              (currentindex === deviationData.length - 1
+                                ? " disabled"
+                                : "")
+                            }
+                            onClick={() => {
+                              setCurrentIndex(currentindex + 1);
+                              setCurrentDeviationDetail(
+                                deviationData[currentindex + 1]
+                              );
+                              setCurrentDeviationImageRaw(
+                                deviationData[currentindex + 1].image
+                              );
+                            }}
+                          >
+                            <Icon
+                              className="icon"
+                              icon="akar-icons:chevron-right"
+                            />
+                          </button>
+                        </div>
+                      </div>
                     </div>
                     <div>
                       <div className="d-flex gap-1">
                         <label className="fw-bolder">Pengawas:</label>
-                        {deviation.user_name === null ? (
+                        {currentDeviationDetail.user_name === null ? (
                           "-"
                         ) : (
-                          <label>{deviation.user_name}</label>
+                          <label>{currentDeviationDetail.user_name}</label>
                         )}
                       </div>
                       <div className="d-flex gap-1">
                         <label className="fw-bolder">Deskripsi:</label>
-                        {deviation.comment === null ? (
+                        {currentDeviationDetail.comment === null ? (
                           "-"
                         ) : (
-                          <label>{deviation.comment}</label>
+                          <label>{currentDeviationDetail.comment}</label>
                         )}
                       </div>
                     </div>
