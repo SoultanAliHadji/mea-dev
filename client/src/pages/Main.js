@@ -341,6 +341,7 @@ const Main = () => {
               />
             ) : currentPage === "validasi-deviasi" ? (
               <ValidasiDeviasi
+                deviationData={deviationData}
                 currentDeviationData={currentDeviationData}
                 setCurrentDeviationData={setCurrentDeviationData}
                 submitData={submitData}

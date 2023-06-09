@@ -6,6 +6,7 @@ import { Icon } from "@iconify/react";
 import ReactImageMagnify from "react-magnify-image";
 
 const ValidasiDeviasi = ({
+  deviationData,
   currentDeviationData,
   setCurrentDeviationData,
   submitData,
@@ -47,6 +48,38 @@ const ValidasiDeviasi = ({
         });
     }
   }, [currentDeviationData]);
+
+  const deviationControllerArray = deviationData.map((deviation, index) => {
+    if (currentDeviationData[0]?.id === deviation.id) {
+      return (
+        <div className="d-grid gap-2">
+          <button
+            className={"border-0" + (index === 0 ? " disabled" : "")}
+            onClick={() => {
+              index !== 0
+                ? setCurrentDeviationData([deviationData[index - 1]])
+                : setCurrentDeviationData([deviationData[index]]);
+            }}
+          >
+            <Icon className="icon" icon="akar-icons:chevron-up" />
+          </button>
+          <button
+            className={
+              "border-0" +
+              (index === deviationData.length - 1 ? " disabled" : "")
+            }
+            onClick={() => {
+              index !== deviationData.length - 1
+                ? setCurrentDeviationData([deviationData[index + 1]])
+                : setCurrentDeviationData([deviationData[index]]);
+            }}
+          >
+            <Icon className="icon" icon="akar-icons:chevron-down" />
+          </button>
+        </div>
+      );
+    }
+  });
 
   const currentDeviationArray = currentDeviationData.map((deviation) => {
     return (
@@ -130,23 +163,33 @@ const ValidasiDeviasi = ({
           {currentDeviationData.length !== 0 ? (
             <div>
               {currentDeviationImageLoading === false ? (
-                <div className="d-flex justify-content-center">
-                  <ReactImageMagnify
-                    className="deviation-img rounded-2"
-                    {...{
-                      smallImage: {
-                        alt: "",
-                        isFluidWidth: true,
-                        src: currentDeviationImageBlob,
-                      },
-                      largeImage: {
-                        src: currentDeviationImageBlob,
-                        width: 2000,
-                        height: 1100,
-                      },
-                      enlargedImagePosition: "over",
-                    }}
-                  />
+                <div className="row w-100 m-0 p-0">
+                  <div className="col-1 m-0 p-0"></div>
+                  <div className="col m-0 p-0">
+                    <div className="d-flex justify-content-center">
+                      <ReactImageMagnify
+                        className="deviation-img rounded-2"
+                        {...{
+                          smallImage: {
+                            alt: "",
+                            isFluidWidth: true,
+                            src: currentDeviationImageBlob,
+                          },
+                          largeImage: {
+                            src: currentDeviationImageBlob,
+                            width: 2000,
+                            height: 1100,
+                          },
+                          enlargedImagePosition: "over",
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="notification-navigation col-1 m-0 p-0">
+                    <div className="h-100 d-flex align-items-center">
+                      {deviationControllerArray}
+                    </div>
+                  </div>
                 </div>
               ) : (
                 <div className="d-flex justify-content-center">

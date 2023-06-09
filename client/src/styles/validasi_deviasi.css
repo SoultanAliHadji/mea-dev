@@ -22,8 +22,24 @@
         border-radius: 0 0 8px 8px;
 
         & .deviation-img {
-            width: 74% !important;
+            width: 89% !important;
             border: 3px solid #297209;
+        }
+
+        & .notification-navigation {
+            & button {
+                background-color: white;
+                color: #737373;
+                font-size: 28px;
+
+                &:hover {
+                    color: #297209;
+                }
+            }
+
+            & .disabled {
+                visibility: hidden;
+            }
         }
 
         & .spinner-border {
@@ -75,8 +91,14 @@
             }
 
             & .deviation-img {
-                width: 65% !important;
+                width: 78% !important;
                 border: 2.5px solid #297209;
+            }
+
+            & .notification-navigation {
+                & button {
+                    font-size: 24px;
+                }
             }
 
             & .spinner-border {

@@ -208,7 +208,11 @@ const LiveMonitoring = ({
                   }}
                 />
               ) : (
-                <img className="my-2" src={require("../assets/error.png")} alt="" />
+                <img
+                  className="my-2"
+                  src={require("../assets/error.png")}
+                  alt=""
+                />
               )}
             </div>
             <div className="cam-navigation row mb-3 m-0 p-0 align-items-center">
