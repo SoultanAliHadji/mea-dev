@@ -22,8 +22,8 @@ const ValidasiDeviasi = ({
       axios
         .get(
           process.env.REACT_APP_API +
-            "assets/outputFolder/cctvOutput/" +
-            "2023-03-17 09:18:38.921260_VIEWPOINT.jpg", //currentDeviationData[0].image,
+            currentDeviationData[0].path +
+            currentDeviationData[0].image,
           {
             headers: {
               Authorization: "Bearer " + localStorage.getItem("token"),

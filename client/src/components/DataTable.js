@@ -7,12 +7,12 @@ const DataTable = ({
   dataLimit,
   deviationData,
   deviationDataLoading,
-  setCurrentDeviationImageRaw,
+  currentDeviationDetail,
+  setCurrentDeviationDetail,
   currentDeviationImageBlob,
   reactMagnifyImageLoading,
 }) => {
   const [currentindex, setCurrentIndex] = useState(0);
-  const [currentDeviationDetail, setCurrentDeviationDetail] = useState({});
 
   const deviationArray = deviationData
     .slice(dataLimit - 10, dataLimit)
@@ -72,7 +72,6 @@ const DataTable = ({
                 onClick={() => {
                   setCurrentIndex(index);
                   setCurrentDeviationDetail(deviation);
-                  setCurrentDeviationImageRaw(deviation.image);
                 }}
               >
                 <Icon icon="fa-solid:eye" />
@@ -155,9 +154,6 @@ const DataTable = ({
                               setCurrentDeviationDetail(
                                 deviationData[currentindex - 1]
                               );
-                              setCurrentDeviationImageRaw(
-                                deviationData[currentindex - 1].image
-                              );
                             }}
                           >
                             <Icon
@@ -176,9 +172,6 @@ const DataTable = ({
                               setCurrentIndex(currentindex + 1);
                               setCurrentDeviationDetail(
                                 deviationData[currentindex + 1]
-                              );
-                              setCurrentDeviationImageRaw(
-                                deviationData[currentindex + 1].image
                               );
                             }}
                           >

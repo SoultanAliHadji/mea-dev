@@ -14,11 +14,11 @@ const DataTervalidasi = ({ cctvData, objectData }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [deviationData, setDeviationData] = useState([]);
   const [deviationDataLoading, setDeviationDataLoading] = useState(false);
-  const [currentDeviationImageRaw, setCurrentDeviationImageRaw] = useState();
+  const [currentDeviationDetail, setCurrentDeviationDetail] = useState({});
   const [currentDeviationImageBlob, setCurrentDeviationImageBlob] = useState();
   const [reactMagnifyImageLoading, setReactMagnifyImageLoading] =
     useState(false);
-  const [currentCctv, setCurrentCctv] = useState("All/All");
+  const [currentCctv, setCurrentCctv] = useState("All");
   const [currentObject, setCurrentObject] = useState("All");
 
   useEffect(() => {
@@ -26,11 +26,13 @@ const DataTervalidasi = ({ cctvData, objectData }) => {
     axios
       .get(
         process.env.REACT_APP_API +
-          "viewtable/" +
-          currentCctv +
-          "/" +
-          currentObject +
-          "/" +
+          "viewtable?" +
+          (currentCctv !== "All" ? "cctv_id=" + currentCctv + "&" : "") +
+          (currentObject !== "All"
+            ? "type_object=" + currentObject + "&"
+            : "") +
+          "filter_notification=Tervalidasi&" +
+          "startDate=" +
           (date[0].getFullYear() +
             "-" +
             (date[0].getMonth() + 1 < 10 ? "0" : "") +
@@ -38,9 +40,18 @@ const DataTervalidasi = ({ cctvData, objectData }) => {
             "-" +
             (date[0].getDate() < 10 ? "0" : "") +
             date[0].getDate()) +
-          "/Allvalidation/" +
-          dataLimit +
-          1,
+          " 00:01&" +
+          "endDate=" +
+          (date[1].getFullYear() +
+            "-" +
+            (date[1].getMonth() + 1 < 10 ? "0" : "") +
+            (date[1].getMonth() + 1) +
+            "-" +
+            (date[1].getDate() < 10 ? "0" : "") +
+            date[1].getDate()) +
+          " 23:59&" +
+          "limit=" +
+          (dataLimit + 1),
         {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
@@ -50,7 +61,10 @@ const DataTervalidasi = ({ cctvData, objectData }) => {
       .then((res) => {
         setDeviationData(res.data.data);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        console.log(err);
+        setDeviationData([]);
+      })
       .finally(() => {
         setDeviationDataLoading(false);
       });
@@ -61,8 +75,8 @@ const DataTervalidasi = ({ cctvData, objectData }) => {
     axios
       .get(
         process.env.REACT_APP_API +
-          "assets/outputFolder/cctvOutput/" +
-          "2023-03-17 09:18:38.921260_VIEWPOINT.jpg", //currentDeviationImageRaw,
+          currentDeviationDetail.path +
+          currentDeviationDetail.image,
         {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
@@ -85,7 +99,7 @@ const DataTervalidasi = ({ cctvData, objectData }) => {
       .finally(() => {
         setReactMagnifyImageLoading(false);
       });
-  }, [currentDeviationImageRaw]);
+  }, [currentDeviationDetail]);
 
   useEffect(() => {
     setDataLimit(10);
@@ -94,26 +108,18 @@ const DataTervalidasi = ({ cctvData, objectData }) => {
 
   const cctvFilter = cctvData.map((cctv) => {
     return (
-      <option key={cctv.id} value={cctv.name + "/" + cctv.location}>
+      <option key={cctv.id} value={cctv.id}>
         {cctv.name + " - " + cctv.location}
       </option>
     );
   });
 
   const objectFilter = objectData.map((object) => {
-    if (object.id === 1) {
-      return (
-        <option key={object.id} value={"All"} selected>
-          Semua Objek
-        </option>
-      );
-    } else {
-      return (
-        <option key={object.id} value={object.value}>
-          {object.name}
-        </option>
-      );
-    }
+    return (
+      <option key={object.id} value={object.value}>
+        {object.name === "Semua" ? "Semua Objek" : object.name}
+      </option>
+    );
   });
 
   return (
@@ -133,7 +139,7 @@ const DataTervalidasi = ({ cctvData, objectData }) => {
                 defaultValue={currentCctv}
                 onChange={(value) => setCurrentCctv(value.target.value)}
               >
-                <option value="All/All" selected>
+                <option value={"All"} selected>
                   Semua CCTV
                 </option>
                 {cctvFilter}
@@ -264,7 +270,8 @@ const DataTervalidasi = ({ cctvData, objectData }) => {
           dataLimit={dataLimit}
           deviationData={deviationData}
           deviationDataLoading={deviationDataLoading}
-          setCurrentDeviationImageRaw={setCurrentDeviationImageRaw}
+          currentDeviationDetail={currentDeviationDetail}
+          setCurrentDeviationDetail={setCurrentDeviationDetail}
           currentDeviationImageBlob={currentDeviationImageBlob}
           reactMagnifyImageLoading={reactMagnifyImageLoading}
         />

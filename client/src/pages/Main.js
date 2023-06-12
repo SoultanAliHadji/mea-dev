@@ -20,7 +20,7 @@ const Main = () => {
 
   //cctv data
   const [cctvData, setCctvData] = useState([]);
-  const [currentCctvId, setCurrentCctvId] = useState(1);
+  const [currentCctvId, setCurrentCctvId] = useState();
   const [currentCctvData, setCurrentCctvData] = useState([]);
   const [currentCctvName, setCurrentCctvName] = useState();
   const [currentCctvLocation, setCurrentCctvLocation] = useState();
@@ -39,22 +39,22 @@ const Main = () => {
 
   //object data
   const objectData = [
-    { id: 1, name: "Semua", value: "AllObject" },
+    { id: 1, name: "Semua", value: "All" },
     { id: 2, name: "Person", value: "Person" },
     { id: 3, name: "LV", value: "LV" },
     { id: 4, name: "HD", value: "HD" },
   ];
-  const [currentObject, setCurrentObject] = useState("AllObject");
+  const [currentObject, setCurrentObject] = useState("All");
 
   //tipe validasi
   const validationTypeData = [
-    { id: 1, name: "Semua", value: "Allvalidation" },
-    { id: 2, name: "Perlu Validasi", value: "not_yet" },
-    { id: 3, name: "Valid", value: "true" },
-    { id: 4, name: "Tidak Valid", value: "false" },
+    { id: 1, name: "Semua", value: "All" },
+    { id: 2, name: "Perlu Validasi", value: "Butuh Validasi" },
+    { id: 3, name: "Tervalidasi", value: "Tervalidasi" },
+    { id: 4, name: "Valid", value: "true" },
+    { id: 5, name: "Tidak Valid", value: "false" },
   ];
-  const [currentValidationType, setCurrentValidationType] =
-    useState("Allvalidation");
+  const [currentValidationType, setCurrentValidationType] = useState("All");
 
   //validation data
   const [submitData, setSubmitData] = useState(false);
@@ -102,14 +102,18 @@ const Main = () => {
       axios
         .get(
           process.env.REACT_APP_API +
-            "viewtable/" +
-            currentCctvName +
-            "/" +
-            currentCctvLocation +
-            "/" +
-            currentObject +
-            "/All/Allvalidation/" +
-            deviationDataLimit,
+            "viewtable?" +
+            "cctv_id=" +
+            currentCctvId +
+            "&" +
+            (currentObject !== "All"
+              ? "type_object=" + currentObject + "&"
+              : "") +
+            (currentValidationType !== "All"
+              ? "filter_notification=" + currentValidationType + "&"
+              : "") +
+            "limit=" +
+            (deviationDataLimit + 1),
           {
             headers: {
               Authorization: "Bearer " + localStorage.getItem("token"),
@@ -129,9 +133,9 @@ const Main = () => {
     }
   }, [
     currentPage === "data-tervalidasi" ? currentPage : currentCctvName,
-    currentCctvName,
-    currentCctvLocation,
+    currentCctvId,
     currentObject,
+    currentValidationType,
     deviationDataLimit,
     submitData,
   ]);
@@ -375,38 +379,39 @@ const Main = () => {
                         }}
                       />
                     </div>
-                    {currentPage === "validasi-deviasi" ? (
-                      <div className="dropdown">
-                        <button
-                          className="bg-transparent rounded px-1"
-                          data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                        >
-                          <Icon
-                            icon="material-symbols:filter-list"
-                          />
-                        </button>
-                        <ul className="dropdown-menu dropdown-menu-end mt-3">
-                          <li className="my-1">
-                            <h6 className="dropdown-title text-center">
-                              Filter CCTV
-                            </h6>
-                          </li>
-                          {cctvFilteArray}
-                          <li>
-                            <hr className="dropdown-title dropdown-divider" />
-                          </li>
-                          <li className="my-1">
-                            <h6 className="dropdown-title text-center">
-                              Filter Tipe Validasi
-                            </h6>
-                          </li>
-                          {validationTypeFilterArray}
-                        </ul>
-                      </div>
-                    ) : (
-                      ""
-                    )}
+
+                    <div className="dropdown">
+                      <button
+                        className="bg-transparent rounded px-1"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        <Icon icon="material-symbols:filter-list" />
+                      </button>
+                      <ul className="dropdown-menu dropdown-menu-end mt-3">
+                        {currentPage === "validasi-deviasi" ? (
+                          <div>
+                            <li className="my-1">
+                              <h6 className="dropdown-title text-center">
+                                Filter CCTV
+                              </h6>
+                            </li>
+                            {cctvFilteArray}
+                            <li>
+                              <hr className="dropdown-title dropdown-divider" />
+                            </li>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                        <li className="my-1">
+                          <h6 className="dropdown-title text-center">
+                            Filter Status Validasi
+                          </h6>
+                        </li>
+                        {validationTypeFilterArray}
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>

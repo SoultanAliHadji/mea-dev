@@ -27,10 +27,6 @@ const LiveMonitoring = ({
     }
   };
 
-  const annotationArray = annotation.map((annotation) => {
-    return <div>{annotation.x + ", " + annotation.y}</div>;
-  });
-
   const annotationDotArray = annotation.map((annotation, index) => {
     return (
       <div
@@ -123,7 +119,7 @@ const LiveMonitoring = ({
 
   const allCctvArray = cctvData.map((cctv) => {
     return (
-      <div className="col-6 m-0 p-0">
+      <div className="col-6 m-0 p-0" key={cctv.id}>
         <ReactImageMagnify
           className="w-100"
           {...{
@@ -227,26 +223,26 @@ const LiveMonitoring = ({
                   <label>Perimeter Area</label>
                 </button>
                 <div
-                  class="modal fade"
+                  className="modal fade"
                   id="perimeterModal"
                   tabindex="-1"
                   aria-labelledby="exampleModalLabel"
                   aria-hidden="true"
                 >
-                  <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  <div className="modal-dialog modal-dialog-centered">
+                    <div className="modal-content">
+                      <div className="modal-header">
+                        <h1 className="modal-title fs-5" id="exampleModalLabel">
                           Atur Perimeter Area
                         </h1>
                         <button
                           type="button"
-                          class="btn-close"
+                          className="btn-close"
                           data-bs-dismiss="modal"
                           aria-label="Close"
                         ></button>
                       </div>
-                      <div class="modal-body">
+                      <div className="modal-body">
                         <div className="position-relative">
                           <img
                             src={realTimeCctv}
@@ -256,7 +252,7 @@ const LiveMonitoring = ({
                           {annotationDotArray}
                         </div>
                       </div>
-                      <div class="modal-footer">
+                      <div className="modal-footer">
                         <div className="row w-100 d-flex align-items-center">
                           <div className="col p-0">
                             <button
