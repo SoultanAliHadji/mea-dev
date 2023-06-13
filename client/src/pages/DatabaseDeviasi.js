@@ -7,7 +7,7 @@ import axios from "axios";
 import { Icon } from "@iconify/react";
 import Calendar from "react-calendar";
 
-const DataTervalidasi = ({ cctvData, objectData }) => {
+const DatabaseDeviasi = ({ cctvData, objectData, validationTypeData }) => {
   const [date, setDate] = useState([new Date(), new Date()]);
   const [dateStatus, setDateStatus] = useState("*pilih tanggal (start)");
   const [dataLimit, setDataLimit] = useState(10);
@@ -20,6 +20,7 @@ const DataTervalidasi = ({ cctvData, objectData }) => {
     useState(false);
   const [currentCctv, setCurrentCctv] = useState("All");
   const [currentObject, setCurrentObject] = useState("All");
+  const [currentValidationType, setCurrentValidationType] = useState("All");
 
   useEffect(() => {
     setDeviationDataLoading(true);
@@ -31,7 +32,9 @@ const DataTervalidasi = ({ cctvData, objectData }) => {
           (currentObject !== "All"
             ? "type_object=" + currentObject + "&"
             : "") +
-          "filter_notification=Tervalidasi&" +
+            (currentValidationType !== "All"
+            ? "filter_notification=" + currentValidationType + "&"
+            : "") +
           "startDate=" +
           (date[0].getFullYear() +
             "-" +
@@ -68,7 +71,7 @@ const DataTervalidasi = ({ cctvData, objectData }) => {
       .finally(() => {
         setDeviationDataLoading(false);
       });
-  }, [currentCctv, currentObject, date, dataLimit]);
+  }, [currentCctv, currentObject, currentValidationType, date, dataLimit]);
 
   useEffect(() => {
     setReactMagnifyImageLoading(true);
@@ -104,7 +107,7 @@ const DataTervalidasi = ({ cctvData, objectData }) => {
   useEffect(() => {
     setDataLimit(10);
     setCurrentPage(1);
-  }, [currentCctv, currentObject, date]);
+  }, [currentCctv, currentObject, currentValidationType, date]);
 
   const cctvFilter = cctvData.map((cctv) => {
     return (
@@ -122,12 +125,20 @@ const DataTervalidasi = ({ cctvData, objectData }) => {
     );
   });
 
+  const validationTypeFilter = validationTypeData.map((validationType) => {
+    return (
+      <option key={validationType.id} value={validationType.value}>
+        {validationType.name === "Semua" ? "Semua Status" : validationType.name}
+      </option>
+    );
+  });
+
   return (
     <div className="data-tervalidasi">
       <div className="title d-grid gap-3 mb-3">
         <h6>Validasi Deviasi Tervalidasi</h6>
-        <div className="row">
-          <div className="col-xl-3 d-grid gap-1 mb-xl-0 mb-3">
+        <div className="d-xl-flex gap-4">
+          <div className="d-grid gap-1 mb-xl-0 mb-3">
             <label>CCTV</label>
             <div className="input-group">
               <label className="input-group-text" for="inputGroupSelect01">
@@ -146,7 +157,7 @@ const DataTervalidasi = ({ cctvData, objectData }) => {
               </select>
             </div>
           </div>
-          <div className="col-xl-3 d-grid gap-1 mb-xl-0 mb-3">
+          <div className="d-grid gap-1 mb-xl-0 mb-3">
             <label>Objek</label>
             <div className="input-group">
               <label className="input-group-text" for="inputGroupSelect02">
@@ -165,7 +176,7 @@ const DataTervalidasi = ({ cctvData, objectData }) => {
               </select>
             </div>
           </div>
-          <div className="col-xl-4 d-grid gap-1 mb-xl-0 mb-3">
+          <div className="d-grid gap-1 mb-xl-0 mb-3">
             <label>Periode</label>
             <div className="input-group">
               <label className="input-group-text" for="inputGroupSelect03">
@@ -260,6 +271,24 @@ const DataTervalidasi = ({ cctvData, objectData }) => {
               </div>
             </div>
           </div>
+          <div className="d-grid gap-1 mb-xl-0 mb-3">
+            <label>Status Validasi</label>
+            <div className="input-group">
+              <label className="input-group-text" for="inputGroupSelect02">
+                <Icon className="filter-icon" icon="ci:check" />
+              </label>
+              <select
+                className="form-select"
+                id="inputGroupSelect03"
+                defaultValue={currentValidationType}
+                onChange={(value) =>
+                  setCurrentValidationType(value.target.value)
+                }
+              >
+                {validationTypeFilter}
+              </select>
+            </div>
+          </div>
           <div className="col-xl d-xl-flex justify-content-end align-items-end">
             <DataExport date={date} deviationData={deviationData} />
           </div>
@@ -324,4 +353,4 @@ const DataTervalidasi = ({ cctvData, objectData }) => {
   );
 };
 
-export default DataTervalidasi;
+export default DatabaseDeviasi;

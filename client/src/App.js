@@ -32,7 +32,7 @@ function App() {
             }
           />
           <Route
-            path="/data-tervalidasi"
+            path="/database-deviasi"
             element={
               localStorage.getItem("token") !== null ? <Main /> : <Login />
             }

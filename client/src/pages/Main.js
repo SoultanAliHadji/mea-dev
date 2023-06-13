@@ -2,7 +2,7 @@ import "../styles/main.css";
 import LiveMonitoring from "./LiveMonitoring";
 import ValidasiDeviasi from "./ValidasiDeviasi";
 import Notification from "../components/Notification";
-import DataTervalidasi from "./DataTervalidasi";
+import DatabaseDeviasi from "./DatabaseDeviasi";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Icon } from "@iconify/react";
@@ -12,9 +12,9 @@ const Main = () => {
   const [currentPage, setCurrentPage] = useState(
     window.location.href.includes("validasi-deviasi")
       ? "validasi-deviasi"
-      : window.location.href.includes("data-tervalidasi") &&
+      : window.location.href.includes("database-deviasi") &&
         localStorage.getItem("role") === "admin"
-      ? "data-tervalidasi"
+      ? "database-deviasi"
       : "live-monitoring"
   );
 
@@ -93,7 +93,7 @@ const Main = () => {
   }, [currentCctvId]);
 
   useEffect(() => {
-    if (currentPage !== "data-tervalidasi") {
+    if (currentPage !== "database-deviasi") {
       setDeviationDataLoading(true);
       axios
         .get(
@@ -125,7 +125,7 @@ const Main = () => {
         });
     }
   }, [
-    currentPage === "data-tervalidasi" ? currentPage : currentCctvId,
+    currentPage === "database-deviasi" ? currentPage : currentCctvId,
     currentCctvId,
     currentObject,
     currentValidationType,
@@ -156,12 +156,11 @@ const Main = () => {
       if (currentCctvId.toString() === deviation.cctv_id) {
         if (currentObject === "All") {
           setDeviationData((data) => [deviation, ...data]);
-          console.log()
+          console.log();
           if (notificationSound === true) {
             audio.play();
           }
-        }
-        else {
+        } else {
           if (currentObject === deviation.type_object) {
             setDeviationData((data) => [deviation, ...data]);
           }
@@ -279,18 +278,18 @@ const Main = () => {
                 <a
                   className={
                     "nav-link" +
-                    (currentPage === "data-tervalidasi" ? " active" : "")
+                    (currentPage === "database-deviasi" ? " active" : "")
                   }
                   onClick={() => {
-                    setCurrentPage("data-tervalidasi");
+                    setCurrentPage("database-deviasi");
                     window.history.replaceState(
                       null,
                       null,
-                      "/data-tervalidasi"
+                      "/database-deviasi"
                     );
                   }}
                 >
-                  Data Tervalidasi
+                  Database Deviasi
                 </a>
               </li>
               <li className="nav-item dropdown">
@@ -354,7 +353,7 @@ const Main = () => {
                 setSubmitData={setSubmitData}
               />
             ) : (
-              <DataTervalidasi cctvData={cctvData} objectData={objectData} />
+              <DatabaseDeviasi cctvData={cctvData} objectData={objectData} validationTypeData={validationTypeData}/>
             )}
           </div>
           {currentPage === "live-monitoring" ||
