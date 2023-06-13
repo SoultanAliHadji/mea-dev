@@ -151,15 +151,21 @@ const Main = () => {
     return () => {
       socket.off("message_from_server");
     };
-  }, []);
+  }, [currentCctvId, currentObject]);
 
-  const handleNewNotif = (deviations) => {
+  const handleNewNotif = (newNotif) => {
     // looping data's'
-    deviations.map((deviation) => {
-      if (
-        currentCctvId === deviations.cctv_id
-      ) {
-        setDeviationData((data) => [deviation, ...data]);
+    newNotif.map((deviation) => {
+      if (currentCctvId.toString() === deviation.cctv_id) {
+        if (currentObject === "All") {
+          setDeviationData((data) => [deviation, ...data]);
+          console.log()
+        }
+        else {
+          if (currentObject === deviation.type_object) {
+            setDeviationData((data) => [deviation, ...data]);
+          }
+        }
       }
     });
   };
