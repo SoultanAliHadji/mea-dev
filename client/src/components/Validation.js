@@ -35,8 +35,8 @@ const Validation = ({
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
     })
-      .then((data) => {
-        console.log(data);
+      .then((res) => {
+        console.log(res);
       })
       .catch((err) => {
         console.log(err);

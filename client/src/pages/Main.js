@@ -22,8 +22,6 @@ const Main = () => {
   const [cctvData, setCctvData] = useState([]);
   const [currentCctvId, setCurrentCctvId] = useState();
   const [currentCctvData, setCurrentCctvData] = useState([]);
-  const [currentCctvName, setCurrentCctvName] = useState();
-  const [currentCctvLocation, setCurrentCctvLocation] = useState();
   const [cctvLoading, setCctvLoading] = useState(false);
   const [cctvInfoLoading, setCctvInfoLoading] = useState(false);
 
@@ -87,8 +85,6 @@ const Main = () => {
       })
       .then((res) => {
         setCurrentCctvData(res.data.data);
-        setCurrentCctvName(res.data.data[0].name);
-        setCurrentCctvLocation(res.data.data[0].location);
       })
       .catch((err) => console.log(err))
       .finally(() => {
@@ -132,7 +128,7 @@ const Main = () => {
         });
     }
   }, [
-    currentPage === "data-tervalidasi" ? currentPage : currentCctvName,
+    currentPage === "data-tervalidasi" ? currentPage : currentCctvId,
     currentCctvId,
     currentObject,
     currentValidationType,
@@ -157,16 +153,13 @@ const Main = () => {
     };
   }, []);
 
-  const handleNewNotif = (datas) => {
+  const handleNewNotif = (deviations) => {
     // looping data's'
-    datas.map((data, index) => {
+    deviations.map((deviation) => {
       if (
-        currentCctvName == data.name &&
-        currentCctvLocation == data.location
+        currentCctvId === deviations.cctv_id
       ) {
-        let newData = data;
-        console.log("newData", newData);
-        setDeviationData((data) => [newData, ...data]);
+        setDeviationData((data) => [deviation, ...data]);
       }
     });
   };

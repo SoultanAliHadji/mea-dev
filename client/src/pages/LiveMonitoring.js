@@ -18,11 +18,11 @@ const LiveMonitoring = ({
   const [realTimeCctvError, setRealTimeCctvError] = useState(false);
   const [annotation, setAnnotation] = useState([]);
 
-  const annotationDot = (e) => {
+  const annotationAdder = (e) => {
     if (annotation.length < 4) {
       setAnnotation((arr) => [
         ...arr,
-        { x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY },
+        [ e.nativeEvent.offsetX, e.nativeEvent.offsetY ],
       ]);
     }
   };
@@ -36,15 +36,34 @@ const LiveMonitoring = ({
           height: "16px",
           fontSize: "12px",
           color: "white",
-          backgroundColor: "red",
-          left: annotation.x - 8 + "px",
-          top: annotation.y - 8 + "px",
+          backgroundColor: "#3B9315",
+          left: annotation[0] - 8 + "px",
+          top: annotation[1] - 8 + "px",
         }}
       >
         <label>{index + 1}</label>
       </div>
     );
   });
+
+  const handleSetPerimeterArea = () => {
+    axios({
+      method: "post",
+      url: process.env.REACT_APP_API + "polygon/" + currentCctvId,
+      data: {
+        polygon: annotation,
+      },
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   useEffect(() => {
     setRealTimeCctvLoading(true);
@@ -247,7 +266,7 @@ const LiveMonitoring = ({
                           <img
                             src={realTimeCctv}
                             alt=""
-                            onClick={annotationDot}
+                            onClick={annotationAdder}
                           />
                           {annotationDotArray}
                         </div>
@@ -269,6 +288,7 @@ const LiveMonitoring = ({
                               type="button"
                               className="submit-button border-0 rounded-2 px-3 py-1"
                               data-bs-dismiss="modal"
+                              onClick={handleSetPerimeterArea}
                             >
                               Simpan
                             </button>
