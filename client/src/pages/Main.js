@@ -32,7 +32,7 @@ const Main = () => {
   const [deviationDataLimit, setDeviationDataLimit] = useState(10);
 
   //notification sound
-  const [notificationSound, setNotificationSound] = useState(false);
+  const [notificationSound, setNotificationSound] = useState(true);
   const audio = new Audio(require("../assets/notification.mp3"));
 
   //object data
@@ -122,9 +122,6 @@ const Main = () => {
         .catch((err) => console.log(err))
         .finally(() => {
           setDeviationDataLoading(false);
-          if (notificationSound === true) {
-            audio.play();
-          }
         });
     }
   }, [
@@ -160,10 +157,16 @@ const Main = () => {
         if (currentObject === "All") {
           setDeviationData((data) => [deviation, ...data]);
           console.log()
+          if (notificationSound === true) {
+            audio.play();
+          }
         }
         else {
           if (currentObject === deviation.type_object) {
             setDeviationData((data) => [deviation, ...data]);
+          }
+          if (notificationSound === true) {
+            audio.play();
           }
         }
       }
