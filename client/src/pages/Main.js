@@ -163,16 +163,15 @@ const Main = () => {
         if (currentCctvId.toString() === deviation.cctv_id) {
           if (currentObject === "All") {
             setDeviationData((data) => [deviation, ...data]);
-            console.log();
             if (notificationSound === true) {
               audio.play();
             }
           } else {
             if (currentObject === deviation.type_object) {
               setDeviationData((data) => [deviation, ...data]);
-            }
-            if (notificationSound === true) {
-              audio.play();
+              if (notificationSound === true) {
+                audio.play();
+              }
             }
           }
         }
