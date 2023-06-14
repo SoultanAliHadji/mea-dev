@@ -136,7 +136,7 @@ const DatabaseDeviasi = ({ cctvData, objectData, validationTypeData }) => {
   return (
     <div className="data-tervalidasi">
       <div className="title d-grid gap-3 mb-3">
-        <h6>Validasi Deviasi Tervalidasi</h6>
+        <h6>Database Deviasi</h6>
         <div className="d-xl-flex gap-4">
           <div className="d-grid gap-1 mb-xl-0 mb-3">
             <label>CCTV</label>
