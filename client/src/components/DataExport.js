@@ -42,7 +42,7 @@ const DataExport = ({ date, deviationData }) => {
       "_" +
       date[1].getFullYear() +
       ")";
-    let fields = exportObjectFields ? exportObjectFields : []; //empty list means "use all"
+    let fields = []; //empty list means "use all"
     const exportType = "xls";
     exportFromJSON({ data, fileName, fields, exportType });
   };
