@@ -32,6 +32,7 @@ const Login = () => {
         })
         .catch((err) => {
           setLoginStatus(err.response.data.data.errors);
+          setLoginMessage("username atau password salah");
         });
     }
   };

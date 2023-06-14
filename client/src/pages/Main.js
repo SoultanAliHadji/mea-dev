@@ -374,18 +374,22 @@ const Main = () => {
                   </div>
                   <div className="col d-flex justify-content-end gap-3">
                     <div>
-                      <Icon
-                        className="notif-sound"
-                        icon={
-                          notificationSound === true
-                            ? "teenyicons:sound-on-solid"
-                            : "teenyicons:sound-off-solid"
-                        }
-                        muted={notificationSound}
+                      <button
+                        className="notif-sound bg-transparent border-0 p-0"
+                        title="hidup/matikan audio"
                         onClick={() => {
                           setNotificationSound(!notificationSound);
                         }}
-                      />
+                      >
+                        <Icon
+                          icon={
+                            notificationSound === true
+                              ? "teenyicons:sound-on-solid"
+                              : "teenyicons:sound-off-solid"
+                          }
+                          muted={notificationSound}
+                        />
+                      </button>
                     </div>
 
                     <div className="dropdown">
@@ -393,6 +397,7 @@ const Main = () => {
                         className="bg-transparent rounded px-1"
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
+                        title="filter lain"
                       >
                         <Icon icon="material-symbols:filter-list" />
                       </button>

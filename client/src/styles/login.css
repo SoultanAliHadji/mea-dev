@@ -79,6 +79,10 @@
                 & button {
                     font-size: 13px;
                 }
+
+                & .login-message {
+                    font-size: 11px;
+                }
             }
         }
     }
