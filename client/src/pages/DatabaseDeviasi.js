@@ -20,7 +20,7 @@ const DatabaseDeviasi = ({ cctvData, objectData, validationTypeData }) => {
     useState(false);
   const [currentCctv, setCurrentCctv] = useState("All");
   const [currentObject, setCurrentObject] = useState("All");
-  const [currentValidationType, setCurrentValidationType] = useState("All");
+  const [currentValidationType, setCurrentValidationType] = useState("Tervalidasi");
 
   useEffect(() => {
     setDeviationDataLoading(true);
@@ -52,9 +52,7 @@ const DatabaseDeviasi = ({ cctvData, objectData, validationTypeData }) => {
             "-" +
             (date[1].getDate() < 10 ? "0" : "") +
             date[1].getDate()) +
-          " 23:59&" +
-          "limit=" +
-          (dataLimit + 1),
+          " 23:59&",
         {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
@@ -71,7 +69,7 @@ const DatabaseDeviasi = ({ cctvData, objectData, validationTypeData }) => {
       .finally(() => {
         setDeviationDataLoading(false);
       });
-  }, [currentCctv, currentObject, currentValidationType, date, dataLimit]);
+  }, [currentCctv, currentObject, currentValidationType, date]);
 
   useEffect(() => {
     setReactMagnifyImageLoading(true);

@@ -7,7 +7,7 @@
 
     & .form-container {
         background-color: white;
-        max-width: 56vw;
+        max-width: 60vw;
         min-height: 65.5vh;
 
         & .col {
@@ -40,6 +40,14 @@
             & .login-message {
                 color: #DE4452;
                 font-size: 14px;
+            }
+        }
+
+        & .col-6 {
+            & .carousel {
+                & img {
+                    max-height: 100%;
+                }
             }
         }
     }

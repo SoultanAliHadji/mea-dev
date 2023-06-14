@@ -151,24 +151,29 @@ const Main = () => {
     return () => {
       socket.off("message_from_server");
     };
-  }, [currentCctvId, currentObject]);
+  }, [currentCctvId, currentObject, currentValidationType, notificationSound]);
 
   const handleNewNotif = (newNotif) => {
     // looping data's'
     newNotif.map((deviation) => {
-      if (currentCctvId.toString() === deviation.cctv_id) {
-        if (currentObject === "All") {
-          setDeviationData((data) => [deviation, ...data]);
-          console.log();
-          if (notificationSound === true) {
-            audio.play();
-          }
-        } else {
-          if (currentObject === deviation.type_object) {
+      if (
+        currentValidationType === "All" ||
+        currentValidationType === "Butuh Validasi"
+      ) {
+        if (currentCctvId.toString() === deviation.cctv_id) {
+          if (currentObject === "All") {
             setDeviationData((data) => [deviation, ...data]);
-          }
-          if (notificationSound === true) {
-            audio.play();
+            console.log();
+            if (notificationSound === true) {
+              audio.play();
+            }
+          } else {
+            if (currentObject === deviation.type_object) {
+              setDeviationData((data) => [deviation, ...data]);
+            }
+            if (notificationSound === true) {
+              audio.play();
+            }
           }
         }
       }
@@ -376,7 +381,7 @@ const Main = () => {
                     <div>
                       <button
                         className="notif-sound bg-transparent border-0 p-0"
-                        title="hidup/matikan audio"
+                        title="hidup/matikan alarm"
                         onClick={() => {
                           setNotificationSound(!notificationSound);
                         }}
