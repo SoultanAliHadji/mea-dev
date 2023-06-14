@@ -20,7 +20,7 @@ const Main = () => {
 
   //cctv data
   const [cctvData, setCctvData] = useState([]);
-  const [currentCctvId, setCurrentCctvId] = useState();
+  const [currentCctvId, setCurrentCctvId] = useState(1);
   const [currentCctvData, setCurrentCctvData] = useState([]);
   const [cctvLoading, setCctvLoading] = useState(false);
   const [cctvInfoLoading, setCctvInfoLoading] = useState(false);
