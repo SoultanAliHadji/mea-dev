@@ -11,6 +11,10 @@
         min-height: 65.5vh;
 
         & .col {
+            & .login-container {
+                width: 86%;
+            }
+
             & img {
                 width: 60%;
             }
