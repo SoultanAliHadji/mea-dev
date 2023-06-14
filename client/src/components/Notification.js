@@ -98,20 +98,33 @@ const Notification = ({
       {deviationDataLoading === false ? (
         <div
           className={
-            "d-grid gap-2 overflow-auto" + (currentPage === "live-monitoring" ? " live-monitoring-notification-list" : " validasi-deviasi-notification-list")
+            "d-grid gap-2 overflow-auto" +
+            (currentPage === "live-monitoring"
+              ? " live-monitoring-notification-list"
+              : " validasi-deviasi-notification-list")
           }
         >
-          {deviationArray}
-          <div className="d-flex justify-content-center mt-2">
-            <a
-              className="load-more-button"
-              onClick={() => {
-                setDeviationDataLimit(deviationDataLimit + 10);
-              }}
-            >
-              Tampilkan Lebih
-            </a>
-          </div>
+          {deviationData.length !== 0 ? (
+            deviationArray
+          ) : (
+            <div className="d-flex justify-content-center">
+              <label className="data-not-found">Data tidak ditemukan</label>
+            </div>
+          )}
+          {deviationData.length >= deviationDataLimit ? (
+            <div className="d-flex justify-content-center mt-2">
+              <a
+                className="load-more-button"
+                onClick={() => {
+                  setDeviationDataLimit(deviationDataLimit + 10);
+                }}
+              >
+                Tampilkan Lebih
+              </a>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       ) : (
         <div className="d-flex justify-content-center my-3">

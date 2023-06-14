@@ -104,16 +104,12 @@ const ValidasiDeviasi = ({
             </label>
           </div>
           <div className="col">
-            {deviation.type_validation === "not_yet" ? (
-              <Validation
-                currentDeviationData={currentDeviationData}
-                setCurrentDeviationData={setCurrentDeviationData}
-                submitData={submitData}
-                setSubmitData={setSubmitData}
-              />
-            ) : (
-              ""
-            )}
+            <Validation
+              currentDeviationData={currentDeviationData}
+              setCurrentDeviationData={setCurrentDeviationData}
+              submitData={submitData}
+              setSubmitData={setSubmitData}
+            />
           </div>
         </div>
         <div className="my-3">

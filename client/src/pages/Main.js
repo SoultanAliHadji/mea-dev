@@ -119,7 +119,10 @@ const Main = () => {
         .then((res) => {
           setDeviationData(res.data.data);
         })
-        .catch((err) => console.log(err))
+        .catch((err) => {
+          console.log(err);
+          setDeviationData([]);
+        })
         .finally(() => {
           setDeviationDataLoading(false);
         });
@@ -353,7 +356,11 @@ const Main = () => {
                 setSubmitData={setSubmitData}
               />
             ) : (
-              <DatabaseDeviasi cctvData={cctvData} objectData={objectData} validationTypeData={validationTypeData}/>
+              <DatabaseDeviasi
+                cctvData={cctvData}
+                objectData={objectData}
+                validationTypeData={validationTypeData}
+              />
             )}
           </div>
           {currentPage === "live-monitoring" ||

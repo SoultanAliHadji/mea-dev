@@ -239,6 +239,7 @@ const Validation = ({
                       handleSubmit();
                       setTimeout(() => {
                         setValidationStatus();
+                        setOperatorName("");
                         setValidationCommentData([]);
                         setTextareaStatus(true);
                         setTextareaValue("");

@@ -136,6 +136,10 @@
             }
         }
 
+        & .data-not-found {
+            font-size: 13px;
+        }
+
         & .load-more-button {
             font-size: 13px;
         }
