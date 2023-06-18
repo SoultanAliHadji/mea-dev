@@ -154,7 +154,6 @@ const Main = () => {
   }, [currentCctvId, currentObject, currentValidationType, notificationSound]);
 
   const handleNewNotif = (newNotif) => {
-    // looping data's'
     newNotif.map((deviation) => {
       if (
         currentValidationType === "All" ||
