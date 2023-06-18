@@ -179,44 +179,6 @@ const Main = () => {
     });
   };
 
-  const cctvFilteArray = cctvData.map((cctv) => {
-    return (
-      <li key={cctv.id}>
-        <button
-          className={
-            "dropdown-item text-center border-0" +
-            (currentCctvId === cctv.id ? " active" : "")
-          }
-          onClick={() => {
-            setCurrentCctvId(cctv.id);
-            setDeviationDataLimit(10);
-          }}
-        >
-          {cctv.name + " - " + cctv.location}
-        </button>
-      </li>
-    );
-  });
-
-  const validationTypeFilterArray = validationTypeData.map((validationType) => {
-    return (
-      <li key={validationType.id}>
-        <button
-          className={
-            "dropdown-item text-center border-0" +
-            (currentValidationType === validationType.value ? " active" : "")
-          }
-          onClick={() => {
-            setCurrentValidationType(validationType.value);
-            setDeviationDataLimit(10);
-          }}
-        >
-          {validationType.name}
-        </button>
-      </li>
-    );
-  });
-
   return (
     <div className="main">
       <nav className="navbar navbar-expand-lg">
@@ -369,85 +331,27 @@ const Main = () => {
           </div>
           {currentPage === "live-monitoring" ||
           currentPage === "validasi-deviasi" ? (
-            <div className="col-xl-3">
-              <div className="title mb-3">
-                <div className="row align-items-center">
-                  <div className="col-8">
-                    <h6>List Deviasi</h6>
-                    <label>List deviasi yang terdeteksi</label>
-                  </div>
-                  <div className="col d-flex justify-content-end gap-3">
-                    <div>
-                      <button
-                        className="notif-sound bg-transparent border-0 p-0"
-                        title="hidup/matikan alarm"
-                        onClick={() => {
-                          setNotificationSound(!notificationSound);
-                        }}
-                      >
-                        <Icon
-                          icon={
-                            notificationSound === true
-                              ? "teenyicons:sound-on-solid"
-                              : "teenyicons:sound-off-solid"
-                          }
-                          muted={notificationSound}
-                        />
-                      </button>
-                    </div>
-
-                    <div className="dropdown">
-                      <button
-                        className="bg-transparent rounded px-1"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                        title="filter lain"
-                      >
-                        <Icon icon="material-symbols:filter-list" />
-                      </button>
-                      <ul className="dropdown-menu dropdown-menu-end mt-3">
-                        {currentPage === "validasi-deviasi" ? (
-                          <div>
-                            <li className="my-1">
-                              <h6 className="dropdown-title text-center">
-                                Filter CCTV
-                              </h6>
-                            </li>
-                            {cctvFilteArray}
-                            <li>
-                              <hr className="dropdown-title dropdown-divider" />
-                            </li>
-                          </div>
-                        ) : (
-                          ""
-                        )}
-                        <li className="my-1">
-                          <h6 className="dropdown-title text-center">
-                            Filter Status Validasi
-                          </h6>
-                        </li>
-                        {validationTypeFilterArray}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="content">
-                <Notification
-                  currentPage={currentPage}
-                  setCurrentPage={setCurrentPage}
-                  deviationData={deviationData}
-                  deviationDataLoading={deviationDataLoading}
-                  deviationDataLimit={deviationDataLimit}
-                  setDeviationDataLimit={setDeviationDataLimit}
-                  currentDeviationData={currentDeviationData}
-                  setCurrentDeviationData={setCurrentDeviationData}
-                  currentObject={currentObject}
-                  setCurrentObject={setCurrentObject}
-                  objectData={objectData}
-                />
-              </div>
-            </div>
+            <Notification
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              notificationSound={notificationSound}
+              setNotificationSound={setNotificationSound}
+              cctvData={cctvData}
+              currentCctvId={currentCctvId}
+              setCurrentCctvId={setCurrentCctvId}
+              currentValidationType={currentValidationType}
+              setCurrentValidationType={setCurrentValidationType}
+              validationTypeData={validationTypeData}
+              deviationData={deviationData}
+              deviationDataLoading={deviationDataLoading}
+              deviationDataLimit={deviationDataLimit}
+              setDeviationDataLimit={setDeviationDataLimit}
+              currentDeviationData={currentDeviationData}
+              setCurrentDeviationData={setCurrentDeviationData}
+              currentObject={currentObject}
+              setCurrentObject={setCurrentObject}
+              objectData={objectData}
+            />
           ) : (
             ""
           )}

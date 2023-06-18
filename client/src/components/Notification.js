@@ -4,6 +4,14 @@ import { Icon } from "@iconify/react";
 const Notification = ({
   currentPage,
   setCurrentPage,
+  notificationSound,
+  setNotificationSound,
+  cctvData,
+  currentCctvId,
+  setCurrentCctvId,
+  currentValidationType,
+  setCurrentValidationType,
+  validationTypeData,
   deviationData,
   deviationDataLoading,
   deviationDataLimit,
@@ -14,6 +22,44 @@ const Notification = ({
   setCurrentObject,
   objectData,
 }) => {
+  const cctvFilteArray = cctvData.map((cctv) => {
+    return (
+      <li key={cctv.id}>
+        <button
+          className={
+            "dropdown-item text-center border-0" +
+            (currentCctvId === cctv.id ? " active" : "")
+          }
+          onClick={() => {
+            setCurrentCctvId(cctv.id);
+            setDeviationDataLimit(10);
+          }}
+        >
+          {cctv.name + " - " + cctv.location}
+        </button>
+      </li>
+    );
+  });
+
+  const validationTypeFilterArray = validationTypeData.map((validationType) => {
+    return (
+      <li key={validationType.id}>
+        <button
+          className={
+            "dropdown-item text-center border-0" +
+            (currentValidationType === validationType.value ? " active" : "")
+          }
+          onClick={() => {
+            setCurrentValidationType(validationType.value);
+            setDeviationDataLimit(10);
+          }}
+        >
+          {validationType.name}
+        </button>
+      </li>
+    );
+  });
+
   const objectArr = objectData.map((object) => {
     return (
       <button
@@ -90,65 +136,128 @@ const Notification = ({
     });
 
   return (
-    <div className="notification">
-      <div className="notification-filter d-flex justify-content-center align-items-center gap-1">
-        {objectArr}
-      </div>
-      <hr />
-      {deviationDataLoading === false ? (
-        <div
-          className={
-            "d-grid gap-2 overflow-auto" +
-            (currentPage === "live-monitoring"
-              ? " live-monitoring-notification-list"
-              : " validasi-deviasi-notification-list")
-          }
-        >
-          {deviationData.length !== 0 ? (
-            deviationArray
-          ) : (
-            <div className="d-flex justify-content-center">
-              <label className="data-not-found">Data tidak ditemukan</label>
-            </div>
-          )}
-          {deviationData.length >= deviationDataLimit ? (
-            <div className="d-flex justify-content-center mt-2">
-              <a
-                className="load-more-button"
+    <div className="notification col-xl-3">
+      <div className="title mb-3">
+        <div className="row align-items-center">
+          <div className="col-8">
+            <h6>List Deviasi</h6>
+            <label>List deviasi yang terdeteksi</label>
+          </div>
+          <div className="col d-flex justify-content-end gap-3">
+            <div>
+              <button
+                className="notif-sound bg-transparent border-0 p-0"
+                title="hidup/matikan alarm"
                 onClick={() => {
-                  setDeviationDataLimit(deviationDataLimit + 10);
+                  setNotificationSound(!notificationSound);
                 }}
               >
-                Tampilkan Lebih
-              </a>
+                <Icon
+                  icon={
+                    notificationSound === true
+                      ? "teenyicons:sound-on-solid"
+                      : "teenyicons:sound-off-solid"
+                  }
+                  muted={notificationSound}
+                />
+              </button>
             </div>
-          ) : (
-            ""
-          )}
-        </div>
-      ) : (
-        <div className="d-flex justify-content-center my-3">
-          <div className="spinner-border">
-            <span className="visually-hidden">Loading...</span>
+            <div className="dropdown">
+              <button
+                className="bg-transparent rounded px-1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                title="filter lain"
+              >
+                <Icon icon="material-symbols:filter-list" />
+              </button>
+              <ul className="dropdown-menu dropdown-menu-end mt-3">
+                {currentPage === "validasi-deviasi" ? (
+                  <div>
+                    <li className="my-1">
+                      <h6 className="dropdown-title text-center">
+                        Filter CCTV
+                      </h6>
+                    </li>
+                    {cctvFilteArray}
+                    <li>
+                      <hr className="dropdown-title dropdown-divider" />
+                    </li>
+                  </div>
+                ) : (
+                  ""
+                )}
+                <li className="my-1">
+                  <h6 className="dropdown-title text-center">
+                    Filter Status Validasi
+                  </h6>
+                </li>
+                {validationTypeFilterArray}
+              </ul>
+            </div>
           </div>
         </div>
-      )}
-
-      {currentPage !== "live-monitoring" ? (
-        ""
-      ) : (
-        <div className="validation-button d-grid mt-4">
-          <button
-            className="border-0 rounded-2 px-3 py-2"
-            onClick={() => {
-              setCurrentPage("validasi-deviasi");
-              window.history.replaceState(null, null, "/validasi-deviasi");
-            }}
-          >
-            Detail Deviasi
-          </button>
+      </div>
+      <div className="content">
+        <div className="notification-filter d-flex justify-content-center align-items-center gap-1">
+          {objectArr}
         </div>
-      )}
+        <hr />
+        {deviationDataLoading === false ? (
+          <div
+            className={
+              "d-grid gap-2 overflow-auto" +
+              (currentPage === "live-monitoring"
+                ? " live-monitoring-notification-list"
+                : " validasi-deviasi-notification-list")
+            }
+          >
+            {deviationData.length !== 0 ? (
+              deviationArray
+            ) : (
+              <div className="d-flex justify-content-center">
+                <label className="data-not-found">Data tidak ditemukan</label>
+              </div>
+            )}
+            {deviationData.length >= deviationDataLimit ? (
+              <div className="d-flex justify-content-center mt-2">
+                <a
+                  className="load-more-button"
+                  onClick={() => {
+                    setDeviationDataLimit(deviationDataLimit + 10);
+                  }}
+                >
+                  Tampilkan Lebih
+                </a>
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+        ) : (
+          <div className="d-flex justify-content-center my-3">
+            <div className="spinner-border">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        )}
+
+        {currentPage !== "live-monitoring" ? (
+          ""
+        ) : (
+          <div className="validation-button d-grid mt-4">
+            <button
+              className="border-0 rounded-2 px-3 py-2"
+              onClick={() => {
+                setCurrentPage("validasi-deviasi");
+                window.history.replaceState(null, null, "/validasi-deviasi");
+              }}
+            >
+              Detail Deviasi
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

@@ -1,151 +1,257 @@
 .notification {
-    & .notification-filter {
-        & button {
-            background-color: white;
+    & .title {
+        background-color: white;
+        box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
+        padding: 8px 16px;
+        border-radius: 8px 8px 0 0;
+
+        & h6 {
+            margin: 0px;
+        }
+
+        & label {
+            font-size: 12px;
             color: #737373;
+        }
+
+        & .notif-sound {
+            font-size: 20px;
+            color: #3B9315;
+
+            &:hover {
+                color: #297209;
+            }
+        }
+
+        & .dropdown {
+            & button {
+                font-weight: 500;
+                border: 1px solid #297209;
+                color: #297209;
+
+                &:hover {
+                    background-color: #DFF4DF !important;
+                }
+            }
+
+            & .dropdown-title {
+                font-size: 14px;
+                pointer-events: none;
+            }
+
+            & .dropdown-item {
+                font-size: 12px;
+                font-weight: 500;
+                color: #737373;
+
+                &:hover {
+                    background-color: #DFF4DF;
+                    color: #297209;
+                }
+
+                &:focus {
+                    color: #297209;
+                }
+
+                & label {
+                    cursor: pointer;
+                }
+            }
+
+            & .active {
+                background-image: linear-gradient(to right, #3B9315, #297209);
+                color: white;
+                pointer-events: none;
+            }
+        }
+    }
+
+    & .content {
+        background-color: white;
+        box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
+        padding: 12px 24px;
+        border-radius: 0 0 8px 8px;
+
+        & .notification-filter {
+            & button {
+                background-color: white;
+                color: #737373;
+                font-size: 12px;
+                font-weight: 500;
+                box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.2);
+
+                &:hover {
+                    background-color: #DFF4DF;
+                    color: #297209;
+                }
+
+                &:focus {
+                    background-image: linear-gradient(to right, #3B9315, #297209);
+                    color: white;
+                }
+            }
+
+            & .active {
+                background-image: linear-gradient(to right, #3B9315, #297209);
+                color: white;
+                pointer-events: none;
+            }
+        }
+
+        & .live-monitoring-notification-list {
+            max-height: 52.8vh
+        }
+
+        & .validasi-deviasi-notification-list {
+            max-height: 60.3vh
+        }
+
+        & .live-monitoring-notification-list, .validasi-deviasi-notification-list {
+            & button {
+                background-color: white;
+                color: #737373;
+                font-size: 10px;
+                font-weight: 600;
+                box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.2);
+
+                &:hover {
+                    background-color: #DFF4DF;
+                    color: #297209;
+                }
+
+                &:focus {
+                    background-image: linear-gradient(to right, #3B9315, #297209);
+                    color: white;
+                }
+
+                & label {
+                    cursor: pointer;
+                }
+
+                & .icon {
+                    font-size: 20px;
+                }
+
+                & .status-none {
+                    background-color: #F0F3FF;
+                    border: 2px solid #B1C5F6;
+                    color: #1573FD;
+                }
+
+                & .status-true {
+                    background-color: #D2F1DD;
+                    border: 2px solid #8EDCA9;
+                    color: #1F8A58;
+                }
+
+                & .status-false {
+                    background-color: #F9D1CC;
+                    border: 2px solid #F08C80;
+                    color: #DE4452;
+                }
+            }
+
+            & .active {
+                background-image: linear-gradient(to right, #3B9315, #297209);
+                color: white;
+                pointer-events: none;
+            }
+
+            & .load-more-button {
+                color: #3B9315;
+                cursor: pointer;
+                text-decoration: none;
+                font-weight: 500;
+
+                &:hover {
+                    color: #297209;
+                }
+            }
+        }
+
+        & .spinner-border {
+            color: #3B9315;
+        }
+
+        & .validation-button button {
             font-size: 12px;
             font-weight: 500;
-            box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.2);
-
-            &:hover {
-                background-color: #DFF4DF;
-                color: #297209;
-            }
-
-            &:focus {
-                background-image: linear-gradient(to right, #3B9315, #297209);
-                color: white;
-            }
-        }
-
-        & .active {
             background-image: linear-gradient(to right, #3B9315, #297209);
             color: white;
-            pointer-events: none;
-        }
-    }
-
-    & .live-monitoring-notification-list {
-        max-height: 52.8vh
-    }
-
-    & .validasi-deviasi-notification-list {
-        max-height: 60.3vh
-    }
-
-    & .live-monitoring-notification-list, .validasi-deviasi-notification-list {
-        & button {
-            background-color: white;
-            color: #737373;
-            font-size: 10px;
-            font-weight: 600;
-            box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.2);
 
             &:hover {
-                background-color: #DFF4DF;
-                color: #297209;
+                background-image: linear-gradient(to right, #297209, #297209);
             }
-
-            &:focus {
-                background-image: linear-gradient(to right, #3B9315, #297209);
-                color: white;
-            }
-
-            & label {
-                cursor: pointer;
-            }
-
-            & .icon {
-                font-size: 20px;
-            }
-
-            & .status-none {
-                background-color: #F0F3FF;
-                border: 2px solid #B1C5F6;
-                color: #1573FD;
-            }
-
-            & .status-true {
-                background-color: #D2F1DD;
-                border: 2px solid #8EDCA9;
-                color: #1F8A58;
-            }
-
-            & .status-false {
-                background-color: #F9D1CC;
-                border: 2px solid #F08C80;
-                color: #DE4452;
-            }
-        }
-
-        & .active {
-            background-image: linear-gradient(to right, #3B9315, #297209);
-            color: white;
-            pointer-events: none;
-        }
-
-        & .load-more-button {
-            color: #3B9315;
-            cursor: pointer;
-            text-decoration: none;
-            font-weight: 500;
-
-            &:hover {
-                color: #297209;
-            }
-        }
-    }
-
-    & .spinner-border {
-        color: #3B9315;
-    }
-
-    & .validation-button button {
-        font-size: 12px;
-        font-weight: 500;
-        background-image: linear-gradient(to right, #3B9315, #297209);
-        color: white;
-
-        &:hover {
-            background-image: linear-gradient(to right, #297209, #297209);
         }
     }
 }
 
 @media only screen and (max-width: 1230px) {
-    & .notification-filter {
-        & button {
-            font-size: 10px !important;
-        }
-    }
+    .notification {
+        & .title {
+            & h6 {
+                font-size: 13px;
+            }
 
-    & .live-monitoring-notification-list {
-        max-height: 50.2vh !important;
-    }
+            & label {
+                font-size: 10px;
+            }
 
-    & .validasi-deviasi-notification-list {
-        max-height: 59.1vh !important;
-    }
+            & .notif-sound {
+                font-size: 16px;
+            }
 
-    & .live-monitoring-notification-list, .validasi-deviasi-notification-list {
-        & button {
-            font-size: 8px !important;
+            & .dropdown {
+                & button {
+                    font-size: 12px;
+                }
 
-            & .icon {
-                font-size: 16px !important;
+                & .dropdown-title {
+                    font-size: 12px;
+                }
+
+                & .dropdown-item {
+                    font-size: 11px;
+                }
             }
         }
 
-        & .data-not-found {
-            font-size: 13px;
-        }
+        & .content {
+            & .notification-filter {
+                & button {
+                    font-size: 10px !important;
+                }
+            }
 
-        & .load-more-button {
-            font-size: 13px;
-        }
-    }
+            & .live-monitoring-notification-list {
+                max-height: 50.2vh !important;
+            }
 
-    & .validation-button button {
-        font-size: 10px !important;
+            & .validasi-deviasi-notification-list {
+                max-height: 59.1vh !important;
+            }
+
+            & .live-monitoring-notification-list, .validasi-deviasi-notification-list {
+                & button {
+                    font-size: 8px !important;
+
+                    & .icon {
+                        font-size: 16px !important;
+                    }
+                }
+
+                & .data-not-found {
+                    font-size: 13px;
+                }
+
+                & .load-more-button {
+                    font-size: 13px;
+                }
+            }
+
+            & .validation-button button {
+                font-size: 10px !important;
+            }
+        }
     }
 }
