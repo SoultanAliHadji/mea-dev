@@ -128,7 +128,6 @@ const Main = () => {
         });
     }
   }, [
-    currentPage === "database-deviasi" ? currentPage : currentCctvId,
     currentCctvId,
     currentObject,
     currentValidationType,
