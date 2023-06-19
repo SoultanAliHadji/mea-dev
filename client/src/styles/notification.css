@@ -98,15 +98,9 @@
             }
         }
 
-        & .live-monitoring-notification-list {
-            max-height: 52.8vh
-        }
+        & .notification-list {
+            max-height: 60.3vh;
 
-        & .validasi-deviasi-notification-list {
-            max-height: 60.3vh
-        }
-
-        & .live-monitoring-notification-list, .validasi-deviasi-notification-list {
             & button {
                 background-color: white;
                 color: #737373;
@@ -223,15 +217,9 @@
                 }
             }
 
-            & .live-monitoring-notification-list {
-                max-height: 50.2vh !important;
-            }
-
-            & .validasi-deviasi-notification-list {
+            & .notification-list {
                 max-height: 59.1vh !important;
-            }
 
-            & .live-monitoring-notification-list, .validasi-deviasi-notification-list {
                 & button {
                     font-size: 8px !important;
 

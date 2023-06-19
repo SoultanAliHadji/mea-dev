@@ -20,7 +20,7 @@ const DatabaseDeviasi = ({ cctvData, objectData, validationTypeData }) => {
     useState(false);
   const [currentCctv, setCurrentCctv] = useState("All");
   const [currentObject, setCurrentObject] = useState("All");
-  const [currentValidationType, setCurrentValidationType] = useState("Tervalidasi");
+  const [currentValidationType, setCurrentValidationType] = useState("All");
 
   useEffect(() => {
     setDeviationDataLoading(true);
@@ -32,7 +32,7 @@ const DatabaseDeviasi = ({ cctvData, objectData, validationTypeData }) => {
           (currentObject !== "All"
             ? "type_object=" + currentObject + "&"
             : "") +
-            (currentValidationType !== "All"
+          (currentValidationType !== "All"
             ? "filter_notification=" + currentValidationType + "&"
             : "") +
           "startDate=" +

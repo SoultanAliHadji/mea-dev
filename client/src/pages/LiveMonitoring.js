@@ -17,12 +17,13 @@ const LiveMonitoring = ({
   const [realTimeCctv, setRealTimeCctv] = useState();
   const [realTimeCctvError, setRealTimeCctvError] = useState(false);
   const [annotation, setAnnotation] = useState([]);
+  const [controlLoading, setControlLoading] = useState(false);
 
   const annotationAdder = (e) => {
     if (annotation.length < 4) {
       setAnnotation((arr) => [
         ...arr,
-        [ e.nativeEvent.offsetX, e.nativeEvent.offsetY ],
+        [e.nativeEvent.offsetX, e.nativeEvent.offsetY],
       ]);
     }
   };
@@ -83,6 +84,7 @@ const LiveMonitoring = ({
   }, [currentCctvId]);
 
   const controlHandler = (act) => {
+    setControlLoading(true);
     axios({
       method: "post",
       url: process.env.REACT_APP_API + "control-cctv/" + currentCctvId,
@@ -98,6 +100,9 @@ const LiveMonitoring = ({
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setControlLoading(false);
       });
   };
 
@@ -300,7 +305,9 @@ const LiveMonitoring = ({
               </div>
               <div className="col d-flex justify-content-end gap-1">
                 <button
-                  className="border-0"
+                  className={
+                    "border-0" + (controlLoading === true ? " d-none" : "")
+                  }
                   onClick={() => {
                     controlHandler("reload");
                   }}

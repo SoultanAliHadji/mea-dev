@@ -204,14 +204,7 @@ const Notification = ({
         </div>
         <hr />
         {deviationDataLoading === false ? (
-          <div
-            className={
-              "d-grid gap-2 overflow-auto" +
-              (currentPage === "live-monitoring"
-                ? " live-monitoring-notification-list"
-                : " validasi-deviasi-notification-list")
-            }
-          >
+          <div className="notification-list d-grid gap-2 overflow-auto">
             {deviationData.length !== 0 ? (
               deviationArray
             ) : (
@@ -239,22 +232,6 @@ const Notification = ({
             <div className="spinner-border">
               <span className="visually-hidden">Loading...</span>
             </div>
-          </div>
-        )}
-
-        {currentPage !== "live-monitoring" ? (
-          ""
-        ) : (
-          <div className="validation-button d-grid mt-4">
-            <button
-              className="border-0 rounded-2 px-3 py-2"
-              onClick={() => {
-                setCurrentPage("validasi-deviasi");
-                window.history.replaceState(null, null, "/validasi-deviasi");
-              }}
-            >
-              Detail Deviasi
-            </button>
           </div>
         )}
       </div>
