@@ -308,6 +308,7 @@ const LiveMonitoring = ({
                   className={
                     "border-0" + (controlLoading === true ? " d-none" : "")
                   }
+                  title="reload cctv"
                   onClick={() => {
                     controlHandler("reload");
                   }}
@@ -334,6 +335,7 @@ const LiveMonitoring = ({
               </button> */}
                 <button
                   className="border-0"
+                  title="full-screen"
                   onClick={() => {
                     fullscreenHandler("realtime-cctv");
                   }}
