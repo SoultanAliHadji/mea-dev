@@ -27,7 +27,7 @@ const DatabaseDeviasi = ({ cctvData, objectData, validationTypeData }) => {
     axios
       .get(
         process.env.REACT_APP_API +
-          "viewtable?" +
+          "deviation?" +
           (currentCctv !== "All" ? "cctv_id=" + currentCctv + "&" : "") +
           (currentObject !== "All"
             ? "type_object=" + currentObject + "&"
