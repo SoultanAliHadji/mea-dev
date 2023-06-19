@@ -7,7 +7,7 @@
 
     & .form-container {
         background-color: white;
-        max-width: 30vw;
+        min-width: 30vw;
         min-height: 65.5vh;
 
         & img {
@@ -46,13 +46,6 @@
 @media only screen and (max-width: 1230px) {
     .register {
         & .form-container {
-            max-width: 34vw;
-            min-height: 65.5vh;
-
-            & img {
-                width: 60%;
-            }
-
             & h3 {
                 font-size: 22px;
             }
