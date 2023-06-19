@@ -35,7 +35,7 @@
             }
         }
 
-        & .login-message {
+        & .register-message {
             color: #DE4452;
             font-size: 14px;
         }
@@ -77,6 +77,9 @@
                 font-size: 13px;
             }
 
+            & .register-message {
+                font-size: 11px;
+            }
         }
     }
 }

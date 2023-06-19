@@ -7,51 +7,51 @@ const Register = () => {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [loginStatus, setLoginStatus] = useState("");
-  const [loginMessage, setLoginMessage] = useState("");
+  const [registerStatus, setRegisterStatus] = useState("");
+  const [registerMessage, setRegisterMessage] = useState("");
   const [passwordVisibility, setPasswordVisibility] = useState(false);
 
   const enterKeyHandle = () => {};
 
-  const handleLogin = () => {
+  const handleRegister = () => {
     if (name === "" || username === "" || password === "") {
-      setLoginMessage("nama, username, dan password tidak boleh kosong");
+      setRegisterMessage("nama, username, dan password tidak boleh kosong");
     } else {
       axios
-        .post(process.env.REACT_APP_API + "login", {
-          username: username,
-          password: password,
-        })
+        .post(
+          process.env.REACT_APP_API + "sign-up",
+          {
+            name: name,
+            username: username,
+            password: password,
+          },
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        )
         .then((res) => {
-          setLoginStatus(res.data.meta.status);
-          console.log(res.data.data);
-          localStorage.setItem("token", res.data.data.token);
-          localStorage.setItem("role", res.data.data.role);
-          localStorage.setItem("id", res.data.data.id);
-          localStorage.setItem("name", res.data.data.name);
-          localStorage.setItem("username", res.data.data.username);
+          setRegisterStatus(res.data.meta.status);
         })
         .catch((err) => {
-          setLoginStatus(err.response.data.data.errors);
+          setRegisterStatus("failed");
+          setRegisterMessage("nama dan username sudah terdaftar");
         });
     }
   };
 
   useEffect(() => {
-    if (loginStatus === "success") {
-      if (window.location.href.includes("login")) {
+    if (registerStatus === "success") {
+      if (window.location.href.includes("register")) {
         window.location.href = "/login";
+      } else {
+        window.location.reload();
       }
-      window.location.reload();
-    } else if (loginStatus === "failed") {
+    } else if (registerStatus === "failed") {
       window.location.href = "/register/#";
-      if (loginStatus.toLocaleLowerCase() === "username salah") {
-        setLoginMessage("username salah");
-      } else if (loginStatus.toLocaleLowerCase() === "password salah") {
-        setLoginMessage("password salah");
-      }
     }
-  }, [loginStatus]);
+  }, [registerStatus]);
 
   return (
     <div className="register d-flex justify-content-center align-items-center">
@@ -72,7 +72,7 @@ const Register = () => {
                 placeholder="Masukkan Nama User"
                 onChange={(e) => setName(e.target.value)}
                 onKeyDown={(e) => {
-                  e.key === "Enter" ? handleLogin() : enterKeyHandle();
+                  e.key === "Enter" ? handleRegister() : enterKeyHandle();
                 }}
               />
             </div>
@@ -84,7 +84,7 @@ const Register = () => {
                 placeholder="Masukkan Username atau SID"
                 onChange={(e) => setUsername(e.target.value)}
                 onKeyDown={(e) => {
-                  e.key === "Enter" ? handleLogin() : enterKeyHandle();
+                  e.key === "Enter" ? handleRegister() : enterKeyHandle();
                 }}
               />
             </div>
@@ -97,7 +97,7 @@ const Register = () => {
                   placeholder="Masukkan Password"
                   onChange={(e) => setPassword(e.target.value)}
                   onKeyDown={(e) => {
-                    e.key === "Enter" ? handleLogin() : enterKeyHandle();
+                    e.key === "Enter" ? handleRegister() : enterKeyHandle();
                   }}
                 />
                 <Icon
@@ -117,13 +117,13 @@ const Register = () => {
           <div className="d-grid">
             <button
               className="border-0 rounded-2 px-3 py-2"
-              onClick={handleLogin}
+              onClick={handleRegister}
             >
-              Submit
+              Daftar
             </button>
           </div>
-          <label className="login-message mt-2">
-            {loginMessage !== "" ? "*" + loginMessage : ""}
+          <label className="register-message mt-2">
+            {registerMessage !== "" ? "*" + registerMessage : ""}
           </label>
         </div>
       </div>

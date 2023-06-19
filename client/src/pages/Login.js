@@ -23,7 +23,6 @@ const Login = () => {
         })
         .then((res) => {
           setLoginStatus(res.data.meta.status);
-          console.log(res.data.data);
           localStorage.setItem("token", res.data.data.token);
           localStorage.setItem("role", res.data.data.role);
           localStorage.setItem("id", res.data.data.id);
@@ -31,7 +30,7 @@ const Login = () => {
           localStorage.setItem("username", res.data.data.username);
         })
         .catch((err) => {
-          setLoginStatus(err.response.data.data.errors);
+          setLoginStatus("failed");
           setLoginMessage("username atau password salah");
         });
     }
@@ -43,13 +42,6 @@ const Login = () => {
         window.location.href = "/live-monitoring";
       } else {
         window.location.reload();
-      }
-    } else if (loginStatus === "failed") {
-      window.location.href = "/login/#";
-      if (loginStatus.toLocaleLowerCase() === "username salah") {
-        setLoginMessage("username salah");
-      } else if (loginStatus.toLocaleLowerCase() === "password salah") {
-        setLoginMessage("password salah");
       }
     }
   }, [loginStatus]);
