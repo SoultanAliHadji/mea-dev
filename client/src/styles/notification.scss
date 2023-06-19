@@ -1,20 +1,20 @@
 .notification {
-    & .title {
+    .title {
         background-color: white;
         box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
         padding: 8px 16px;
         border-radius: 8px 8px 0 0;
 
-        & h6 {
+        h6 {
             margin: 0px;
         }
 
-        & label {
+        label {
             font-size: 12px;
             color: #737373;
         }
 
-        & .notif-sound {
+        .notif-sound {
             font-size: 20px;
             color: #3B9315;
 
@@ -23,8 +23,8 @@
             }
         }
 
-        & .dropdown {
-            & button {
+        .dropdown {
+            button {
                 font-weight: 500;
                 border: 1px solid #297209;
                 color: #297209;
@@ -34,12 +34,12 @@
                 }
             }
 
-            & .dropdown-title {
+            .dropdown-title {
                 font-size: 14px;
                 pointer-events: none;
             }
 
-            & .dropdown-item {
+            .dropdown-item {
                 font-size: 12px;
                 font-weight: 500;
                 color: #737373;
@@ -53,12 +53,12 @@
                     color: #297209;
                 }
 
-                & label {
+                label {
                     cursor: pointer;
                 }
             }
 
-            & .active {
+            .active {
                 background-image: linear-gradient(to right, #3B9315, #297209);
                 color: white;
                 pointer-events: none;
@@ -66,14 +66,14 @@
         }
     }
 
-    & .content {
+    .content {
         background-color: white;
         box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
         padding: 12px 24px;
         border-radius: 0 0 8px 8px;
 
-        & .notification-filter {
-            & button {
+        .notification-filter {
+            button {
                 background-color: white;
                 color: #737373;
                 font-size: 12px;
@@ -91,17 +91,17 @@
                 }
             }
 
-            & .active {
+            .active {
                 background-image: linear-gradient(to right, #3B9315, #297209);
                 color: white;
                 pointer-events: none;
             }
         }
 
-        & .notification-list {
+        .notification-list {
             max-height: 60.3vh;
 
-            & button {
+            button {
                 background-color: white;
                 color: #737373;
                 font-size: 10px;
@@ -118,40 +118,40 @@
                     color: white;
                 }
 
-                & label {
+                label {
                     cursor: pointer;
                 }
 
-                & .icon {
+                .icon {
                     font-size: 20px;
                 }
 
-                & .status-none {
+                .status-none {
                     background-color: #F0F3FF;
                     border: 2px solid #B1C5F6;
                     color: #1573FD;
                 }
 
-                & .status-true {
+                .status-true {
                     background-color: #D2F1DD;
                     border: 2px solid #8EDCA9;
                     color: #1F8A58;
                 }
 
-                & .status-false {
+                .status-false {
                     background-color: #F9D1CC;
                     border: 2px solid #F08C80;
                     color: #DE4452;
                 }
             }
 
-            & .active {
+            .active {
                 background-image: linear-gradient(to right, #3B9315, #297209);
                 color: white;
                 pointer-events: none;
             }
 
-            & .load-more-button {
+            .load-more-button {
                 color: #3B9315;
                 cursor: pointer;
                 text-decoration: none;
@@ -163,11 +163,11 @@
             }
         }
 
-        & .spinner-border {
+        .spinner-border {
             color: #3B9315;
         }
 
-        & .validation-button button {
+        .validation-button button {
             font-size: 12px;
             font-weight: 500;
             background-image: linear-gradient(to right, #3B9315, #297209);
@@ -182,62 +182,62 @@
 
 @media only screen and (max-width: 1530px) {
     .notification {
-        & .title {
-            & h6 {
+        .title {
+            h6 {
                 font-size: 14px;
             }
 
-            & label {
+            label {
                 font-size: 11px;
             }
 
-            & .notif-sound {
+            .notif-sound {
                 font-size: 17px;
             }
 
-            & .dropdown {
-                & button {
+            .dropdown {
+                button {
                     font-size: 13px;
                 }
 
-                & .dropdown-title {
+                .dropdown-title {
                     font-size: 13px;
                 }
 
-                & .dropdown-item {
+                .dropdown-item {
                     font-size: 12px;
                 }
             }
         }
 
-        & .content {
-            & .notification-filter {
-                & button {
+        .content {
+            .notification-filter {
+                button {
                     font-size: 11px !important;
                 }
             }
 
-            & .notification-list {
+            .notification-list {
                 max-height: 60vh !important;
 
-                & button {
+                button {
                     font-size: 9px !important;
 
-                    & .icon {
+                    .icon {
                         font-size: 17px !important;
                     }
                 }
 
-                & .data-not-found {
+                .data-not-found {
                     font-size: 14px;
                 }
 
-                & .load-more-button {
+                .load-more-button {
                     font-size: 14px;
                 }
             }
 
-            & .validation-button button {
+            .validation-button button {
                 font-size: 11px !important;
             }
         }
@@ -246,62 +246,62 @@
 
 @media only screen and (max-width: 1230px) {
     .notification {
-        & .title {
-            & h6 {
+        .title {
+            h6 {
                 font-size: 13px;
             }
 
-            & label {
+            label {
                 font-size: 10px;
             }
 
-            & .notif-sound {
+            .notif-sound {
                 font-size: 16px;
             }
 
-            & .dropdown {
-                & button {
+            .dropdown {
+                button {
                     font-size: 12px;
                 }
 
-                & .dropdown-title {
+                .dropdown-title {
                     font-size: 12px;
                 }
 
-                & .dropdown-item {
+                .dropdown-item {
                     font-size: 11px;
                 }
             }
         }
 
-        & .content {
-            & .notification-filter {
-                & button {
+        .content {
+            .notification-filter {
+                button {
                     font-size: 10px !important;
                 }
             }
 
-            & .notification-list {
+            .notification-list {
                 max-height: 59.1vh !important;
 
-                & button {
+                button {
                     font-size: 8px !important;
 
-                    & .icon {
+                    .icon {
                         font-size: 16px !important;
                     }
                 }
 
-                & .data-not-found {
+                .data-not-found {
                     font-size: 13px;
                 }
 
-                & .load-more-button {
+                .load-more-button {
                     font-size: 13px;
                 }
             }
 
-            & .validation-button button {
+            .validation-button button {
                 font-size: 10px !important;
             }
         }

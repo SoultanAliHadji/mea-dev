@@ -1,5 +1,5 @@
 .validation {
-    & .button-true {
+    .button-true {
         background-image: linear-gradient(to right, #3B9315, #297209);
         color: white;
         font-weight: 500;
@@ -9,7 +9,7 @@
         }
     }
 
-    & .button-false {
+    .button-false {
         background-image: linear-gradient(to right, white, white);
         border: 2px solid #3B9315;
         color: #297209;
@@ -22,14 +22,14 @@
         }
     }
 
-    & .modal {
-        & .modal-header {
-            & .modal-title {
+    .modal {
+        .modal-header {
+            .modal-title {
                 font-size: 20px;
             }
         }
 
-        & .cancel-button {
+        .cancel-button {
             background-image: linear-gradient(to right, white, white);
             border: 2px solid #3B9315;
             color: #297209;
@@ -42,7 +42,7 @@
             }
         }
 
-        & .submit-button {
+        .submit-button {
             background-image: linear-gradient(to right, #3B9315, #297209);
             color: white;
             font-weight: 500;
@@ -52,7 +52,7 @@
             }
         }
 
-        & .disabled {
+        .disabled {
             background-image: linear-gradient(to right, #7FB766, #74A460);
             pointer-events: none;
         }
@@ -61,19 +61,19 @@
 
 @media only screen and (max-width: 1530px) {
     .validation {
-        & .modal {
-            & .modal-header {
-                & .modal-title {
+        .modal {
+            .modal-header {
+                .modal-title {
                     font-size: 17px;
                 }
             }
 
-            & .modal-body {
-                & input {
+            .modal-body {
+                input {
                     font-size: 14px;
                 }
 
-                & textarea {
+                textarea {
                     font-size: 14px;
                 }
             }
@@ -83,19 +83,19 @@
 
 @media only screen and (max-width: 1230px) {
     .validation {
-        & .modal {
-            & .modal-header {
-                & .modal-title {
+        .modal {
+            .modal-header {
+                .modal-title {
                     font-size: 16px;
                 }
             }
 
-            & .modal-body {
-                & input {
+            .modal-body {
+                input {
                     font-size: 13px;
                 }
 
-                & textarea {
+                textarea {
                     font-size: 13px;
                 }
             }

@@ -2,22 +2,22 @@
     height: 100vh;
     width: 100vw;
 
-    & img {
+    img {
         height: 40vh;
     }
 
-    & label {
+    label {
         width: 40vw;
     }
 }
 
 @media only screen and (max-width: 1530px) {
     .not-found {
-        & h3 {
+        h3 {
             font-size: 23px;
         }
     
-        & label {
+        label {
             font-size: 14px;
         }
     }
@@ -25,11 +25,11 @@
 
 @media only screen and (max-width: 1230px) {
     .not-found {
-        & h3 {
+        h3 {
             font-size: 22px;
         }
     
-        & label {
+        label {
             font-size: 13px;
         }
     }

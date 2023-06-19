@@ -1,4 +1,4 @@
-import "../styles/validasi_deviasi.css";
+import "../styles/validasi_deviasi.scss";
 import Validation from "../components/Validation";
 import { useState, useEffect } from "react";
 import axios from "axios";

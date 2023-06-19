@@ -1,4 +1,4 @@
-import "../styles/data_tervalidasi.css";
+import "../styles/database_deviasi.scss";
 import "../styles/calendar.css";
 import DataTable from "../components/DataTable";
 import DataExport from "../components/DataExport";

@@ -1,4 +1,4 @@
-import "../styles/data_table.css";
+import "../styles/data_table.scss";
 import { useState } from "react";
 import ReactImageMagnify from "react-magnify-image";
 import { Icon } from "@iconify/react";

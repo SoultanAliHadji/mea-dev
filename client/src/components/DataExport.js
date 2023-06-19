@@ -1,4 +1,4 @@
-import "../styles/data_export.css"
+import "../styles/data_export.scss"
 import { Icon } from "@iconify/react";
 import exportFromJSON from "export-from-json";
 

@@ -1,4 +1,4 @@
-import "../styles/notification.css";
+import "../styles/notification.scss";
 import { Icon } from "@iconify/react";
 
 const Notification = ({

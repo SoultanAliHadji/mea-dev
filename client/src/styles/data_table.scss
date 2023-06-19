@@ -1,19 +1,19 @@
 .data-table {
     max-height: 50.1vh !important;
 
-    & table {
+    table {
         font-size: 14px;
 
-        & .table-header {
+        .table-header {
             background-color: #3B9315;
             color: white;
         }
 
-        & img {
+        img {
             width: 100px;
         }
 
-        & .detail-button {
+        .detail-button {
             font-size: 14px;
             font-weight: 500;
             background-image: linear-gradient(to right, #3B9315, #297209);
@@ -24,29 +24,29 @@
             }
         }
 
-        & .status-none {
+        .status-none {
             font-weight: 500;
             background-color: #F0F3FF;
             border: 2px solid #B1C5F6;
             color: #1573FD;
         }
 
-        & .status-true {
+        .status-true {
             font-weight: 500;
             background-color: #D2F1DD;
             border: 2px solid #8EDCA9;
             color: #1F8A58;
         }
 
-        & .status-false {
+        .status-false {
             font-weight: 500;
             background-color: #F9D1CC;
             border: 2px solid #F08C80;
             color: #DE4452;
         }
 
-        & .deviation-navigation {
-            & button {
+        .deviation-navigation {
+            button {
                 background-color: white;
                 color: #737373;
                 font-size: 24px;
@@ -56,20 +56,20 @@
                 }
             }
 
-            & .disabled {
+            .disabled {
                 visibility: hidden;
             }
         }
 
-        & .modal-dialog {
-            & .modal-header {
-                & h1 {
+        .modal-dialog {
+            .modal-header {
+                h1 {
                     font-size: 20px;
                 }
             }
 
-            & .modal-body {
-                & .spinner-border {
+            .modal-body {
+                .spinner-border {
                     color: #3B9315;
                 }
             }
@@ -81,35 +81,35 @@
     .data-table {
         max-height: 48.2vh !important;
 
-        & table {
+        table {
             font-size: 12px;
 
-            & .table-header {
+            .table-header {
                 background-color: #3B9315;
                 color: white;
             }
 
-            & img {
+            img {
                 width: 100px;
             }
 
-            & .detail-button {
+            .detail-button {
                 font-size: 12px;
             }
 
-            & .status-none, .status-true, .status-false {
+            .status-none, .status-true, .status-false {
                 font-size: 12px;
             }
 
-            & .deviation-navigation {
-                & button {
+            .deviation-navigation {
+                button {
                     font-size: 21px;
                 }
             }
 
-            & .modal-dialog {
-                & .modal-header {
-                    & h1 {
+            .modal-dialog {
+                .modal-header {
+                    h1 {
                         font-size: 17px;
                     }
                 }
@@ -122,35 +122,35 @@
     .data-table {
         max-height: 47.3vh !important;
 
-        & table {
+        table {
             font-size: 11px;
 
-            & .table-header {
+            .table-header {
                 background-color: #3B9315;
                 color: white;
             }
 
-            & img {
+            img {
                 width: 100px;
             }
 
-            & .detail-button {
+            .detail-button {
                 font-size: 11px;
             }
 
-            & .status-none, .status-true, .status-false {
+            .status-none, .status-true, .status-false {
                 font-size: 11px;
             }
 
-            & .deviation-navigation {
-                & button {
+            .deviation-navigation {
+                button {
                     font-size: 20px;
                 }
             }
 
-            & .modal-dialog {
-                & .modal-header {
-                    & h1 {
+            .modal-dialog {
+                .modal-header {
+                    h1 {
                         font-size: 16px;
                     }
                 }

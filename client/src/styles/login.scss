@@ -5,32 +5,32 @@
     width: 100vw;
     height: 100vh;
 
-    & .form-container {
+    .form-container {
         background-color: white;
         max-width: 60vw;
         min-height: 65.5vh;
 
-        & .col {
-            & .login-container {
+        .col {
+            .login-container {
                 width: 86%;
             }
 
-            & img {
+            img {
                 width: 60%;
             }
 
-            & label {
+            label {
                 font-weight: 500;
             }
 
-            & .password-visibility {
+            .password-visibility {
                 font-size: 20px;
                 cursor: pointer;
                 margin-left: -30px;
                 color: #297209;
             }
 
-            & button {
+            button {
                 background-image: linear-gradient(to right, #3B9315, #297209);
                 color: white;
                 font-weight: 500;
@@ -41,15 +41,15 @@
                 }
             }
 
-            & .login-message {
+            .login-message {
                 color: #DE4452;
                 font-size: 14px;
             }
         }
 
-        & .col-6 {
-            & .carousel {
-                & img {
+        .col-6 {
+            .carousel {
+                img {
                     max-height: 100%;
                 }
             }
@@ -59,33 +59,33 @@
 
 @media only screen and (max-width: 1530px) {
     .login {
-        & .form-container {
-            & .col {
-                & h3 {
+        .form-container {
+            .col {
+                h3 {
                     font-size: 23px;
                 }
 
-                & p {
+                p {
                     font-size: 14px;
                 }
     
-                & label {
+                label {
                     font-size: 14px;
                 }
 
-                & input {
+                input {
                     font-size: 14px;
                 }
     
-                & .password-visibility {
+                .password-visibility {
                     font-size: 17px;
                 }
     
-                & button {
+                button {
                     font-size: 14px;
                 }
 
-                & .login-message {
+                .login-message {
                     font-size: 12px;
                 }
             }
@@ -95,33 +95,33 @@
 
 @media only screen and (max-width: 1230px) {
     .login {
-        & .form-container {
-            & .col {
-                & h3 {
+        .form-container {
+            .col {
+                h3 {
                     font-size: 22px;
                 }
 
-                & p {
+                p {
                     font-size: 13px;
                 }
     
-                & label {
+                label {
                     font-size: 13px;
                 }
 
-                & input {
+                input {
                     font-size: 13px;
                 }
     
-                & .password-visibility {
+                .password-visibility {
                     font-size: 16px;
                 }
     
-                & button {
+                button {
                     font-size: 13px;
                 }
 
-                & .login-message {
+                .login-message {
                     font-size: 11px;
                 }
             }

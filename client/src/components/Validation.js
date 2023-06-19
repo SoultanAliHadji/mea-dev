@@ -1,4 +1,4 @@
-import "../styles/validation.css";
+import "../styles/validation.scss";
 import { useState } from "react";
 import axios from "axios";
 

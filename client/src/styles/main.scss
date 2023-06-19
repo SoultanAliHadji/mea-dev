@@ -8,19 +8,19 @@
     background-color: white;
     box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
 
-    & a {
+    a {
         cursor: pointer;
     }
 
-    & .navbar-brand img {
+    .navbar-brand img {
         max-height: 30px;
     }
 
-    & .nav-item {
+    .nav-item {
         font-weight: 500;
 
-        & .nav-link {
-            & .icon {
+        .nav-link {
+            .icon {
                 font-size: 24px;
             }
 
@@ -29,7 +29,7 @@
             }
         }
 
-        & .active {
+        .active {
             color: #297209 !important;
             text-decoration: underline;
             text-decoration-thickness: 3px;
@@ -38,7 +38,7 @@
         }
     }
 
-    & .dropdown .dropdown-menu button {
+    .dropdown .dropdown-menu button {
         font-weight: 500;
         color: #737373;
 
@@ -51,7 +51,7 @@
             color: #DE4452;
         }
 
-        & label {
+        label {
             cursor: pointer;
         }
     }
@@ -59,27 +59,27 @@
 
 @media only screen and (max-width: 1530px) {
     .navbar {
-        & .navbar-brand img {
+        .navbar-brand img {
             max-height: 26px;
         }
 
-        & .nav-item {
+        .nav-item {
 
-            & .nav-link {
+            .nav-link {
                 font-size: 14px;
 
-                & .icon {
+                .icon {
                     font-size: 21px;
                 }
             }
 
-            & .active {
+            .active {
                 text-decoration-thickness: 2.5px;
                 text-underline-offset: 9px;
             }
         }
 
-        & .dropdown .dropdown-menu {
+        .dropdown .dropdown-menu {
             font-size: 14px;
         }
     }
@@ -87,27 +87,27 @@
 
 @media only screen and (max-width: 1230px) {
     .navbar {
-        & .navbar-brand img {
+        .navbar-brand img {
             max-height: 24px;
         }
 
-        & .nav-item {
+        .nav-item {
 
-            & .nav-link {
+            .nav-link {
                 font-size: 13px;
 
-                & .icon {
+                .icon {
                     font-size: 20px;
                 }
             }
 
-            & .active {
+            .active {
                 text-decoration-thickness: 2.5px;
                 text-underline-offset: 8px;
             }
         }
 
-        & .dropdown .dropdown-menu {
+        .dropdown .dropdown-menu {
             font-size: 13px;
         }
     }

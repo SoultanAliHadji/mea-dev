@@ -1,4 +1,4 @@
-import "../styles/live_monitoring.css";
+import "../styles/live_monitoring.scss";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Icon } from "@iconify/react";

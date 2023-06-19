@@ -1,4 +1,4 @@
-import "../styles/register.css";
+import "../styles/register.scss";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Icon } from "@iconify/react";

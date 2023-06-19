@@ -5,22 +5,22 @@
         padding: 8px 16px;
         border-radius: 8px 8px 0 0;
 
-        & h6 {
+        h6 {
             margin: 0px;
         }
 
-        & label {
+        label {
             color: #737373;
         }
 
-        & .form-select {
+        .form-select {
             cursor: pointer;
 
             &:hover {
                 color: #297209;
             }
 
-            & label {
+            label {
                 color: black;
 
                 &:hover {
@@ -29,17 +29,17 @@
             }
         }
 
-        & .input-group {
+        .input-group {
             max-width: max-content;
 
-            & .input-group-text {
+            .input-group-text {
                 background-color: transparent;
             }
 
-            & button {
+            button {
                 background-image: linear-gradient(to right, white, white);
 
-                & label {
+                label {
                     cursor: pointer;
                 }
 
@@ -49,17 +49,17 @@
             }
         }
 
-        & .modal-dialog {
+        .modal-dialog {
             max-width: max-content;
 
-            & .modal-header {
-                & h1 {
+            .modal-header {
+                h1 {
                     font-size: 20px;
                 }
             }
 
-            & .modal-footer {
-                & button {
+            .modal-footer {
+                button {
                     font-size: 14px;
                     font-weight: 500;
                     background-image: linear-gradient(to right, #3B9315, #297209);
@@ -79,14 +79,14 @@
         padding: 12px 24px;
         border-radius: 0 0 8px 8px;
 
-        & .spinner-border {
+        .spinner-border {
             color: #3B9315;
         }
 
-        & .pagination-nav {
+        .pagination-nav {
             height: 40px;
 
-            & button {
+            button {
                 min-width: 90px;
                 font-size: 14px;
                 font-weight: 500;
@@ -98,7 +98,7 @@
                 }
             }
 
-            & .disabled {
+            .disabled {
                 background-image: linear-gradient(to right, white, white);
                 border: 1px solid #737373 !important;
                 color: #737373;
@@ -111,29 +111,29 @@
 @media only screen and (max-width: 1530px) {
     .data-tervalidasi {
         .title {
-            & h6 {
+            h6 {
                 font-size: 14px;
             }
 
-            & label {
+            label {
                 font-size: 14px;
             }
 
-            & .form-select {
+            .form-select {
                 font-size: 14px;
             }
 
-            & .modal-dialog {
+            .modal-dialog {
                 max-width: max-content;
 
-                & .modal-header {
-                    & h1 {
+                .modal-header {
+                    h1 {
                         font-size: 17px;
                     }
                 }
 
-                & .modal-footer {
-                    & button {
+                .modal-footer {
+                    button {
                         font-size: 12px;
                     }
                 }
@@ -141,14 +141,14 @@
         }
 
         .content {
-            & label {
+            label {
                 font-size: 14px;
             }
             
-            & .pagination-nav {
+            .pagination-nav {
                 font-size: 14px;
 
-                & button {
+                button {
                     min-width: 84px;
                     font-size: 12px;
                 }
@@ -160,29 +160,29 @@
 @media only screen and (max-width: 1230px) {
     .data-tervalidasi {
         .title {
-            & h6 {
+            h6 {
                 font-size: 13px;
             }
 
-            & label {
+            label {
                 font-size: 13px;
             }
 
-            & .form-select {
+            .form-select {
                 font-size: 13px;
             }
 
-            & .modal-dialog {
+            .modal-dialog {
                 max-width: max-content;
 
-                & .modal-header {
-                    & h1 {
+                .modal-header {
+                    h1 {
                         font-size: 16px;
                     }
                 }
 
-                & .modal-footer {
-                    & button {
+                .modal-footer {
+                    button {
                         font-size: 11px;
                     }
                 }
@@ -190,14 +190,14 @@
         }
 
         .content {
-            & label {
+            label {
                 font-size: 13px;
             }
             
-            & .pagination-nav {
+            .pagination-nav {
                 font-size: 13px;
 
-                & button {
+                button {
                     min-width: 80px;
                     font-size: 11px;
                 }

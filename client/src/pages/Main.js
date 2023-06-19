@@ -1,4 +1,4 @@
-import "../styles/main.css";
+import "../styles/main.scss";
 import LiveMonitoring from "./LiveMonitoring";
 import ValidasiDeviasi from "./ValidasiDeviasi";
 import Notification from "../components/Notification";

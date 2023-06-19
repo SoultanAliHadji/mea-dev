@@ -5,26 +5,26 @@
     width: 100vw;
     height: 100vh;
 
-    & .form-container {
+    .form-container {
         background-color: white;
         min-width: 30vw;
         min-height: 65.5vh;
 
-        & img {
+        img {
             width: 60%;
         }
 
-        & label {
+        label {
             font-weight: 500;
         }
 
-        & .password-visibility {
+        .password-visibility {
             cursor: pointer;
             margin-left: -30px;
             color: #297209;
         }
 
-        & button {
+        button {
             background-image: linear-gradient(to right, #3B9315, #297209);
             color: white;
             font-weight: 500;
@@ -35,7 +35,7 @@
             }
         }
 
-        & .register-message {
+        .register-message {
             color: #DE4452;
             font-size: 14px;
         }
@@ -45,32 +45,32 @@
 
 @media only screen and (max-width: 1530px) {
     .register {
-        & .form-container {
-            & h3 {
+        .form-container {
+            h3 {
                 font-size: 23px;
             }
 
-            & p {
+            p {
                 font-size: 14px;
             }
 
-            & label {
+            label {
                 font-size: 14px;
             }
 
-            & input {
+            input {
                 font-size: 14px;
             }
 
-            & .password-visibility {
+            .password-visibility {
                 font-size: 17px;
             }
 
-            & button {
+            button {
                 font-size: 14px;
             }
 
-            & .register-message {
+            .register-message {
                 font-size: 12px;
             }
         }
@@ -79,32 +79,32 @@
 
 @media only screen and (max-width: 1230px) {
     .register {
-        & .form-container {
-            & h3 {
+        .form-container {
+            h3 {
                 font-size: 22px;
             }
 
-            & p {
+            p {
                 font-size: 13px;
             }
 
-            & label {
+            label {
                 font-size: 13px;
             }
 
-            & input {
+            input {
                 font-size: 13px;
             }
 
-            & .password-visibility {
+            .password-visibility {
                 font-size: 16px;
             }
 
-            & button {
+            button {
                 font-size: 13px;
             }
 
-            & .register-message {
+            .register-message {
                 font-size: 11px;
             }
         }
