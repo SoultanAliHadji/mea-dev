@@ -281,14 +281,25 @@ const Main = () => {
                   </li>
                   <li>
                     <button
-                      className="dropdown-item d-flex align-items-center gap-2"
+                      className="report dropdown-item d-flex align-items-center gap-2"
+                      onClick={() => {
+                        window.open("https://docs.google.com/forms/d/e/1FAIpQLSedEw8EqKvhh7P0MU9QsT4SpOHotJIXBtJkc-Iw-axuj4Azsw/viewform")
+                      }}
+                    >
+                      <Icon className="fs-5" icon="mdi:speak" />
+                      <label>Laporkan Isu</label>
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      className="log-out dropdown-item d-flex align-items-center gap-2"
                       onClick={() => {
                         localStorage.clear();
                         window.location.href = "/login";
                         window.location.reload();
                       }}
                     >
-                      <Icon className="fs-5" icon="ci:log-out" />
+                      <Icon className="fs-5" icon="heroicons-outline:logout" />
                       <label>Log Out</label>
                     </button>
                   </li>

@@ -38,21 +38,36 @@
         }
     }
 
-    .dropdown .dropdown-menu button {
-        font-weight: 500;
-        color: #737373;
+    .dropdown .dropdown-menu {
+        button {
+            font-weight: 500;
+            color: #737373;
 
-        &:hover {
-            background-color: #F9D1CC;
-            color: #DE4452;
+            label {
+                cursor: pointer;
+            }
         }
 
-        &:focus {
-            color: #DE4452;
+        .report {
+            &:hover {
+                background-color: #DFF4DF;
+                color: #297209;
+            }
+    
+            &:focus {
+                color: #297209;
+            }
         }
 
-        label {
-            cursor: pointer;
+        .log-out {
+            &:hover {
+                background-color: #F9D1CC;
+                color: #DE4452;
+            }
+    
+            &:focus {
+                color: #DE4452;
+            }
         }
     }
 }
