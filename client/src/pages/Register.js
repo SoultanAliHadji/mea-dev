@@ -55,7 +55,7 @@ const Register = () => {
 
   return (
     <div className="register d-flex justify-content-center align-items-center">
-      <div className="form-container rounded-4">
+      <div className="form-container rounded-4 d-flex justify-content-center align-items-center">
         <div className="px-5 py-4">
           <img className="mb-5" src={require("../assets/logo.png")} alt="" />
           <h3>Register</h3>

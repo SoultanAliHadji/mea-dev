@@ -77,6 +77,47 @@
     }
 }
 
+@media only screen and (max-width: 1530px) {
+    .data-table {
+        max-height: 48.2vh !important;
+
+        & table {
+            font-size: 12px;
+
+            & .table-header {
+                background-color: #3B9315;
+                color: white;
+            }
+
+            & img {
+                width: 100px;
+            }
+
+            & .detail-button {
+                font-size: 12px;
+            }
+
+            & .status-none, .status-true, .status-false {
+                font-size: 12px;
+            }
+
+            & .deviation-navigation {
+                & button {
+                    font-size: 21px;
+                }
+            }
+
+            & .modal-dialog {
+                & .modal-header {
+                    & h1 {
+                        font-size: 17px;
+                    }
+                }
+            }
+        }
+    }
+}
+
 @media only screen and (max-width: 1230px) {
     .data-table {
         max-height: 47.3vh !important;

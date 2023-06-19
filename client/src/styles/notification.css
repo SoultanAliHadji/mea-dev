@@ -180,6 +180,70 @@
     }
 }
 
+@media only screen and (max-width: 1530px) {
+    .notification {
+        & .title {
+            & h6 {
+                font-size: 14px;
+            }
+
+            & label {
+                font-size: 11px;
+            }
+
+            & .notif-sound {
+                font-size: 17px;
+            }
+
+            & .dropdown {
+                & button {
+                    font-size: 13px;
+                }
+
+                & .dropdown-title {
+                    font-size: 13px;
+                }
+
+                & .dropdown-item {
+                    font-size: 12px;
+                }
+            }
+        }
+
+        & .content {
+            & .notification-filter {
+                & button {
+                    font-size: 11px !important;
+                }
+            }
+
+            & .notification-list {
+                max-height: 60vh !important;
+
+                & button {
+                    font-size: 9px !important;
+
+                    & .icon {
+                        font-size: 17px !important;
+                    }
+                }
+
+                & .data-not-found {
+                    font-size: 14px;
+                }
+
+                & .load-more-button {
+                    font-size: 14px;
+                }
+            }
+
+            & .validation-button button {
+                font-size: 11px !important;
+            }
+        }
+    }
+}
+
 @media only screen and (max-width: 1230px) {
     .notification {
         & .title {

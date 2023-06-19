@@ -157,6 +157,14 @@
     background-color: #e6e6e6;
 }
 
+@media only screen and (max-width: 1530px) {
+    .react-calendar {
+        width: 330px;
+        line-height: 1.10em;
+        font-size: 12px;
+    }
+}
+
 @media only screen and (max-width: 1230px) {
     .react-calendar {
         width: 310px;

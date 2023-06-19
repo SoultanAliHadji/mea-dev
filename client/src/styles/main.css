@@ -57,6 +57,34 @@
     }
 }
 
+@media only screen and (max-width: 1530px) {
+    .navbar {
+        & .navbar-brand img {
+            max-height: 26px;
+        }
+
+        & .nav-item {
+
+            & .nav-link {
+                font-size: 14px;
+
+                & .icon {
+                    font-size: 21px;
+                }
+            }
+
+            & .active {
+                text-decoration-thickness: 2.5px;
+                text-underline-offset: 9px;
+            }
+        }
+
+        & .dropdown .dropdown-menu {
+            font-size: 14px;
+        }
+    }
+}
+
 @media only screen and (max-width: 1230px) {
     .navbar {
         & .navbar-brand img {

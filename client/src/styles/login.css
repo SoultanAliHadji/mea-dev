@@ -57,17 +57,46 @@
     }
 }
 
+@media only screen and (max-width: 1530px) {
+    .login {
+        & .form-container {
+            & .col {
+                & h3 {
+                    font-size: 23px;
+                }
+
+                & p {
+                    font-size: 14px;
+                }
+    
+                & label {
+                    font-size: 14px;
+                }
+
+                & input {
+                    font-size: 14px;
+                }
+    
+                & .password-visibility {
+                    font-size: 17px;
+                }
+    
+                & button {
+                    font-size: 14px;
+                }
+
+                & .login-message {
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+}
+
 @media only screen and (max-width: 1230px) {
     .login {
         & .form-container {
-            max-width: 60vw;
-            min-height: 65.5vh;
-    
             & .col {
-                & img {
-                    width: 60%;
-                }
-
                 & h3 {
                     font-size: 22px;
                 }

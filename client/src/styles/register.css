@@ -43,6 +43,40 @@
     }
 }
 
+@media only screen and (max-width: 1530px) {
+    .register {
+        & .form-container {
+            & h3 {
+                font-size: 23px;
+            }
+
+            & p {
+                font-size: 14px;
+            }
+
+            & label {
+                font-size: 14px;
+            }
+
+            & input {
+                font-size: 14px;
+            }
+
+            & .password-visibility {
+                font-size: 17px;
+            }
+
+            & button {
+                font-size: 14px;
+            }
+
+            & .register-message {
+                font-size: 12px;
+            }
+        }
+    }
+}
+
 @media only screen and (max-width: 1230px) {
     .register {
         & .form-container {

@@ -108,6 +108,55 @@
     }
 }
 
+@media only screen and (max-width: 1530px) {
+    .data-tervalidasi {
+        .title {
+            & h6 {
+                font-size: 14px;
+            }
+
+            & label {
+                font-size: 14px;
+            }
+
+            & .form-select {
+                font-size: 14px;
+            }
+
+            & .modal-dialog {
+                max-width: max-content;
+
+                & .modal-header {
+                    & h1 {
+                        font-size: 17px;
+                    }
+                }
+
+                & .modal-footer {
+                    & button {
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+
+        .content {
+            & label {
+                font-size: 14px;
+            }
+            
+            & .pagination-nav {
+                font-size: 14px;
+
+                & button {
+                    min-width: 84px;
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+}
+
 @media only screen and (max-width: 1230px) {
     .data-tervalidasi {
         .title {
