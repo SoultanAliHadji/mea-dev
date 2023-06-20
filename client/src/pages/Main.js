@@ -287,7 +287,7 @@ const Main = () => {
                       }}
                     >
                       <Icon className="fs-5" icon="mdi:speak" />
-                      <label>Laporkan Isu</label>
+                      <label>Pelaporan Isu</label>
                     </button>
                   </li>
                   <li>
