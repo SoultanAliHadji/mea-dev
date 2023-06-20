@@ -9,8 +9,8 @@ const LiveMonitoring = ({
   currentCctvId,
   setCurrentCctvId,
   currentCctvData,
+  setCurrentCctvData,
   cctvLoading,
-  cctvInfoLoading,
   setDeviationDataLimit,
 }) => {
   const [realTimeCctvLoading, setRealTimeCctvLoading] = useState(false);
@@ -114,7 +114,7 @@ const LiveMonitoring = ({
     }
   };
 
-  const cctvArray = cctvData.map((cctv) => {
+  const cctvArray = cctvData.map((cctv, index) => {
     return (
       <button
         key={cctv.id}
@@ -124,6 +124,7 @@ const LiveMonitoring = ({
         }
         onClick={() => {
           setCurrentCctvId(cctv.id);
+          setCurrentCctvData([cctvData[index]]);
           setDeviationDataLimit(10);
         }}
       >
@@ -344,15 +345,7 @@ const LiveMonitoring = ({
                 </button>
               </div>
             </div>
-            {cctvInfoLoading === false ? (
-              <div>{cctvInfoArray}</div>
-            ) : (
-              <div className="d-flex justify-content-center my-3">
-                <div className="spinner-border">
-                  <span className="visually-hidden">Loading...</span>
-                </div>
-              </div>
-            )}
+            <div>{cctvInfoArray}</div>
           </div>
         </div>
       </div>

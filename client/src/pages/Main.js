@@ -23,7 +23,6 @@ const Main = () => {
   const [currentCctvId, setCurrentCctvId] = useState(1);
   const [currentCctvData, setCurrentCctvData] = useState([]);
   const [cctvLoading, setCctvLoading] = useState(false);
-  const [cctvInfoLoading, setCctvInfoLoading] = useState(false);
 
   //deviation data
   const [deviationData, setDeviationData] = useState([]);
@@ -68,6 +67,7 @@ const Main = () => {
       .then((res) => {
         setCctvData(res.data.data);
         setCurrentCctvId(res.data.data[0].id);
+        setCurrentCctvData([res.data.data[0]]);
       })
       .catch((err) => console.log(err))
       .finally(() => {
@@ -75,22 +75,22 @@ const Main = () => {
       });
   }, []);
 
-  useEffect(() => {
-    setCctvInfoLoading(true);
-    axios
-      .get(process.env.REACT_APP_API + "cctv/" + currentCctvId, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      })
-      .then((res) => {
-        setCurrentCctvData(res.data.data);
-      })
-      .catch((err) => console.log(err))
-      .finally(() => {
-        setCctvInfoLoading(false);
-      });
-  }, [currentCctvId]);
+  // useEffect(() => {
+  //   setCctvInfoLoading(true);
+  //   axios
+  //     .get(process.env.REACT_APP_API + "cctv/" + currentCctvId, {
+  //       headers: {
+  //         Authorization: "Bearer " + localStorage.getItem("token"),
+  //       },
+  //     })
+  //     .then((res) => {
+  //       setCurrentCctvData(res.data.data);
+  //     })
+  //     .catch((err) => console.log(err))
+  //     .finally(() => {
+  //       setCctvInfoLoading(false);
+  //     });
+  // }, [currentCctvId]);
 
   useEffect(() => {
     if (currentPage !== "database-deviasi") {
@@ -318,8 +318,8 @@ const Main = () => {
                 currentCctvId={currentCctvId}
                 setCurrentCctvId={setCurrentCctvId}
                 currentCctvData={currentCctvData}
+                setCurrentCctvData={setCurrentCctvData}
                 cctvLoading={cctvLoading}
-                cctvInfoLoading={cctvInfoLoading}
                 setDeviationDataLimit={setDeviationDataLimit}
               />
             ) : currentPage === "validasi-deviasi" ? (
