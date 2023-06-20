@@ -75,23 +75,6 @@ const Main = () => {
       });
   }, []);
 
-  // useEffect(() => {
-  //   setCctvInfoLoading(true);
-  //   axios
-  //     .get(process.env.REACT_APP_API + "cctv/" + currentCctvId, {
-  //       headers: {
-  //         Authorization: "Bearer " + localStorage.getItem("token"),
-  //       },
-  //     })
-  //     .then((res) => {
-  //       setCurrentCctvData(res.data.data);
-  //     })
-  //     .catch((err) => console.log(err))
-  //     .finally(() => {
-  //       setCctvInfoLoading(false);
-  //     });
-  // }, [currentCctvId]);
-
   useEffect(() => {
     if (currentPage !== "database-deviasi") {
       setDeviationDataLoading(true);
