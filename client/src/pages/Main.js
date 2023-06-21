@@ -53,6 +53,9 @@ const Main = () => {
   ];
   const [currentValidationType, setCurrentValidationType] = useState("All");
 
+  //filter waktu
+  const [currentTime, setCurrentTime] = useState(null);
+
   //validation data
   const [submitData, setSubmitData] = useState(false);
 
@@ -91,6 +94,28 @@ const Main = () => {
             (currentValidationType !== "All"
               ? "filter_notification=" + currentValidationType + "&"
               : "") +
+            (currentTime !== null
+              ? "startDate=" +
+                (new Date().getFullYear() +
+                  "-" +
+                  (new Date().getMonth() + 1 < 10 ? "0" : "") +
+                  (new Date().getMonth() + 1) +
+                  "-" +
+                  (new Date().getDate() < 10 ? "0" : "") +
+                  new Date().getDate()) +
+                " 00:01&" +
+                "endDate=" +
+                (new Date().getFullYear() +
+                  "-" +
+                  (new Date().getMonth() + 1 < 10 ? "0" : "") +
+                  (new Date().getMonth() + 1) +
+                  "-" +
+                  (new Date().getDate() < 10 ? "0" : "") +
+                  new Date().getDate()) +
+                " " +
+                currentTime +
+                "&"
+              : "") +
             "limit=" +
             (deviationDataLimit + 1),
           {
@@ -114,6 +139,7 @@ const Main = () => {
     currentCctvId,
     currentObject,
     currentValidationType,
+    currentTime,
     deviationDataLimit,
     submitData,
   ]);
@@ -266,7 +292,9 @@ const Main = () => {
                     <button
                       className="report dropdown-item d-flex align-items-center gap-2"
                       onClick={() => {
-                        window.open("https://docs.google.com/forms/d/e/1FAIpQLSedEw8EqKvhh7P0MU9QsT4SpOHotJIXBtJkc-Iw-axuj4Azsw/viewform")
+                        window.open(
+                          "https://docs.google.com/forms/d/e/1FAIpQLSedEw8EqKvhh7P0MU9QsT4SpOHotJIXBtJkc-Iw-axuj4Azsw/viewform"
+                        );
                       }}
                     >
                       <Icon className="fs-5" icon="mdi:speak" />
@@ -343,6 +371,8 @@ const Main = () => {
               currentObject={currentObject}
               setCurrentObject={setCurrentObject}
               objectData={objectData}
+              currentTime={currentTime}
+              setCurrentTime={setCurrentTime}
             />
           ) : (
             ""

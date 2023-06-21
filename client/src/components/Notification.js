@@ -1,5 +1,7 @@
 import "../styles/notification.scss";
+import "../styles/time_picker.css";
 import { Icon } from "@iconify/react";
+import TimePicker from "react-time-picker";
 
 const Notification = ({
   currentPage,
@@ -21,6 +23,8 @@ const Notification = ({
   currentObject,
   setCurrentObject,
   objectData,
+  currentTime,
+  setCurrentTime,
 }) => {
   const cctvFilteArray = cctvData.map((cctv) => {
     return (
@@ -193,6 +197,19 @@ const Notification = ({
                   </h6>
                 </li>
                 {validationTypeFilterArray}
+                <li>
+                  <hr className="dropdown-title dropdown-divider" />
+                </li>
+                <li className="my-1">
+                  <h6 className="dropdown-title text-center">Filter Waktu</h6>
+                </li>
+                <li className="mt-2 mb-1 d-flex justify-content-center">
+                  <TimePicker
+                    onChange={setCurrentTime}
+                    value={currentTime}
+                    disableClock={true}
+                  />
+                </li>
               </ul>
             </div>
           </div>
