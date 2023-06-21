@@ -119,7 +119,7 @@ const Main = () => {
   ]);
 
   //socket.io
-  const socket = socketIOClient("http://10.10.10.66:5002", {
+  const socket = socketIOClient(process.env.REACT_APP_SOCKET, {
     transports: ["polling"],
     cors: {
       origin: "*",
