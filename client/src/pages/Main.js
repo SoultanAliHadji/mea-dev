@@ -159,25 +159,33 @@ const Main = () => {
     return () => {
       socket.off("message_from_server");
     };
-  }, [currentCctvId, currentObject, currentValidationType, notificationSound]);
+  }, [
+    currentCctvId,
+    currentObject,
+    currentValidationType,
+    currentTime,
+    notificationSound,
+  ]);
 
   const handleNewNotif = (newNotif) => {
     newNotif.map((deviation) => {
-      if (
-        currentValidationType === "All" ||
-        currentValidationType === "Butuh Validasi"
-      ) {
-        if (currentCctvId.toString() === deviation.cctv_id) {
-          if (currentObject === "All") {
-            setDeviationData((data) => [deviation, ...data]);
-            if (notificationSound === true) {
-              audio.play();
-            }
-          } else {
-            if (currentObject === deviation.type_object) {
+      if (currentTime === null) {
+        if (
+          currentValidationType === "All" ||
+          currentValidationType === "Butuh Validasi"
+        ) {
+          if (currentCctvId.toString() === deviation.cctv_id) {
+            if (currentObject === "All") {
               setDeviationData((data) => [deviation, ...data]);
               if (notificationSound === true) {
                 audio.play();
+              }
+            } else {
+              if (currentObject === deviation.type_object) {
+                setDeviationData((data) => [deviation, ...data]);
+                if (notificationSound === true) {
+                  audio.play();
+                }
               }
             }
           }
