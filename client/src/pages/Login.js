@@ -54,7 +54,7 @@ const Login = () => {
             <div className="login-container">
               <img
                 className="mb-5"
-                src={require("../assets/logo.png")}
+                src={require("../assets/logo.webp")}
                 alt=""
               />
               <h3>Log in</h3>
@@ -145,21 +145,21 @@ const Login = () => {
               <div className="carousel-inner">
                 <div className="carousel-item active" data-bs-interval="3000">
                   <img
-                    src={require("../assets/login-slider-png/slider_live_monitoring.png")}
+                    src={require("../assets/login-slider/slider_live_monitoring.webp")}
                     className="d-block w-100"
                     alt="..."
                   />
                 </div>
                 <div className="carousel-item" data-bs-interval="3000">
                   <img
-                    src={require("../assets/login-slider-png/slider_validasi_deviasi.png")}
+                    src={require("../assets/login-slider/slider_validasi_deviasi.webp")}
                     className="d-block w-100"
                     alt="..."
                   />
                 </div>
                 <div className="carousel-item" data-bs-interval="3000">
                   <img
-                    src={require("../assets/login-slider-png/slider_data_tervalidasi.png")}
+                    src={require("../assets/login-slider/slider_data_tervalidasi.webp")}
                     className="d-block w-100"
                     alt="..."
                   />

@@ -230,7 +230,7 @@ const LiveMonitoring = ({
               ) : (
                 <img
                   className="my-2"
-                  src={require("../assets/error.png")}
+                  src={require("../assets/error.webp")}
                   alt=""
                 />
               )}

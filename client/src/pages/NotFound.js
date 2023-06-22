@@ -6,7 +6,7 @@ const NotFound = () => {
       <div className="d-flex justify-content-center align-items-center h-100">
         <div className="d-grid gap-5">
           <div className="d-flex justify-content-center">
-            <img src={require("../assets/error.png")} alt="" />
+            <img src={require("../assets/error.webp")} alt="" />
           </div>
           <div className="text-center">
             <h3>Halaman tidak ditemukan</h3>

@@ -203,7 +203,7 @@ const Main = () => {
               window.history.replaceState(null, null, "/live-monitoring");
             }}
           >
-            <img src={require("../assets/logo.png")} alt="logo" />
+            <img src={require("../assets/logo.webp")} alt="logo" />
           </a>
           <button
             className="navbar-toggler"

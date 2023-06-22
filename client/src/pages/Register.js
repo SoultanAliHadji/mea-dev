@@ -57,7 +57,7 @@ const Register = () => {
     <div className="register d-flex justify-content-center align-items-center">
       <div className="form-container rounded-4 d-flex justify-content-center align-items-center">
         <div className="px-5 py-4">
-          <img className="mb-5" src={require("../assets/logo.png")} alt="" />
+          <img className="mb-5" src={require("../assets/logo.webp")} alt="" />
           <h3>Register</h3>
           <p>
             Silahkan isi beberapa detail di bawah ini untuk registrasi akun
