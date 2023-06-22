@@ -197,19 +197,21 @@ const Notification = ({
                   </h6>
                 </li>
                 {validationTypeFilterArray}
-                <li>
-                  <hr className="dropdown-title dropdown-divider" />
-                </li>
-                <li className="my-1">
-                  <h6 className="dropdown-title text-center">Filter Waktu</h6>
-                </li>
-                <li className="mt-2 mb-1 d-flex justify-content-center">
-                  <TimePicker
-                    onChange={setCurrentTime}
-                    value={currentTime}
-                    disableClock={true}
-                  />
-                </li>
+                <div>
+                  <li>
+                    <hr className="dropdown-title dropdown-divider" />
+                  </li>
+                  <li className="my-1">
+                    <h6 className="dropdown-title text-center">Filter Waktu</h6>
+                  </li>
+                  <li className="mt-2 mb-1 d-flex justify-content-center">
+                    <TimePicker
+                      onChange={setCurrentTime}
+                      value={currentTime}
+                      disableClock={true}
+                    />
+                  </li>
+                </div>
               </ul>
             </div>
           </div>

@@ -79,62 +79,60 @@ const Main = () => {
   }, []);
 
   useEffect(() => {
-    if (currentPage !== "database-deviasi") {
-      setDeviationDataLoading(true);
-      axios
-        .get(
-          process.env.REACT_APP_API +
-            "deviation?" +
-            "cctv_id=" +
-            currentCctvId +
-            "&" +
-            (currentObject !== "All"
-              ? "type_object=" + currentObject + "&"
-              : "") +
-            (currentValidationType !== "All"
-              ? "filter_notification=" + currentValidationType + "&"
-              : "") +
-            (currentTime !== null
-              ? "startDate=" +
-                (new Date().getFullYear() +
-                  "-" +
-                  (new Date().getMonth() + 1 < 10 ? "0" : "") +
-                  (new Date().getMonth() + 1) +
-                  "-" +
-                  (new Date().getDate() < 10 ? "0" : "") +
-                  new Date().getDate()) +
-                " 00:01&" +
-                "endDate=" +
-                (new Date().getFullYear() +
-                  "-" +
-                  (new Date().getMonth() + 1 < 10 ? "0" : "") +
-                  (new Date().getMonth() + 1) +
-                  "-" +
-                  (new Date().getDate() < 10 ? "0" : "") +
-                  new Date().getDate()) +
-                " " +
-                currentTime +
-                "&"
-              : "") +
-            "limit=" +
-            (deviationDataLimit + 1),
-          {
-            headers: {
-              Authorization: "Bearer " + localStorage.getItem("token"),
-            },
-          }
-        )
-        .then((res) => {
-          setDeviationData(res.data.data);
-        })
-        .catch((err) => {
-          console.log(err);
-          setDeviationData([]);
-        })
-        .finally(() => {
-          setDeviationDataLoading(false);
-        });
-    }
+    setDeviationDataLoading(true);
+    axios
+      .get(
+        process.env.REACT_APP_API +
+          "deviation?" +
+          "cctv_id=" +
+          currentCctvId +
+          "&" +
+          (currentObject !== "All"
+            ? "type_object=" + currentObject + "&"
+            : "") +
+          (currentValidationType !== "All"
+            ? "filter_notification=" + currentValidationType + "&"
+            : "") +
+          (currentTime !== null
+            ? "startDate=" +
+              (new Date().getFullYear() +
+                "-" +
+                (new Date().getMonth() + 1 < 10 ? "0" : "") +
+                (new Date().getMonth() + 1) +
+                "-" +
+                (new Date().getDate() < 10 ? "0" : "") +
+                new Date().getDate()) +
+              " 00:01&" +
+              "endDate=" +
+              (new Date().getFullYear() +
+                "-" +
+                (new Date().getMonth() + 1 < 10 ? "0" : "") +
+                (new Date().getMonth() + 1) +
+                "-" +
+                (new Date().getDate() < 10 ? "0" : "") +
+                new Date().getDate()) +
+              " " +
+              currentTime +
+              "&"
+            : "") +
+          "limit=" +
+          (deviationDataLimit + 1),
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      )
+      .then((res) => {
+        setDeviationData(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        setDeviationData([]);
+      })
+      .finally(() => {
+        setDeviationDataLoading(false);
+      });
   }, [
     currentCctvId,
     currentObject,
