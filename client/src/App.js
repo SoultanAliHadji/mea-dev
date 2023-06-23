@@ -26,7 +26,7 @@ function App() {
             }
           />
           <Route
-            path="/validasi-deviasi"
+            path="/validasi-notifikasi"
             element={
               localStorage.getItem("token") !== null ? <Main /> : <Login />
             }

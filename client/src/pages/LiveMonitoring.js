@@ -11,7 +11,7 @@ const LiveMonitoring = ({
   currentCctvData,
   setCurrentCctvData,
   cctvLoading,
-  setDeviationDataLimit,
+  setNotificationDataLimit,
 }) => {
   const [realTimeCctvLoading, setRealTimeCctvLoading] = useState(false);
   const [realTimeCctv, setRealTimeCctv] = useState();
@@ -125,7 +125,7 @@ const LiveMonitoring = ({
         onClick={() => {
           setCurrentCctvId(cctv.id);
           setCurrentCctvData([cctvData[index]]);
-          setDeviationDataLimit(10);
+          setNotificationDataLimit(10);
         }}
       >
         {cctv.name + " - " + cctv.location}

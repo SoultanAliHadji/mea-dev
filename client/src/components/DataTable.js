@@ -237,7 +237,7 @@ const DataTable = ({
               Status
             </th>
             <th className="table-header" scope="col">
-              Pengawas
+              Validator
             </th>
             <th className="table-header" scope="col">
               Action

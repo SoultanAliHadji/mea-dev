@@ -14,12 +14,12 @@ const Notification = ({
   currentValidationType,
   setCurrentValidationType,
   validationTypeData,
-  deviationData,
-  deviationDataLoading,
-  deviationDataLimit,
-  setDeviationDataLimit,
-  currentDeviationData,
-  setCurrentDeviationData,
+  notificationData,
+  notificationDataLoading,
+  notificationDataLimit,
+  setNotificationDataLimit,
+  currentNotificationData,
+  setCurrentNotificationData,
   currentObject,
   setCurrentObject,
   objectData,
@@ -36,7 +36,7 @@ const Notification = ({
           }
           onClick={() => {
             setCurrentCctvId(cctv.id);
-            setDeviationDataLimit(10);
+            setNotificationDataLimit(10);
           }}
         >
           {cctv.name + " - " + cctv.location}
@@ -55,7 +55,7 @@ const Notification = ({
           }
           onClick={() => {
             setCurrentValidationType(validationType.value);
-            setDeviationDataLimit(10);
+            setNotificationDataLimit(10);
           }}
         >
           {validationType.name}
@@ -74,7 +74,7 @@ const Notification = ({
         }
         onClick={() => {
           setCurrentObject(object.value);
-          setDeviationDataLimit(10);
+          setNotificationDataLimit(10);
         }}
       >
         {object.name}
@@ -82,46 +82,46 @@ const Notification = ({
     );
   });
 
-  const deviationArray = deviationData
-    .slice(0, deviationDataLimit)
-    .map((deviation, index) => {
+  const notificationArray = notificationData
+    .slice(0, notificationDataLimit)
+    .map((notification, index) => {
       return (
         <button
-          key={deviation.id}
+          key={notification.id}
           className={
             "border-0 text-start rounded-2 px-3 py-2 d-grid gap-2" +
             (currentPage !== "live-monitoring" &&
-            currentDeviationData.length !== 0 &&
-            currentDeviationData[0].id === deviation.id
+            currentNotificationData.length !== 0 &&
+            currentNotificationData[0].id === notification.id
               ? " active"
               : "")
           }
           onClick={() => {
-            currentPage !== "validasi-deviasi"
-              ? setCurrentPage("validasi-deviasi")
+            currentPage !== "validasi-notifikasi"
+              ? setCurrentPage("validasi-notifikasi")
               : setCurrentPage(currentPage);
-            window.history.replaceState(null, null, "/validasi-deviasi");
-            setCurrentDeviationData([deviationData[index]]);
+            window.history.replaceState(null, null, "/validasi-notifikasi");
+            setCurrentNotificationData([notificationData[index]]);
           }}
         >
           <div className="row align-items-center">
             <div className="col-5">
-              <label>{"Deviasi " + deviation.type_object}</label>
+              <label>{"Deviasi " + notification.type_object}</label>
             </div>
             <div className="col-7 d-flex justify-content-end">
               <label
                 className={
                   "px-2 rounded-2" +
-                  (deviation.type_validation === "true"
+                  (notification.type_validation === "true"
                     ? " status-true"
-                    : deviation.type_validation === "false"
+                    : notification.type_validation === "false"
                     ? " status-false"
                     : " status-none")
                 }
               >
-                {deviation.type_validation === "not_yet"
+                {notification.type_validation === "not_yet"
                   ? "Perlu Validasi"
-                  : deviation.type_validation === "true"
+                  : notification.type_validation === "true"
                   ? "Valid"
                   : "Tidak Valid"}
               </label>
@@ -129,11 +129,11 @@ const Notification = ({
           </div>
           <div className="d-flex align-items-end gap-2">
             <Icon className="icon" icon="mdi:cctv" />
-            <label>{deviation.name + " - " + deviation.location}</label>
+            <label>{notification.name + " - " + notification.location}</label>
           </div>
           <div className="d-flex align-items-end gap-2">
             <Icon className="icon" icon="akar-icons:clock" />
-            <label>{deviation.created_at}</label>
+            <label>{notification.created_at}</label>
           </div>
         </button>
       );
@@ -144,8 +144,8 @@ const Notification = ({
       <div className="title mb-3">
         <div className="row align-items-center">
           <div className="col-8">
-            <h6>List Deviasi</h6>
-            <label>List deviasi yang terdeteksi</label>
+            <h6>List Notifikasi</h6>
+            <label>List notifikasi deviasi</label>
           </div>
           <div className="col d-flex justify-content-end gap-3">
             <div>
@@ -176,7 +176,7 @@ const Notification = ({
                 <Icon icon="material-symbols:filter-list" />
               </button>
               <ul className="dropdown-menu dropdown-menu-end mt-3">
-                {currentPage === "validasi-deviasi" ? (
+                {currentPage === "validasi-notifikasi" ? (
                   <div>
                     <li className="my-1">
                       <h6 className="dropdown-title text-center">
@@ -222,21 +222,21 @@ const Notification = ({
           {objectArr}
         </div>
         <hr />
-        {deviationDataLoading === false ? (
+        {notificationDataLoading === false ? (
           <div className="notification-list d-grid gap-2 overflow-auto">
-            {deviationData.length !== 0 ? (
-              deviationArray
+            {notificationData.length !== 0 ? (
+              notificationArray
             ) : (
               <div className="d-flex justify-content-center">
                 <label className="data-not-found">Data tidak ditemukan</label>
               </div>
             )}
-            {deviationData.length >= deviationDataLimit ? (
+            {notificationData.length >= notificationDataLimit ? (
               <div className="d-flex justify-content-center mt-2">
                 <a
                   className="load-more-button"
                   onClick={() => {
-                    setDeviationDataLimit(deviationDataLimit + 10);
+                    setNotificationDataLimit(notificationDataLimit + 10);
                   }}
                 >
                   Tampilkan Lebih

@@ -3,8 +3,8 @@ import { useState } from "react";
 import axios from "axios";
 
 const Validation = ({
-  currentDeviationData,
-  setCurrentDeviationData,
+  currentNotificationData,
+  setCurrentNotificationData,
   submitData,
   setSubmitData,
 }) => {
@@ -18,7 +18,9 @@ const Validation = ({
     axios({
       method: "put",
       url:
-        process.env.REACT_APP_API + "deviation/" + currentDeviationData[0].id,
+        process.env.REACT_APP_API +
+        "deviation/" +
+        currentNotificationData[0].id,
       data: {
         type_validation: validationStatus,
         comment:
@@ -54,7 +56,7 @@ const Validation = ({
     { id: 4, value: "Pekerja/Orang berada di luar unit area pertambangan" },
   ];
 
-  const falseCommentData = [{ id: 1, value: "Deviasi tidak benar" }];
+  const falseCommentData = [{ id: 1, value: "Notifikasi tidak benar" }];
 
   const trueCommentArray = trueCommentData.map((comment) => {
     return (
@@ -137,7 +139,7 @@ const Validation = ({
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title" id="validationModalLabel">
-                Deskripsi Deviasi
+                Deskripsi Validasi
               </h1>
               <button
                 type="button"
@@ -245,9 +247,9 @@ const Validation = ({
                         setTextareaValue("");
                         setSubmitData(submitData === false ? true : false);
                       }, 2000);
-                      setCurrentDeviationData([
+                      setCurrentNotificationData([
                         {
-                          cctv_id: currentDeviationData[0].cctv_id,
+                          cctv_id: currentNotificationData[0].cctv_id,
                           comment:
                             "Operator terdeteksi: " +
                             operatorName +
@@ -255,22 +257,23 @@ const Validation = ({
                             validationCommentData.join(", ") +
                             (validationCommentData.length > 0 ? ", " : "") +
                             (textareaValue.length > 0 ? textareaValue : ""),
-                          created_at: currentDeviationData[0].created_at,
-                          id: currentDeviationData[0].id,
-                          image: currentDeviationData[0].image,
-                          ip: currentDeviationData[0].ip,
-                          location: currentDeviationData[0].location,
-                          name: currentDeviationData[0].name,
-                          path: currentDeviationData[0].path,
+                          created_at: currentNotificationData[0].created_at,
+                          id: currentNotificationData[0].id,
+                          image: currentNotificationData[0].image,
+                          ip: currentNotificationData[0].ip,
+                          location: currentNotificationData[0].location,
+                          name: currentNotificationData[0].name,
+                          path: currentNotificationData[0].path,
                           realtime_images_id:
-                            currentDeviationData[0].realtime_images_id,
-                          type_object: currentDeviationData[0].type_object,
+                            currentNotificationData[0].realtime_images_id,
+                          type_object: currentNotificationData[0].type_object,
                           type_validation: validationStatus.toString(),
                           updated_at: new Date(),
                           user_id: localStorage.getItem("id"),
                           user_name: localStorage.getItem("name"),
                           username: localStorage.getItem("username"),
-                          violate_count: currentDeviationData[0].violate_count,
+                          violate_count:
+                            currentNotificationData[0].violate_count,
                         },
                       ]);
                     }}

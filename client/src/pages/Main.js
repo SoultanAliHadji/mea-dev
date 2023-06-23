@@ -1,6 +1,6 @@
 import "../styles/main.scss";
 import LiveMonitoring from "./LiveMonitoring";
-import ValidasiDeviasi from "./ValidasiDeviasi";
+import ValidasiNotifikasi from "./ValidasiNotifikasi";
 import Notification from "../components/Notification";
 import DatabaseDeviasi from "./DatabaseDeviasi";
 import { useState, useEffect } from "react";
@@ -10,8 +10,8 @@ import socketIOClient from "socket.io-client";
 
 const Main = () => {
   const [currentPage, setCurrentPage] = useState(
-    window.location.href.includes("validasi-deviasi")
-      ? "validasi-deviasi"
+    window.location.href.includes("validasi-notifikasi")
+      ? "validasi-notifikasi"
       : window.location.href.includes("database-deviasi") &&
         localStorage.getItem("role") === "admin"
       ? "database-deviasi"
@@ -24,11 +24,11 @@ const Main = () => {
   const [currentCctvData, setCurrentCctvData] = useState([]);
   const [cctvLoading, setCctvLoading] = useState(false);
 
-  //deviation data
-  const [deviationData, setDeviationData] = useState([]);
-  const [deviationDataLoading, setDeviationDataLoading] = useState(false);
-  const [currentDeviationData, setCurrentDeviationData] = useState([]);
-  const [deviationDataLimit, setDeviationDataLimit] = useState(10);
+  //notification data
+  const [notificationData, setNotificationData] = useState([]);
+  const [notificationDataLoading, setNotificationDataLoading] = useState(false);
+  const [currentNotificationData, setCurrentNotificationData] = useState([]);
+  const [notificationDataLimit, setNotificationDataLimit] = useState(10);
 
   //notification sound
   const [notificationSound, setNotificationSound] = useState(true);
@@ -79,7 +79,7 @@ const Main = () => {
   }, []);
 
   useEffect(() => {
-    setDeviationDataLoading(true);
+    setNotificationDataLoading(true);
     axios
       .get(
         process.env.REACT_APP_API +
@@ -116,7 +116,7 @@ const Main = () => {
               "&"
             : "") +
           "limit=" +
-          (deviationDataLimit + 1),
+          (notificationDataLimit + 1),
         {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
@@ -124,21 +124,21 @@ const Main = () => {
         }
       )
       .then((res) => {
-        setDeviationData(res.data.data);
+        setNotificationData(res.data.data);
       })
       .catch((err) => {
         console.log(err);
-        setDeviationData([]);
+        setNotificationData([]);
       })
       .finally(() => {
-        setDeviationDataLoading(false);
+        setNotificationDataLoading(false);
       });
   }, [
     currentCctvId,
     currentObject,
     currentValidationType,
     currentTime,
-    deviationDataLimit,
+    notificationDataLimit,
     submitData,
   ]);
 
@@ -166,21 +166,21 @@ const Main = () => {
   ]);
 
   const handleNewNotif = (newNotif) => {
-    newNotif.map((deviation) => {
+    newNotif.map((notification) => {
       if (currentTime === null) {
         if (
           currentValidationType === "All" ||
           currentValidationType === "Butuh Validasi"
         ) {
-          if (currentCctvId.toString() === deviation.cctv_id) {
+          if (currentCctvId.toString() === notification.cctv_id) {
             if (currentObject === "All") {
-              setDeviationData((data) => [deviation, ...data]);
+              setNotificationData((data) => [notification, ...data]);
               if (notificationSound === true) {
                 audio.play();
               }
             } else {
-              if (currentObject === deviation.type_object) {
-                setDeviationData((data) => [deviation, ...data]);
+              if (currentObject === notification.type_object) {
+                setNotificationData((data) => [notification, ...data]);
                 if (notificationSound === true) {
                   audio.play();
                 }
@@ -236,18 +236,18 @@ const Main = () => {
                 <a
                   className={
                     "nav-link" +
-                    (currentPage === "validasi-deviasi" ? " active" : "")
+                    (currentPage === "validasi-notifikasi" ? " active" : "")
                   }
                   onClick={() => {
-                    setCurrentPage("validasi-deviasi");
+                    setCurrentPage("validasi-notifikasi");
                     window.history.replaceState(
                       null,
                       null,
-                      "/validasi-deviasi"
+                      "/validasi-notifikasi"
                     );
                   }}
                 >
-                  Validasi Deviasi
+                  Validasi Notifikasi
                 </a>
               </li>
               <li
@@ -337,13 +337,13 @@ const Main = () => {
                 currentCctvData={currentCctvData}
                 setCurrentCctvData={setCurrentCctvData}
                 cctvLoading={cctvLoading}
-                setDeviationDataLimit={setDeviationDataLimit}
+                setNotificationDataLimit={setNotificationDataLimit}
               />
-            ) : currentPage === "validasi-deviasi" ? (
-              <ValidasiDeviasi
-                deviationData={deviationData}
-                currentDeviationData={currentDeviationData}
-                setCurrentDeviationData={setCurrentDeviationData}
+            ) : currentPage === "validasi-notifikasi" ? (
+              <ValidasiNotifikasi
+                notificationData={notificationData}
+                currentNotificationData={currentNotificationData}
+                setCurrentNotificationData={setCurrentNotificationData}
                 submitData={submitData}
                 setSubmitData={setSubmitData}
               />
@@ -356,7 +356,7 @@ const Main = () => {
             )}
           </div>
           {currentPage === "live-monitoring" ||
-          currentPage === "validasi-deviasi" ? (
+          currentPage === "validasi-notifikasi" ? (
             <Notification
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
@@ -368,12 +368,12 @@ const Main = () => {
               currentValidationType={currentValidationType}
               setCurrentValidationType={setCurrentValidationType}
               validationTypeData={validationTypeData}
-              deviationData={deviationData}
-              deviationDataLoading={deviationDataLoading}
-              deviationDataLimit={deviationDataLimit}
-              setDeviationDataLimit={setDeviationDataLimit}
-              currentDeviationData={currentDeviationData}
-              setCurrentDeviationData={setCurrentDeviationData}
+              notificationData={notificationData}
+              notificationDataLoading={notificationDataLoading}
+              notificationDataLimit={notificationDataLimit}
+              setNotificationDataLimit={setNotificationDataLimit}
+              currentNotificationData={currentNotificationData}
+              setCurrentNotificationData={setCurrentNotificationData}
               currentObject={currentObject}
               setCurrentObject={setCurrentObject}
               objectData={objectData}

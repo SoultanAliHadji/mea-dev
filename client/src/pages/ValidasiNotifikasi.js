@@ -1,14 +1,14 @@
-import "../styles/validasi_deviasi.scss";
+import "../styles/validasi_notifikasi.scss";
 import Validation from "../components/Validation";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Icon } from "@iconify/react";
 import ReactImageMagnify from "react-magnify-image";
 
-const ValidasiDeviasi = ({
-  deviationData,
-  currentDeviationData,
-  setCurrentDeviationData,
+const ValidasiNotifikasi = ({
+  notificationData,
+  currentNotificationData,
+  setCurrentNotificationData,
   submitData,
   setSubmitData,
 }) => {
@@ -17,13 +17,13 @@ const ValidasiDeviasi = ({
     useState(false);
 
   useEffect(() => {
-    if (currentDeviationData.length !== 0) {
+    if (currentNotificationData.length !== 0) {
       setCurrentDeviationImageLoading(true);
       axios
         .get(
           process.env.REACT_APP_API +
-            currentDeviationData[0].path +
-            currentDeviationData[0].image,
+            currentNotificationData[0].path +
+            currentNotificationData[0].image,
           {
             headers: {
               Authorization: "Bearer " + localStorage.getItem("token"),
@@ -47,18 +47,18 @@ const ValidasiDeviasi = ({
           setCurrentDeviationImageLoading(false);
         });
     }
-  }, [currentDeviationData]);
+  }, [currentNotificationData]);
 
-  const deviationControllerArray = deviationData.map((deviation, index) => {
-    if (currentDeviationData[0]?.id === deviation.id) {
+  const notificationControllerArray = notificationData.map((notification, index) => {
+    if (currentNotificationData[0]?.id === notification.id) {
       return (
         <div className="d-grid gap-2">
           <button
             className={"border-0" + (index === 0 ? " disabled" : "")}
             onClick={() => {
               index !== 0
-                ? setCurrentDeviationData([deviationData[index - 1]])
-                : setCurrentDeviationData([deviationData[index]]);
+                ? setCurrentNotificationData([notificationData[index - 1]])
+                : setCurrentNotificationData([notificationData[index]]);
             }}
           >
             <Icon className="icon" icon="akar-icons:chevron-up" />
@@ -66,12 +66,12 @@ const ValidasiDeviasi = ({
           <button
             className={
               "border-0" +
-              (index === deviationData.length - 1 ? " disabled" : "")
+              (index === notificationData.length - 1 ? " disabled" : "")
             }
             onClick={() => {
-              index !== deviationData.length - 1
-                ? setCurrentDeviationData([deviationData[index + 1]])
-                : setCurrentDeviationData([deviationData[index]]);
+              index !== notificationData.length - 1
+                ? setCurrentNotificationData([notificationData[index + 1]])
+                : setCurrentNotificationData([notificationData[index]]);
             }}
           >
             <Icon className="icon" icon="akar-icons:chevron-down" />
@@ -81,62 +81,62 @@ const ValidasiDeviasi = ({
     }
   });
 
-  const currentDeviationArray = currentDeviationData.map((deviation) => {
+  const currentNotificationArray = currentNotificationData.map((notification) => {
     return (
-      <div key={deviation.id} className="deviation-data">
+      <div key={notification.id} className="notification-data">
         <div className="row align-items-center">
           <div className="col">
             <label
               className={
                 "px-3 my-1 rounded-2" +
-                (deviation.type_validation === "true"
+                (notification.type_validation === "true"
                   ? " status-true"
-                  : deviation.type_validation === "false"
+                  : notification.type_validation === "false"
                   ? " status-false"
                   : " status-none")
               }
             >
-              {deviation.type_validation === "not_yet"
+              {notification.type_validation === "not_yet"
                 ? "Perlu Validasi"
-                : deviation.type_validation === "true"
+                : notification.type_validation === "true"
                 ? "Valid"
                 : "Tidak Valid"}
             </label>
           </div>
           <div className="col">
             <Validation
-              currentDeviationData={currentDeviationData}
-              setCurrentDeviationData={setCurrentDeviationData}
+              currentNotificationData={currentNotificationData}
+              setCurrentNotificationData={setCurrentNotificationData}
               submitData={submitData}
               setSubmitData={setSubmitData}
             />
           </div>
         </div>
         <div className="my-3">
-          <h6>Terdeteksi Deviasi {deviation.type_object}</h6>
+          <h6>Terdeteksi Deviasi {notification.type_object}</h6>
         </div>
         <div className="row">
           <div className="col-4 d-grid gap-2">
             <div className="d-flex gap-2">
               <Icon className="icon" icon="mdi:cctv" />
-              <label>{deviation.name + " - " + deviation.location}</label>
+              <label>{notification.name + " - " + notification.location}</label>
             </div>
             <div className="d-flex gap-2">
               <Icon className="icon" icon="akar-icons:clock" />
-              <label>{deviation.created_at}</label>
+              <label>{notification.created_at}</label>
             </div>
           </div>
-          {deviation.type_validation !== "not_yet" ? (
+          {notification.type_validation !== "not_yet" ? (
             <div className="col-4 d-grid gap-2">
               <div className="d-flex gap-2">
                 <Icon className="icon" icon="fa6-solid:helmet-safety" />
-                <label>{deviation.user_name}</label>
+                <label>{notification.user_name}</label>
               </div>
               <div className="d-flex gap-2">
                 <Icon className="icon" icon="codicon:note" />
                 <label>
-                  {deviation.comment.substring(0, 35) +
-                    (deviation.comment.length > 36 ? "..." : "")}
+                  {notification.comment.substring(0, 35) +
+                    (notification.comment.length > 36 ? "..." : "")}
                 </label>
               </div>
             </div>
@@ -149,14 +149,14 @@ const ValidasiDeviasi = ({
   });
 
   return (
-    <div className="validasi-deviasi">
+    <div className="validasi-notifikasi">
       <div className="title mb-3">
-        <h6>Validasi Deviasi</h6>
-        <label>Validasi deviasi yang terdeteksi</label>
+        <h6>Validasi Notifikasi</h6>
+        <label>Validasi notifikasi deviasi yang terdeteksi</label>
       </div>
       <div className="content">
         <div>
-          {currentDeviationData.length !== 0 ? (
+          {currentNotificationData.length !== 0 ? (
             <div>
               {currentDeviationImageLoading === false ? (
                 <div className="row w-100 m-0 p-0">
@@ -183,7 +183,7 @@ const ValidasiDeviasi = ({
                   </div>
                   <div className="notification-navigation col-1 m-0 p-0">
                     <div className="h-100 d-flex align-items-center">
-                      {deviationControllerArray}
+                      {notificationControllerArray}
                     </div>
                   </div>
                 </div>
@@ -194,12 +194,12 @@ const ValidasiDeviasi = ({
                   </div>
                 </div>
               )}
-              <div className="mt-3">{currentDeviationArray}</div>
+              <div className="mt-3">{currentNotificationArray}</div>
             </div>
           ) : (
             <div className="d-flex justify-content-center">
-              <label className="not-yet-deviation">
-                Pilih deviasi pada List Deviasi
+              <label className="not-yet-notification">
+                Pilih notifikasi deviasi pada List Notifikasi
               </label>
             </div>
           )}
@@ -209,4 +209,4 @@ const ValidasiDeviasi = ({
   );
 };
 
-export default ValidasiDeviasi;
+export default ValidasiNotifikasi;
