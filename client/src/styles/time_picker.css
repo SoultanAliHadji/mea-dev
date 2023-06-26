@@ -1,7 +1,7 @@
 .react-time-picker {
     display: inline-flex;
     position: relative;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 500;
     color: #737373;
 }
@@ -40,7 +40,7 @@
 }
 
 .react-time-picker__inputGroup__divider {
-    padding: 1px 0;
+    padding: 2px 0;
     white-space: pre;
 }
 
@@ -50,7 +50,7 @@
 }
 
 .react-time-picker__inputGroup__input {
-    min-width: 1em;
+    min-width: 1.2em;
     height: 100%;
     position: relative;
     padding: 0 1px;
@@ -128,4 +128,24 @@
 
 .react-time-picker__clock--closed {
     display: none;
+}
+
+@media only screen and (max-width: 1530px) {
+    .react-time-picker {
+        font-size: 12px;
+    }
+
+    .react-time-picker__inputGroup__divider {
+        padding: 1px 0;
+    }
+}
+
+@media only screen and (max-width: 1230px) {
+    .react-time-picker {
+        font-size: 11px;
+    }
+
+    .react-time-picker__inputGroup__divider {
+        padding: 1px 0;
+    }
 }

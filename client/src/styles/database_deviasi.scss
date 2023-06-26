@@ -58,10 +58,44 @@
                 }
             }
 
+            .modal-body {
+                .advanced-filter-button {
+                    font-size: 14px;
+                    font-weight: 500;
+                    background-color: white;
+                    color: #737373;
+
+                    &:hover {
+                        color: #297209;
+                    }
+                }
+            }
+
             .modal-footer {
                 button {
                     font-size: 14px;
                     font-weight: 500;
+                    background-image: linear-gradient(to right, #3B9315, #297209);
+                    color: white;
+
+                    &:hover {
+                        background-image: linear-gradient(to right, #297209, #297209);
+                    }
+                }
+
+                .reset-button {
+                    background-image: linear-gradient(to right, white, white);
+                    border: 2px solid #3B9315;
+                    color: #297209;
+
+                    &:hover {
+                        background-image: linear-gradient(to right, #297209, #297209);
+                        border: 2px solid #297209;
+                        color: white;
+                    }
+                }
+
+                .ok-button {
                     background-image: linear-gradient(to right, #3B9315, #297209);
                     color: white;
 

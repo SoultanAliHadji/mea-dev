@@ -1,11 +1,13 @@
 import "../styles/database_deviasi.scss";
 import "../styles/calendar.css";
+import "../styles/time_picker.css";
 import DataTable from "../components/DataTable";
 import DataExport from "../components/DataExport";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Icon } from "@iconify/react";
 import Calendar from "react-calendar";
+import TimePicker from "react-time-picker";
 
 const DatabaseDeviasi = ({ cctvData, objectData, validationTypeData }) => {
   const [date, setDate] = useState([new Date(), new Date()]);
@@ -21,6 +23,8 @@ const DatabaseDeviasi = ({ cctvData, objectData, validationTypeData }) => {
   const [currentCctv, setCurrentCctv] = useState("All");
   const [currentObject, setCurrentObject] = useState("All");
   const [currentValidationType, setCurrentValidationType] = useState("All");
+  const [advancedFilter, setAdvancedFilter] = useState(false);
+  const [time, setTime] = useState(["00:01", "23:59"]);
 
   useEffect(() => {
     setDeviationDataLoading(true);
@@ -43,7 +47,9 @@ const DatabaseDeviasi = ({ cctvData, objectData, validationTypeData }) => {
             "-" +
             (date[0].getDate() < 10 ? "0" : "") +
             date[0].getDate()) +
-          " 00:01&" +
+          " " +
+          (time[0] !== null ? time[0] : "00:01") +
+          "&" +
           "endDate=" +
           (date[1].getFullYear() +
             "-" +
@@ -52,7 +58,9 @@ const DatabaseDeviasi = ({ cctvData, objectData, validationTypeData }) => {
             "-" +
             (date[1].getDate() < 10 ? "0" : "") +
             date[1].getDate()) +
-          " 23:59&",
+          " " +
+          (time[1] !== null ? time[1] : "23:59") +
+          "&",
         {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
@@ -69,7 +77,7 @@ const DatabaseDeviasi = ({ cctvData, objectData, validationTypeData }) => {
       .finally(() => {
         setDeviationDataLoading(false);
       });
-  }, [currentCctv, currentObject, currentValidationType, date]);
+  }, [currentCctv, currentObject, currentValidationType, date, time]);
 
   useEffect(() => {
     setReactMagnifyImageLoading(true);
@@ -105,7 +113,15 @@ const DatabaseDeviasi = ({ cctvData, objectData, validationTypeData }) => {
   useEffect(() => {
     setDataLimit(10);
     setCurrentPage(1);
-  }, [currentCctv, currentObject, currentValidationType, date]);
+  }, [currentCctv, currentObject, currentValidationType, date, time]);
+
+  const handleTime = (index, value) => {
+    if (index === 0) {
+      setTime([value, time[1]]);
+    } else {
+      setTime([time[0], value]);
+    }
+  };
 
   const cctvFilter = cctvData.map((cctv) => {
     return (
@@ -225,7 +241,7 @@ const DatabaseDeviasi = ({ cctvData, objectData, validationTypeData }) => {
                       aria-label="Close"
                     ></button>
                   </div>
-                  <div className="modal-body d-flex justify-content-center">
+                  <div className="modal-body d-grid justify-content-center gap-3">
                     <Calendar
                       onChange={setDate}
                       onClickDay={() => {
@@ -239,29 +255,74 @@ const DatabaseDeviasi = ({ cctvData, objectData, validationTypeData }) => {
                       maxDate={new Date()}
                       selectRange={true}
                     />
+                    {advancedFilter === false ? (
+                      ""
+                    ) : (
+                      <div className="row">
+                        <div className="col d-grid">
+                          <label>Start</label>
+                          <TimePicker
+                            onChange={(value) => {
+                              handleTime(0, value);
+                            }}
+                            value={time[0]}
+                            disableClock={true}
+                          />
+                        </div>
+                        <div className="col d-grid">
+                          <label>End</label>
+                          <TimePicker
+                            onChange={(value) => {
+                              handleTime(1, value);
+                            }}
+                            value={time[1]}
+                            disableClock={true}
+                          />
+                        </div>
+                      </div>
+                    )}
+                    <button
+                      className="advanced-filter-button border-0"
+                      title="filter waktu"
+                      onClick={() => {
+                        setAdvancedFilter(
+                          advancedFilter === false ? true : false
+                        );
+                      }}
+                    >
+                      <Icon
+                        icon={
+                          "codicon:fold-" +
+                          (advancedFilter === false ? "down" : "up")
+                        }
+                      />
+                    </button>
                   </div>
                   <div className="modal-footer">
                     <div className="row w-100 d-flex align-items-center">
                       <div className="col p-0">
                         <label>{dateStatus}</label>
                       </div>
-                      <div className="col d-flex justify-content-end p-0">
-                        {date !== [new Date(), new Date()] &&
-                        dateStatus === "" ? (
-                          <button
-                            className="border-0 rounded-2 px-3 py-2"
-                            onClick={() => {
-                              setDate([new Date(), new Date()]);
-                              date !== [new Date(), new Date()]
-                                ? setDateStatus("*pilih tanggal (start)")
-                                : setDateStatus(dateStatus);
-                            }}
-                          >
-                            Reset Periode
-                          </button>
-                        ) : (
-                          ""
-                        )}
+                      <div className="col d-flex justify-content-end p-0 gap-3">
+                        <button
+                          className="reset-button rounded-2 px-3 py-2"
+                          onClick={() => {
+                            setDate([new Date(), new Date()]);
+                            date !== [new Date(), new Date()]
+                              ? setDateStatus("*pilih tanggal (start)")
+                              : setDateStatus(dateStatus);
+                            setTime(["00:01", "23:59"]);
+                          }}
+                        >
+                          Reset
+                        </button>
+
+                        <button
+                          className="ok-button border-0 rounded-2 px-3 py-2"
+                          data-bs-dismiss="modal"
+                        >
+                          Tutup
+                        </button>
                       </div>
                     </div>
                   </div>
