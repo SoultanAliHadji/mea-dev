@@ -4,26 +4,6 @@
     table {
         font-size: 14px;
 
-        .table-header {
-            background-color: #3B9315;
-            color: white;
-        }
-
-        img {
-            width: 100px;
-        }
-
-        .detail-button {
-            font-size: 14px;
-            font-weight: 500;
-            background-image: linear-gradient(to right, #3B9315, #297209);
-            color: white;
-
-            &:hover {
-                background-image: linear-gradient(to right, #297209, #297209);
-            }
-        }
-
         .status-none {
             font-weight: 500;
             background-color: #F0F3FF;
@@ -45,19 +25,27 @@
             color: #DE4452;
         }
 
-        .deviation-navigation {
-            button {
-                background-color: white;
-                color: #737373;
-                font-size: 24px;
-
+        thead {
+            .table-header {
+                background-color: #3B9315;
+                color: white;
+            }
+        }
+        
+        tbody {
+            tr {
                 &:hover {
-                    color: #297209;
+                    th, td, label {
+                        cursor: pointer;
+                        background-color: #DFF4DF;
+                    }
                 }
             }
 
-            .disabled {
-                visibility: hidden;
+            .active {
+                th, td, label {
+                    background-color: #DFF4DF;
+                }
             }
         }
 
@@ -73,6 +61,22 @@
                     color: #3B9315;
                 }
             }
+
+            .deviation-navigation {
+                button {
+                    background-color: white;
+                    color: #737373;
+                    font-size: 24px;
+    
+                    &:hover {
+                        color: #297209;
+                    }
+                }
+    
+                .disabled {
+                    visibility: hidden;
+                }
+            }
         }
     }
 }
@@ -80,37 +84,48 @@
 @media only screen and (max-width: 1530px) {
     .data-table {
         max-height: 48.2vh !important;
-
+    
         table {
             font-size: 12px;
-
-            .table-header {
-                background-color: #3B9315;
-                color: white;
-            }
-
-            img {
-                width: 100px;
-            }
-
-            .detail-button {
-                font-size: 12px;
-            }
-
+    
             .status-none, .status-true, .status-false {
                 font-size: 12px;
             }
-
-            .deviation-navigation {
-                button {
-                    font-size: 21px;
+    
+            thead {
+                .table-header {
+                    background-color: #3B9315;
+                    color: white;
                 }
             }
-
+            
+            tbody {
+                tr {
+                    &:hover {
+                        th, td, label {
+                            cursor: pointer;
+                            background-color: #DFF4DF;
+                        }
+                    }
+                }
+            }
+    
             .modal-dialog {
                 .modal-header {
                     h1 {
                         font-size: 17px;
+                    }
+                }
+    
+                .modal-body {
+                    .spinner-border {
+                        color: #3B9315;
+                    }
+                }
+    
+                .deviation-navigation {
+                    button {
+                        font-size: 21px;
                     }
                 }
             }
@@ -121,37 +136,48 @@
 @media only screen and (max-width: 1230px) {
     .data-table {
         max-height: 47.3vh !important;
-
+    
         table {
             font-size: 11px;
-
-            .table-header {
-                background-color: #3B9315;
-                color: white;
-            }
-
-            img {
-                width: 100px;
-            }
-
-            .detail-button {
-                font-size: 11px;
-            }
-
+    
             .status-none, .status-true, .status-false {
                 font-size: 11px;
             }
-
-            .deviation-navigation {
-                button {
-                    font-size: 20px;
+    
+            thead {
+                .table-header {
+                    background-color: #3B9315;
+                    color: white;
                 }
             }
-
+            
+            tbody {
+                tr {
+                    &:hover {
+                        th, td, label {
+                            cursor: pointer;
+                            background-color: #DFF4DF;
+                        }
+                    }
+                }
+            }
+    
             .modal-dialog {
                 .modal-header {
                     h1 {
                         font-size: 16px;
+                    }
+                }
+    
+                .modal-body {
+                    .spinner-border {
+                        color: #3B9315;
+                    }
+                }
+    
+                .deviation-navigation {
+                    button {
+                        font-size: 20px;
                     }
                 }
             }

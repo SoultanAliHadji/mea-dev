@@ -5,6 +5,9 @@ import { Icon } from "@iconify/react";
 
 const DataTable = ({
   dataLimit,
+  setDataLimit,
+  currentTablePage,
+  setCurrentTablePage,
   deviationData,
   deviationDataLoading,
   currentDeviationDetail,
@@ -12,13 +15,35 @@ const DataTable = ({
   currentDeviationImageBlob,
   reactMagnifyImageLoading,
 }) => {
-  const [currentindex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleMovePage = (action) => {
+    if (action === "previous" && dataLimit - 25 === currentIndex) {
+      setCurrentTablePage(currentTablePage - 1);
+      setDataLimit(dataLimit - 25);
+    } else if (action === "next" && (currentIndex + 1) % 25 === 0) {
+      setCurrentTablePage(currentTablePage + 1);
+      setDataLimit(dataLimit + 25);
+    }
+  };
 
   const deviationArray = deviationData
-    .slice(dataLimit - 10, dataLimit)
+    .slice(dataLimit - 25, dataLimit)
     .map((deviation, index) => {
       return (
-        <tr className="align-middle" key={deviation.id}>
+        <tr
+          className={
+            "align-middle" +
+            (deviation.id === currentDeviationDetail.id ? " active" : "")
+          }
+          key={deviation.id}
+          data-bs-toggle="modal"
+          data-bs-target="#deviationModal"
+          onClick={() => {
+            setCurrentIndex(dataLimit - 25 + index);
+            setCurrentDeviationDetail(deviation);
+          }}
+        >
           <th className="text-center" scope="row">
             {deviation.id}
           </th>
@@ -27,9 +52,6 @@ const DataTable = ({
           </td>
           <td className="text-center">{deviation.created_at}</td>
           <td className="text-center">{deviation.type_object}</td>
-          {/* <td className="text-center">
-              <img src={currentDeviationImageBlob} alt="" />
-            </td> */}
           <td className="text-center">
             {deviation.comment === null
               ? "-"
@@ -61,22 +83,6 @@ const DataTable = ({
               : deviation.user_name.length < 10
               ? deviation.user_name
               : deviation.user_name.substr(0, 9) + "..."}
-          </td>
-          <td>
-            <div className="d-flex justify-content-center">
-              <button
-                type="button"
-                className="detail-button border-0 rounded-2 px-3 py-1"
-                data-bs-toggle="modal"
-                data-bs-target={"#deviationModal" + deviation.id}
-                onClick={() => {
-                  setCurrentIndex(index);
-                  setCurrentDeviationDetail(deviation);
-                }}
-              >
-                <Icon icon="fa-solid:eye" />
-              </button>
-            </div>
             <div
               className="modal fade"
               id={"deviationModal" + deviation.id}
@@ -147,12 +153,12 @@ const DataTable = ({
                           <button
                             className={
                               "border-0" +
-                              (currentindex === 0 ? " disabled" : "")
+                              (currentIndex === 0 ? " disabled" : "")
                             }
                             onClick={() => {
-                              setCurrentIndex(currentindex - 1);
+                              setCurrentIndex(currentIndex - 1);
                               setCurrentDeviationDetail(
-                                deviationData[currentindex - 1]
+                                deviationData[currentIndex - 1]
                               );
                             }}
                           >
@@ -164,14 +170,14 @@ const DataTable = ({
                           <button
                             className={
                               "border-0" +
-                              (currentindex === deviationData.length - 1
+                              (currentIndex === deviationData.length - 1
                                 ? " disabled"
                                 : "")
                             }
                             onClick={() => {
-                              setCurrentIndex(currentindex + 1);
+                              setCurrentIndex(currentIndex + 1);
                               setCurrentDeviationDetail(
-                                deviationData[currentindex + 1]
+                                deviationData[currentIndex + 1]
                               );
                             }}
                           >
@@ -239,9 +245,6 @@ const DataTable = ({
             <th className="table-header" scope="col">
               Validator
             </th>
-            <th className="table-header" scope="col">
-              Action
-            </th>
           </tr>
         </thead>
         {deviationData.length > 0 && deviationDataLoading === false ? (
@@ -249,6 +252,143 @@ const DataTable = ({
         ) : (
           ""
         )}
+        <div
+          className="modal fade"
+          id="deviationModal"
+          tabindex="-1"
+          aria-labelledby="deviationModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h1 className="modal-title" id="periodModalLabel">
+                  {"ID: " + currentDeviationDetail.id}
+                </h1>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div className="modal-body d-grid gap-2">
+                {reactMagnifyImageLoading === false ? (
+                  <ReactImageMagnify
+                    {...{
+                      smallImage: {
+                        alt: "",
+                        isFluidWidth: true,
+                        src: currentDeviationImageBlob,
+                      },
+                      largeImage: {
+                        src: currentDeviationImageBlob,
+                        width: 800,
+                        height: 500,
+                      },
+                      enlargedImagePosition: "over",
+                    }}
+                  />
+                ) : (
+                  <div className="d-flex justify-content-center my-3">
+                    <div className="spinner-border">
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
+                  </div>
+                )}
+                <div className="row">
+                  <div className="col">
+                    <label
+                      className={
+                        "px-2 rounded-2 mt-2" +
+                        (currentDeviationDetail.type_validation === "not_yet"
+                          ? " status-none"
+                          : currentDeviationDetail.type_validation === "true"
+                          ? " status-true"
+                          : " status-false")
+                      }
+                    >
+                      {currentDeviationDetail.type_validation === "not_yet"
+                        ? "Perlu Validasi"
+                        : currentDeviationDetail.type_validation === "true"
+                        ? "Valid"
+                        : "Tidak Valid"}
+                    </label>
+                  </div>
+                  <div className="col p-0">
+                    <div className="deviation-navigation d-flex justify-content-end gap-2">
+                      <button
+                        className={
+                          "border-0" + (currentIndex === 0 ? " disabled" : "")
+                        }
+                        onClick={() => {
+                          setCurrentIndex(currentIndex - 1);
+                          setCurrentDeviationDetail(
+                            deviationData[currentIndex - 1]
+                          );
+                          handleMovePage("previous");
+                        }}
+                      >
+                        <Icon className="icon" icon="akar-icons:chevron-left" />
+                      </button>
+                      <button
+                        className={
+                          "border-0" +
+                          (currentIndex === deviationData.length - 1
+                            ? " disabled"
+                            : "")
+                        }
+                        onClick={() => {
+                          setCurrentIndex(currentIndex + 1);
+                          setCurrentDeviationDetail(
+                            deviationData[currentIndex + 1]
+                          );
+                          handleMovePage("next");
+                        }}
+                      >
+                        <Icon
+                          className="icon"
+                          icon="akar-icons:chevron-right"
+                        />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div className="row">
+                    <label className="col-2 fw-bolder">CCTV</label>
+                    <label className="col-10">
+                      {": " +
+                        currentDeviationDetail.name +
+                        " - " +
+                        currentDeviationDetail.location}
+                    </label>
+                  </div>
+                  <div className="row">
+                    <label className="col-2 fw-bolder">Pengawas</label>
+                    {currentDeviationDetail.user_name === null ? (
+                      <label className="col-10">: -</label>
+                    ) : (
+                      <label className="col-10">
+                        {": " + currentDeviationDetail.user_name}
+                      </label>
+                    )}
+                  </div>
+                  <div className="row">
+                    <label className="col-2 fw-bolder">Deskripsi</label>
+                    {currentDeviationDetail.comment === null ? (
+                      <label className="col-10">: -</label>
+                    ) : (
+                      <label className="col-10">
+                        {currentDeviationDetail.comment}
+                      </label>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </table>
     </div>
   );

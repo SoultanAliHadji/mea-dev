@@ -12,8 +12,8 @@ import TimePicker from "react-time-picker";
 const DatabaseDeviasi = ({ cctvData, objectData, validationTypeData }) => {
   const [date, setDate] = useState([new Date(), new Date()]);
   const [dateStatus, setDateStatus] = useState("*pilih tanggal (start)");
-  const [dataLimit, setDataLimit] = useState(10);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [dataLimit, setDataLimit] = useState(25);
+  const [currentTablePage, setCurrentTablePage] = useState(1);
   const [deviationData, setDeviationData] = useState([]);
   const [deviationDataLoading, setDeviationDataLoading] = useState(false);
   const [currentDeviationDetail, setCurrentDeviationDetail] = useState({});
@@ -111,8 +111,8 @@ const DatabaseDeviasi = ({ cctvData, objectData, validationTypeData }) => {
   }, [currentDeviationDetail]);
 
   useEffect(() => {
-    setDataLimit(10);
-    setCurrentPage(1);
+    setDataLimit(25);
+    setCurrentTablePage(1);
   }, [currentCctv, currentObject, currentValidationType, date, time]);
 
   const handleTime = (index, value) => {
@@ -356,6 +356,9 @@ const DatabaseDeviasi = ({ cctvData, objectData, validationTypeData }) => {
       <div className="content">
         <DataTable
           dataLimit={dataLimit}
+          setDataLimit={setDataLimit}
+          currentTablePage={currentTablePage}
+          setCurrentTablePage={setCurrentTablePage}
           deviationData={deviationData}
           deviationDataLoading={deviationDataLoading}
           currentDeviationDetail={currentDeviationDetail}
@@ -366,32 +369,40 @@ const DatabaseDeviasi = ({ cctvData, objectData, validationTypeData }) => {
         <div>
           {deviationDataLoading === false ? (
             deviationData.length > 0 ? (
-              <div className="pagination-nav d-flex justify-content-center align-items-center gap-3 mt-5">
-                <button
-                  className={
-                    "border-0 rounded-start py-2" +
-                    (currentPage === 1 ? " disabled" : "")
-                  }
-                  onClick={() => {
-                    setCurrentPage(currentPage - 1);
-                    setDataLimit(dataLimit - 10);
-                  }}
-                >
-                  Previous
-                </button>
-                <label>{currentPage}</label>
-                <button
-                  className={
-                    "border-0 rounded-end py-2" +
-                    (dataLimit >= deviationData.length ? " disabled" : "")
-                  }
-                  onClick={() => {
-                    setCurrentPage(currentPage + 1);
-                    setDataLimit(dataLimit + 10);
-                  }}
-                >
-                  Next
-                </button>
+              <div className="row align-items-center mt-5">
+                <div className="col">
+                  <label>{dataLimit} dari {deviationData.length} data</label>
+                </div>
+                <div className="col">
+                  <div className="pagination-nav d-flex justify-content-center align-items-center gap-3">
+                    <button
+                      className={
+                        "border-0 rounded-start py-2" +
+                        (currentTablePage === 1 ? " disabled" : "")
+                      }
+                      onClick={() => {
+                        setCurrentTablePage(currentTablePage - 1);
+                        setDataLimit(dataLimit - 25);
+                      }}
+                    >
+                      Previous
+                    </button>
+                    <label>{currentTablePage}</label>
+                    <button
+                      className={
+                        "border-0 rounded-end py-2" +
+                        (dataLimit >= deviationData.length ? " disabled" : "")
+                      }
+                      onClick={() => {
+                        setCurrentTablePage(currentTablePage + 1);
+                        setDataLimit(dataLimit + 25);
+                      }}
+                    >
+                      Next
+                    </button>
+                  </div>
+                </div>
+                <div className="col"></div>
               </div>
             ) : (
               <label className="w-100 text-center my-2">

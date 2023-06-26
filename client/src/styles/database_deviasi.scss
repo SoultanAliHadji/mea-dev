@@ -113,8 +113,9 @@
         padding: 12px 24px;
         border-radius: 0 0 8px 8px;
 
-        .spinner-border {
-            color: #3B9315;
+        label {
+            font-size: 14px;
+            color: #737373;
         }
 
         .pagination-nav {
@@ -138,6 +139,10 @@
                 color: #737373;
                 pointer-events: none;
             }
+        }
+
+        .spinner-border {
+            color: #3B9315;
         }
     }
 }
