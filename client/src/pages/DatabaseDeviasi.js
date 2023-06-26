@@ -349,7 +349,7 @@ const DatabaseDeviasi = ({ cctvData, objectData, validationTypeData }) => {
             </div>
           </div>
           <div className="col-xl d-xl-flex justify-content-end align-items-end">
-            <DataExport date={date} deviationData={deviationData} />
+            <DataExport deviationData={deviationData} />
           </div>
         </div>
       </div>
