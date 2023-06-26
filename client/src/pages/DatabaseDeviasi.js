@@ -396,7 +396,7 @@ const DatabaseDeviasi = ({ cctvData, objectData, validationTypeData }) => {
             ) : (
               <label className="w-100 text-center my-2">
                 Tidak terdapat data yang sesuai dengan filter CCTV, Objek,
-                maupun Periode
+                Status Validasi, maupun Periode
               </label>
             )
           ) : (
