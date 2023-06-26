@@ -151,7 +151,7 @@ const Main = () => {
   });
 
   useEffect(() => {
-    socket.on("message_from_server", (data) => handleNewNotif(data));
+    socket.on("message_from_server", (data) => newNotifHandler(data));
     console.log(socket);
 
     return () => {
@@ -165,7 +165,7 @@ const Main = () => {
     notificationSound,
   ]);
 
-  const handleNewNotif = (newNotif) => {
+  const newNotifHandler = (newNotif) => {
     newNotif.map((notification) => {
       if (currentTime === null) {
         if (

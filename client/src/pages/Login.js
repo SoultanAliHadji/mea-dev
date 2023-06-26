@@ -10,9 +10,9 @@ const Login = () => {
   const [loginMessage, setLoginMessage] = useState("");
   const [passwordVisibility, setPasswordVisibility] = useState(false);
 
-  const enterKeyHandle = () => {};
+  const enterKeyHandler = () => {};
 
-  const handleLogin = () => {
+  const loginHandler = () => {
     if (username === "" || password === "") {
       setLoginMessage("username dan password tidak boleh kosong");
     } else {
@@ -71,7 +71,7 @@ const Login = () => {
                     placeholder="Masukkan Username atau SID"
                     onChange={(e) => setUsername(e.target.value)}
                     onKeyDown={(e) => {
-                      e.key === "Enter" ? handleLogin() : enterKeyHandle();
+                      e.key === "Enter" ? loginHandler() : enterKeyHandler();
                     }}
                   />
                 </div>
@@ -84,7 +84,7 @@ const Login = () => {
                       placeholder="Masukkan Password"
                       onChange={(e) => setPassword(e.target.value)}
                       onKeyDown={(e) => {
-                        e.key === "Enter" ? handleLogin() : enterKeyHandle();
+                        e.key === "Enter" ? loginHandler() : enterKeyHandler();
                       }}
                     />
                     <Icon
@@ -104,7 +104,7 @@ const Login = () => {
               <div className="d-grid">
                 <button
                   className="border-0 rounded-2 px-3 py-2"
-                  onClick={handleLogin}
+                  onClick={loginHandler}
                 >
                   Masuk
                 </button>

@@ -47,7 +47,7 @@ const LiveMonitoring = ({
     );
   });
 
-  const handleSetPerimeterArea = () => {
+  const perimeterAreaHandler = () => {
     axios({
       method: "post",
       url: process.env.REACT_APP_API + "polygon/" + currentCctvId,
@@ -293,7 +293,7 @@ const LiveMonitoring = ({
                               type="button"
                               className="submit-button border-0 rounded-2 px-3 py-1"
                               data-bs-dismiss="modal"
-                              onClick={handleSetPerimeterArea}
+                              onClick={perimeterAreaHandler}
                             >
                               Simpan
                             </button>

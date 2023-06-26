@@ -115,7 +115,7 @@ const DatabaseDeviasi = ({ cctvData, objectData, validationTypeData }) => {
     setCurrentTablePage(1);
   }, [currentCctv, currentObject, currentValidationType, date, time]);
 
-  const handleTime = (index, value) => {
+  const timeHandler = (index, value) => {
     if (index === 0) {
       setTime([value, time[1]]);
     } else {
@@ -263,7 +263,7 @@ const DatabaseDeviasi = ({ cctvData, objectData, validationTypeData }) => {
                           <label>Start</label>
                           <TimePicker
                             onChange={(value) => {
-                              handleTime(0, value);
+                              timeHandler(0, value);
                             }}
                             value={time[0]}
                             disableClock={true}
@@ -273,7 +273,7 @@ const DatabaseDeviasi = ({ cctvData, objectData, validationTypeData }) => {
                           <label>End</label>
                           <TimePicker
                             onChange={(value) => {
-                              handleTime(1, value);
+                              timeHandler(1, value);
                             }}
                             value={time[1]}
                             disableClock={true}

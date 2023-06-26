@@ -14,7 +14,7 @@ const Validation = ({
   const [textareaStatus, setTextareaStatus] = useState(true);
   const [textareaValue, setTextareaValue] = useState("");
 
-  const handleSubmit = () => {
+  const submitHandler = () => {
     axios({
       method: "put",
       url:
@@ -238,7 +238,7 @@ const Validation = ({
                     }
                     data-bs-dismiss="modal"
                     onClick={() => {
-                      handleSubmit();
+                      submitHandler();
                       setTimeout(() => {
                         setValidationStatus();
                         setOperatorName("");

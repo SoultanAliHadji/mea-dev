@@ -11,9 +11,9 @@ const Register = () => {
   const [registerMessage, setRegisterMessage] = useState("");
   const [passwordVisibility, setPasswordVisibility] = useState(false);
 
-  const enterKeyHandle = () => {};
+  const enterKeyHandler = () => {};
 
-  const handleRegister = () => {
+  const registerHandler = () => {
     if (name === "" || username === "" || password === "") {
       setRegisterMessage("nama, username, dan password tidak boleh kosong");
     } else {
@@ -72,7 +72,7 @@ const Register = () => {
                 placeholder="Masukkan Nama User"
                 onChange={(e) => setName(e.target.value)}
                 onKeyDown={(e) => {
-                  e.key === "Enter" ? handleRegister() : enterKeyHandle();
+                  e.key === "Enter" ? registerHandler() : enterKeyHandler();
                 }}
               />
             </div>
@@ -84,7 +84,7 @@ const Register = () => {
                 placeholder="Masukkan Username atau SID"
                 onChange={(e) => setUsername(e.target.value)}
                 onKeyDown={(e) => {
-                  e.key === "Enter" ? handleRegister() : enterKeyHandle();
+                  e.key === "Enter" ? registerHandler() : enterKeyHandler();
                 }}
               />
             </div>
@@ -97,7 +97,7 @@ const Register = () => {
                   placeholder="Masukkan Password"
                   onChange={(e) => setPassword(e.target.value)}
                   onKeyDown={(e) => {
-                    e.key === "Enter" ? handleRegister() : enterKeyHandle();
+                    e.key === "Enter" ? registerHandler() : enterKeyHandler();
                   }}
                 />
                 <Icon
@@ -117,7 +117,7 @@ const Register = () => {
           <div className="d-grid">
             <button
               className="border-0 rounded-2 px-3 py-2"
-              onClick={handleRegister}
+              onClick={registerHandler}
             >
               Daftar
             </button>
