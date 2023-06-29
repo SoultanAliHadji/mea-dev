@@ -142,6 +142,10 @@ const Main = () => {
     submitData,
   ]);
 
+  useEffect(() => {
+    setNotificationDataLimit(10);
+  }, [currentTime]);
+
   //socket.io
   const socket = socketIOClient(process.env.REACT_APP_SOCKET, {
     transports: ["polling"],
