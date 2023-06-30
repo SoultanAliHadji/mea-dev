@@ -243,7 +243,7 @@ const LiveMonitoring = ({
             <div className="cam-navigation row mb-3 m-0 p-0 align-items-center">
               <div className="col">
                 <button
-                  className="border-0 d-flex align-items-center gap-1"
+                  className="border-0 d-flex align-items-center gap-1 d-none"
                   type="button"
                   data-bs-toggle="modal"
                   data-bs-target="#perimeterModal"
