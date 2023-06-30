@@ -17,6 +17,7 @@ const LiveMonitoring = ({
   const [realTimeCctv, setRealTimeCctv] = useState();
   const [realTimeCctvError, setRealTimeCctvError] = useState(false);
   const [annotation, setAnnotation] = useState([]);
+  const [tempAnnotation, setTempAnnotation] = useState([]);
   const [controlLoading, setControlLoading] = useState(false);
 
   const annotationAdder = (e) => {
@@ -24,6 +25,10 @@ const LiveMonitoring = ({
       setAnnotation((arr) => [
         ...arr,
         [e.nativeEvent.offsetX, e.nativeEvent.offsetY],
+      ]);
+      setTempAnnotation((arr) => [
+        ...arr,
+        [e.nativeEvent.offsetX * 2.75, e.nativeEvent.offsetY * 2.75],
       ]);
     }
   };
@@ -52,7 +57,7 @@ const LiveMonitoring = ({
       method: "post",
       url: process.env.REACT_APP_API + "polygon/" + currentCctvId,
       data: {
-        polygon: annotation,
+        polygon: tempAnnotation,
       },
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -238,7 +243,7 @@ const LiveMonitoring = ({
             <div className="cam-navigation row mb-3 m-0 p-0 align-items-center">
               <div className="col">
                 <button
-                  className="border-0 d-flex align-items-center gap-1 d-none"
+                  className="border-0 d-flex align-items-center gap-1"
                   type="button"
                   data-bs-toggle="modal"
                   data-bs-target="#perimeterModal"
@@ -283,6 +288,7 @@ const LiveMonitoring = ({
                               className="border-0"
                               onClick={() => {
                                 setAnnotation([]);
+                                setTempAnnotation([]);
                               }}
                             >
                               Reset anotasi
