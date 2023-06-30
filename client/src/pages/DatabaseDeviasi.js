@@ -371,7 +371,12 @@ const DatabaseDeviasi = ({ cctvData, objectData, validationTypeData }) => {
             deviationData.length > 0 ? (
               <div className="row align-items-center mt-5">
                 <div className="col">
-                  <label>{dataLimit} dari {deviationData.length} data</label>
+                  <label>
+                    {dataLimit <= deviationData.length
+                      ? dataLimit
+                      : deviationData.length}{" "}
+                    dari {deviationData.length} data
+                  </label>
                 </div>
                 <div className="col">
                   <div className="pagination-nav d-flex justify-content-center align-items-center gap-3">
