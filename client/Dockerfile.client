@@ -1,0 +1,21 @@
+FROM node:latest as builder
+
+WORKDIR /client
+
+ARG API=http://10.10.10.66:5000/api/
+ARG SOCKET=http://10.10.10.66:5000
+ENV REACT_APP_API=$API
+ENV REACT_APP_SOCKET=$SOCKET
+
+COPY package-lock.json package.json ./
+COPY ./src ./src
+COPY ./public ./public
+
+RUN npm install
+RUN npm run build
+RUN npm install -g serve
+
+EXPOSE 3000
+
+CMD ["serve", "-s", "build"]
+
