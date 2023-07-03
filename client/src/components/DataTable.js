@@ -380,7 +380,7 @@ const DataTable = ({
                       <label className="col-10">: -</label>
                     ) : (
                       <label className="col-10">
-                        {currentDeviationDetail.comment}
+                        {": " + currentDeviationDetail.comment}
                       </label>
                     )}
                   </div>
