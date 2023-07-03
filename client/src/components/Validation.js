@@ -24,11 +24,11 @@ const Validation = ({
       data: {
         type_validation: validationStatus,
         comment:
-          "Operator terdeteksi: " +
-          operatorName +
-          ", " +
+          (operatorName !== ""
+            ? "Operator terdeteksi: " + operatorName + ". "
+            : "") +
           validationCommentData.join(", ") +
-          (validationCommentData.length > 0 ? ", " : "") +
+          (textareaValue.length > 0 ? ", " : "") +
           (textareaValue.length > 0 ? textareaValue : ""),
         user_id: localStorage.getItem("id"),
       },
@@ -49,7 +49,7 @@ const Validation = ({
     {
       id: 1,
       value:
-        "Unit hauling road jarak kurang dari 50 meter terhadap unit di depannya.",
+        "Unit hauling road jarak kurang dari 50 meter terhadap unit di depannya",
     },
     { id: 2, value: "Double trailer, jarak aman unit kurang dari 180 meter" },
     { id: 3, value: "Jarak aman di area pit kurang dari 40 meter" },
@@ -160,7 +160,7 @@ const Validation = ({
                 className="form-control mb-4"
                 type="text"
                 value={operatorName}
-                placeholder="Tulis nama operator yang terdeteksi"
+                placeholder="Tulis nama operator yang terdeteksi (opsional)"
                 onChange={(e) => {
                   setOperatorName(e.target.value);
                 }}
@@ -203,10 +203,8 @@ const Validation = ({
               <div className="row w-100 align-items-center">
                 <div className="col px-0">
                   <label>
-                    {operatorName === ""
-                      ? "*tulis nama operator satu/lebih"
-                      : validationCommentData.length < 1 &&
-                        textareaValue.length < 1
+                    {validationCommentData.length < 1 &&
+                    textareaValue.length < 1
                       ? "*pilih dan/atau deskripsikan manual"
                       : ""}
                   </label>
@@ -230,9 +228,8 @@ const Validation = ({
                     type="button"
                     className={
                       "submit-button border-0 rounded-2 px-3 py-1" +
-                      (operatorName === "" ||
                       (validationCommentData.length < 1 &&
-                        textareaValue.length < 1)
+                      textareaValue.length < 1
                         ? " disabled"
                         : "")
                     }
@@ -251,11 +248,11 @@ const Validation = ({
                         {
                           cctv_id: currentNotificationData[0].cctv_id,
                           comment:
-                            "Operator terdeteksi: " +
-                            operatorName +
-                            ", " +
+                            (operatorName !== ""
+                              ? "Operator terdeteksi: " + operatorName + ". "
+                              : "") +
                             validationCommentData.join(", ") +
-                            (validationCommentData.length > 0 ? ", " : "") +
+                            (textareaValue.length > 0 ? ", " : "") +
                             (textareaValue.length > 0 ? textareaValue : ""),
                           created_at: currentNotificationData[0].created_at,
                           id: currentNotificationData[0].id,

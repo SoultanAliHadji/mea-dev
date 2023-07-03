@@ -22,7 +22,7 @@ const DatabaseDeviasi = ({ cctvData, objectData, validationTypeData }) => {
     useState(false);
   const [currentCctv, setCurrentCctv] = useState("All");
   const [currentObject, setCurrentObject] = useState("All");
-  const [currentValidationType, setCurrentValidationType] = useState("All");
+  const [currentValidationType, setCurrentValidationType] = useState("Tervalidasi");
   const [advancedFilter, setAdvancedFilter] = useState(false);
   const [time, setTime] = useState(["00:01", "23:59"]);
 
