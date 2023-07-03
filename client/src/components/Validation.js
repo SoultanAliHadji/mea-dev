@@ -28,7 +28,7 @@ const Validation = ({
             ? "Operator terdeteksi: " + operatorName + ". "
             : "") +
           validationCommentData.join(", ") +
-          (textareaValue.length > 0 ? ", " : "") +
+          (validationCommentData.length > 0 ? ", " : "") +
           (textareaValue.length > 0 ? textareaValue : ""),
         user_id: localStorage.getItem("id"),
       },
@@ -252,7 +252,7 @@ const Validation = ({
                               ? "Operator terdeteksi: " + operatorName + ". "
                               : "") +
                             validationCommentData.join(", ") +
-                            (textareaValue.length > 0 ? ", " : "") +
+                            (validationCommentData.length > 0 ? ", " : "") +
                             (textareaValue.length > 0 ? textareaValue : ""),
                           created_at: currentNotificationData[0].created_at,
                           id: currentNotificationData[0].id,
