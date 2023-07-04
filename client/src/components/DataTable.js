@@ -71,7 +71,7 @@ const DataTable = ({
               }
             >
               {deviation.type_validation === "not_yet"
-                ? "Perlu Validasi"
+                ? "Belum Divalidasi"
                 : deviation.type_validation === "true"
                 ? "Valid"
                 : "Tidak Valid"}
@@ -142,7 +142,7 @@ const DataTable = ({
                           }
                         >
                           {currentDeviationDetail.type_validation === "not_yet"
-                            ? "Perlu Validasi"
+                            ? "Belum Divalidasi"
                             : currentDeviationDetail.type_validation === "true"
                             ? "Valid"
                             : "Tidak Valid"}
@@ -309,7 +309,7 @@ const DataTable = ({
                       }
                     >
                       {currentDeviationDetail.type_validation === "not_yet"
-                        ? "Perlu Validasi"
+                        ? "Belum Divalidasi"
                         : currentDeviationDetail.type_validation === "true"
                         ? "Valid"
                         : "Tidak Valid"}

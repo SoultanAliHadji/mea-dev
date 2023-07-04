@@ -28,7 +28,9 @@ const Validation = ({
             ? "Operator terdeteksi: " + operatorName + ". "
             : "") +
           validationCommentData.join(", ") +
-          (validationCommentData.length > 0 ? ", " : "") +
+          (validationCommentData.length > 0 && textareaValue.length > 0
+            ? ", "
+            : "") +
           (textareaValue.length > 0 ? textareaValue : ""),
         user_id: localStorage.getItem("id"),
       },
@@ -48,15 +50,17 @@ const Validation = ({
   const trueCommentData = [
     {
       id: 1,
-      value:
-        "Unit hauling road jarak kurang dari 50 meter terhadap unit di depannya",
+      value: "LV tidak memiliki izin memasuki area tambang",
     },
-    { id: 2, value: "Double trailer, jarak aman unit kurang dari 180 meter" },
-    { id: 3, value: "Jarak aman di area pit kurang dari 40 meter" },
-    { id: 4, value: "Pekerja/Orang berada di luar unit area pertambangan" },
+    { id: 2, value: "HD tidak menjaga jarak aman iring (40m)" },
+    { id: 3, value: "Pekerja/orang berada di luar unit" },
   ];
 
-  const falseCommentData = [{ id: 1, value: "Notifikasi tidak benar" }];
+  const falseCommentData = [
+    { id: 1, value: "LV memiliki izin memasuki area tambang" },
+    { id: 2, value: "HD menjaga jarak aman iring (40m)" },
+    { id: 3, value: "Sistem salah mendeteksi manusia" },
+  ];
 
   const trueCommentArray = trueCommentData.map((comment) => {
     return (

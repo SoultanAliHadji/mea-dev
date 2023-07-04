@@ -46,8 +46,8 @@ const Main = () => {
   //tipe validasi
   const validationTypeData = [
     { id: 1, name: "Semua", value: "All" },
-    { id: 2, name: "Perlu Validasi", value: "Perlu Validasi" },
-    { id: 3, name: "Tervalidasi", value: "Tervalidasi" },
+    { id: 2, name: "Belum Divalidasi", value: "Perlu Validasi" },
+    { id: 3, name: "Sudah Divalidasi", value: "Tervalidasi" },
     { id: 4, name: "Valid", value: "true" },
     { id: 5, name: "Tidak Valid", value: "false" },
   ];

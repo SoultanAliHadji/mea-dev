@@ -97,7 +97,7 @@ const ValidasiNotifikasi = ({
               }
             >
               {notification.type_validation === "not_yet"
-                ? "Perlu Validasi"
+                ? "Belum Divalidasi"
                 : notification.type_validation === "true"
                 ? "Valid"
                 : "Tidak Valid"}

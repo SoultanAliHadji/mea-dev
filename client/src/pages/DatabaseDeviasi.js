@@ -22,7 +22,8 @@ const DatabaseDeviasi = ({ cctvData, objectData, validationTypeData }) => {
     useState(false);
   const [currentCctv, setCurrentCctv] = useState("All");
   const [currentObject, setCurrentObject] = useState("All");
-  const [currentValidationType, setCurrentValidationType] = useState("Tervalidasi");
+  const [currentValidationType, setCurrentValidationType] =
+    useState("Tervalidasi");
   const [advancedFilter, setAdvancedFilter] = useState(false);
   const [time, setTime] = useState(["00:01", "23:59"]);
 
@@ -321,7 +322,7 @@ const DatabaseDeviasi = ({ cctvData, objectData, validationTypeData }) => {
                           className="ok-button border-0 rounded-2 px-3 py-2"
                           data-bs-dismiss="modal"
                         >
-                          Tutup
+                          Ok
                         </button>
                       </div>
                     </div>
