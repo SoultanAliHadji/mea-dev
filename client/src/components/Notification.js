@@ -120,7 +120,7 @@ const Notification = ({
                 }
               >
                 {notification.type_validation === "not_yet"
-                  ? "Belum Divalidasi"
+                  ? "Validasi"
                   : notification.type_validation === "true"
                   ? "Valid"
                   : "Tidak Valid"}
@@ -133,7 +133,7 @@ const Notification = ({
           </div>
           <div className="d-flex align-items-end gap-2">
             <Icon className="icon" icon="akar-icons:clock" />
-            <label>{notification.created_at}</label>
+            <label>{(notification.created_at).substring(4,25)}</label>
           </div>
         </button>
       );

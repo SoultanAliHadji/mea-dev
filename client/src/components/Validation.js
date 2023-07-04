@@ -193,7 +193,7 @@ const Validation = ({
                   value={textareaValue}
                   placeholder={
                     textareaStatus === true && textareaValue.length < 1
-                      ? "Centang untuk mengaktifkan deskripsi manual"
+                      ? "Centang untuk mengaktifkan deskripsi manual (opsional)"
                       : "Tulis deskripsi"
                   }
                   disabled={textareaStatus}
