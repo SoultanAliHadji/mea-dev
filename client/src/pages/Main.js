@@ -28,6 +28,7 @@ const Main = () => {
   const [notificationData, setNotificationData] = useState([]);
   const [notificationDataLoading, setNotificationDataLoading] = useState(false);
   const [currentNotificationData, setCurrentNotificationData] = useState([]);
+  const [notificationDataReload, setNotificationDataReload] = useState(false);
   const [notificationDataLimit, setNotificationDataLimit] = useState(10);
 
   //notification sound
@@ -138,7 +139,7 @@ const Main = () => {
     currentObject,
     currentValidationType,
     currentTime,
-    notificationDataLimit,
+    notificationDataReload === true ? notificationDataLimit : currentCctvId,
     submitData,
   ]);
 
@@ -166,6 +167,8 @@ const Main = () => {
     currentObject,
     currentValidationType,
     currentTime,
+    notificationDataReload,
+    notificationDataLimit,
     notificationSound,
   ]);
 
@@ -179,12 +182,16 @@ const Main = () => {
           if (currentCctvId.toString() === notification.cctv_id) {
             if (currentObject === "All") {
               setNotificationData((data) => [notification, ...data]);
+              setNotificationDataReload(false);
+              setNotificationDataLimit(notificationDataLimit + 1);
               if (notificationSound === true) {
                 audio.play();
               }
             } else {
               if (currentObject === notification.type_object) {
                 setNotificationData((data) => [notification, ...data]);
+                setNotificationDataReload(false);
+                setNotificationDataLimit(notificationDataLimit + 1);
                 if (notificationSound === true) {
                   audio.play();
                 }
@@ -374,6 +381,7 @@ const Main = () => {
               validationTypeData={validationTypeData}
               notificationData={notificationData}
               notificationDataLoading={notificationDataLoading}
+              setNotificationDataReload={setNotificationDataReload}
               notificationDataLimit={notificationDataLimit}
               setNotificationDataLimit={setNotificationDataLimit}
               currentNotificationData={currentNotificationData}

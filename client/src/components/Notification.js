@@ -16,6 +16,7 @@ const Notification = ({
   validationTypeData,
   notificationData,
   notificationDataLoading,
+  setNotificationDataReload,
   notificationDataLimit,
   setNotificationDataLimit,
   currentNotificationData,
@@ -236,6 +237,7 @@ const Notification = ({
                 <a
                   className="load-more-button"
                   onClick={() => {
+                    setNotificationDataReload(true);
                     setNotificationDataLimit(notificationDataLimit + 10);
                   }}
                 >
