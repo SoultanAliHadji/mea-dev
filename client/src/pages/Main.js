@@ -26,6 +26,7 @@ const Main = () => {
 
   //notification data
   const [notificationData, setNotificationData] = useState([]);
+  const [notificationChildData, setNotificationChildData] = useState([]);
   const [notificationDataLoading, setNotificationDataLoading] = useState(false);
   const [currentNotificationData, setCurrentNotificationData] = useState([]);
   const [notificationDataReload, setNotificationDataReload] = useState(false);
@@ -126,6 +127,7 @@ const Main = () => {
       )
       .then((res) => {
         setNotificationData(res.data.data);
+        console.log(res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -179,21 +181,33 @@ const Main = () => {
           currentValidationType === "All" ||
           currentValidationType === "Butuh Validasi"
         ) {
-          if (currentCctvId.toString() === notification.cctv_id) {
-            if (currentObject === "All") {
-              setNotificationData((data) => [notification, ...data]);
-              setNotificationDataReload(false);
-              setNotificationDataLimit(notificationDataLimit + 1);
-              if (notificationSound === true) {
-                audio.play();
-              }
-            } else {
-              if (currentObject === notification.type_object) {
+          if (notification.parent_id === null) {
+            if (currentCctvId.toString() === notification.cctv_id) {
+              if (currentObject === "All") {
                 setNotificationData((data) => [notification, ...data]);
                 setNotificationDataReload(false);
                 setNotificationDataLimit(notificationDataLimit + 1);
                 if (notificationSound === true) {
                   audio.play();
+                }
+              } else {
+                if (currentObject === notification.type_object) {
+                  setNotificationData((data) => [notification, ...data]);
+                  setNotificationDataReload(false);
+                  setNotificationDataLimit(notificationDataLimit + 1);
+                  if (notificationSound === true) {
+                    audio.play();
+                  }
+                }
+              }
+            }
+          } else {
+            if (currentCctvId.toString() === notification.cctv_id) {
+              if (currentObject === "All") {
+                setNotificationChildData((data) => [...data, notification]);
+              } else {
+                if (currentObject === notification.type_object) {
+                  setNotificationChildData((data) => [notification, ...data]);
                 }
               }
             }
@@ -380,6 +394,7 @@ const Main = () => {
               setCurrentValidationType={setCurrentValidationType}
               validationTypeData={validationTypeData}
               notificationData={notificationData}
+              notificationChildData={notificationChildData}
               notificationDataLoading={notificationDataLoading}
               setNotificationDataReload={setNotificationDataReload}
               notificationDataLimit={notificationDataLimit}

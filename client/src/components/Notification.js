@@ -15,6 +15,7 @@ const Notification = ({
   setCurrentValidationType,
   validationTypeData,
   notificationData,
+  notificationChildData,
   notificationDataLoading,
   setNotificationDataReload,
   notificationDataLimit,
@@ -87,56 +88,237 @@ const Notification = ({
     .slice(0, notificationDataLimit)
     .map((notification, index) => {
       return (
-        <button
-          key={notification.id}
-          className={
-            "border-0 text-start rounded-2 px-3 py-2 d-grid gap-2" +
-            (currentPage !== "live-monitoring" &&
-            currentNotificationData.length !== 0 &&
-            currentNotificationData[0].id === notification.id
-              ? " active"
-              : "")
-          }
-          onClick={() => {
-            currentPage !== "validasi-notifikasi"
-              ? setCurrentPage("validasi-notifikasi")
-              : setCurrentPage(currentPage);
-            window.history.replaceState(null, null, "/validasi-notifikasi");
-            setCurrentNotificationData([notificationData[index]]);
-          }}
-        >
-          <div className="row align-items-center">
-            <div className="col-5">
-              <label>{"Deviasi " + notification.type_object}</label>
+        <div>
+          <button
+            key={notification.id}
+            className={
+              "border-0 text-start rounded-2 px-3 py-2 d-grid gap-2 w-100" +
+              (currentPage !== "live-monitoring" &&
+              currentNotificationData.length !== 0 &&
+              currentNotificationData[0].id === notification.id
+                ? " active"
+                : "")
+            }
+            onClick={() => {
+              currentPage !== "validasi-notifikasi"
+                ? setCurrentPage("validasi-notifikasi")
+                : setCurrentPage(currentPage);
+              window.history.replaceState(null, null, "/validasi-notifikasi");
+              setCurrentNotificationData([notificationData[index]]);
+            }}
+          >
+            <div className="row align-items-center">
+              <div className="col-5">
+                <label>{"Deviasi " + notification.type_object}</label>
+              </div>
+              <div className="col-7 d-flex justify-content-end">
+                <label
+                  className={
+                    "px-2 rounded-2" +
+                    (notification.type_validation === "true"
+                      ? " status-true"
+                      : notification.type_validation === "false"
+                      ? " status-false"
+                      : " status-none")
+                  }
+                >
+                  {notification.type_validation === "not_yet"
+                    ? "Validasi"
+                    : notification.type_validation === "true"
+                    ? "Valid"
+                    : "Tidak Valid"}
+                </label>
+              </div>
             </div>
-            <div className="col-7 d-flex justify-content-end">
-              <label
+            <div className="d-flex align-items-end gap-2">
+              <Icon className="icon" icon="mdi:cctv" />
+              <label>{notification.name + " - " + notification.location}</label>
+            </div>
+            <div className="d-flex align-items-end gap-2">
+              <Icon className="icon" icon="akar-icons:clock" />
+              <label>{notification.created_at.substring(4, 25)}</label>
+            </div>
+          </button>
+          {notification.child ? (
+            notification.child?.length !== 0 ? (
+              <button className="border-0 w-100">
+                <div className="row m-0">
+                  <div className="col p-0">
+                    <div className="d-flex justify-content-start">
+                      <label>
+                        Jumlah repetisi:
+                        {" " + notification.child?.length}
+                      </label>
+                    </div>
+                  </div>
+                  <div className="col p-0">
+                    <div className="d-flex justify-content-end">
+                      <Icon icon="codicon:fold-down" />
+                    </div>
+                  </div>
+                </div>
+              </button>
+            ) : (
+              ""
+            )
+          ) : notificationChildData.filter(
+              (array) => array.parent_id === notification.id
+            ).length !== 0 ? (
+            <button className="border-0 w-100">
+              <div className="row m-0">
+                <div className="col p-0">
+                  <div className="d-flex justify-content-start">
+                    <label>
+                      Jumlah repetisi:
+                      {" " +
+                        notificationChildData.filter(
+                          (array) => array.parent_id === notification.id
+                        ).length}
+                    </label>
+                  </div>
+                </div>
+                <div className="col p-0">
+                  <div className="d-flex justify-content-end">
+                    <Icon icon="codicon:fold-down" />
+                  </div>
+                </div>
+              </div>
+            </button>
+          ) : (
+            ""
+          )}
+          {notification.child?.map((notificationChild) => {
+            return (
+              <button
+                key={notificationChild.id}
                 className={
-                  "px-2 rounded-2" +
-                  (notification.type_validation === "true"
-                    ? " status-true"
-                    : notification.type_validation === "false"
-                    ? " status-false"
-                    : " status-none")
+                  "border-0 text-start rounded-2 px-3 py-2 d-grid gap-2 w-100" +
+                  (currentPage !== "live-monitoring" &&
+                  currentNotificationData.length !== 0 &&
+                  currentNotificationData[0].id === notificationChild.id
+                    ? " active"
+                    : "")
                 }
+                onClick={() => {
+                  currentPage !== "validasi-notifikasi"
+                    ? setCurrentPage("validasi-notifikasi")
+                    : setCurrentPage(currentPage);
+                  window.history.replaceState(
+                    null,
+                    null,
+                    "/validasi-notifikasi"
+                  );
+                  setCurrentNotificationData([notificationChild]);
+                }}
               >
-                {notification.type_validation === "not_yet"
-                  ? "Validasi"
-                  : notification.type_validation === "true"
-                  ? "Valid"
-                  : "Tidak Valid"}
-              </label>
-            </div>
-          </div>
-          <div className="d-flex align-items-end gap-2">
-            <Icon className="icon" icon="mdi:cctv" />
-            <label>{notification.name + " - " + notification.location}</label>
-          </div>
-          <div className="d-flex align-items-end gap-2">
-            <Icon className="icon" icon="akar-icons:clock" />
-            <label>{(notification.created_at).substring(4,25)}</label>
-          </div>
-        </button>
+                <div className="row align-items-center">
+                  <div className="col-5">
+                    <label>{"Deviasi " + notificationChild.type_object}</label>
+                  </div>
+                  <div className="col-7 d-flex justify-content-end">
+                    <label
+                      className={
+                        "px-2 rounded-2" +
+                        (notificationChild.type_validation === "true"
+                          ? " status-true"
+                          : notificationChild.type_validation === "false"
+                          ? " status-false"
+                          : " status-none")
+                      }
+                    >
+                      {notificationChild.type_validation === "not_yet"
+                        ? "Validasi"
+                        : notificationChild.type_validation === "true"
+                        ? "Valid"
+                        : "Tidak Valid"}
+                    </label>
+                  </div>
+                </div>
+                <div className="d-flex align-items-end gap-2">
+                  <Icon className="icon" icon="mdi:cctv" />
+                  <label>
+                    {notificationChild.name +
+                      " - " +
+                      notificationChild.location}
+                  </label>
+                </div>
+                <div className="d-flex align-items-end gap-2">
+                  <Icon className="icon" icon="akar-icons:clock" />
+                  <label>{notificationChild.created_at.substring(4, 25)}</label>
+                </div>
+              </button>
+            );
+          })}
+          {notificationChildData.map((notificationChild) => {
+            if (notificationChild.parent_id === notification.id) {
+              return (
+                <button
+                  key={notificationChild.id}
+                  className={
+                    "border-0 text-start rounded-2 px-3 py-2 d-grid gap-2 w-100" +
+                    (currentPage !== "live-monitoring" &&
+                    currentNotificationData.length !== 0 &&
+                    currentNotificationData[0].id === notificationChild.id
+                      ? " active"
+                      : "")
+                  }
+                  onClick={() => {
+                    currentPage !== "validasi-notifikasi"
+                      ? setCurrentPage("validasi-notifikasi")
+                      : setCurrentPage(currentPage);
+                    window.history.replaceState(
+                      null,
+                      null,
+                      "/validasi-notifikasi"
+                    );
+                    setCurrentNotificationData([notificationChild]);
+                  }}
+                >
+                  <div className="row align-items-center">
+                    <div className="col-5">
+                      <label>
+                        {"Deviasi " + notificationChild.type_object}
+                      </label>
+                    </div>
+                    <div className="col-7 d-flex justify-content-end">
+                      <label
+                        className={
+                          "px-2 rounded-2" +
+                          (notificationChild.type_validation === "true"
+                            ? " status-true"
+                            : notificationChild.type_validation === "false"
+                            ? " status-false"
+                            : " status-none")
+                        }
+                      >
+                        {notificationChild.type_validation === "not_yet"
+                          ? "Validasi"
+                          : notificationChild.type_validation === "true"
+                          ? "Valid"
+                          : "Tidak Valid"}
+                      </label>
+                    </div>
+                  </div>
+                  <div className="d-flex align-items-end gap-2">
+                    <Icon className="icon" icon="mdi:cctv" />
+                    <label>
+                      {notificationChild.name +
+                        " - " +
+                        notificationChild.location}
+                    </label>
+                  </div>
+                  <div className="d-flex align-items-end gap-2">
+                    <Icon className="icon" icon="akar-icons:clock" />
+                    <label>
+                      {notificationChild.created_at.substring(4, 25)}
+                    </label>
+                  </div>
+                </button>
+              );
+            }
+          })}
+          <hr />
+        </div>
       );
     });
 
