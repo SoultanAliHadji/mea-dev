@@ -334,14 +334,6 @@ const Notification = ({
                           </div>
                         </div>
                         <div className="d-flex align-items-end gap-2">
-                          <Icon className="icon" icon="mdi:cctv" />
-                          <label>
-                            {notificationChild.name +
-                              " - " +
-                              notificationChild.location}
-                          </label>
-                        </div>
-                        <div className="d-flex align-items-end gap-2">
                           <Icon className="icon" icon="akar-icons:clock" />
                           <label>
                             {notificationChild.created_at.substring(4, 25)}
