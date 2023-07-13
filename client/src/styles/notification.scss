@@ -113,11 +113,6 @@
                     color: #297209;
                 }
 
-                &:focus {
-                    background-image: linear-gradient(to right, #3B9315, #297209);
-                    color: white;
-                }
-
                 label {
                     cursor: pointer;
                 }
@@ -151,6 +146,11 @@
                 pointer-events: none;
             }
 
+            .active-child-dropdown {
+                background-image: linear-gradient(to right, #3B9315, #297209);
+                color: white !important;
+            }
+
             .load-more-button {
                 color: #3B9315;
                 cursor: pointer;
@@ -160,6 +160,10 @@
                 &:hover {
                     color: #297209;
                 }
+            }
+
+            hr {
+                margin-bottom: 2px;
             }
         }
 
