@@ -332,6 +332,7 @@ const Notification = ({
                   );
                 }
               })}
+          <hr />
         </div>
       );
     });
