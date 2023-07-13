@@ -47,106 +47,112 @@ const ValidasiNotifikasi = ({
           setCurrentDeviationImageLoading(false);
         });
     }
-  }, [currentNotificationData]);
+  }, [currentNotificationData[0]?.id]);
 
-  const notificationControllerArray = notificationData.map((notification, index) => {
-    if (currentNotificationData[0]?.id === notification.id) {
+  const notificationControllerArray = notificationData.map(
+    (notification, index) => {
+      if (currentNotificationData[0]?.id === notification.id) {
+        return (
+          <div className="d-grid gap-2">
+            <button
+              className={"border-0" + (index === 0 ? " disabled" : "")}
+              onClick={() => {
+                index !== 0
+                  ? setCurrentNotificationData([notificationData[index - 1]])
+                  : setCurrentNotificationData([notificationData[index]]);
+              }}
+            >
+              <Icon className="icon" icon="akar-icons:chevron-up" />
+            </button>
+            <button
+              className={
+                "border-0" +
+                (index === notificationData.length - 1 ? " disabled" : "")
+              }
+              onClick={() => {
+                index !== notificationData.length - 1
+                  ? setCurrentNotificationData([notificationData[index + 1]])
+                  : setCurrentNotificationData([notificationData[index]]);
+              }}
+            >
+              <Icon className="icon" icon="akar-icons:chevron-down" />
+            </button>
+          </div>
+        );
+      }
+    }
+  );
+
+  const currentNotificationArray = currentNotificationData.map(
+    (notification) => {
       return (
-        <div className="d-grid gap-2">
-          <button
-            className={"border-0" + (index === 0 ? " disabled" : "")}
-            onClick={() => {
-              index !== 0
-                ? setCurrentNotificationData([notificationData[index - 1]])
-                : setCurrentNotificationData([notificationData[index]]);
-            }}
-          >
-            <Icon className="icon" icon="akar-icons:chevron-up" />
-          </button>
-          <button
-            className={
-              "border-0" +
-              (index === notificationData.length - 1 ? " disabled" : "")
-            }
-            onClick={() => {
-              index !== notificationData.length - 1
-                ? setCurrentNotificationData([notificationData[index + 1]])
-                : setCurrentNotificationData([notificationData[index]]);
-            }}
-          >
-            <Icon className="icon" icon="akar-icons:chevron-down" />
-          </button>
+        <div key={notification.id} className="notification-data">
+          <div className="row align-items-center">
+            <div className="col">
+              <label
+                className={
+                  "px-3 my-1 rounded-2" +
+                  (notification.type_validation === "true"
+                    ? " status-true"
+                    : notification.type_validation === "false"
+                    ? " status-false"
+                    : " status-none")
+                }
+              >
+                {notification.type_validation === "not_yet"
+                  ? "Belum Divalidasi"
+                  : notification.type_validation === "true"
+                  ? "Valid"
+                  : "Tidak Valid"}
+              </label>
+            </div>
+            <div className="col">
+              <Validation
+                currentNotificationData={currentNotificationData}
+                setCurrentNotificationData={setCurrentNotificationData}
+                submitData={submitData}
+                setSubmitData={setSubmitData}
+              />
+            </div>
+          </div>
+          <div className="my-3">
+            <h6>Terdeteksi Deviasi {notification.type_object}</h6>
+          </div>
+          <div className="row">
+            <div className="col-4 d-grid gap-2">
+              <div className="d-flex gap-2">
+                <Icon className="icon" icon="mdi:cctv" />
+                <label>
+                  {notification.name + " - " + notification.location}
+                </label>
+              </div>
+              <div className="d-flex gap-2">
+                <Icon className="icon" icon="akar-icons:clock" />
+                <label>{notification.created_at}</label>
+              </div>
+            </div>
+            {notification.type_validation !== "not_yet" ? (
+              <div className="col-4 d-grid gap-2">
+                <div className="d-flex gap-2">
+                  <Icon className="icon" icon="fa6-solid:helmet-safety" />
+                  <label>{notification.user_name}</label>
+                </div>
+                <div className="d-flex gap-2">
+                  <Icon className="icon" icon="codicon:note" />
+                  <label>
+                    {notification.comment.substring(0, 35) +
+                      (notification.comment.length > 36 ? "..." : "")}
+                  </label>
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
         </div>
       );
     }
-  });
-
-  const currentNotificationArray = currentNotificationData.map((notification) => {
-    return (
-      <div key={notification.id} className="notification-data">
-        <div className="row align-items-center">
-          <div className="col">
-            <label
-              className={
-                "px-3 my-1 rounded-2" +
-                (notification.type_validation === "true"
-                  ? " status-true"
-                  : notification.type_validation === "false"
-                  ? " status-false"
-                  : " status-none")
-              }
-            >
-              {notification.type_validation === "not_yet"
-                ? "Belum Divalidasi"
-                : notification.type_validation === "true"
-                ? "Valid"
-                : "Tidak Valid"}
-            </label>
-          </div>
-          <div className="col">
-            <Validation
-              currentNotificationData={currentNotificationData}
-              setCurrentNotificationData={setCurrentNotificationData}
-              submitData={submitData}
-              setSubmitData={setSubmitData}
-            />
-          </div>
-        </div>
-        <div className="my-3">
-          <h6>Terdeteksi Deviasi {notification.type_object}</h6>
-        </div>
-        <div className="row">
-          <div className="col-4 d-grid gap-2">
-            <div className="d-flex gap-2">
-              <Icon className="icon" icon="mdi:cctv" />
-              <label>{notification.name + " - " + notification.location}</label>
-            </div>
-            <div className="d-flex gap-2">
-              <Icon className="icon" icon="akar-icons:clock" />
-              <label>{notification.created_at}</label>
-            </div>
-          </div>
-          {notification.type_validation !== "not_yet" ? (
-            <div className="col-4 d-grid gap-2">
-              <div className="d-flex gap-2">
-                <Icon className="icon" icon="fa6-solid:helmet-safety" />
-                <label>{notification.user_name}</label>
-              </div>
-              <div className="d-flex gap-2">
-                <Icon className="icon" icon="codicon:note" />
-                <label>
-                  {notification.comment.substring(0, 35) +
-                    (notification.comment.length > 36 ? "..." : "")}
-                </label>
-              </div>
-            </div>
-          ) : (
-            ""
-          )}
-        </div>
-      </div>
-    );
-  });
+  );
 
   return (
     <div className="validasi-notifikasi">

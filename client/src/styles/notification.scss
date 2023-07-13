@@ -143,12 +143,10 @@
             .active {
                 background-image: linear-gradient(to right, #3B9315, #297209);
                 color: white;
-                pointer-events: none;
-            }
 
-            .active-child-dropdown {
-                background-image: linear-gradient(to right, #3B9315, #297209);
-                color: white !important;
+                &:hover {
+                    color: white;
+                }
             }
 
             .load-more-button {

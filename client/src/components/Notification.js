@@ -108,6 +108,9 @@ const Notification = ({
                 : setCurrentPage(currentPage);
               window.history.replaceState(null, null, "/validasi-notifikasi");
               setCurrentNotificationData([notificationData[index]]);
+              setShowChild(
+                showChild !== notification.id ? notification.id : ""
+              );
             }}
           >
             <div className="row align-items-center">
@@ -141,87 +144,72 @@ const Notification = ({
               <Icon className="icon" icon="akar-icons:clock" />
               <label>{notification.created_at.substring(4, 25)}</label>
             </div>
-          </button>
-          {notification.child ? (
-            notification.child?.length !== 0 ? (
-              <button
-                className={
-                  "border-0 w-100" +
-                  (showChild === notification.id
-                    ? " active-child-dropdown"
-                    : "")
-                }
-                onClick={() => {
-                  setShowChild(
-                    showChild !== notification.id ? notification.id : ""
-                  );
-                }}
-              >
+            {notification.child ? (
+              notification.child?.length !== 0 ? (
+                <div
+                  className="w-100"
+                  onClick={() => {
+                    setShowChild(
+                      showChild !== notification.id ? notification.id : ""
+                    );
+                  }}
+                >
+                  <div className="row m-0">
+                    <div className="col p-0">
+                      <div className="d-flex justify-content-start">
+                        <label>
+                          Jumlah Repetisi:
+                          {" " + notification.child?.length}
+                        </label>
+                      </div>
+                    </div>
+                    <div className="col p-0">
+                      <div className="d-flex justify-content-end">
+                        <Icon
+                          icon={
+                            "codicon:fold-" +
+                            (showChild !== notification.id ? "down" : "up")
+                          }
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                ""
+              )
+            ) : notificationChildData.filter(
+                (array) => array.parent_id === notification.id
+              ).length !== 0 ? (
+              <div className="w-100">
                 <div className="row m-0">
                   <div className="col p-0">
                     <div className="d-flex justify-content-start">
                       <label>
-                        Jumlah Repetisi:
-                        {" " + notification.child?.length}
+                        Jumlah repetisi:
+                        {" " +
+                          notificationChildData.filter(
+                            (array) => array.parent_id === notification.id
+                          ).length}
                       </label>
                     </div>
                   </div>
                   <div className="col p-0">
                     <div className="d-flex justify-content-end">
-                      <Icon
-                        icon={
-                          "codicon:fold-" +
-                          (showChild !== notification.id ? "down" : "up")
-                        }
-                      />
+                      <Icon icon="codicon:fold-down" />
                     </div>
                   </div>
                 </div>
-              </button>
+              </div>
             ) : (
               ""
-            )
-          ) : notificationChildData.filter(
-              (array) => array.parent_id === notification.id
-            ).length !== 0 ? (
-            <button
-              className={
-                "border-0 w-100" +
-                (showChild === notification.id ? " active-child-dropdown" : "")
-              }
-              onClick={() => {
-                setShowChild(
-                  showChild !== notification.id ? notification.id : ""
-                );
-              }}
-            >
-              <div className="row m-0">
-                <div className="col p-0">
-                  <div className="d-flex justify-content-start">
-                    <label>
-                      Jumlah repetisi:
-                      {" " +
-                        notificationChildData.filter(
-                          (array) => array.parent_id === notification.id
-                        ).length}
-                    </label>
-                  </div>
-                </div>
-                <div className="col p-0">
-                  <div className="d-flex justify-content-end">
-                    <Icon icon="codicon:fold-down" />
-                  </div>
-                </div>
-              </div>
-            </button>
-          ) : (
-            ""
-          )}
+            )}
+          </button>
           {showChild !== notification.id
             ? ""
             : notification.child?.map((notificationChild) => {
                 return (
-                  <div className="px-3 pt-2">
+                  <div className="px-2 pt-2">
                     <button
                       key={notificationChild.id}
                       className={
@@ -284,7 +272,7 @@ const Notification = ({
             : notificationChildData.map((notificationChild) => {
                 if (notificationChild.parent_id === notification.id) {
                   return (
-                    <div className="px-3 pt-2">
+                    <div className="px-2 pt-2">
                       <button
                         key={notificationChild.id}
                         className={
