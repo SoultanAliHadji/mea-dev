@@ -267,7 +267,6 @@ const Notification = ({
                   </div>
                 );
               })}
-              
           {showChild !== notification.id
             ? ""
             : notificationChildData.map((notificationChild) => {
