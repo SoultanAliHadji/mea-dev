@@ -212,6 +212,7 @@ const DataTable = ({
               </div>
             </div>
           </td>
+          <td className="text-center">{deviation.type_validation === "not_yet" ? "-" : deviation.updated_at}</td>
         </tr>
       );
     });
@@ -228,7 +229,7 @@ const DataTable = ({
               Lokasi CCTV
             </th>
             <th className="table-header" scope="col">
-              Date Time
+              Waktu Terdeteksi
             </th>
             <th className="table-header" scope="col">
               Objek
@@ -244,6 +245,9 @@ const DataTable = ({
             </th>
             <th className="table-header" scope="col">
               Validator
+            </th>
+            <th className="table-header" scope="col">
+              Waktu Tervalidasi
             </th>
           </tr>
         </thead>
