@@ -20,7 +20,7 @@ const Validation = ({
       url:
         process.env.REACT_APP_API +
         "deviation/" +
-        currentNotificationData[0].id,
+        currentNotificationData?.id,
       data: {
         type_validation: validationStatus,
         comment:
@@ -248,9 +248,9 @@ const Validation = ({
                         setTextareaValue("");
                         setSubmitData(submitData === false ? true : false);
                       }, 2000);
-                      setCurrentNotificationData([
+                      setCurrentNotificationData(
                         {
-                          cctv_id: currentNotificationData[0].cctv_id,
+                          cctv_id: currentNotificationData?.cctv_id,
                           comment:
                             (operatorName !== ""
                               ? "Operator terdeteksi: " + operatorName + ". "
@@ -258,25 +258,25 @@ const Validation = ({
                             validationCommentData.join(", ") +
                             (validationCommentData.length > 0 ? ", " : "") +
                             (textareaValue.length > 0 ? textareaValue : ""),
-                          created_at: currentNotificationData[0].created_at,
-                          id: currentNotificationData[0].id,
-                          image: currentNotificationData[0].image,
-                          ip: currentNotificationData[0].ip,
-                          location: currentNotificationData[0].location,
-                          name: currentNotificationData[0].name,
-                          path: currentNotificationData[0].path,
+                          created_at: currentNotificationData?.created_at,
+                          id: currentNotificationData?.id,
+                          image: currentNotificationData?.image,
+                          ip: currentNotificationData?.ip,
+                          location: currentNotificationData?.location,
+                          name: currentNotificationData?.name,
+                          path: currentNotificationData?.path,
                           realtime_images_id:
-                            currentNotificationData[0].realtime_images_id,
-                          type_object: currentNotificationData[0].type_object,
+                            currentNotificationData?.realtime_images_id,
+                          type_object: currentNotificationData?.type_object,
                           type_validation: validationStatus.toString(),
                           updated_at: new Date(),
                           user_id: localStorage.getItem("id"),
                           user_name: localStorage.getItem("name"),
                           username: localStorage.getItem("username"),
                           violate_count:
-                            currentNotificationData[0].violate_count,
+                            currentNotificationData?.violate_count,
                         },
-                      ]);
+                      );
                     }}
                   >
                     Validasi

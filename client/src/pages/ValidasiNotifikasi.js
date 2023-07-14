@@ -17,13 +17,13 @@ const ValidasiNotifikasi = ({
     useState(false);
 
   useEffect(() => {
-    if (currentNotificationData.length !== 0) {
+    if (currentNotificationData !== undefined) {
       setCurrentDeviationImageLoading(true);
       axios
         .get(
           process.env.REACT_APP_API +
-            currentNotificationData[0].path +
-            currentNotificationData[0].image,
+            currentNotificationData?.path +
+            currentNotificationData?.image,
           {
             headers: {
               Authorization: "Bearer " + localStorage.getItem("token"),
@@ -47,19 +47,19 @@ const ValidasiNotifikasi = ({
           setCurrentDeviationImageLoading(false);
         });
     }
-  }, [currentNotificationData[0]?.id]);
+  }, [currentNotificationData?.id]);
 
   const notificationControllerArray = notificationData.map(
     (notification, index) => {
-      if (currentNotificationData[0]?.id === notification.id) {
+      if (currentNotificationData?.id === notification.id) {
         return (
           <div className="d-grid gap-2">
             <button
               className={"border-0" + (index === 0 ? " disabled" : "")}
               onClick={() => {
                 index !== 0
-                  ? setCurrentNotificationData([notificationData[index - 1]])
-                  : setCurrentNotificationData([notificationData[index]]);
+                  ? setCurrentNotificationData(notificationData[index - 1])
+                  : setCurrentNotificationData(notificationData[index]);
               }}
             >
               <Icon className="icon" icon="akar-icons:chevron-up" />
@@ -71,8 +71,8 @@ const ValidasiNotifikasi = ({
               }
               onClick={() => {
                 index !== notificationData.length - 1
-                  ? setCurrentNotificationData([notificationData[index + 1]])
-                  : setCurrentNotificationData([notificationData[index]]);
+                  ? setCurrentNotificationData(notificationData[index + 1])
+                  : setCurrentNotificationData(notificationData[index]);
               }}
             >
               <Icon className="icon" icon="akar-icons:chevron-down" />
@@ -80,77 +80,6 @@ const ValidasiNotifikasi = ({
           </div>
         );
       }
-    }
-  );
-
-  const currentNotificationArray = currentNotificationData.map(
-    (notification) => {
-      return (
-        <div key={notification.id} className="notification-data">
-          <div className="row align-items-center">
-            <div className="col">
-              <label
-                className={
-                  "px-3 my-1 rounded-2" +
-                  (notification.type_validation === "true"
-                    ? " status-true"
-                    : notification.type_validation === "false"
-                    ? " status-false"
-                    : " status-none")
-                }
-              >
-                {notification.type_validation === "not_yet"
-                  ? "Belum Divalidasi"
-                  : notification.type_validation === "true"
-                  ? "Valid"
-                  : "Tidak Valid"}
-              </label>
-            </div>
-            <div className="col">
-              <Validation
-                currentNotificationData={currentNotificationData}
-                setCurrentNotificationData={setCurrentNotificationData}
-                submitData={submitData}
-                setSubmitData={setSubmitData}
-              />
-            </div>
-          </div>
-          <div className="my-3">
-            <h6>Terdeteksi Deviasi {notification.type_object}</h6>
-          </div>
-          <div className="row">
-            <div className="col-4 d-grid gap-2">
-              <div className="d-flex gap-2">
-                <Icon className="icon" icon="mdi:cctv" />
-                <label>
-                  {notification.name + " - " + notification.location}
-                </label>
-              </div>
-              <div className="d-flex gap-2">
-                <Icon className="icon" icon="akar-icons:clock" />
-                <label>{notification.created_at}</label>
-              </div>
-            </div>
-            {notification.type_validation !== "not_yet" ? (
-              <div className="col-4 d-grid gap-2">
-                <div className="d-flex gap-2">
-                  <Icon className="icon" icon="fa6-solid:helmet-safety" />
-                  <label>{notification.user_name}</label>
-                </div>
-                <div className="d-flex gap-2">
-                  <Icon className="icon" icon="codicon:note" />
-                  <label>
-                    {notification.comment.substring(0, 35) +
-                      (notification.comment.length > 36 ? "..." : "")}
-                  </label>
-                </div>
-              </div>
-            ) : (
-              ""
-            )}
-          </div>
-        </div>
-      );
     }
   );
 
@@ -162,7 +91,7 @@ const ValidasiNotifikasi = ({
       </div>
       <div className="content">
         <div>
-          {currentNotificationData.length !== 0 ? (
+          {currentNotificationData !== undefined ? (
             <div>
               {currentDeviationImageLoading === false ? (
                 <div className="row w-100 m-0 p-0">
@@ -200,7 +129,72 @@ const ValidasiNotifikasi = ({
                   </div>
                 </div>
               )}
-              <div className="mt-3">{currentNotificationArray}</div>
+              <div className="mt-3">
+              <div key={currentNotificationData?.id} className="notification-data">
+          <div className="row align-items-center">
+            <div className="col">
+              <label
+                className={
+                  "px-3 my-1 rounded-2" +
+                  (currentNotificationData?.type_validation === "true"
+                    ? " status-true"
+                    : currentNotificationData?.type_validation === "false"
+                    ? " status-false"
+                    : " status-none")
+                }
+              >
+                {currentNotificationData?.type_validation === "not_yet"
+                  ? "Belum Divalidasi"
+                  : currentNotificationData?.type_validation === "true"
+                  ? "Valid"
+                  : "Tidak Valid"}
+              </label>
+            </div>
+            <div className="col">
+              <Validation
+                currentNotificationData={currentNotificationData}
+                setCurrentNotificationData={setCurrentNotificationData}
+                submitData={submitData}
+                setSubmitData={setSubmitData}
+              />
+            </div>
+          </div>
+          <div className="my-3">
+            <h6>Terdeteksi Deviasi {currentNotificationData?.type_object}</h6>
+          </div>
+          <div className="row">
+            <div className="col-4 d-grid gap-2">
+              <div className="d-flex gap-2">
+                <Icon className="icon" icon="mdi:cctv" />
+                <label>
+                  {currentNotificationData?.name + " - " + currentNotificationData?.location}
+                </label>
+              </div>
+              <div className="d-flex gap-2">
+                <Icon className="icon" icon="akar-icons:clock" />
+                <label>{currentNotificationData?.created_at}</label>
+              </div>
+            </div>
+            {currentNotificationData?.type_validation !== "not_yet" ? (
+              <div className="col-4 d-grid gap-2">
+                <div className="d-flex gap-2">
+                  <Icon className="icon" icon="fa6-solid:helmet-safety" />
+                  <label>{currentNotificationData?.user_name}</label>
+                </div>
+                <div className="d-flex gap-2">
+                  <Icon className="icon" icon="codicon:note" />
+                  <label>
+                    {currentNotificationData?.comment.substring(0, 35) +
+                      (currentNotificationData?.comment.length > 36 ? "..." : "")}
+                  </label>
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+        </div>
+              </div>
             </div>
           ) : (
             <div className="d-flex justify-content-center">

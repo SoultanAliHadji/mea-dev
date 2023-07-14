@@ -28,7 +28,7 @@ const Main = () => {
   const [notificationData, setNotificationData] = useState([]);
   const [notificationChildData, setNotificationChildData] = useState([]);
   const [notificationDataLoading, setNotificationDataLoading] = useState(false);
-  const [currentNotificationData, setCurrentNotificationData] = useState([]);
+  const [currentNotificationData, setCurrentNotificationData] = useState();
   const [notificationDataReload, setNotificationDataReload] = useState(false);
   const [notificationDataLimit, setNotificationDataLimit] = useState(10);
 

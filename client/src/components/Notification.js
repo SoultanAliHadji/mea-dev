@@ -97,8 +97,8 @@ const Notification = ({
             className={
               "border-0 text-start rounded-2 px-3 py-2 d-grid gap-2 w-100" +
               (currentPage !== "live-monitoring" &&
-              currentNotificationData.length !== 0 &&
-              currentNotificationData[0].id === notification.id
+              currentNotificationData !== undefined &&
+              currentNotificationData?.id === notification.id
                 ? " active"
                 : "")
             }
@@ -107,7 +107,7 @@ const Notification = ({
                 ? setCurrentPage("validasi-notifikasi")
                 : setCurrentPage(currentPage);
               window.history.replaceState(null, null, "/validasi-notifikasi");
-              setCurrentNotificationData([notificationData[index]]);
+              setCurrentNotificationData(notificationData[index]);
               setShowChild(
                 showChild !== notification.id ? notification.id : ""
               );
@@ -215,8 +215,8 @@ const Notification = ({
                       className={
                         "border-0 text-start rounded-2 px-3 py-2 d-grid gap-2 w-100" +
                         (currentPage !== "live-monitoring" &&
-                        currentNotificationData.length !== 0 &&
-                        currentNotificationData[0].id === notificationChild.id
+                        currentNotificationData !== undefined &&
+                        currentNotificationData?.id === notificationChild.id
                           ? " active"
                           : "")
                       }
@@ -229,7 +229,7 @@ const Notification = ({
                           null,
                           "/validasi-notifikasi"
                         );
-                        setCurrentNotificationData([notificationChild]);
+                        setCurrentNotificationData(notificationChild);
                       }}
                     >
                       <div className="row align-items-center">
@@ -278,8 +278,8 @@ const Notification = ({
                         className={
                           "border-0 text-start rounded-2 px-3 py-2 d-grid gap-2 w-100" +
                           (currentPage !== "live-monitoring" &&
-                          currentNotificationData.length !== 0 &&
-                          currentNotificationData[0].id === notificationChild.id
+                          currentNotificationData !== undefined &&
+                          currentNotificationData?.id === notificationChild.id
                             ? " active"
                             : "")
                         }
@@ -292,7 +292,7 @@ const Notification = ({
                             null,
                             "/validasi-notifikasi"
                           );
-                          setCurrentNotificationData([notificationChild]);
+                          setCurrentNotificationData(notificationChild);
                         }}
                       >
                         <div className="row align-items-center">
